@@ -1,0 +1,20 @@
+{
+    "name": "nks/search",
+    "description": "projet de base pour la gestion d'etablissement",
+    "authors": [{
+        "name": "NKS-SEARCH",
+        "email": "prodigit7@gmail.com"
+    }],
+    "autoload": {
+        "files": ["core/Invariant/constants.php"],
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/",
+            "ClanCats\\Hydrahon\\": "lib/Hydrahon/src/",
+            "FPDF\\": "lib/pdf/"
+        }
+    },
+    "require": {
+        "spipu/html2pdf": "^5.2"
+    }
+}

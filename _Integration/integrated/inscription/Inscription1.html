@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+<html class="loaded" data-textdirection="ltr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="KGS Framework, using to perform web application features">
+    <meta name="keywords" content="">
+    <meta name="author" content="Stéphane KAMGA">
+
+    <title>Scolaire - Nkap-scour</title>
+
+    <link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CMuli:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/selects/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/animate/animate.css">
+
+
+
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/pickers/daterange/daterangepicker.css">
+    <!-- END VENDOR CSS-->
+    <!--Form wizard add-on-->
+    <!-- BEGIN ROBUST CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/wizard.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/pickers/daterange/daterange.css">
+    <link rel="stylesheet" href="app-assets/vendors/css/file-uploaders/dropzone.min.css">
+    <link rel="stylesheet" href="../../Robust_theme/app-assets/css/colors.css">
+    <!-- END Page Level CSS-->
+
+
+    <!-- END Custom CSS-->
+
+</head>
+
+<body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">
+<!-- BARRE DE NAVIGATION -->
+<nav class="header-navbar navbar-expand-md navbar navbar-with-menu fixed-top navbar-light navbar-shadow">
+    <div class="navbar-wrapper">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav flex-row">
+                <li class="nav-item mobile-menu d-md-none mr-auto">
+                    <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="">
+                        <i class="ft-menu font-large-1"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href=""><img class="brand-logo" alt="robust admin logo" src="app-assets/images/logo/logo-dark-sm.png">
+                        <h3 class="brand-text">Les comelines</h3>
+                    </a>
+                </li>
+                <li class="nav-item d-md-none">
+                    <a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile">
+                        <i class="fa fa-ellipsis-v"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="navbar-container content">
+            <div class="collapse navbar-collapse" id="navbar-mobile">
+                <ul class="nav navbar-nav mr-auto float-left">
+                    <li class="nav-item d-none d-md-block">
+                        <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="">
+                            <i class="ft-menu"></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item d-none d-md-block">
+                        <fieldset class="form-group position-relative  has-icon-left mt-1 mb-0">
+                            <input type="search" name="recherche" placeholder="Recherche" class="form-control">
+                            <div class="form-control-position">
+                                <i class="ficon ft-search"></i>
+                            </div>
+                        </fieldset>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav float-right">
+                    <li class="dropdown dropdown-notification nav-item">
+                        <a class="nav-link nav-link-label" href="" data-toggle="dropdown">
+                            <i class="ficon ft-bell"></i>
+                            <span class="badge badge-pill badge-default badge-danger badge-default badge-up">3</span>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                            <li class="dropdown-menu-header">
+                                <h6 class="dropdown-header m-0">
+                                    <span class="grey darken-2">Messages</span>
+                                </h6>
+                                <span class="notification-tag badge badge-default badge-danger float-right m-0">3 nouveaux</span>
+                            </li>
+
+                            <li class="scrollable-container media-list w-100">
+                                <a href="">
+                                    <div class="media">
+                                        <div class="media-left">
+												<span class="avatar avatar-sm avatar-online rounded-circle">
+													<img src="app-assets/images/portrait/small/avatar-s-1.png" alt="avatar">
+													<i></i>
+												</span>
+                                        </div>
+
+                                        <div class="media-body">
+                                            <h6 class="media-heading">Stéphane KAMGA</h6>
+                                            <p class="notification-text font-small-3 text-muted">Bientôt la fin d'année...</p>
+                                            <small>
+                                                <time class="media-meta text-muted" datetime="2020-06-11T18:29:20+08:00">Aujourd'hui</time>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="">
+                                    <div class="media">
+                                        <div class="media-left">
+												<span class="avatar avatar-sm avatar-away rounded-circle">
+													<img src="app-assets/images/portrait/small/avatar-s-1.png" alt="avatar">
+													<i></i>
+												</span>
+                                        </div>
+
+                                        <div class="media-body">
+                                            <h6 class="media-heading">Didier FOTSO</h6>
+                                            <p class="notification-text font-small-3 text-muted">Le trimestre dernier était ...</p><small>
+                                            <time class="media-meta text-muted" datetime="2020-06-11T18:29:20+08:00">Mois dernier</time></small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li class="dropdown-menu-footer">
+                                <a class="dropdown-item text-muted text-center" href="">Lire tout...</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown dropdown-user nav-item">
+                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+								<span class="avatar avatar-online">
+									<img src="app-assets/images/portrait/small/fff.png" alt="avatar">
+									<i></i>
+								</span>
+                            <span class="user-name">Kakambi Franck</span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="">
+                                <i class="ft-user"></i>&nbsp;Mon compte
+                            </a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" href="login.html">
+                                <i class="ft-power"></i>&nbsp;Déconnexion
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="main-menu menu-fixed menu-light bg-warningcreated menu-accordion menu-shadow" data-scroll-to-active="true">
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main bg-warningcreated" id="main-menu-navigation" data-menu="menu-navigation">
+            <li class=" nav-item">
+                <a href="index.html">
+                    <i class="icon-home"></i>
+                    <span class="menu-title" data-i18n="">Accueil</span>
+                </a>
+            </li>
+
+            <li class=" nav-item">
+                <a href="scolaire.html">
+                    <i class="fa fa-graduation-cap"></i>
+                    <span class="menu-title" data-i18n="">Scolaire</span>
+                </a>
+
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="scolaire.html" data-i18n="nav.starter_kit.1_column">Inscription</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="scolaire.html" data-i18n="nav.starter_kit.2_columns">Versement</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class=" nav-item">
+                <a href="">
+                    <i class="icon-calendar"></i>
+                    <span class="menu-title" data-i18n="">Emploi de temps</span>
+                </a>
+
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">Emprunt</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">Restitution</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class=" nav-item">
+                <a href="">
+                    <i class="fa fa-book"></i>
+                    <span class="menu-title" data-i18n="">Bibliothèque</span>
+                </a>
+
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">Emprunt</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">Restitution</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class=" nav-item">
+                <a href="">
+                    <i class="icon-notebook"></i>
+                    <span class="menu-title" data-i18n="">Bulletin</span>
+                </a>
+
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">Remplissage</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">Impression</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class=" nav-item">
+                <a href="">
+                    <i class="icon-trophy"></i>
+                    <span class="menu-title" data-i18n="">Cantine</span>
+                </a>
+
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">Liste</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">Nouveau</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class=" nav-item">
+                <a href="">
+                    <i class="fa fa-users"></i>
+                    <span class="menu-title" data-i18n="">Club</span>
+                </a>
+
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">Liste</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">Nouveau</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class=" nav-item">
+                <a href="">
+                    <i class="ft-search"></i>
+                    <span class="menu-title" data-i18n="">Aperçus</span>
+                </a>
+
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">Entrées</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">Sorties</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="app-content content bg-warningcreated22">
+    <div class="content-wrapper">
+
+        <div class="content-body">
+
+            <section class="row">
+                <div class="col-sm-12">
+                    <!-- ESPACE DE TRAVAIL -->
+                    <div id="kick-start" class="border-2 border-warning card box-shadow-2">
+                        <div class="card-header border-bottom-2 border-bottom-warning card-header-inverse ">
+                            <strong class="card-title center"><h4>INSCRIPTION</h4></strong>
+
+                        </div>
+
+                        <div class="card-content collapse show">
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <p>Remplissez les champs ci_dessous pour inscrire un nouvel élève.</p>
+                                </div>
+
+                                <div class="table-responsive">
+
+                                    <section id="validation">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card">
+
+                                                    <div class="card-content collapse show">
+                                                        <div class="card-body">
+                                                            <form action="#" class="steps-validation wizard-circle needs-validation" novalidate>
+
+                                                                <!-- Step 1 -->
+                                                                <h6>Etape 1</h6>
+                                                                <fieldset>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+
+                                                                            <h4 class="form-section" align="center"><strong> Informations de l'élève</strong></h4>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+
+
+                                                                        <span class="file-button"><p style="text-align:center"><strong> </strong></p></span>
+                                                                        </br>
+                                                                        <input type="file" class="inputfile" style="display: none;" name="photo" id="photo" onchange="readURL(this, '.photo_eleve');" />
+                                                                        <label for="photo" style="  display: block; margin-left: auto; margin-right: auto;">
+                                                                            <figure>
+                                                                                <img width="200px" height="200px"  src="app-assets/images/portrait/small/no-photo.jpg" alt="" class="photo_eleve" class="center">
+                                                                            </figure>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="nom_eleve">
+                                                                                    Nom :
+                                                                                    <span class="danger">*</span>
+                                                                                </label>
+
+                                                                                <input type="text" class="form-control required" id="nom_eleve" name="nom_eleve" required>
+                                                                                <div class="invalid-feedback">
+                                                                                    Veuillez indiquer le libelle
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="lastname">
+                                                                                    Prenom :
+                                                                                    <span class="danger">*</span>
+                                                                                </label>
+                                                                                <input type="text" class="form-control required" id="lastname" name="prenom_eleve" >
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="date_de_naissance">Date de naissance :</label>
+                                                                                <input type="date" class="form-control" id="date_de_naissance" name="date_de_naissance">
+                                                                            </div>
+                                                                        </div>
+
+
+
+
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="Ville">
+                                                                                    Ville de naissance :
+                                                                                    <span class="danger">*</span>
+                                                                                </label>
+                                                                                <input type="text" class="form-control required" id="Ville" name="ville_de_naissance" >
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+
+
+                                                                            <div class="form-group">
+                                                                                <div class="text-bold-600 ">
+                                                                                    Nationalité :
+                                                                                </div>
+                                                                                <select class="select2 js-example-programmatic form-control" id="nationalite_eleve" name="nationalite_eleve">
+
+                                                                                    <option value=" "></option>
+                                                                                    <option value="cm2a">Camerounaise</option>
+                                                                                    <option value="cm2b">Gabonaise</option>
+                                                                                    
+
+
+                                                                                </select>
+                                                                            </div>
+
+
+
+
+                                                                        </div>
+
+
+                                                                        <div class="col-md-6">
+
+                                                                            <div class="form-group">
+                                                                                <div class="text-bold-600 ">
+                                                                                    Classe :
+                                                                                </div>
+                                                                                <select class="select2 js-example-programmatic form-control" id="programmatic-single">
+
+                                                                                    <option value=" "></option>
+                                                                                    <option value="cm2a">CM2A</option>
+                                                                                    <option value="cm2b">CM2B</option>
+                                                                                    </optgroup>
+
+
+                                                                                </select>
+                                                                            </div>
+
+
+
+                                                                        </div>
+
+                                                                    </div>
+
+
+
+
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group"><strong>
+                                                                                Sexe  :</strong>
+
+                                                                                <div class="form-check-inline">
+                                                                                    <label class="form-check-label" for="radio1">
+                                                                                        <input type="radio" class="form-check-input" id="radio1" name="sexe" value="masculin" >Masculin
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check-inline">
+                                                                                    <label class="form-check-label" for="radio2">
+                                                                                        <input type="radio" class="form-check-input" id="radio2" name="sexe" value="feminin">Feminin
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <div class="controls"><strong>Statut de l'apprenant :</strong>
+                                                                                    <div class="form-check-inline">
+                                                                                        <label class="form-check-label" for="radio3">
+                                                                                            <input type="radio" class="form-check-input" id="radio3" name="statut_eleve" value="masculin" checked>Nouveau
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="form-check-inline">
+                                                                                        <label class="form-check-label" for="radio4">
+                                                                                            <input type="radio" class="form-check-input" id="radio4" name="statut_eleve" value="option2">Ancien
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+
+
+                                                                                <div class="card">
+
+                                                                                    <div class="input-group">
+                                                                                        <input type="text" class="form-control" placeholder="Ancienne Ecole" id="ancienne_ecole" name="ancienne_ecole">
+                                                                                        <div class="input-group-append">
+
+                                                                                            <select class="select2 js-example-programmatic form-control" id="ancienne_classe" name="ancienne_classe">
+
+                                                                                                <option value=" "> Classe</option>
+                                                                                                <option value="cm2a">CM2A</option>
+                                                                                                <option value="cm2b">CM2B</option>
+                                                                                                </optgroup>
+                                                                                            </select>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="allergies">
+                                                                                    Allergies et Autres :
+                                                                                </label>
+                                                                                <textarea name="allergies" id="allergies" rows="4" class="form-control"></textarea>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                </fieldset>
+
+                                                                <!-- Step 2 -->
+                                                                <h6>Etape 2</h6>
+                                                                <fieldset>
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+
+                                                                            <h4 class="form-section" align="center"><strong> Informations du Père (Tuteur)</strong></h4>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="nom_pere">
+                                                                                    Nom du Père (Tuteur) :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="nom_pere" name="nom_pere" >
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label for="lieu_travail_pere">
+                                                                                    Lieu de Travail  :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="lieu_travail_pere" name="lieu_travail_pere" >
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label for="quartier_pere">
+                                                                                    Quartier:
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="quartier_pere" name="quartier_pere" >
+                                                                            </div>
+
+
+
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                      <div cldiv class="form-group">
+                                                                                <label for="profession_pere">
+                                                                                    Profession :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="profession_pere" name="profession_pere" >
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="employeur_pere">
+                                                                                    Employeur :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="employeur_pere" name="employeur_pere" >
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="telephone_pere">
+                                                                                    Téléphone :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="telephone_pere" name="telephone_pere" >
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="nationalite_pere">
+                                                                                    Nationalité :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="nationalite_pere" name="nationalite_pere" >
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="emailpere">
+                                                                                    Email  :
+
+                                                                                </label>
+                                                                                <input type="email" class="form-control" id="emailpere" name="email_pere">
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                </fieldset>
+
+                                                                <!-- Step 3 -->
+                                                                <h6>Etape 3</h6>
+                                                                <fieldset>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+
+                                                                            <h4 class="form-section" align="center"><strong> Informations de la Mère (Tutrice)</strong></h4>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="nom_mere">
+                                                                                    Nom :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="nom_mere" name="nom_mere" >
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label for="lieu_travail_mere">
+                                                                                    Lieu de Travail  :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="lieu_travail_mere" name="lieu_travail_mere" >
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label for="quartier_mere">
+                                                                                    Quartier:
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="quartier_mere" name="quartier_mere" >
+                                                                            </div>
+
+
+
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="profession_mere">
+                                                                                    Profession :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="profession_mere" name="profession_mere" >
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="employeur_mere">
+                                                                                    Employeur :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="employeur_mere" name="employeur_mere" >
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="telephone_mere">
+                                                                                    Téléphone
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="telephone_mere" name="telephone_mere" >
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="nationalite_mere">
+                                                                                    Nationalité:
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="nationalite_mere" name="nationalite_mere" >
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="email_mere">
+                                                                                    Email :
+
+                                                                                </label>
+                                                                                <input type="email" class="form-control" id="email_mere" name="email_mere">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </fieldset>
+
+                                                                <!-- Step 4 -->
+                                                                <h6>Etape 4</h6>
+                                                                <fieldset>
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+
+                                                                            <h4 class="form-section" align="center"><strong> Autres Informations</strong></h4>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="nom_mere">
+                                                                                    <h5> <strong> Personne à prévenir en cas d'urgence</strong> </h5>
+                                                                                    <br>
+                                                                                    Nom :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="nom_mere" name="nom_mere" >
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label for="lieu_travail_mere">
+                                                                                    Téléphone  :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="lieu_travail_mere" name="lieu_travail_mere" >
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label for="quartier_mere">
+                                                                                    Portable :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="quartier_mere" name="quartier_mere" >
+                                                                            </div>
+
+
+
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="profession_mere">
+                                                                                    <h5> <strong> Médecin traitant</strong></h5>
+
+                                                                                    <br>
+                                                                                    Nom :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="profession_mere" name="profession_mere" >
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="employeur_mere">
+                                                                                    Téléphone :
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="employeur_mere" name="employeur_mere" >
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="telephone_mere">
+                                                                                    Portable
+
+                                                                                </label>
+                                                                                <input type="text" class="form-control " id="telephone_mere" name="telephone_mere" >
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </fieldset>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer border-top-2 border-top-warning">
+                            <span>Les Comelines</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal animated fadeInDownBig text-left" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel40" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel40">Nouvelle Classe1</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post" action="scolaire.html">
+                <div class="modal-body">
+                    <label>Nom de la classe: </label>
+                    <div class="form-group position-relative has-icon-left">
+                        <input type="text" name="classe0" placeholder="Cours Moyen 2" class="form-control">
+                        <div class="form-control-position">
+                            <i class="fa fa-edit font-medium-5 line-height-1 text-muted icon-align"></i>
+                        </div>
+                    </div>
+
+                    <label>Code de la classe: </label>
+                    <div class="form-group position-relative has-icon-left">
+                        <input name="classe1" type="text" placeholder="CM2" class="form-control">
+                        <div class="form-control-position">
+                            <i class="fa fa-code font-medium-5 line-height-1 text-muted icon-align"></i>
+                        </div>
+                    </div>
+
+                    <label>Effectif de la classe: </label>
+                    <div class="form-group position-relative has-icon-left">
+                        <input type="text" name="classe2" placeholder="28" class="form-control">
+                        <div class="form-control-position">
+                            <i class="fa fa-neuter font-medium-5 line-height-1 text-muted icon-align"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="reset" class="btn btn-danger" data-dismiss="modal" value="Annuler">
+                    <input type="submit" class="btn btn-warning btn-darken-2" value="Sauvegarder">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<footer class="footer footer-static bg-warningcreated navbar-border">
+    <p class="clearfix text-sm-center mb-0 px-2">
+        <span class="float-md-left d-block d-md-inline-block">Copyright  &copy; 2020&nbsp;<a class="text-bold-800 grey darken-2" href="" target="_blank">Les Comelines </a>, Tous droits reservés. </span>
+        <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block">Slogan <i class="ft-heart pink"></i></span>
+    </p>
+</footer>
+
+<!--<script src="app-assets/vendors/js/vendors.min.js"></script>-->
+<!--<script src="app-assets/js/core/app-menu.js"></script>-->
+<!--<script src="app-assets/js/core/app.js"></script>-->
+<!--<script src="app-assets/js/scripts/modal/components-modal.js"></script>-->
+
+<!-- BEGIN VENDOR JS-->
+<script src="app-assets/vendors/js/vendors.min.js"></script>
+<!-- BEGIN VENDOR JS-->
+<!-- BEGIN PAGE VENDOR JS-->
+<script src="app-assets/vendors/js/ui/jquery.sticky.js"></script>
+<script src="app-assets/vendors/js/charts/jquery.sparkline.min.js"></script>
+<script src="app-assets/vendors/js/ui/headroom.min.js"></script>
+<script src="app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+<script src="app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+<script src="app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+<script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+<script src="app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
+
+
+<!-- END PAGE VENDOR JS-->
+<!-- BEGIN ROBUST JS-->
+<script src="app-assets/js/core/app-menu.js"></script>
+<script src="app-assets/js/core/app.js"></script>
+<!-- END ROBUST JS-->
+<!-- BEGIN PAGE LEVEL JS-->
+<script src="app-assets/js/scripts/ui/breadcrumbs-with-stats.js"></script>
+<script src="app-assets/js/scripts/forms/wizard-steps.js"></script>
+<script src="app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+<script src="app-assets/js/scripts/forms/select/form-select2.js"></script>
+<script src="app-assets/js/scripts/forms/form-repeater.js"></script>
+<script>
+    function readURL(input, selector) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $(selector)
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+<script>
+    $(document).ready(function(){
+        $("#registration").validate({
+            // Specify validation rules
+            rules: {
+                nom_eleve: "required",
+                lastname: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                phone: {
+                    required: true,
+                    digits: true,
+                    minlength: 10,
+                    maxlength: 10,
+                },
+                password: {
+                    required: true,
+                    minlength: 5,
+                }
+            },
+            messages: {
+                nom_eleve: {
+                    required: "Please enter first name",
+                },
+                lastname: {
+                    required: "Please enter last name",
+                },
+                phone: {
+                    required: "Please enter phone number",
+                    digits: "Please enter valid phone number",
+                    minlength: "Phone number field accept only 10 digits",
+                    maxlength: "Phone number field accept only 10 digits",
+                },
+                email: {
+                    required: "Please enter email address",
+                    email: "Please enter a valid email address.",
+                },
+            },
+
+        });
+    });
+</script>
+
+<!-- END PAGE LEVEL JS-->
+
+</body>
+</html>

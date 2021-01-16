@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html class="loaded" data-textdirection="ltr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+		<meta name="description" content="KGS Framework, using to perform web application features">
+		<meta name="keywords" content="">
+		<meta name="author" content="Stéphane KAMGA">
+
+		<title>Accueil - Nkap-scour</title>
+
+		<link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
+		<link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.ico">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CMuli:300,400,500,700" rel="stylesheet">
+
+		<link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
+
+		<link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
+
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
+        <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/animate/animate.css">
+	</head>
+  
+	<body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">
+		<!-- BARRE DE NAVIGATION -->
+		<nav class="header-navbar navbar-expand-md navbar navbar-with-menu fixed-top navbar-light navbar-shadow">
+			<div class="navbar-wrapper">
+				<div class="navbar-header">
+					<ul class="nav navbar-nav flex-row">
+						<li class="nav-item mobile-menu d-md-none mr-auto">
+							<a class="nav-link nav-menu-main menu-toggle hidden-xs" href="">
+								<i class="ft-menu font-large-1"></i>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="navbar-brand" href=""><img class="brand-logo" alt="robust admin logo" src="app-assets/images/logo/logo-dark-sm.png">
+								<h3 class="brand-text">Les comelines</h3>
+							</a>
+						</li>
+						<li class="nav-item d-md-none">
+							<a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile">
+								<i class="fa fa-ellipsis-v"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="navbar-container content">
+				  <div class="collapse navbar-collapse" id="navbar-mobile">
+					<ul class="nav navbar-nav mr-auto float-left">
+						<li class="nav-item d-none d-md-block">
+							<a class="nav-link nav-menu-main menu-toggle hidden-xs" href="">
+								<i class="ft-menu"></i>
+							</a>
+						</li>
+
+						<li class="nav-item d-none d-md-block">
+							<fieldset class="form-group position-relative  has-icon-left mt-1 mb-0">
+								<input type="search" name="recherche" placeholder="Recherche" class="form-control">
+								<div class="form-control-position">
+									<i class="ficon ft-search"></i>
+								</div>
+							</fieldset>
+						</li>
+					</ul>
+
+					
+					<ul class="nav navbar-nav float-right">
+						<li class="dropdown dropdown-notification nav-item">
+							<a class="nav-link nav-link-label" href="" data-toggle="dropdown">
+								<i class="ficon ft-bell"></i>
+								<span class="badge badge-pill badge-default badge-danger badge-default badge-up">3</span>
+							</a>
+							
+							<ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+								<li class="dropdown-menu-header">
+									<h6 class="dropdown-header m-0">
+										<span class="grey darken-2">Messages</span>
+									</h6>
+									<span class="notification-tag badge badge-default badge-danger float-right m-0">3 nouveaux</span>
+								</li>
+								
+								<li class="scrollable-container media-list w-100">
+									<a href="">
+										<div class="media">
+											<div class="media-left">
+												<span class="avatar avatar-sm avatar-online rounded-circle">
+													<img src="app-assets/images/portrait/small/avatar-s-1.png" alt="avatar">
+													<i></i>
+												</span>
+											</div>
+											
+											<div class="media-body">
+												<h6 class="media-heading">Stéphane KAMGA</h6>
+												<p class="notification-text font-small-3 text-muted">Bientôt la fin d'année...</p>
+												<small>
+													<time class="media-meta text-muted" datetime="2020-06-11T18:29:20+08:00">Aujourd'hui</time>
+												</small>
+											</div>
+										</div>
+									</a>
+									<a href="">
+										<div class="media">
+											<div class="media-left">
+												<span class="avatar avatar-sm avatar-away rounded-circle">
+													<img src="app-assets/images/portrait/small/avatar-s-1.png" alt="avatar">
+													<i></i>
+												</span>
+											</div>
+											
+											<div class="media-body">
+												<h6 class="media-heading">Didier FOTSO</h6>
+												<p class="notification-text font-small-3 text-muted">Le trimestre dernier était ...</p><small>
+												<time class="media-meta text-muted" datetime="2020-06-11T18:29:20+08:00">Mois dernier</time></small>
+											</div>
+										</div>
+									</a>
+								</li>
+								
+								<li class="dropdown-menu-footer">
+									<a class="dropdown-item text-muted text-center" href="">Lire tout...</a>
+								</li>
+							</ul>
+						</li>
+						
+						<li class="dropdown dropdown-user nav-item">
+							<a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+								<span class="avatar avatar-online">
+									<img src="app-assets/images/portrait/small/fff.png" alt="avatar">
+									<i></i>
+								</span>
+								<span class="user-name">Kakambi Franck</span>
+							</a>
+							
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" href="">
+									<i class="ft-user"></i>&nbsp;Mon compte
+								</a>
+								
+								<div class="dropdown-divider"></div>
+								
+								<a class="dropdown-item" href="login.html">
+									<i class="ft-power"></i>&nbsp;Déconnexion
+								</a>
+							</div>
+						</li>
+					</ul>
+				  </div>
+				</div>
+			</div>
+		</nav>
+
+		<div class="main-menu menu-fixed menu-light bg-warning bg-darken-2 menu-accordion menu-shadow" data-scroll-to-active="true">
+			<div class="main-menu-content">
+				<ul class="navigation navigation-main bg-warning bg-darken-2" id="main-menu-navigation" data-menu="menu-navigation">
+                    <li class=" nav-item">
+                        <a href="index.html">
+                            <i class="icon-home"></i>
+                            <span class="menu-title" data-i18n="">Accueil</span>
+                        </a>
+                    </li>
+
+                    <li class=" nav-item">
+                        <a href="scolaire.html">
+                            <i class="fa fa-graduation-cap"></i>
+                            <span class="menu-title" data-i18n="">Scolarité</span>
+                        </a>
+
+                        <ul class="menu-content">
+                            <li>
+                                <a class="menu-item" href="scolaire.html" data-i18n="nav.starter_kit.1_column">Inscription</a>
+                            </li>
+                            <li>
+                                <a class="menu-item" href="scolaire.html" data-i18n="nav.starter_kit.2_columns">Versement</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class=" nav-item">
+                        <a href="">
+                            <i class="icon-calendar"></i>
+                            <span class="menu-title" data-i18n="">Emploi de temps</span>
+                        </a>
+
+                        <ul class="menu-content">
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">Emprunt</a>
+                            </li>
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">Restitution</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class=" nav-item">
+                        <a href="">
+                            <i class="fa fa-book"></i>
+                            <span class="menu-title" data-i18n="">Bibliothèque</span>
+                        </a>
+
+                        <ul class="menu-content">
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">Emprunt</a>
+                            </li>
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">Restitution</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class=" nav-item">
+                        <a href="">
+                            <i class="icon-notebook"></i>
+                            <span class="menu-title" data-i18n="">Bulletin</span>
+                        </a>
+
+                        <ul class="menu-content">
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">Remplissage</a>
+                            </li>
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">Impression</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class=" nav-item">
+                        <a href="">
+                            <i class="icon-trophy"></i>
+                            <span class="menu-title" data-i18n="">Cantine</span>
+                        </a>
+
+                        <ul class="menu-content">
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">Liste</a>
+                            </li>
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">Nouveau</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class=" nav-item">
+                        <a href="">
+                            <i class="fa fa-users"></i>
+                            <span class="menu-title" data-i18n="">Club</span>
+                        </a>
+
+                        <ul class="menu-content">
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">Liste</a>
+                            </li>
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">Nouveau</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class=" nav-item">
+                        <a href="">
+                            <i class="ft-search"></i>
+                            <span class="menu-title" data-i18n="">Aperçus</span>
+                        </a>
+
+                        <ul class="menu-content">
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">Entrées</a>
+                            </li>
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">Sorties</a>
+                            </li>
+                        </ul>
+                    </li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="app-content content bg-white ">
+			<div class="content-wrapper">
+				<div class="content-body">
+
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="scolaire.html" style="cursor:pointer; text-decoration: none;">
+                                <div class="card border-0 shadow bg-warning ">
+                                    <div class="card-body kgs-bg-yellow">
+                                        <div class="row align-items-end h3 kgs-green">
+                                            <div class="col-12 text-center">
+                                                <span class="fa fa-graduation-cap fa-5x"></span>
+                                            </div>
+
+                                            <div class="col">
+                                                <h1 align="center" class="text-uppercase pt-1"><strong>Scolarite</strong></h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-4">
+                            <a href="" style="cursor:pointer; text-decoration: none;">
+                                <div class="card border-0 shadow bg-warning ">
+                                    <div class="card-body kgs-bg-yellow">
+                                        <div class="row align-items-end h3 kgs-green">
+                                            <div class="col-12 text-center">
+                                                <span class="icon-calendar fa-5x"></span>
+                                            </div>
+
+                                            <div class="col">
+                                                <h1 align="center" class="text-uppercase pt-1"><strong>Emploi de temps</strong></h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-4">
+                            <a href="" style="cursor:pointer; text-decoration: none;">
+                                <div class="card border-0 shadow bg-warning ">
+                                    <div class="card-body kgs-bg-yellow">
+                                        <div class="row align-items-end h3 kgs-green">
+                                            <div class="col-12 text-center">
+                                                <span class="fa fa-book fa-5x"></span>
+                                            </div>
+
+                                            <div class="col">
+                                                <h1 align="center" class="text-uppercase pt-1"><strong>Bibliothèque</strong></h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+
+
+                        <div class="col-4">
+                            <a href="" style="cursor:pointer; text-decoration: none;">
+                                <div class="card border-0 shadow bg-warning ">
+                                    <div class="card-body kgs-bg-yellow">
+                                        <div class="row align-items-end h3 kgs-green">
+                                            <div class="col-12 text-center">
+                                                <span class="icon-notebook fa-5x"></span>
+                                            </div>
+
+                                            <div class="col">
+                                                <h1 align="center" class="text-uppercase pt-1"><strong>Bulletin</strong></h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-4">
+                            <a href="" style="cursor:pointer; text-decoration: none;">
+                                <div class="card border-0 shadow bg-warning ">
+                                    <div class="card-body kgs-bg-yellow">
+                                        <div class="row align-items-end h3 kgs-green">
+                                            <div class="col-12 text-center">
+                                                <span class="icon-trophy fa-5x"></span>
+                                            </div>
+
+                                            <div class="col">
+                                                <h1 align="center" class="text-uppercase pt-1"><strong>Cantine</strong></h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-4">
+                            <a href="" style="cursor:pointer; text-decoration: none;">
+                                <div class="card border-0 shadow bg-warning ">
+                                    <div class="card-body kgs-bg-yellow">
+                                        <div class="row align-items-end h3 kgs-green">
+                                            <div class="col-12 text-center">
+                                                <span class="fa fa-users fa-5x"></span>
+                                            </div>
+
+                                            <div class="col">
+                                                <h1 align="center" class="text-uppercase pt-1"><strong>Club</strong></h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="" style="cursor:pointer; text-decoration: none;">
+                                <div class="card border-0 shadow bg-warning ">
+                                    <div class="card-body kgs-bg-yellow">
+                                        <div class="row align-items-end h3 kgs-green">
+                                            <div class="col-12 text-center">
+                                                <span class="ft-search fa-5x"></span>
+                                            </div>
+
+                                            <div class="col">
+                                                <h1 align="center" class="text-uppercase pt-1"><strong>Aperçus</strong></h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+
+        <!-- Modal -->
+        <div class="modal animated fadeInDownBig text-left" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel40" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel40">Nouvelle Classe</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <form>
+                        <div class="modal-body">
+                            <label>Nom de la classe: </label>
+                            <div class="form-group position-relative has-icon-left">
+                                <input type="text" placeholder="Cours Moyen 2" class="form-control">
+                                <div class="form-control-position">
+                                    <i class="fa fa-edit font-medium-5 line-height-1 text-muted icon-align"></i>
+                                </div>
+                            </div>
+
+                            <label>Code de la classe: </label>
+                            <div class="form-group position-relative has-icon-left">
+                                <input type="text" placeholder="CM2" class="form-control">
+                                <div class="form-control-position">
+                                    <i class="fa fa-code font-medium-5 line-height-1 text-muted icon-align"></i>
+                                </div>
+                            </div>
+
+                            <label>Effectif de la classe: </label>
+                            <div class="form-group position-relative has-icon-left">
+                                <input type="text" placeholder="28" class="form-control">
+                                <div class="form-control-position">
+                                    <i class="fa fa-neuter font-medium-5 line-height-1 text-muted icon-align"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="reset" class="btn btn-danger" data-dismiss="modal" value="Annuler">
+                            <input type="submit" class="btn btn-warning btn-darken-2" value="Sauvegarder">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+		<footer class="footer footer-static bg-warning bg-lighten-3 darken-4 navbar-border">
+		  <p class="clearfix text-sm-center mb-0 px-2">
+              <span class="float-md-left d-block d-md-inline-block">Copyright  &copy; 2020&nbsp;<a class="text-bold-800 grey darken-2" href="" target="_blank">Les Comelines </a>, Tous droits reservés. </span>
+              <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block">Slogan <i class="ft-heart pink"></i></span>
+          </p>
+		</footer>
+
+		<script src="app-assets/vendors/js/vendors.min.js"></script>
+		<script src="app-assets/js/core/app-menu.js"></script>
+		<script src="app-assets/js/core/app.js"></script>
+        <script src="app-assets/js/scripts/modal/components-modal.js"></script>
+	</body>
+</html>

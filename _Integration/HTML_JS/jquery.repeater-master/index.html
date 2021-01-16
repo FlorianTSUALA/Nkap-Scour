@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Repeater</title>
+    <title>jquery.repeater</title>
+    <style>
+    html, body {
+        font-family: Helvetica, Arial, sans-serif;
+        color: rgb(80, 80, 80);
+    }
+    </style>
+</head>
+<body>
+    <h2>Repeater</h2>
+    <form action="echo.php" class="repeater" enctype="multipart/form-data">
+      <div data-repeater-list="data">
+        <div class="item" data-repeater-item>
+          <input  type="text"  name="untyped-input" value="A"/>
+    
+          <input type="text" name="input" value="3"/>
+    
+          <input type="date" value="1995-03-17" class="in" name="input"/>
+    
+          <textarea name="textarea-input">A</textarea>
+    
+          <input type="radio" name="radio-input" value="A" checked/>
+          <input type="radio" name="radio-input" value="B"/>
+    
+          <input type="checkbox" name="checkbox-input" value="A" checked/>
+          <input type="checkbox" name="checkbox-input" value="B"/>
+    
+          <select name="select-input">
+            <option value="A" selected>A</option>
+            <option value="B">B</option>
+          </select>
+    
+          <select name="multiple-select-input" multiple>
+            <option value="A" selected>A</option>
+            <option value="B" selected>B</option>
+          </select>
+    
+          <input data-repeater-delete type="button" value="Delete"/>
+        </div>
+        
+      </div>
+      <input data-repeater-create type="button" value="Add"/>
+    </form>
+    
+    
+    <script src="http://127.0.0.1/nkap-scour/_Integration/app-assets/vendors/js/vendors.min.js"></script>
+    <script src="http://127.0.0.1/nkap-scour/_Integration/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
+    <script src="jquery.inputV2.js"></script>
+    <script>
+
+
+    $(document).ready(function () {
+
+      $("button").click(function() {
+        $("h2").append("<p class='test'>click me " + (++counter) + "</p>")
+    });
+
+    // With on():
+
+    $("h2").on("click", "p.test", function(){
+        alert($(this).text());
+    });
+
+
+        'use strict';
+
+        $('.repeater').repeater({
+          initEmpty: true,
+          errorMessage: true,
+            errorMessageClass: 'error_message',
+            defaultValues: {
+                'date': '1995-03-17',
+                'input': 4,
+                'multiple-select-input': 'B',
+                'checkbox-input': ['A', 'B'],
+                'radio-input': 'B'
+            },
+            show: function () {
+                $(this).slideDown();
+
+                $(".item").on("change", "input.in", function(){
+                    //console.log($(this).val());
+                    console.log($(this).parent().children(".in").val('1995-03-18') );
+                });
+                console.log($('.repeater').repeaterVal())
+                // $(".item").on("blur", "input.in", function(){
+                //     alert("click");
+                // });
+                // $( this).live( "click", function() {
+                //   console.log(this)
+                //   return false;
+                // });
+                //console.log(this)
+            },
+            hide: function (deleteElement) {
+                if(confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+                }
+            }
+        });
+
+
+
+
+    });
+    </script>
+</body>
+</html>

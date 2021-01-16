@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="repeater" data-limit="5">
+        <table class="table table-striped" data-repeater-list="group-a">
+            <tr data-repeater-item>
+                <td>
+                    <input type="text" name="text-input" placeholder="Guest Name" />
+                </td>
+                <td>
+                    <input type="text" name="text-input" placeholder="Guest Email" />
+                </td>
+                <td>
+                    <input type="text" name="text-input" placeholder="Guest Phone (optional)" />
+                </td>
+                <td>
+                    <input data-repeater-delete type="button" value="Delete" />
+                </td>
+            </tr>
+        </table>
+                            
+        <input data-repeater-create type="button" value="Add" />
+    </div>
+
+    <script>
+        $('.m_repeater').repeater({
+            initEmpty: false,
+            show: function () {
+                if ($(this).parents(".m_repeater").attr("data-limit").length > 0) {
+                    if ($(this).parents(".m_repeater").find("div[data-repeater-item]").length <= $(this).parents(".m_repeater").attr("data-limit")) {
+                        $(this).slideDown();
+                    } else {
+                        $(this).remove();
+                    }
+                } else {
+                    $(this).slideDown();
+                }
+            },
+            hide: function (deleteElement) {
+                $(this).slideUp(deleteElement);
+            }
+        });
+
+
+        $('.m_repeater').repeater({
+            initEmpty: false,
+            show: function () {
+
+                var limitcount = $(this).parents(".repeater").data("limit");
+                var itemcount = $(this).parents(".repeater").find("tr[data-repeater-item]").length;
+
+                if (limitcount) {
+                    if (itemcount <= limitcount) {
+                        $(this).slideDown();
+                    } else {
+                        $(this).remove();
+                    }
+                } else {
+                    $(this).slideDown();
+                }
+
+                if (itemcount >= limitcount) {
+                    $(".repeater input[data-repeater-create]").hide("slow");
+                }
+            },
+
+            hide: function (deleteElement) {
+                var limitcount = $(this).parents(".repeater").data("limit");
+                var itemcount = $(this).parents(".repeater").find("tr[data-repeater-item]").length;
+
+                if (confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+                }
+
+                if (itemcount <= limitcount) {
+                    $(".repeater input[data-repeater-create]").show("slow");
+                }
+            },
+        });
+
+
+        $(this).find("input[id='id of your textbox']").datepicker({
+
+        });
+        function markCheckBox(ctrl) {$('input:checkbox.group-name').prop("checked", false);
+        $("[name='" + ctrl + "']").prop("checked", true);
+        };
+    </script>
+</body>
+</html>

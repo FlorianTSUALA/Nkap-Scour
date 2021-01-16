@@ -1,0 +1,76 @@
+<?php
+
+namespace App\Controller\Auth;
+
+use App;
+use App\Helpers\S;
+use Core\Auth\DBAuth;
+use App\Controller\AppController;
+
+class LoginController extends AppController
+{
+    /**
+     * Permet l'authentification de l'utilisateur
+     **/
+    public function login()
+    {
+        $error = "Aucune valeur saisie";
+       
+        if (!empty($_POST)) {
+            $auth = new DBAuth($this->app->getDb());
+            
+            if ($auth->login($_POST['user-name'], $_POST['user-password'])) {
+                $this->home();
+            } else {
+                $error = "Nom d'utilisateur ou mot de passe invalid";
+            }
+        }
+
+        $this->render('auth.login', compact('error'), "layout-auth");
+    }
+
+    /**
+     * Permet l'authentification de l'utilisateur
+     **/
+    public function logout()
+    {
+        $auth = new DBAuth($this->app->getDb());
+        $auth->disconnect();
+        $this->app->setTitle('Connexion - Comelines');
+        header("HTTP/1.1 200 OK");
+        $root = App::base_url();
+		header("Location: {$root}");
+        $this->render('auth.login', [], "layout-auth");
+    }
+
+
+    public function index()
+    {
+        $this->app->setTitle('Connexion - Comelines');
+        $this->render('auth.login', [], "layout-auth");
+    }
+
+    /**
+     * permet la connexion d'utilisateur à la BD
+     **/
+    public function home()
+    {
+        $this->app->setTitle('Acceuil - Comelines');
+        
+        $this->session->flash("Hello  ".$this->session->get(S::PERS_NOM)."!!!<br> Nous sommes ravis de vous revoir!!!");
+
+        header("HTTP/1.1 200 OK");
+        header('Location: acceuil');
+        
+    }
+
+     /**
+     * Initialise les Models qu'on charge dans ce controller
+     **/
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+  
+}

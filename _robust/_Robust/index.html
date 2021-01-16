@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="loaded" data-textdirection="ltr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+		<meta name="description" content="KGS Framework, using to perform web application features">
+		<meta name="keywords" content="">
+		<meta name="author" content="Stéphane KAMGA">
+
+		<title>TITRE</title>
+
+		<link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
+		<link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.ico">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CMuli:300,400,500,700" rel="stylesheet">
+
+		<link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
+
+		<link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
+
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
+	</head>
+  
+	<body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">
+		<!-- BARRE DE NAVIGATION -->
+		<nav class="header-navbar navbar-expand-md navbar navbar-with-menu fixed-top navbar-semi-dark navbar-shadow">
+			<div class="navbar-wrapper">
+				<div class="navbar-header">
+					<ul class="nav navbar-nav flex-row">
+						<li class="nav-item mobile-menu d-md-none mr-auto">
+							<a class="nav-link nav-menu-main menu-toggle hidden-xs" href="">
+								<i class="ft-menu font-large-1"></i>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="navbar-brand" href=""><img class="brand-logo" alt="robust admin logo" src="app-assets/images/logo/logo-light-sm.png">
+								<h3 class="brand-text">APPS_NAME</h3>
+							</a>
+						</li>
+						<li class="nav-item d-md-none">
+							<a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile">
+								<i class="fa fa-ellipsis-v"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="navbar-container content">
+				  <div class="collapse navbar-collapse" id="navbar-mobile">
+					<ul class="nav navbar-nav mr-auto float-left">
+						<li class="nav-item d-none d-md-block">
+							<a class="nav-link nav-menu-main menu-toggle hidden-xs" href="">
+								<i class="ft-menu"></i>
+							</a>
+						</li>
+						
+						<li class="nav-item d-none d-md-block">
+							<a class="nav-link nav-link-expand" href="">
+								<i class="ficon ft-maximize"></i>
+							</a>
+						</li>
+						
+						<li class="nav-item nav-search">
+							<a class="nav-link nav-link-search" href="">
+								<i class="ficon ft-search"></i>
+							</a>
+							<div class="search-input">
+							  <input type="search" name="recherche" class="input" placeholder="Que recherchez vous ?">
+							</div>
+						</li>
+					</ul>
+					
+					<ul class="nav navbar-nav float-right">         
+						<li class="dropdown dropdown-language nav-item">
+							<a class="dropdown-toggle nav-link" id="dropdown-flag" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="flag-icon flag-icon-fr"></i>
+								<span>Français</span>
+								<span class="selected-language"></span>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-flag">
+								<a class="dropdown-item" href="">
+									<i class="flag-icon flag-icon-gb"></i>&nbsp;Anglais
+								</a>
+								<a class="dropdown-item" href="">
+									<i class="flag-icon flag-icon-fr"></i>&nbsp;Français
+								</a>
+								<a class="dropdown-item" href="">
+									<i class="flag-icon flag-icon-cm"></i>&nbsp;Camerounais
+								</a>
+								<a class="dropdown-item" href="">
+									<i class="flag-icon flag-icon-de"></i>&nbsp;Allemand
+								</a>
+							</div>
+						</li>
+						
+						<li class="dropdown dropdown-notification nav-item">
+							<a class="nav-link nav-link-label" href="" data-toggle="dropdown">
+								<i class="ficon ft-mail"></i>
+								<span class="badge badge-pill badge-default badge-danger badge-default badge-up">3</span>
+							</a>
+							
+							<ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+								<li class="dropdown-menu-header">
+									<h6 class="dropdown-header m-0">
+										<span class="grey darken-2">Messages</span>
+									</h6>
+									<span class="notification-tag badge badge-default badge-danger float-right m-0">3 nouveaux</span>
+								</li>
+								
+								<li class="scrollable-container media-list w-100">
+									<a href="">
+										<div class="media">
+											<div class="media-left">
+												<span class="avatar avatar-sm avatar-online rounded-circle">
+													<img src="app-assets/images/portrait/small/avatar-s-1.png" alt="avatar">
+													<i></i>
+												</span>
+											</div>
+											
+											<div class="media-body">
+												<h6 class="media-heading">Stéphane KAMGA</h6>
+												<p class="notification-text font-small-3 text-muted">Comment vas-tu ?.</p>
+												<small>
+													<time class="media-meta text-muted" datetime="2020-06-11T18:29:20+08:00">Aujourd'hui</time>
+												</small>
+											</div>
+										</div>
+									</a>
+									<a href="">
+										<div class="media">
+											<div class="media-left">
+												<span class="avatar avatar-sm avatar-away rounded-circle">
+													<img src="app-assets/images/portrait/small/avatar-s-1.png" alt="avatar">
+													<i></i>
+												</span>
+											</div>
+											
+											<div class="media-body">
+												<h6 class="media-heading">Didier FOTSO</h6>
+												<p class="notification-text font-small-3 text-muted">My dream is real</p><small>
+												<time class="media-meta text-muted" datetime="2020-06-11T18:29:20+08:00">last month</time></small>
+											</div>
+										</div>
+									</a>
+								</li>
+								
+								<li class="dropdown-menu-footer">
+									<a class="dropdown-item text-muted text-center" href="">Lire tout...</a>
+								</li>
+							</ul>
+						</li>
+						
+						<li class="dropdown dropdown-user nav-item">
+							<a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+								<span class="avatar avatar-online">
+									<img src="app-assets/images/portrait/small/avatar-s-1.png" alt="avatar">
+									<i></i>
+								</span>
+								<span class="user-name">USER_NAME</span>
+							</a>
+							
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" href="">
+									<i class="ft-user"></i>&nbsp;SUB_FUNC-01
+								</a>
+								<a class="dropdown-item" href="">
+									<i class="ft-mail"></i>&nbsp;SUB_FUNC-02
+								</a>
+								<a class="dropdown-item" href="">
+									<i class="ft-check-square"></i>&nbsp;SUB_FUNC-03
+								</a>
+								<a class="dropdown-item" href="">
+									<i class="ft-message-square"></i>&nbsp;SUB_FUNC-04
+								</a>
+								
+								<div class="dropdown-divider"></div>
+								
+								<a class="dropdown-item" href="">
+									<i class="ft-power"></i>&nbsp;GO_OUT
+								</a>
+							</div>
+						</li>
+					</ul>
+				  </div>
+				</div>
+			</div>
+		</nav>
+
+		<div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
+			<div class="main-menu-content">
+				<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+				  <li class=" nav-item">
+					<a href="">
+						<i class="icon-home"></i>
+						<span class="menu-title" data-i18n="">Dashboard</span>
+						<span class="badge badge badge-info badge-pill float-right">indication</span>
+					</a>
+				  </li>
+				  
+				  <li class=" navigation-header">
+					<span>MENU_GROUP</span>
+					<i class="ft-more-horizontal ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="MENU_TITLE"></i>
+				  </li>
+				  
+				  <li class=" nav-item">
+					<a href="">
+						<i class="icon-bulb"></i>
+						<span class="menu-title" data-i18n="">MENU</span>
+					</a>
+					
+					<ul class="menu-content">
+					  <li>
+						<a class="menu-item" href="" data-i18n="nav.starter_kit.1_column">SUB_MENU</a>
+					  </li>
+					  <li>
+						<a class="menu-item" href="" data-i18n="nav.starter_kit.2_columns">SUB_MENU</a>
+					  </li>
+					</ul>
+				  </li>
+				  
+				  <li class=" navigation-header">
+					<span>MENU_GROUP</span>
+					<i class="ft-more-horizontal ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="MENU_TITLE"></i>
+				  </li>
+				  
+				  <li class=" nav-item">
+					<a href="">
+						<i class="icon-docs"></i>
+						<span class="menu-title" data-i18n="">MENU</span>
+						<span class="badge badge badge-pill badge-danger float-right">indication</span>
+					</a>
+				  </li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="app-content content">
+			<div class="content-wrapper">
+				<!-- 1ère LIGNE D'ENTETE -->
+				<div class="content-header row">
+					<div class="content-header-left col-md-6 col-12">
+						<h3 class="content-header-title">SITE MAP</h3>
+						<div class="row breadcrumbs-top">
+							<div class="breadcrumb-wrapper col-12">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="">Dossier-01</a>
+									</li>
+									<li class="breadcrumb-item"><a href="">Dossier-02</a>
+									</li>
+									<li class="breadcrumb-item active">Dossier-Actif
+									</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+					
+					<div class="content-header-right col-md-6 col-12">
+						<div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+							<div class="btn-group" role="group">
+								<a class="btn btn-outline-info" href="">
+									<i class="fa fa-calendar"></i>&nbsp;Button-01
+								</a>
+								<a class="btn btn-outline-info" href="">
+									<i class="fa fa-bar-chart"></i>&nbsp;Button-02
+								</a>
+								<button class="btn btn-outline-info dropdown-toggle dropdown-menu-right" id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="fa fa-settings icon-left"></i>&nbsp;Action
+								</button>
+								<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+									<a class="dropdown-item" href="">Action-01</a>
+									<a class="dropdown-item" href="">Action-02</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="content-header-lead col-12 mt-2">
+						<p class="lead">Description de la page</p>
+					</div>
+				</div>
+				
+				<div class="content-body">
+					<section class="row">
+						<div class="col-sm-12">
+							<!-- ESPACE DE TRAVAIL -->
+							<div id="kick-start" class="border-bottom-3 border-bottom-blue card box-shadow-2">
+								<div class="card-header bg-green bg-lighten-2 card-header-inverse text-white">
+									<h4 class="card-title text-white">TITLE OF WORKING SPACE</h4>
+									<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+									<div class="heading-elements">
+										<ul class="list-inline mb-0">
+											<li>
+												<a data-action="collapse">
+													<i class="ft-minus"></i>
+												</a>
+											</li>
+											<li>
+												<a data-action="reload">
+													<i class="ft-rotate-cw"></i>
+												</a>
+											</li>
+											<li>
+												<a data-action="close">
+													<i class="ft-x"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="card-content collapse show">
+									<div class="card-body">
+										<div class="card-text">
+											<p>YOUR WORKING SPACE</p>
+										</div>
+									</div>
+								</div>
+								<div class="card-footer bg-grey bg-lighten-4">
+									<span>Nkap-scour</span>
+									<span class="float-right">
+										<a href="">Home&nbsp;<i class="ft-arrow-right"></i></a>
+									</span>
+								</div>
+							</div>
+						</div>						
+					</section>
+				</div>
+			</div>
+		</div>
+
+		<footer class="footer footer-static footer-light navbar-border">
+		  <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-block d-md-inline-block">Copyright  &copy; 2018 <a class="text-bold-800 grey darken-2" href="" target="_blank">FABRICANT </a>, Tous droits reservés. </span><span class="float-md-right d-block d-md-inline-blockd-none d-lg-block">Slogan <i class="ft-heart pink"></i></span></p>
+		</footer>
+
+		<script src="app-assets/vendors/js/vendors.min.js"></script>
+		<script src="app-assets/js/core/app-menu.js"></script>
+		<script src="app-assets/js/core/app.js"></script>
+	</body>
+</html>
