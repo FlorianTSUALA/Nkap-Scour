@@ -6,12 +6,20 @@ use Exception;
 use App\Helpers\S;
 use Core\Model\Model;
 use App\Model\DBTable;
+use App\Model\Periode;
 use Core\Session\Request;
+use App\Helpers\DateHelpers;
+use function Core\Helper\dd;
+
+use function Core\Helper\vd;
+use App\Model\AbonnementDetail;
+use App\Model\AbonnementCantine;
 use App\Model\AbonnementActivite;
 use ClanCats\Hydrahon\Query\Expression as Ex;
 
 class VersementController extends AppController
 {
+    
     public function __construct()
     {
         parent::__construct();
@@ -159,17 +167,15 @@ class VersementController extends AppController
     */
     public function save($code)
     {
-        var_dump($_POST);
+        dd($_POST);
 
         $eleve = DBTable::getModel('eleve')->select()->find($code, 'code');
 
-        $eleve_code = Model::getId('eleve', Request::getSecParam('eleve_id', ''));
-        $classe_code = Model::getId('classe', Request::getSecParam('classe_id', ''));
+        $eleve_id = Model::getId('eleve', Request::getSecParam('eleve_id', ''));
+        $classe_id = Model::getId('classe', Request::getSecParam('classe_id', ''));
 
-        $classe = DBTable::getModel('classe')->select()->find($classe_code);
+        $classe = DBTable::getModel('classe')->select()->find($classe_id);
        
-        $classe_id = $classe['id'];
-        $eleve_id = $eleve['id'];
 
         $statut_apprenant_id = Model::getId('statut_apprenant', Request::getSecParam('statut_apprenant_id', ''));
         $annee_scolaire_id = Model::getId('annee_scolaire', Request::getSecParam('annee_scolaire_id', ''));
@@ -203,6 +209,8 @@ class VersementController extends AppController
         $parcours_id = Model::getId('parcours', $parcours_code);
 
         */
+        $data_pension = $_POST['pension_classe'];
+
 
         $_SESSION[S::FAC_DATE] = Request::getSecParam('date_facture');
         $_SESSION[S::FAC_NOM] = $eleve['nom'];
@@ -210,7 +218,6 @@ class VersementController extends AppController
         $_SESSION[S::FAC_CLASSE] = $classe['libelle'];
         $_SESSION[S::FAC_REF] = $reference;
 
-        $data_pension = $_POST['pension_classe'];
 
         $_SESSION[S::FAC_PENSION] =  $data_pension;
 
@@ -218,107 +225,182 @@ class VersementController extends AppController
         $_SESSION[S::FAC_ACTIVITE] =  $_POST['activites'];
         $_SESSION[S::FAC_CANTINE] =  $_POST['cantines'];
 
+         //TYPE PENSION
+        //  -NKAP-SCOUR- 
+        //  array(12) {
+        //    ["pension_classe"]=>
+        //    array(3) {
+        //      [0]=>
+        //      array(8) {
+        //        ["pension_classe_code"]=>
+        //        string(15) "PENS_1598861726"
+        //        ["type_pension_code"]=>
+        //        string(15) "TYPE_1598620518"
+        //        ["type_pension"]=>
+        //        string(10) "Scolarité"
+        //        ["multiplicateur"]=>
+        //        array(2) {
+        //          [0]=>
+        //          array(2) {
+        //            ["id"]=>
+        //            string(15) "TRAN_1598852718"
+        //            ["value"]=>
+        //            string(7) "Janvier"
+        //          }
+        //          [1]=>
+        //          array(2) {
+        //            ["id"]=>
+        //            string(15) "TRAN_1598854187"
+        //            ["value"]=>
+        //            string(4) "Mars"
+        //          }
+        //        }
+        //        ["recapitulatif"]=>
+        //        string(1) "2"
+        //        ["montant"]=>
+        //        string(6) "900000"
+        //        ["mensualite"]=>
+        //        string(6) "900000"
+        //        ["est_mensuel"]=>
+        //        string(1) "1"
+        //      }
+        //      [1]=>
+        //      array(8) {
+        //        ["pension_classe_code"]=>
+        //        string(15) "PENS_1599093524"
+        //        ["type_pension_code"]=>
+        //        string(15) "TYPE_1599051076"
+        //        ["type_pension"]=>
+        //        string(11) "Inscription"
+        //        ["multiplicateur"]=>
+        //        string(1) "1"
+        //        ["recapitulatif"]=>
+        //        string(1) "1"
+        //        ["montant"]=>
+        //        string(6) "100000"
+        //        ["mensualite"]=>
+        //        string(1) "0"
+        //        ["est_mensuel"]=>
+        //        string(1) "0"
+        //      }
+        //      [2]=>
+        //      array(8) {
+        //        ["pension_classe_code"]=>
+        //        string(15) "PENS_1610959047"
+        //        ["type_pension_code"]=>
+        //        string(15) "TYPE_1610958956"
+        //        ["type_pension"]=>
+        //        string(5) "Tenue"
+        //        ["multiplicateur"]=>
+        //        string(1) "1"
+        //        ["recapitulatif"]=>
+        //        string(1) "1"
+        //        ["montant"]=>
+        //        string(3) "500"
+        //        ["mensualite"]=>
+        //        string(1) "0"
+        //        ["est_mensuel"]=>
+        //        string(1) "0"
+        //      }
+        //    }
 
-        //Enregistrement des payements des activites
-        $abonnement_activite = DBTable::getModel('abonnement_activite');
-        foreach ($data_pension as $item) {
+
            
-            //$data['reduction'] = $reduction;
-            //$data['code'] = Model::generateCode();
-            //$data['type_paiement_id'] = $type_paiement_id;
+
+           
+        //    ["eleve_id"]=>
+        //    string(15) "ELEV_1598610091"
+        //    ["classe_id"]=>
+        //    string(9) "SECTION_1"
+        //    ["annee_scolaire_id"]=>
+        //    string(15) "CORE_1598613732"
+        //    ["type_paiement_id"]=>
+        //    string(15) "TYPE_1598618757"
+        //    ["reduction"]=>
+        //    string(1) "0"
+        //    ["date_paie"]=>
+        //    string(0) ""
+        //    ["reference"]=>
+        //    string(10) "0ABA5F079A"
+        //    ["date_facture"]=>
+        //    string(22) "Mardi, 19 Janvier 2021"
+        //  }
+        //  array(1) {
+        //    [0]=>
+        //    array(0) {
+        //    }
+        //  }
             
-            $code = AbonnementActivite::generateCode();
-            $eleve_id = $eleve_id; 
+            $abonnement_activite = DBTable::getModel('abonnement_activite');
+            foreach ($data_pension as $item) {
             
-            /*
-            $periode = :.//
-            $multiplicateur = :.//
-            $montant_unitaire = :.//
-            $montant_total = :.//
-            $reduction = :.//
-            $resume_periode = :.//
+                $data['reduction'] = $reduction;
+                $data['code'] = Model::generateCode();
+                $data['type_paiement_id'] = $type_paiement_id;
+                
+                /*
+                $periode = :.//
+                $multiplicateur = :.//
+                $montant_unitaire = :.//
+                $montant_total = :.//
+                $reduction = :.//
+                $resume_periode = :.//
+                
+                $date_paiement = :.//
+                $description = :.//
+                $libelle = :.//
+                */
             
-            $date_paiement = :.//
-            $description = :.//
-            $libelle = :.//
-            */
-        
-            if (isset($multiplicateur) && is_array($multiplicateur)) {
-                foreach ($multiplicateur as $tranche) {
+                if (isset($multiplicateur) && is_array($multiplicateur)) {
+                    foreach ($multiplicateur as $tranche) {
+
+                        $mois  =  $tranche['value'];
+                        $tranche_id =  $tranche['id'];
+                        $index_mois = DateHelpers::getStrIndexMonth($mois);
+                        
+
+                        $query_date = date('01-'.$index_mois.'-'.date("Y"));
+
+                        // First day of the month.
+                        $date_debut =  date('Y-m-01', strtotime($query_date));
+
+                        // Last day of the month.
+                        $date_fin = date('Y-m-t', strtotime($query_date));
+
+                        $date_debut = date("Y-m-1", strtotime("-1 month") ) ;
+            
+                        $date_fin = date("Y-m-t", strtotime("-1 month") ) ;
+
+                        $data = [];
+                        $date_paiement = $date_paiement;
+                        $date_debut = $item['date_debut'];
+                        $date_fin = $item['date_fin'];
+                        $periode = $item['periode'];
+                        $multiplicateur = $item['recapitulatif'];
+                        $montant_unitaire = $item['mensualite'];
+                        $montant_total = $item['montant'];
+
+                        $data['date_paiement'] = $date_paiement;
+                        $data['date_debut'] = $date_debut;
+                        $data['date_fin'] = $date_fin;
+                        $data['periode'] = $periode;
+                        $data['multiplicateur'] = $multiplicateur;
+                        $data['montant_unitaire'] = $montant_unitaire;
+                        $data['montant_total'] = $montant_total;
+                        
+                        $data['tranche_scolaire_id'] = Model::getId('tranche_scolaire', $tranche['id']);
+                        $data['montant'] = $mensualite;
+
                     
-                    $mois  =  $tranche['value'];
-                    $tranche_id =  $tranche['id'];
-                    switch ($mois) {
-                        case ($mois == 'Janvier' || $mois == 'janvier'):
-                            $index_mois = '01';
-                            break;
-                        
-                        case ($mois == 'Février' || $mois == 'Février'):
-                            $index_mois = '02';
-                            break;
-                        
-                        case ($mois == 'Mars' || $mois == 'mars'):
-                            $index_mois = 3;
-                            break;
-                        
-                        case ($mois == 'Avril' || $mois == 'avril'):
-                            $index_mois = '04';
-                            break;
-
-                            
-                        case ($mois == 'Mai' || $mois == 'mai'):
-                            $index_mois = '05';
-                            break;
-
-
-                        case ($mois == 'Juin' || $mois == 'juin'):
-                            $index_mois = '06';
-                            break;
-                            
-                        
-                        case ($mois == 'Juillet' || $mois == 'juillet'):
-                            $index_mois = '07';
-                            break;
-                            
-
-                        case ($mois == 'Aout' || $mois == 'aout'):
-                            $index_mois = '08';
-                            break;
-                                
-                        case ($mois == 'Septembre' || $mois == 'septembre'):
-                            $index_mois = '09';
-                            break;
-                        
-                        case ($mois == 'Octobre' || $mois == 'octobre'):
-                            $index_mois = '10';
-                            break;
-                        
-                        case ($mois == 'Novembre' || $mois == 'novembre'):
-                            $index_mois = '11';
-                            break;
-
-                            
-                        case ($mois == 'Decembre' || $mois == 'decembre'):
-                            $index_mois = '12';
-                            break;
-                        default: 
-                            $index_mois = -1;
+                        try {
+                            var_dump($data);
+                            $result = $abonnement_activite->insert($data)->execute();
+                        } catch (Exception $ex) {
+                        }
                     }
-
-                    $query_date = date('01-'.$index_mois.'-'.date("Y"));
-
-                    // First day of the month.
-                    $date_debut =  date('Y-m-01', strtotime($query_date));
-
-                    // Last day of the month.
-                    $date_fin = date('Y-m-t', strtotime($query_date));
-
-                    $date_debut = date("Y-m-1", strtotime("-1 month") ) ;
-        
-                    $date_fin = date("Y-m-t", strtotime("-1 month") ) ;
-
+                } else {
                     $data = [];
-                    $date_paiement = $date_paiement;
+                    $date_paiement = $item['date_paiement'];
                     $date_debut = $item['date_debut'];
                     $date_fin = $item['date_fin'];
                     $periode = $item['periode'];
@@ -326,6 +408,8 @@ class VersementController extends AppController
                     $montant_unitaire = $item['mensualite'];
                     $montant_total = $item['montant'];
 
+
+                    
                     $data['date_paiement'] = $date_paiement;
                     $data['date_debut'] = $date_debut;
                     $data['date_fin'] = $date_fin;
@@ -334,62 +418,275 @@ class VersementController extends AppController
                     $data['montant_unitaire'] = $montant_unitaire;
                     $data['montant_total'] = $montant_total;
                     
-                    $data['tranche_scolaire_id'] = Model::getId('tranche_scolaire', $tranche['id']);
-                    $data['montant'] = $mensualite;
-
-                
+                    $data['tranche_scolaire_id'] = null;
                     try {
                         var_dump($data);
                         $result = $abonnement_activite->insert($data)->execute();
                     } catch (Exception $ex) {
                     }
                 }
-            } else {
-                $data = [];
-                $date_paiement = $item['date_paiement'];
-                $date_debut = $item['date_debut'];
-                $date_fin = $item['date_fin'];
-                $periode = $item['periode'];
-                $multiplicateur = $item['recapitulatif'];
-                $montant_unitaire = $item['mensualite'];
-                $montant_total = $item['montant'];
 
-
-                
-                $data['date_paiement'] = $date_paiement;
-                $data['date_debut'] = $date_debut;
-                $data['date_fin'] = $date_fin;
-                $data['periode'] = $periode;
-                $data['multiplicateur'] = $multiplicateur;
-                $data['montant_unitaire'] = $montant_unitaire;
-                $data['montant_total'] = $montant_total;
-                
-                $data['tranche_scolaire_id'] = null;
-                try {
-                    var_dump($data);
-                    $result = $abonnement_activite->insert($data)->execute();
-                } catch (Exception $ex) {
-                }
             }
 
-        }
+            //Gestion des variables de session pour la soumission des pour impression de la facture.
+            if ($this->session->has(S::DATA_TRANSPORT))
+                $this->session->flush(S::DATA_TRANSPORT);
+        //TYPE PENSION
 
-        //Gestion des variables de session pour la soumission des pour impression de la facture.
-        if ($this->session->has(S::DATA_TRANSPORT))
-            $this->session->flush(S::DATA_TRANSPORT);
+
+        //CANTINE
+
+        // {
+        //   ["multiplicateur"]=>
+        //   array(2) {
+        //     [0]=>
+        //     array(2) {
+        //       ["id"]=>
+        //       string(15) "TRAN_1598852718"
+        //       ["value"]=>
+        //       string(7) "Janvier"
+        //     }
+        //     [1]=>
+        //     array(2) {
+        //       ["id"]=>
+        //       string(15) "TRAN_1598854187"
+        //       ["value"]=>
+        //       string(4) "Mars"
+        //     }
+        //   }
+        //   ["recapitulatif"]=>
+        //   string(1) "2"
+        // }
+            
+            $cantines = $_POST['cantines'];
+            $model_cantine = DBTable::getModel(DBTable::ABONNEMENT_CANTINE);
+            $code_cantine = AbonnementCantine::generateCode();
+
+            $id_eleve = Model::getId(DBTable::ELEVE, Request::getSecParam('eleve_id', ''));
+            
+            $montant_total = '';
+            $reduction = '';
+            $reference = '';
+            $date_debut = '';
+            $date_fin = '';
+            $date_paiement = '';
+
+            
+            $data_abonnment = [
+                'code' => $code_cantine,
+                'eleve_id' => $id_eleve,
+                'montant_total' => Request::getSecParam('montant_total', ''),
+                'reduction' => Request::getSecParam('reduction', ''),
+                'reference' => Request::getSecParam('reference', ''),
+                'date_debut' => Request::getSecParam('date_debut', ''),
+                'date_fin' => Request::getSecParam('date_fin', ''),
+                'date_paiement' => Request::getSecParam('date_paiement', '')
+            ];
+
+            $result_cantine = $model_cantine->insert($data_abonnment)->execute();
+            
+            vd($result_cantine);
+
+            $abonnement_detail = DBTable::getModel(DBTable::ABONNEMENT_DETAIL);
+            $items = $_POST['cantines']['data'];
+
+            dd($items);
+
+            $id_cantine = Model::getId(DBTable::ABONNEMENT_CANTINE, $code_cantine);
+
+            $dayCount  = 0; 
+            $start_day = Request::getSecParam('date_debut', '');
+            $end_day = Request::getSecParam('date_debut', '');
+
+            foreach($items as $item){
+                
+                $dayCount = Periode::getDayCount($item['periode']);
+
+                $end_day = DateHelpers::addDays($start_day, $dayCount);
+
+                $data_abonnment_detail = [
+                    'code' => AbonnementDetail::generateCode(),
+                    'cantine_id' => $id_cantine,
+                    'periode' =>  $item['periode'],
+                    'multiplicateur' =>  $item['duree'],
+                    'total' =>  $item['sous_total'],
+                    'prix_unitaire' =>  $item['prix_unitaire'],
+                    'date_debut' =>  $start_day,
+                    'date_fin' =>  $end_day
+                ];
+                
+                $start_day = $end_day;
+
+                $abonnement_detail->insert($data_abonnment_detail)->execute();
+            }
+
+            vd($result_cantine);
+
+            if ($result_cantine) {
+                // $this->setupSessionVerement();
+
+                // $_SESSION[S::DATA_TRANSPORT][S::VERS_CODE_CANTINE] = $code_cantine ;
+                // $_SESSION[S::DATA_TRANSPORT][S::VERS_CODE_CLASSE] = $this->classe->code(Request::getSecParam('classe_cantine', ''), Classe::LIBELLE) ;
+                // $_SESSION[S::DATA_TRANSPORT][S::VERS_CLASSE] = Request::getSecParam('classe_cantine', '');
+
+                $this->session->flash("Abonnement enregistrée avec success");
+
+                // $this->render('sections.abonnement.abonnement_list');
+                $this->sendResponseAndExit($code, false, 200, 'Good');
+                
+            } else {
+                $this->sendResponseAndExit($result_cantine, false, 400, 'DB Error');
+            }
+        
+        //CANTINE
+        
+        
+        //PENSION ELEVE
+        
+        //PENSION ELEVE
+
+
+        //ACTIVITE
+            $model_activite = DBTable::getModel(DBTable::ABONNEMENT_ACTIVITE);
+        
+            $activites = $_POST['activites'];
+
+            
+            $code_activite = AbonnementActivite::generateCode();
+
+            $data_activite = ['code' => $code_activite ];
+
+            $data_activite = [
+                'code' => $code_activite,
+                'eleve_id' => $id_eleve,
+                'montant_total' => Request::getSecParam('montant_total', ''),
+                'reduction' => Request::getSecParam('reduction', ''),
+                'reference' => Request::getSecParam('reference', ''),
+                'date_debut' => Request::getSecParam('date_debut', ''),
+                'date_fin' => Request::getSecParam('date_fin', ''),
+                'date_paiement' => Request::getSecParam('date_paiement', '')
+            ];
+
+            $result_cantine = $model_cantine->insert($data_abonnment)->execute();
+            
+            $abonnement_detail = DBTable::getModel(DBTable::ABONNEMENT_DETAIL);
+            
+            $id_activite = Model::getId(DBTable::ABONNEMENT_ACTIVITE, $code_activite);
+
+            $dayCount  = 0; 
+            $start_day = Request::getSecParam('date_debut', '');
+            $end_day = Request::getSecParam('date_debut', '');
+
+            foreach($items as $item){
+                
+                $dayCount = Periode::getDayCount($item['periode']);
+
+                $end_day = DateHelpers::addDays($start_day, $dayCount);
+
+                $data_abonnment_detail = [
+                    'code' => AbonnementDetail::generateCode(),
+                    'cantine_id' => $id_cantine,
+                    'periode' =>  $item['periode'],
+                    'multiplicateur' =>  $item['duree'],
+                    'total' =>  $item['sous_total'],
+                    'prix_unitaire' =>  $item['prix_unitaire'],
+                    'date_debut' =>  $start_day,
+                    'date_fin' =>  $end_day
+                ];
+                
+                $start_day = $end_day;
+
+                $abonnement_detail->insert($data_abonnment_detail)->execute();
+            }
+// -----
+            foreach($activites as $activite){
+                $nbre_tranche = $activite['recapitulatif'];
+                foreach($activites['activites'] as $_activite){
+                    $id = $_activite['id'];
+                    $value = $_activite['value'];
+                    $montant = $_activite['montant'];
+
+                    $data_activite += ['montant' => $montant];
+                    $data_activite += ['periode' => $montant];
+                    $data_activite += ['montant' => $montant];
+
+                    foreach($activites['multiplicateur'] as $periode){
+                        $data_activite += [];
+                        $id = $periode['id'];
+                        $value = $periode['value'];
+                        $model_insert->insert($data_activite);
+                    }
+
+                }
+
+            }
+
+            
+        //     ["activites"]=>
+        //    array(3) {
+        //      ["recapitulatif"]=>
+        //      string(1) "3"
+        //      ["multiplicateur"]=>
+        //      array(3) {
+        //        [0]=>
+        //        array(2) {
+        //          ["id"]=>
+        //          string(15) "TRAN_1598854187"
+        //          ["value"]=>
+        //          string(4) "Mars"
+        //        }
+        //      }
+        //      ["activites"]=>
+        //      array(2) {
+        //        [0]=>
+        //        array(3) {
+        //          ["id"]=>
+        //          string(15) "ACTI_1599816340"
+        //          ["value"]=>
+        //          string(7) "Karaté"
+        //          ["montant"]=>
+        //          string(4) "6000"
+        //        }
+        //      }
+        //    }
+           
+        //ACTIVITE
+
+        //AUTRES
+            $autres = $_POST['autres'];
+            $type_pension = $autres['type_pension'];
+            $multiplicateur = $autres['multiplicateur'];
+            $recapitulatif = $autres['recapitulatif'];
+            $model_pension_classe = DBTable::getModel(DBTable::PENSION_CLASSE);
+        //AUTRES
+
 
         //Pension eleve
-        $type_paiement_id = "";
-        $tranche_scolaire_id = [];
-        $pension_classe_id = [];
+            $type_paiement_id = "";
+            $tranche_scolaire_id = [];
+            $pension_classe_id = [];
 
-        if ($this->session->has(S::DATA_TRANSPORT)) 
-            $this->session->flush(S::DATA_TRANSPORT);
+            if ($this->session->has(S::DATA_TRANSPORT)) 
+                $this->session->flush(S::DATA_TRANSPORT);
 
-        if ($result) {
-            $this->sendResponseAndExit('[{"msg": "Versement realisé avec success!!!"}]');
-        } else {
-            $this->sendResponseAndExit($code, false, 400, 'DB Error');
-        }
+            if ($result) {
+                $this->sendResponseAndExit('[{"msg": "Versement realisé avec success!!!"}]');
+            } else {
+                $this->sendResponseAndExit($code, false, 400, 'DB Error');
+            }
     }
+
+    public function print(){
+        
+        // $periode
+        // $date_debut
+        // $date_fin
+        // $prix_unitaire
+        // $quantite
+        // $total
+        // , compact('date_facturation', 'eleve', 'classe', 'reference', 'remise', 'reste', 'solde_paye', 'sous_total', 'items'), 'facture_cantine'
+        $this->renderPDF('reports.versement' );  
+
+    }
+
 }

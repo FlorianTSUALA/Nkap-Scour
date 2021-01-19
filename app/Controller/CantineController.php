@@ -65,23 +65,24 @@ class CantineController extends AppController
 
 
 
-    public function getall()
-    {
-        $model = AbonnementCantine::table();
-        $results = $model->select('
-                type_abonnement_cantine.libelle as type_abonnement_cantine_id,
-                pays.libelle as pays_id,
-                abonnement_cantine.code as code,
-                abonnement_cantine.nom,
-                abonnement_cantine.prenom,
-                abonnement_cantine.bibliographie')
-            ->where('abonnement_cantine.visibilite', 1)
-            ->join('type_abonnement_cantine', 'abonnement_cantine.type_abonnement_cantine_id', '=', 'type_abonnement_cantine.id')
-            ->join('pays', 'abonnement_cantine.pays_id', '=', 'pays.id')
-            ->get();
+        public function getall()
+        {
+            $model = AbonnementCantine::table();
+            $results = $model->select('
+                    type_abonnement_cantine.libelle as type_abonnement_cantine_id,
+                    pays.libelle as pays_id,
+                    abonnement_cantine.code as code,
+                    abonnement_cantine.nom,
+                    abonnement_cantine.prenom,
+                    abonnement_cantine.bibliographie')
+                ->where('abonnement_cantine.visibilite', 1)
+                ->join('type_abonnement_cantine', 'abonnement_cantine.type_abonnement_cantine_id', '=', 'type_abonnement_cantine.id')
+                ->join('pays', 'abonnement_cantine.pays_id', '=', 'pays.id')
+                ->get();        
             
             return $results;
-        }*/
+        }
+    */
         
         
     public function abonnement_cantine()
@@ -236,7 +237,7 @@ class CantineController extends AppController
         $this->render('sections.cantine.abonnement_liste', compact( 'classes','abonnements'));
     }
 
-    public function print_recu(){
+    public function print_facture(){
 
         $date_facturation = Request::getSecParam('date_facturation', '');
         $eleve = Request::getSecParam('eleve', '');
@@ -258,4 +259,5 @@ class CantineController extends AppController
         $this->renderPDF('reports.cantine', compact('date_facturation', 'eleve', 'classe', 'reference', 'remise', 'reste', 'solde_paye', 'sous_total', 'items'), 'facture_cantine' );  
 
     }
+
 }

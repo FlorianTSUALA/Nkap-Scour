@@ -213,7 +213,7 @@
             items = $('.repeater').repeaterVal()
             data_items = []
             let sum = 0
-            
+
             if( items !== undefined && items.data != undefined ){
                 current = items.data
             }
@@ -295,11 +295,12 @@
             data_facture['total_day'] = total_day
             data_facture['date_facture'] = "<?= Helpers::getFullDate(date("Y-m-d H:i:s")) ?>"
             data_facture['description'] = $('#motif').text()
-            data_facture['prix'] = $('#montant_total').text()
+            data_facture['montant_total'] = $('#montant_total').text()
             data_facture['quantite'] = $('#quantite').text()
             data_facture['somme'] = $('#somme').text()
+            data_facture['reduction'] = $('#reduction').val()
 
-            data_facture['nom'] = $('#eleve_nom_complet option:selected').text()
+            data_facture['nom_complet'] = $('#eleve_nom_complet option:selected').text()
             data_facture['classe'] = $('#classe option:selected').text()
             data_facture['mode_paiement'] = $('#type_paiement option:selected').text()
             
@@ -316,7 +317,7 @@
 
             $('#recap-body').html(body)
             $('#recap-mode_paiement').text( data_facture['mode_paiement'] )
-            $('#recap-nom').text( data_facture['nom'] )
+            $('#recap-nom').text( data_facture['nom_complet'] )
             $('#recap-classe').text( data_facture['classe'] )
 
             $('#recap-date').text( date_facture )
@@ -333,12 +334,12 @@
             $('#recap-nom_banque').hide()
             $('#recap-numero_cheque').hide()
 
-            $('#recap-total-top').text( $('#montant_total').val())
-            $('#recap-total-bottom').text( $('#montant_total').val())
-            $('#recap-reduction').text( ""+ $('#reduction').val() )
+            $('#recap-total-top').text( data_facture['montant_total'])
+            $('#recap-total-bottom').text( data_facture['montant_total'])
+            $('#recap-reduction').text( ""+ data_facture['reduction'] )
 
             
-            $('#recap-sous_total').text( parseInt($('#montant_total').val() ) )
+            $('#recap-sous_total').text( parseInt(data_facture['montant_total'] ) )
 
             $('#recap-signataire').text( "<?=  $signataire; ?>" )
             $('#recap-funtion_signataire').text(  "<?= $funtion_signataire; ?>" )
@@ -372,6 +373,10 @@
         })
 
         $(btn_save).click(function() {
+            sauvegarderVersement()
+        })
+
+        $(btn_print).click(function() {
             sauvegarderVersement()
         })
 

@@ -1,5 +1,11 @@
 <?php
-ini_set('xdebug.max_nesting_level', 200);
+
+
+define('APP_MODE', 'DEVELOPMENT'); //PRODUCTION
+
+
+define('BASE_PATH', "nkap-scour/public/");
+
 define("OFFLINE_DB", true);
 
 define('APP_DIR_ABORT', '/ressources/views/abort/');

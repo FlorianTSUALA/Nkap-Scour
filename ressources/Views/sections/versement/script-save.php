@@ -9,9 +9,6 @@ use App\Helpers\Helpers;
 // depoter ces variables dans le controller
 
 
-
-
-
     function sauvegarderVersement(){
         console.log(cantines);
         console.log(activites);
@@ -29,9 +26,9 @@ use App\Helpers\Helpers;
                 "annee_scolaire_id":  $('#annee_scolaire option:selected').val(),
                 "type_paiement_id":  $('#type_paiement option:selected').val(),
                 "motif":  $('#motif').val(),
-                "reste":  $('#reste').val(),
+                // "reste":  $('#reste').val(),
                 "autre":  $('#autres').val(),
-                "reduction":  $('#reduction').val(),
+                "reduction":  reduction,
                 "date_paie":  $( "#date_paie" ).text(),
                 "reference": reference,
                 "date_facture":  date_facture,

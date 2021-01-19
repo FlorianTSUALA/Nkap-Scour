@@ -23,11 +23,13 @@ Raccourci clavier de visual studio code
 19 - Ctrl + :           =   commenter ou décommenter une ligne ou un block
 20 - 
 
+
+
 Top extension for Dev Web
 1 - php extension pack
 2 - html extension package
 3 - Git Source Control
-4 - 
+4 - Html Preview triangel.html-preview === ctrl + l
 5 - 
 6 - 
 7 - 

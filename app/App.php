@@ -15,6 +15,7 @@ class App
 
 	private $title = 'Bienvenue aux Comelines';
 	const SCHOOLL_NAME = 'Les Comelines';
+	const TEAM = 'NKAP-SCOUR';
 
 	private static $_instance = null;
 

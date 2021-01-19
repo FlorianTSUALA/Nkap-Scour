@@ -1,6 +1,5 @@
 <?php
-use App\Helpers\S;
-
+    use App\Helpers\S;
     use Core\Routing\URL;
 
     ob_start();
@@ -11,11 +10,11 @@ use App\Helpers\S;
 	echo '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js"></script>';
 
     
-    echo  require "script-event.php";
-    echo  require "script-init.php";
-    echo  require "script-update-etat.php";
-    echo  require "script-save.php";
-    echo  require "script-versement_scolarite.php";
+    require "script-event.php";
+    require "script-component-init.php";
+    require "script-update-etat.php";
+    require "script-save.php";
+    require "script-versement_scolarite.php";
 
     $include_footer_script = ob_get_clean();
 
@@ -170,7 +169,7 @@ use App\Helpers\S;
                                                                                 </div>
                                                                                 <div class="col-8">
 
-                                                                                        <input placeholder="Reduction" type="text" class="form-control" id="RFT-reduction" name="RFT-reduction" readonly/>
+                                                                                        <input placeholder="Reduction" type="text" class="form-control reduction" id="RFT-reduction" name="RFT-reduction" readonly/>
 
                                                                                 </div>
                                                                             </div>
@@ -230,7 +229,7 @@ use App\Helpers\S;
                         <fieldset class="mb-1">
                             <h5>Reduction</h5>
                             <div class="form-group">
-                                <input type="number" class="form-control "  id="COL5-<?= $item['id'];?>" value="0"  name="COL5-<?= $item['id'];?>"   placeholder="" />
+                                <input type="number" class="form-control reduction"  id="COL5-<?= $item['id'];?>" value="0"  name="COL5-<?= $item['id'];?>"   placeholder="" />
                             </div>
                         </fieldset>
                     </div>
@@ -277,7 +276,7 @@ use App\Helpers\S;
                                                                             <fieldset class="mb-1">
                                                                                 <h5>Reduction</h5>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" class="form-control "  id="COL5-Cantine" value="0"  name="COL5-Cantine"   placeholder="" />
+                                                                                    <input type="number" class="form-control reduction"  id="COL5-Cantine" value="0"  name="COL5-Cantine"   placeholder="" />
                                                                                 </div>
                                                                             </fieldset>
                                                                         </div>
@@ -326,7 +325,7 @@ use App\Helpers\S;
                                                                             <fieldset class="mb-1">
                                                                                 <h5>Reduction</h5>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" class="form-control "  id="COL5-Activite" value="0"  name="COL5-Activite"   placeholder="" />
+                                                                                    <input type="number" class="form-control reduction"  id="COL5-Activite" value="0"  name="COL5-Activite"   placeholder="" />
                                                                                 </div>
                                                                             </fieldset>
                                                                         </div>
@@ -369,7 +368,7 @@ use App\Helpers\S;
                                                                             <fieldset class="mb-1">
                                                                                 <h5>Reduction</h5>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" class="form-control "  id="COL5-Autres" value="0"  name="COL5-Autres"   placeholder="" />
+                                                                                    <input type="number" class="form-control reduction"  id="COL5-Autres" value="0"  name="COL5-Autres"   placeholder="" />
                                                                                 </div>
                                                                             </fieldset>
                                                                         </div>
@@ -413,14 +412,14 @@ use App\Helpers\S;
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="row">
+                                                                    <!-- <div class="row">
                                                                         <div class="col-md-12">
                                                                             <h4 class="form-section text-warning" align="">
                                                                                 <strong>Informations complémentaires</strong>
                                                                             </h4>
                                                                         </div>
-                                                                    </div>
-<!-- Reste à payer -->
+                                                                    </div> -->
+<!-- Reste à payer
                                                                     <div class="row">
                                                                         <div class="col-md-6">
                                                                             <div class="form-group row">
@@ -430,18 +429,18 @@ use App\Helpers\S;
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-<!-- Montant de reduction -->
+    Montant de reduction 
                                                                         <div class="col-md-6">
                                                                             <div class="form-group row">
                                                                                 <label for="reduction" class="col-4 col-form-label">Montant de réduction&nbsp;:</label>
                                                                                 <div class="col-8">
-                                                                                    <input placeholder="Renseigner le montant de la réduction" value="0" type="number" class="form-control" id="reduction" name="reduction" />
+                                                                                    <input placeholder="Renseigner le montant de la réduction" value="0" type="number" class="reduction form-control" id="reduction" name="reduction" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
 
-<!-- Motif -->
+    Motif 
                                                                     <div class="row">
                                                                         <div class="col-md-6">
                                                                             <div class="form-group row">
@@ -451,7 +450,7 @@ use App\Helpers\S;
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-<!-- Autre détails -->
+    Autre détails 
                                                                         <div class="col-md-6">
                                                                             <div class="form-group row">
                                                                                 <label for="autres" class="col-4 col-form-label">Autres détails:</label>
@@ -460,8 +459,10 @@ use App\Helpers\S;
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-<!-- Type de paiement -->
+                                                                    </div> 
+-->
+
+                                                                    <!-- Type de paiement -->
                                                                     <div class="row">
                                                                         <div class="col-md-6">
                                                                             <div class="form-group row">
@@ -482,9 +483,12 @@ use App\Helpers\S;
                                                                                 Veuillez remplir ce champ.
                                                                             </div>
                                                                         </div>
-
+                                                                        <div class="col-md-4"></div>
+                                                                        <div class="col-md-1">
+                                                                            <a id="btn_preview" type="button" class="btn btn-warning my-1"><i class="fa fa-arrow-right"></i> Suivant</a>
+                                                                        </div>
                                                                     </div>
-                
+<!--                 
                                                                     <div class="row">
                                                                         <div class="col-md-6">
                                                                         </div>
@@ -492,7 +496,7 @@ use App\Helpers\S;
                                                                         <div class="col-md-1">
                                                                             <a id="btn_preview" type="button" class="btn btn-warning my-1"><i class="fa fa-arrow-right"></i> Suivant</a>
                                                                         </div>
-                                                                    </div>
+                                                                    </div> -->
 
                                                                     
                                                                 </fieldset>
@@ -547,7 +551,7 @@ use App\Helpers\S;
 
                     <div class="form-group">
                         <input type="number" id="RF-reduction" class="form-control" >
-                        <input type="hidden" id="OLD-RF-reduction" class="form-control" >
+                        <input type="hidden" id="OLD-RF-reduction" class="reduction form-control" >
                     </div>
 
 
