@@ -50,6 +50,8 @@ class AppController extends \Core\Controller\Controller
     }
  
     protected function fill($to_extract, $fillables){
+
+
         return array_map( function($fillable) use ($to_extract)
         {   
             if(is_array($to_extract) && count($to_extract) > 1){
@@ -64,12 +66,15 @@ class AppController extends \Core\Controller\Controller
             }else{
                 if(is_array($to_extract))
                 {
+                    
                     return $fillable[$to_extract];
                 }else{
                     return $fillable->{$to_extract};
                 }
             } 
         }, $fillables);
+
+
     }
  
     protected function fillExternal($fillables){
@@ -87,4 +92,6 @@ class AppController extends \Core\Controller\Controller
           
         }, $fillables);
     }
+
+
 }

@@ -98,7 +98,7 @@ class Eleve extends Model implements FrequentlyReapeat
 
             ) InfoEleve,
             (
-                select  parcours.id as id, parcours.date_inscription_parcours, classe.libelle as classe_parcours,
+                select  parcours.eleve_id as id, parcours.date_inscription_parcours, classe.libelle as classe_parcours,
                         annee_scolaire.debut_annee as annee_scolaire, annee_scolaire.statut as statut_annee_scolaire, statut_apprenant.libelle as statut_apprenant
                 from parcours
                 left join classe on classe.id = parcours.classe_id
@@ -157,7 +157,7 @@ class Eleve extends Model implements FrequentlyReapeat
 
             ) InfoEleve,
             (
-                select  parcours.id as id, parcours.date_inscription_parcours, classe.libelle as classe_parcours,
+                select  parcours.eleve_id as id, parcours.date_inscription_parcours, classe.libelle as classe_parcours,
                         annee_scolaire.debut_annee as annee_scolaire, annee_scolaire.statut as statut_annee_scolaire, statut_apprenant.libelle as statut_apprenant
                 from parcours
                 left join classe on classe.id = parcours.classe_id
@@ -215,7 +215,7 @@ class Eleve extends Model implements FrequentlyReapeat
 
             ) InfoEleve,
             (
-                select  parcours.id as id, parcours.eleve_id, parcours.date_inscription, classe.libelle as classe_parcours,
+                select  parcours.eleve_id as id, parcours.eleve_id, parcours.date_inscription, classe.libelle as classe_parcours,
                         annee_scolaire.debut_annee as annee_scolaire, annee_scolaire.statut as statut_annee_scolaire, statut_apprenant.libelle as statut_apprenant
                 from parcours
                 left join classe on classe.id = parcours.classe_id
@@ -274,7 +274,7 @@ class Eleve extends Model implements FrequentlyReapeat
 
         ) InfoEleve,
         (
-            select  parcours.id as id, parcours.eleve_id, parcours.date_inscription, classe.libelle as classe_parcours,
+            select  parcours.eleve_id as id, parcours.eleve_id, parcours.date_inscription, classe.libelle as classe_parcours,
                     annee_scolaire.debut_annee as annee_scolaire, annee_scolaire.statut as statut_annee_scolaire, statut_apprenant.libelle as statut_apprenant
             from parcours
             left join classe on classe.id = parcours.classe_id

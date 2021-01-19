@@ -65,8 +65,6 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
      })();
 </script>
 
-
-
 <!-- update  -->
 <script>
      (function(){
@@ -128,8 +126,7 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
                          $('#modal-update').modal('show');
                     }
                });
-          }
-          );
+          });
 
 
           //Store Data
@@ -180,8 +177,6 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
 
 </script>
 
-
-
 <!-- delete  -->
 <script>
      (function(){
@@ -225,8 +220,6 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
           });
      })();
 </script>
-
-
 
 <!-- read  -->
 <script>

@@ -6,6 +6,7 @@ use Core\Config;
 use Core\Database\Builder;
 use Core\Database\HydrahonDatabase;
 
+
 /**
  * Va stocker les informations nécessaires à plusieurs éléments de l'Application afin de les réutiliser un peu partout
  * @package App
@@ -14,7 +15,7 @@ class App
 {
 
 	private $title = 'Bienvenue aux Comelines';
-	const SCHOOLL_NAME = 'Les Comelines';
+	const SCHOOLL_NAME = "Les Comelines";
 
 	private static $_instance = null;
 
@@ -70,7 +71,7 @@ class App
 	 */
 	public static function load() {
 		session_start();
-		require '../vendor/autoload.php';
+		require "../vendor/autoload.php";
 	}
 
 
@@ -93,7 +94,7 @@ class App
 	 */
 	public function getDB()
     {
-        $config = Config::getInstance('config/config.php');
+        $config = Config::getInstance("config/config.php");
         if (empty($this->db_instance_mysql))
         {
             $this->db_instance_mysql = new HydrahonDatabase($config->get('db_name'), $config->get('db_user'), $config->get('db_host'), $config->get('db_pass'));

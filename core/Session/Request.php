@@ -93,7 +93,8 @@ class Request
 
 		return $default;
 	}
-
+	
+ /////////////////////////////////
 
 	public static function getSecPostParam($items)
 	{

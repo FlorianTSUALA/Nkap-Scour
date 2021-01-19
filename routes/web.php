@@ -36,6 +36,8 @@ use App\Controller\TypeActiviteController;
 use App\Controller\InscriptionActiviteController;
 use App\Controller\AbonnementActiviteController;
 use App\Controller\DocumentController;
+use App\Controller\BulletinController;
+use App\Controller\AffectationClasseMatiereController;
 
 //Login
 $router->addRoute("login", "", [LoginController::class, "index"]);
@@ -119,12 +121,17 @@ $router->crudRoute("statut_apprenant", StatutApprenantController::class);
 //pays
 $router->crudRoute("pays", PaysController::class);
 
+//bulletin
+$router->crudRoute("bulletin", BulletinController::class);
+
 //annee_scolaire
 $router->crudRoute("annee_scolaire", AnneeScolaireController::class);
 
 //type_paiement
 $router->crudRoute("type_paiement", TypePaiementController::class);
 
+//affectation_classe_matiere
+$router->crudRoute("affectation_classe_matiere", AffectationClasseMatiereController::class);
 
 //tranche_scolaire
 $router->crudRoute("tranche_scolaire", TrancheScolaireController::class);

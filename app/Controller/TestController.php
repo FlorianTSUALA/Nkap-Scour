@@ -56,18 +56,24 @@ class TestController extends AppController
 
     public function testpdf()
     {
-    
-        $date_facturation = 'Mardi, 24 Novembre 2020';
-        $eleve = 'kakambi franck';
-        $classe = 'Petite-section';
-        $reference = 'AC45FA4464';
-        $remise = '156';
-        $reste = '0';
-        $solde_paye = '0';
-        $sous_total = '0';
-        $items = [];
-        $this->renderPDF('reports.cantine', compact('date_facturation', 'eleve', 'classe', 'reference', 'remise', 'reste', 'solde_paye', 'sous_total', 'items'), 'facture_cantine' );  
-    
+
+
+        try {
+            ob_start();
+            include dirname(__FILE__).'/res/cantineList2.php';
+            $content = ob_get_clean();
+
+            $html2pdf = new Html2Pdf('P', 'A4', 'fr');
+            $html2pdf->pdf->SetDisplayMode('fullpage');
+            //$html2pdf->setDefaultFont("GOTHIC.php");
+            $html2pdf->writeHTML($content);
+            $html2pdf->output('examplSe04.pdf');
+        } catch (Html2PdfException $e) {
+            $html2pdf->clean();
+
+            $formatter = new ExceptionFormatter($e);
+            echo $formatter->getHtmlMessage();
+        }    
     }
 
     public function testAlert()

@@ -10,16 +10,11 @@ define('BASE_PATH', "nkap-scour/public/");
 require_once ROOT . '/app/App.php';
 
 App::load();
-
-use Core\Routing\URL;
-use Core\Helper\Helpers;
 use Core\Routing\Router;
 use Core\Routing\RouteNotFoundException;
+use Core\Routing\URL;
 
 $router = new Router();
-
-$helper = new Helpers();
-$helper->declareDebug();
 
 $action = str_replace( strtolower(App::base_url()) , "", strtolower(App::full_url()) );
 

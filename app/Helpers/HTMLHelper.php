@@ -54,7 +54,7 @@ trait HTMLHelper
     public static function genBodyTable($items, $className, $headerItems) {
         $html = '';
         $i = 0;
-        //var_dump($items, $headerItems);
+        //var_dump($items, $headerItems); die();
         if(isset($items) && is_array($items) && count($items)>0)
             foreach($items as $item):
                 $html .= helpers::genRowBodyTable(++$i, $item, $headerItems);
@@ -87,7 +87,7 @@ trait HTMLHelper
             $headerItem = Helpers::object_to_array($headerItem);
             $html .= '  <td  style="word-wrap: break-word;min-width: 20px;max-width: 200px;">' . helpers::formatToReadableOutput($model[$headerItem[FormModel::NAME]], $headerItem[FormModel::EXTERNAL_TYPE]) . '</td>';
         }
-
+    
         $html .= '   <td width="20%">
                         <button data-id="'. $model[FrequentlyReapeat::CODE] .'" type="button" class=" btn_delete_data btn btn-sm btn-danger"><i class="ft-trash-2"></i></button>
                         <button data-id="'. $model[FrequentlyReapeat::CODE] .'" type="button" class=" btn_update_data btn btn-sm btn-green"><i class="ft-edit-2"></i></button>

@@ -66,6 +66,8 @@ class DBTable
     const TYPE_PENSION = "type_pension";
     const TYPE_PERSONNEL = "type_personnel";
     const PRIX_ABONNEMENT = "prix_abonnement";
+    const VIEW_BULLETIN = "bulletin";
+    const AFFECTATION_CLASSE_MATIERE = "affectation_classe_matiere";
 
 
     public static function getModel($class_name){
@@ -75,6 +77,9 @@ class DBTable
             break;
             case DBTable::TYPE_ACTIVITE:
                 return TypeActivite::table();
+            break;
+            case DBTable::AFFECTATION_CLASSE_MATIERE:
+                return AffectationClasseMatiere::table();
             break;
             case DBTable::PERSONNEL_ACTIVITE:
                 return PersonnelActivite::table();
@@ -134,6 +139,9 @@ class DBTable
             break;
             case DBTable::PAYS:
                 return Pays::table();
+            break;
+            case DBTable::VIEW_BULLETIN:
+                return bulletin::table();
             break;
             case DBTable::PERIODE:
                 return Periode::table();

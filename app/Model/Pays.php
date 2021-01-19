@@ -18,6 +18,7 @@ class Pays extends Model implements FrequentlyReapeat
             [
                 new FormModel(true, self::LIBELLE),
                 new FormModel(true, self::DESCRIPTION),
+               
 
             ];
     }

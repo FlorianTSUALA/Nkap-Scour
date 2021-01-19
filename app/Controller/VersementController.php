@@ -219,6 +219,7 @@ class VersementController extends AppController
         $_SESSION[S::FAC_CANTINE] =  $_POST['cantines'];
 
 
+
         //Enregistrement des payements des activites
         $abonnement_activite = DBTable::getModel('abonnement_activite');
         foreach ($data_pension as $item) {
