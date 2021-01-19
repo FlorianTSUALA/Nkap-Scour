@@ -78,4 +78,53 @@ use App\Helpers\Helpers;
 
     }
 
+
+    function PrintVersement(){
+        date_facture['eleve_id'] = $('#eleve_nom_complet option:selected').val()
+        date_facture['classe_id'] = $('#classe option:selected').val()
+        date_facture['montant_total'] = $( "#montant_total" ).val()
+        data = {
+                
+                "reduction":  $('#reduction').val(),
+                "reference": reference,
+                "montant_total": ,
+                "date_paiement":  toSQLDate($( "#date_versement" ).val()),
+                "date_debut":   toSQLDate(date_debut),
+                "date_facture":  toSQLDate(date_facture),
+                "date_fin":  toSQLDate(date_fin),
+         };
+
+         console.log(data);
+
+        $.ajax({
+            url: '<?= URL::link('enregistrement_cantine');?>'+$('#eleve_nom_complet option:selected').val(),
+            type: 'post',
+            data: date_facture,
+            dataType: 'json',
+            beforeSend:function(){
+                // $("#btn_save").hide();
+                // $("#btn_back").hide();
+                $(loading).show();
+            },
+            success:function(data){
+                //$("#btn_save").hide();
+                $("#btn_home").show();
+                //$("#btn_back").hide();
+                $("#btn_print").show();
+                $(loading).hide();
+
+               console.log(data);
+
+            },
+            error: function (textStatus, errorThrown) {
+                $("#btn_save").show();
+                $("#btn_back").show();
+                Success = false;
+                console.log(textStatus, errorThrown);
+            }
+        });
+
+
+    }
+
 </script>

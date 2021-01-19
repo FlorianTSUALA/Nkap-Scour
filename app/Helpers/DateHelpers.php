@@ -150,14 +150,14 @@ trait DateHelpers
         return $mois[$month];
     }
 
-    public static function getIndexMonth($mois)
+    public static function getStrIndexMonth($mois)
     {
         switch ($mois) {
             case ($mois == 'Janvier' || $mois == 'janvier'):
                 $index_mois = '01';
                 break;
             
-            case ($mois == 'Février' || $mois == 'Février'):
+            case ($mois == 'Février' || $mois == 'février' || $mois == 'fevrier' || $mois == 'Fevrier'):
                 $index_mois = '02';
                 break;
             
@@ -230,6 +230,14 @@ trait DateHelpers
         return $dateborn > date("Y") ? false : "$dateborn-01-01";
     }
 
+    
+
+    public static function getLastDayOfYear($date)
+    {
+        //https://thisinterestsme.com/php-get-last-day-of-month/
+        return date("Y-m-d", strtotime("Last day of December", strtotime($date)));
+    }
+
     public static function getMonthInDateInterval($startDate, $endDate)
     {
         $months = [];
@@ -238,30 +246,47 @@ trait DateHelpers
         $interval = DateInterval::createFromDateString('1 month');
         $period   = new DatePeriod($start, $interval, $end);
         foreach ($period as $dt)
-            $months.push($dt->format("m"));         
+            array_push($months, $dt->format("m"));         
         return $months;
     }
-
-    public static function getLastDayOfYear($date)
-    {
-        //https://thisinterestsme.com/php-get-last-day-of-month/
-        return date("Y-m-d", strtotime("Last day of December", strtotime($date)));
-    }
-
     
-    public static function phpDate2MyslDate($mysqldate)
-    {
-        $phpdate = strtotime( $mysqldate );
-        $mysqldate = date( 'Y-m-d H:i:s', $phpdate );    }
+    public static function getCurrentToEndMonthOfYear($start_date = NULL){
+        $start_date = ($start_date)??date('Y-m-d H:i:s');
+        $num = date("n",strtotime($start_date));
+        array_push($months, date("F", strtotime($start_date)));
+
+        for($i = ($num + 1); $i <= 12; $i++){
+            $dateObj = DateTime::createFromFormat('!m', $i);
+            array_push($months, $dateObj->format('F'));
+        }
+        return $months;
+    }
 
     public static function getFirstDayMonth($query_date)
     {
         $date_debut =  date('Y-m-01', strtotime($query_date));
+        return $date_debut;
     }
 
+    
+    public static function getFirstDayNextMonth($query_date)
+    {
+        $endDate = new DateTime('1st January Next Year');
+        return $endDate->format('Y-m-d');
+    }
+
+    
     public static function getLastDayMonth($query_date)
     {
-          $date_fin = date('Y-m-t', strtotime($query_date));
+        $date_fin = date('Y-m-t', strtotime($query_date));
+        return $date_fin;
     }
+
+    public static function phpDate2MyslDate($mysqldate)
+    {
+        $phpdate = strtotime( $mysqldate );
+        $mysqldate = date( 'Y-m-d H:i:s', $phpdate );    
+    }
+
 
 }

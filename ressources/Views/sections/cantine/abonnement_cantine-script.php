@@ -10,6 +10,8 @@
 
 <script>
     var items = []
+    var data_items = []
+    var data_facture = []
     var date_debut
     var date_fin
     var date_facture = '<?= Helpers::getFullDate(date('y-M-d')) ?>'
@@ -202,59 +204,45 @@
     $(document).ready(function(){
 
         function update_etat(){
-
-            $('#recap-body').html('')
-            $('#recap-reference').text(reference)
-            $('#recap-somme').text( $('#somme').text() )
-
-            console.log("items")
+            console.log("WELCOME TO UPDATE FACTURE")
 
             //Cantines
+            date_debut = $('#date_debut').val()
+            date_fin
             let current = []
             items = $('.repeater').repeaterVal()
+            data_items = []
             let sum = 0
+
             if( items !== undefined && items.data != undefined ){
                 current = items.data
             }
-            let body = ''
-            let i = 0
-
-            let date_ref
-            let total_day = 0
-            let total = 0
-
-            date_debut = $('#date_debut').val()
-            date_fin
-            console.log(date_debut)
 
             function addDays(date, days){
                 let _date = new Date(date)
                 _date.setDate(_date.getDate() + days)
                 let str_date = _date.toLocaleDateString()
-
-                console.log(date)
-                console.log(days)
-                console.log(_date)
-                console.log(str_date)
-
                 return  str_date
             }
 
+            let i = 0
+            let body = ''
+            let date_ref
+            let total_day = 0
+            let total = 0
             current.forEach( (item, index) =>{
+
+                let tmp_item = []
 
                 function addDays(date, days){
                     let _date = new Date(date)
                     _date.setDate(_date.getDate() + days)
                     return  _date.toLocaleDateString()
                 }
-                
                 ++i
-                
-                let quantite = item.duree
-                let periode = item.periode
+
                 console.log(item)
                 let dayCount = 0
-
                 switch(periode){
                     case 'JOUR':
                         dayCount = 1
@@ -272,55 +260,73 @@
                         dayCount = 1
                 }
 
-                let start_date = addDays(date_debut, total_day)
-                total_day += (dayCount*quantite)
-                let end_date = addDays(date_debut, total_day)
-                
-                let prix_unitaire = item.prix_unitaire
-                let sub_total = prix_unitaire * quantite
+                tmp_item['date_debut'] = addDays(date_debut, total_day)
+                total_day += ( dayCount * quantite )
+                tmp_item['date_fin'] = addDays(date_debut, total_day)
+                tmp_item['quantite'] = item.duree
+                tmp_item['periode'] = item.periode
+                tmp_item['prix_unitaire'] = item.prix_unitaire
+                tmp_item['sous_total'] = tmp_item['prix_unitaire'] * tmp_item['periode']
+                tmp_item['resume'] = 'Du : '+ start_date +' au '+ end_date
+                data_items.push(tmp_item)
    
                 body += "<tr>"
                 body += '   <th scope="row">'+i+'</th>'
                 body += '       <td>'
-                body += '           <p>Periode : '+ periode +' </p>'
-                body += '           <em class="text-muted">Du : '+ start_date +' au '+ end_date +'.</em>'
+                body += '           <p>Periode : '+ tmp_item['quantite'] +' </p>'
+                body += '           <em class="text-muted">Du : '+ tmp_item['date_debut'] +' au '+ tmp_item['date_fin'] +'.</em>'
                 body += '       </td>'
-                body += '       <td class="text-right">'+ prix_unitaire +' Fcfa</td>'
-                body += '       <td class="text-right">'+ quantite +'</td>'
-                body += '       <td class="text-right">'+ sub_total +' Fcfa</td>'
+                body += '       <td class="text-right">'+ tmp_item['prix_unitaire'] +' Fcfa</td>'
+                body += '       <td class="text-right">'+ tmp_item['quantite'] +'</td>'
+                body += '       <td class="text-right">'+ tmp_item['sous_total'] +' Fcfa</td>'
 
                 body += '</tr>'
-            
+
             })
+
+ 
+            data_facture['data_items'] = data_items
+            
+            data_facture['reference'] = reference
+            data_facture['date_debut'] = (date_debut = addDays(date_debut, 0))
+            data_facture['date_fin'] = (date_fin = addDays(date_debut, total_day))
+            data_facture['date_versement'] =  $( "#date_versement" ).text()
+
+            data_facture['total_day'] = total_day
+            data_facture['date_facture'] = "<?= Helpers::getFullDate(date("Y-m-d H:i:s")) ?>"
+            data_facture['description'] = $('#motif').text()
+            data_facture['montant_total'] = $('#montant_total').text()
+            data_facture['quantite'] = $('#quantite').text()
+            data_facture['somme'] = $('#somme').text()
+            data_facture['reduction'] = $('#reduction').val()
+
+            data_facture['nom_complet'] = $('#eleve_nom_complet option:selected').text()
+            data_facture['classe'] = $('#classe option:selected').text()
+            data_facture['mode_paiement'] = $('#type_paiement option:selected').text()
+            
+            $('#recap-body').html('')
 
             body += "<tr>"
             body += '       <td colspan="2">'
             body += '           <B>Nombre de jours : '+ total_day +' </B>'
             body += '       </td>'
             body += '       <td colspan="3">'
-            body += '           <B><em class="text-muted">Du : '+ (date_debut = addDays(date_debut, 0)) +' au '+ (date_fin = addDays(date_debut, total_day)) +'.</em> </B>'
+            body += '           <B><em class="text-muted">Du : '+ data_facture['date_debut'] +' au '+ data_facture['date_fin'] +'.</em> </B>'
             body += '       </td>'
             body += '</tr>'
 
             $('#recap-body').html(body)
-
-            $('#recap-nom').text( $('#eleve_nom_complet option:selected').text() )
-            $('#recap-classe').text( $('#classe option:selected').text() )
-
-            let date_versement = $( "#date_versement" ).text()
-
-            let classe = $( "#classe option:selected" ).text()
-            let type_paiement = $( "#type_paiement option:selected" ).text()
-            let date_facture = "<?= Helpers::getFullDate(date("Y-m-d H:i:s")) ?>"
+            $('#recap-mode_paiement').text( data_facture['mode_paiement'] )
+            $('#recap-nom').text( data_facture['nom_complet'] )
+            $('#recap-classe').text( data_facture['classe'] )
 
             $('#recap-date').text( date_facture )
 
-            $('#recap-description').text( $('#motif').text() )
-            $('#recap-prix').text( $('#montant_total').text() )
-            $('#recap-quantite').text( $('#quantite').text() )
-            $('#recap-somme').text( $('#somme').text() )
-
-            $('#recap-mode_paiement').text( $('#type_paiement option:selected').text() )
+            $('#recap-description').text( data_facture['description'] )
+            $('#recap-prix').text( data_facture['prix'] )
+            $('#recap-quantite').text( data_facture['quantite'] )
+            $('#recap-somme').text( data_facture['somme'] )
+            $('#recap-reference').text(reference)
 
             //NON PRIS EN COMPTE
             $('#recap-banque').hide()
@@ -328,17 +334,15 @@
             $('#recap-nom_banque').hide()
             $('#recap-numero_cheque').hide()
 
-            $('#recap-total-top').text( $('#montant_total').val())
-            $('#recap-total-bottom').text( $('#montant_total').val())
-            $('#recap-reduction').text( ""+ $('#reduction').val() )
+            $('#recap-total-top').text( data_facture['montant_total'])
+            $('#recap-total-bottom').text( data_facture['montant_total'])
+            $('#recap-reduction').text( ""+ data_facture['reduction'] )
 
-            console.log("Les remise : "+  $('#reduction').val())
             
-            $('#recap-sous_total').text( parseInt($('#montant_total').val() ) )
+            $('#recap-sous_total').text( parseInt(data_facture['montant_total'] ) )
 
             $('#recap-signataire').text( "<?=  $signataire; ?>" )
             $('#recap-funtion_signataire').text(  "<?= $funtion_signataire; ?>" )
-            // $('#recap-numero_ligne').text( 1 )
 
             $('#section_versement').hide()
             $('#section_recaputilatif').show()
@@ -369,6 +373,10 @@
         })
 
         $(btn_save).click(function() {
+            sauvegarderVersement()
+        })
+
+        $(btn_print).click(function() {
             sauvegarderVersement()
         })
 

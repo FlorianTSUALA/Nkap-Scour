@@ -34,6 +34,7 @@ class AppController extends \Core\Controller\Controller
         $this->field = new FormField();
 
         $this->session = new Session();
+        
     }
 
     /**

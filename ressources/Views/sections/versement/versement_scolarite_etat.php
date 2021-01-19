@@ -161,10 +161,10 @@ use App\Controller\PrinterController;
                                                         <td>Remise</td>
                                                         <td class="text-right"><strong id="recap-remise"><?= $remise??"";?> Fcfa</strong></td>
                                                     </tr>
-                                                    <tr>
+                                                    <!-- <tr>
                                                         <td>Reste</td>
                                                         <td class="text-right"><strong id="recap-reste"><?= $reste??"";?> Fcfa</strong></td>
-                                                    </tr>
+                                                    </tr> -->
                                                     <!-- <tr>
                                                         <td class="text-bold-800">Total</td>
                                                         <td class="text-bold-800 text-right"> <strong id="recap-total"><?= $total??"";?> Fcfa</strong></td>

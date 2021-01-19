@@ -9,24 +9,24 @@ use App\Helpers\S;
     var isFirstLoad = true;
     var fromInscription = <?= ($this->session->has(S::DATA_TRANSPORT))? 'true' : 'false' ;?>;
 
-    var type_pension = $('#type_pension');
-    var eleve_nom_complet = $('#eleve_nom_complet');
-    var classe = $('#classe');
-    var statut_apprenant = $('#statut_apprenant');
+    var type_pension = $('#type_pension')
+    var eleve_nom_complet = $('#eleve_nom_complet')
+    var classe = $('#classe')
+    var statut_apprenant = $('#statut_apprenant')
 
-    var reduction = $('#reduction');
-    var reste = $('#reste');
-    var montant = $('#montant');
+    var reduction = $('.reduction')
+    // var reste = $('#reste')
+    var montant = $('#montant')
 
-    var section_versement = $('#section_versement');
-    var section_recaputilatif = $('#section_recaputilatif');
+    var section_versement = $('#section_versement')
+    var section_recaputilatif = $('#section_recaputilatif')
 
-    var btn_preview = $('#btn_preview');
-    var btn_save = $('#btn_save');
-    var btn_home = $('#btn_home');
-    var btn_back = $('#btn_back');
-    var btn_print = $('#btn_print');
-    var loading = $('#loading');
+    var btn_preview = $('#btn_preview')
+    var btn_save = $('#btn_save')
+    var btn_home = $('#btn_home')
+    var btn_back = $('#btn_back')
+    var btn_print = $('#btn_print')
+    var loading = $('#loading')
 
     var eleve_id;
     var eleve_matricule;
@@ -56,84 +56,77 @@ use App\Helpers\S;
 
         let _montant_total = 0;
         let i = 0;
+
         for(var item in items)
         {
             let current = items[item];
-            let _state = current['state'];
             var _type_pension_code = current['type_pension_code'];
-            if(_state){
-                let  _est_mensuel    = parseInt(current['est_mensuel']);
-                let _montant =  parseFloat(current['montant']);
-                let _mensualite = parseFloat(current['mensualite']);
-
-                let  msg = "";
-                let  sub_total = 0;
-                let  tmp_montant = 0;
-
-                let _recapitulatif = parseFloat(current['recapitulatif']);
-                if(_est_mensuel === 1){
-                    _recapitulatif = (isNaN(_recapitulatif))? 0 : _recapitulatif;
-                    tmp_montant = _mensualite;
-                }else{
-                    _recapitulatif = (isNaN(_recapitulatif))? 0 : _recapitulatif;
-                    tmp_montant = _montant;
-                }
-
-                let _remise = parseFloat(current['remise']);
-                _remise = (isNaN(_remise))? 0 : _remise;
-
-                sub_total = tmp_montant*_recapitulatif - _remise;
-                msg = _recapitulatif+"*"+tmp_montant+"-"+_remise+ " = " +sub_total;
-
-                $('#COL4-'+_type_pension_code).val(msg);
-
-                _montant_total += sub_total;
-            }else{
-                $('#COL4-'+_type_pension_code).val("");
-            }
-        }
-
-
-        //Autres
-            let current = autres ;
-            let  _est_mensuel = parseInt(current['est_mensuel']);
-            let _montant = parseFloat(current['multiplicateur']);
-            _montant = (isNaN(_montant))? 0 : _montant;
+            
+            let  _est_mensuel    = parseInt(current['est_mensuel']);
+            let _montant =  parseFloat(current['montant']);
             let _mensualite = parseFloat(current['mensualite']);
 
             let  msg = "";
             let  sub_total = 0;
             let  tmp_montant = 0;
 
+            let _recapitulatif = parseFloat(current['recapitulatif']);
+            if(_est_mensuel === 1){
+                _recapitulatif = (isNaN(_recapitulatif))? 0 : _recapitulatif;
+                tmp_montant = _mensualite;
+            }else{
+                _recapitulatif = (isNaN(_recapitulatif))? 0 : _recapitulatif;
+                tmp_montant = _montant;
+            }
 
             let _remise = parseFloat(current['remise']);
             _remise = (isNaN(_remise))? 0 : _remise;
-            sub_total = _montant - _remise;
-            msg = _montant+"-"+_remise+ " = " +sub_total;
 
-            $('#COL4-Autres').val(msg);
-            _montant_total += sub_total;
-
-
-        //Cantines
-            current = cantines ;
-            _est_mensuel = parseInt(current['est_mensuel']);
-            _montant = parseFloat(current['montant']);
-            _mensualite = parseFloat(current['mensualite']);
-            msg = "";
-            sub_total = 0;
-            tmp_montant = 0;
-            _recapitulatif = parseFloat(current['recapitulatif']);
-            _recapitulatif = (isNaN(_recapitulatif))? 0 : _recapitulatif;
-            tmp_montant = cantine_prix_mois;
-            _remise = parseFloat(current['remise']);
-            _remise = (isNaN(_remise))? 0 : _remise;
             sub_total = tmp_montant*_recapitulatif - _remise;
             msg = _recapitulatif+"*"+tmp_montant+"-"+_remise+ " = " +sub_total;
 
-            $('#COL4-Cantine').val(msg);
-            _montant_total += sub_total;
+            $('#COL4-'+_type_pension_code).val(msg);
 
+            _montant_total += sub_total;
+            
+        }
+
+
+        //Autres
+            let current = autres 
+            let  msg = ''
+            let  sub_total = 0
+            let _montant = parseFloat(current['montant'])
+            _montant = (isNaN(_montant))? 0 : _montant
+            let _remise = parseFloat(current['remise'])
+            _remise = (isNaN(_remise))? 0 : _remise
+
+            sub_total = _montant - _remise
+            msg = _montant+"-"+_remise+ " = " +sub_total
+            _montant_total += sub_total
+
+            $('#COL4-Autres').val(msg)
+        //Autres
+        
+        //Cantines
+            cantines['montant'] = cantine_prix_mois
+            current = cantines 
+            _montant = cantine_prix_mois
+            msg = ''
+            sub_total = 0
+
+            _multiplicateur = parseFloat(current['multiplicateur'])
+            _multiplicateur = (isNaN(_multiplicateur))? 0 : _multiplicateur
+
+            _remise = parseFloat(current['remise'])
+            _remise = (isNaN(_remise))? 0 : _remise
+            console.log('MES MES MES '+_remise)
+            sub_total = _montant*_multiplicateur - _remise
+            msg = _multiplicateur+'*'+_montant+'-'+_remise+ ' = ' +sub_total
+
+            $('#COL4-Cantine').val(msg)
+            _montant_total += sub_total
+        //Cantine
 
         //Activite
             let activites_souscrits  = activites['activites'];
@@ -147,7 +140,6 @@ use App\Helpers\S;
 
             let nbre_tranche = parseInt(current['recapitulatif']);
             nbre_tranche = (isNaN(nbre_tranche))? 0 : nbre_tranche;
-            console.log(activites_souscrits);
 
             if(activites_souscrits != undefined){
                 for(let i=0; i<activites_souscrits.length; i++){
@@ -167,15 +159,18 @@ use App\Helpers\S;
             msg += "-"+_remise+ " = " +sub_total;
             $('#COL4-Activite').val(msg);
             _montant_total += sub_total;
+        //Activite
 
-        //Reste
-        _reduction = parseFloat($(reduction).val());
-        _reste = parseFloat($(reste).val());
-        _montant_total -= _reduction;
-        _montant_total -= _reste;
-        let reduction_familiale = (isNaN($('#RF-reduction').val()))? 0 : $('#RF-reduction').val();
-        _montant_total = _montant_total - reduction_familiale;
-        $(montant).val(_montant_total);
+        // //Reste
+            _reduction = parseFloat($(reduction).val());
+            // _reste = parseFloat($(reste).val());
+            // _montant_total -= _reduction;
+            _montant_total -= _reste;
+            let reduction_familiale = (isNaN($('#RF-reduction').val()))? 0 : $('#RF-reduction').val();
+            _montant_total = _montant_total - reduction_familiale;
+            $(montant).val(_montant_total); 
+        // //Reste
+
     }
 
     $(document).ready(function(){
@@ -200,11 +195,11 @@ use App\Helpers\S;
             init();
         });
 
-        $(reste).on("change paste keyup mouseup", function () {
-            if($(reste).val() < 0)
-                $(reste).val(0);
-            init();
-        });
+        // $(reste).on("change paste keyup mouseup", function () {
+        //     if($(reste).val() < 0)
+        //         $(reste).val(0);
+        //     init();
+        // });
 
         $(btn_preview).click(function() {
             $(section_versement).hide();

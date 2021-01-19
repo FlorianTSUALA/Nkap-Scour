@@ -15,16 +15,19 @@ use App\Helpers\TraitCRUDController;
 use App\Controller\Admin\AppController;
 use App\Model\Periode;
 use ClanCats\Hydrahon\Query\Expression as Ex;
-
+use App\Repository\CantineRepository;
+use function Core\Helper\dd;
+use function Core\Helper\vd;
 
 class CantineController extends AppController
 {
 
-    
+    private $cantine_repository;
     use TraitCRUDController;
     public function __construct()
     {
         parent::__construct();
+        $this->cantine_repository = new CantineRepository;
 
         $this->vairant = DBTable::ABONNEMENT_CANTINE;
         $this->folder_view_index = 'cantine.abonnement_cantine';
@@ -62,23 +65,24 @@ class CantineController extends AppController
 
 
 
-    public function getall()
-    {
-        $model = AbonnementCantine::table();
-        $results = $model->select('
-                type_abonnement_cantine.libelle as type_abonnement_cantine_id,
-                pays.libelle as pays_id,
-                abonnement_cantine.code as code,
-                abonnement_cantine.nom,
-                abonnement_cantine.prenom,
-                abonnement_cantine.bibliographie')
-            ->where('abonnement_cantine.visibilite', 1)
-            ->join('type_abonnement_cantine', 'abonnement_cantine.type_abonnement_cantine_id', '=', 'type_abonnement_cantine.id')
-            ->join('pays', 'abonnement_cantine.pays_id', '=', 'pays.id')
-            ->get();
+        public function getall()
+        {
+            $model = AbonnementCantine::table();
+            $results = $model->select('
+                    type_abonnement_cantine.libelle as type_abonnement_cantine_id,
+                    pays.libelle as pays_id,
+                    abonnement_cantine.code as code,
+                    abonnement_cantine.nom,
+                    abonnement_cantine.prenom,
+                    abonnement_cantine.bibliographie')
+                ->where('abonnement_cantine.visibilite', 1)
+                ->join('type_abonnement_cantine', 'abonnement_cantine.type_abonnement_cantine_id', '=', 'type_abonnement_cantine.id')
+                ->join('pays', 'abonnement_cantine.pays_id', '=', 'pays.id')
+                ->get();        
             
             return $results;
-        }*/
+        }
+    */
         
         
     public function abonnement_cantine()
@@ -124,6 +128,7 @@ class CantineController extends AppController
 
     public function save($code)
     {
+        dd($_POST['cantines']['data']);
 
         $model = DBTable::getModel(DBTable::ABONNEMENT_CANTINE);
         $code_cantine = AbonnementCantine::generateCode();
@@ -138,17 +143,17 @@ class CantineController extends AppController
             'reference' => Request::getSecParam('reference', ''),
             'date_debut' => Request::getSecParam('date_debut', ''),
             'date_fin' => Request::getSecParam('date_fin', ''),
-            'date_paiement' => Request::getSecParam('date_paiement', ''),
+            'date_paiement' => Request::getSecParam('date_paiement', '')
         ];
 
         $result_cantine = $model->insert($data_abonnment)->execute();
         
-        var_dump($result_cantine);
+        vd($result_cantine);
 
         $abonnement_detail = DBTable::getModel(DBTable::ABONNEMENT_DETAIL);
         $items = $_POST['cantines']['data'];
 
-        // var_dump($items);
+        dd($items);
 
         $id_cantine = Model::getId(DBTable::ABONNEMENT_CANTINE, $code_cantine);
 
@@ -177,7 +182,8 @@ class CantineController extends AppController
 
             $abonnement_detail->insert($data_abonnment_detail)->execute();
         }
-        var_dump($result_cantine);
+
+        vd($result_cantine);
 
         if ($result_cantine) {
             // $this->setupSessionVerement();
@@ -198,7 +204,6 @@ class CantineController extends AppController
 
     public function liste_abonnee()
     {
-
      
         $classes = DBTable::getModel('classe')->select(['code'=>'id', 'libelle' => 'libelle'])->where('visibilite', '=', 1)->get();
       
@@ -228,10 +233,31 @@ class CantineController extends AppController
                 ->where('parcours.annee_scolaire_id', '=', $annee_scolaire)
                 ->get();
 
-        
-            
 
         $this->render('sections.cantine.abonnement_liste', compact( 'classes','abonnements'));
+    }
+
+    public function print_facture(){
+
+        $date_facturation = Request::getSecParam('date_facturation', '');
+        $eleve = Request::getSecParam('eleve', '');
+        $classe = Request::getSecParam('classe', '');
+        $reference = Request::getSecParam('reference', '');
+        $remise = Request::getSecParam('remise', '');
+        $reste = Request::getSecParam('reste', '');
+        $solde_paye = Request::getSecParam('solde_paye', '');
+        $sous_total = Request::getSecParam('sous_total', '');
+        $items = $_POST['items'];
+
+        // $periode
+        // $date_debut
+        // $date_fin
+        // $prix_unitaire
+        // $quantite
+        // $total
+    
+        $this->renderPDF('reports.cantine', compact('date_facturation', 'eleve', 'classe', 'reference', 'remise', 'reste', 'solde_paye', 'sous_total', 'items'), 'facture_cantine' );  
+
     }
 
 }
