@@ -76,9 +76,10 @@ $funtion_signataire = "Le Sécrétariat";
                 }
 
                 //Reste
-                _reduction = parseFloat($(reduction).val());
+                // console.log('*-*--*--*--*--*-*')
+                
                 // _reste = parseFloat($(reste).val());
-                _montant_total -= _reduction;
+                _montant_total -= current['remise'];
                 // _montant_total -= _reste;
 
                 body += '       </td>'
