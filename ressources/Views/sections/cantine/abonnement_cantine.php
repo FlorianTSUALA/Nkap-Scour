@@ -17,6 +17,7 @@ $include_res_footer .= '<script src="' . URL::base() . 'assets/app-assets/vendor
 $include_res_footer .= '<script src="' . URL::base() . 'assets/app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>';
 
 
+
 ob_start();
 //select2
 echo '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/select/select2.full.min.js"></script>';
@@ -28,11 +29,11 @@ echo '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/toggle/boot
 echo '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js"></script>';
 // echo '<script src="'.URL::base().'assets/"></script>';
 
-echo require "abonnement_cantine-script.php";
+require 'abonnement_cantine-script.php';
 
-echo  require "script-init.php";
-//echo  require "script-update-etat.php";
-echo  require "script-save.php";
+require 'script-init.php';
+// require 'script-update-etat.php';
+require 'script-save.php';
 
 $include_footer_script = ob_get_clean();
 

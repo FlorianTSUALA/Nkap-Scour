@@ -6,9 +6,9 @@ use App\Helpers\Helpers;
 ?>
 
 <script>
+
     var reference = "<?= Helpers::generateReference(); ?>";
     var date_facture = "<?= Helpers::getFullDate(date("Y-m-d H:i:s")); ?>";
-
 
     function pad(number, length = 2) {
         var str = '' + number;
@@ -19,8 +19,6 @@ use App\Helpers\Helpers;
     function toSQLDate(str_date){
         let dt = new Date(str_date)
         // don't remove console
-        console.log(str_date)
-        console.log(dt)
         return dt.getFullYear() + '-' + pad(dt.getMonth()+1) + '-' + pad(dt.getDate()) + ' ' + 
                 pad(dt.getHours()) + ':' + pad(dt.getMinutes()) + ':' + pad(dt.getSeconds())
     }
@@ -28,21 +26,21 @@ use App\Helpers\Helpers;
     function sauvegarderVersement(){
 
         data = {
-                "cantines": items,
-                "eleve_id":  $('#eleve_nom_complet option:selected').val(),
-                "classe_id":  $('#classe option:selected').val(),
-                // "annee_scolaire_id":  $('#annee_scolaire option:selected').val(),
-                // "type_paiement_id":  $('#type_paiement option:selected').val(),
-                // "motif":  $('#motif').val(),
-                // "reste":  $('#reste').val(),
-                // "autre":  $('#autres').val(),
-                "reduction":  $('#reduction').val(),
-                "reference": reference,
-                "montant_total": $( "#montant_total" ).val(),
-                "date_paiement":  toSQLDate($( "#date_versement" ).val()),
-                "date_debut":   toSQLDate(date_debut),
-                "date_facture":  toSQLDate(date_facture),
-                "date_fin":  toSQLDate(date_fin),
+                'cantines': items,
+                'eleve_id':  $('#eleve_nom_complet option:selected').val(),
+                'classe_id':  $('#classe option:selected').val(),
+                // 'annee_scolaire_id':  $('#annee_scolaire option:selected').val(),
+                // 'type_paiement_id':  $('#type_paiement option:selected').val(),
+                // 'motif':  $('#motif').val(),
+                // 'reste':  $('#reste').val(),
+                // 'autre':  $('#autres').val(),
+                'reduction':  $('#reduction').val(),
+                'reference': reference,
+                'montant_total': $( "#montant_total" ).val(),
+                'date_paiement':  toSQLDate($( "#date_versement" ).val()),
+                'date_debut':   toSQLDate(date_debut),
+                'date_facture':  toSQLDate(date_facture),
+                'date_fin':  toSQLDate(date_fin),
          };
 
          console.log(data);
@@ -53,23 +51,23 @@ use App\Helpers\Helpers;
             data: data,
             dataType: 'json',
             beforeSend:function(){
-                // $("#btn_save").hide();
-                // $("#btn_back").hide();
+                // $('#btn_save').hide();
+                // $('#btn_back').hide();
                 $(loading).show();
             },
             success:function(data){
-                //$("#btn_save").hide();
-                $("#btn_home").show();
-                //$("#btn_back").hide();
-                $("#btn_print").show();
+                //$('#btn_save').hide();
+                $('#btn_home').show();
+                //$('#btn_back').hide();
+                $('#btn_print').show();
                 $(loading).hide();
 
                console.log(data);
 
             },
             error: function (textStatus, errorThrown) {
-                $("#btn_save").show();
-                $("#btn_back").show();
+                $('#btn_save').show();
+                $('#btn_back').show();
                 Success = false;
                 console.log(textStatus, errorThrown);
             }
@@ -80,18 +78,18 @@ use App\Helpers\Helpers;
 
 
     function PrintVersement(){
-        date_facture['eleve_id'] = $('#eleve_nom_complet option:selected').val()
-        date_facture['classe_id'] = $('#classe option:selected').val()
-        date_facture['montant_total'] = $( "#montant_total" ).val()
+        data_facture['eleve_id'] = $('#eleve_nom_complet option:selected').val()
+        data_facture['classe_id'] = $('#classe option:selected').val()
+        data_facture['montant_total'] = $( '#montant_total' ).val()
         data = {
                 
-                "reduction":  $('#reduction').val(),
-                "reference": reference,
-                "montant_total": ,
-                "date_paiement":  toSQLDate($( "#date_versement" ).val()),
-                "date_debut":   toSQLDate(date_debut),
-                "date_facture":  toSQLDate(date_facture),
-                "date_fin":  toSQLDate(date_fin),
+                'reduction':  $('#reduction').val(),
+                'reference': reference,
+                'montant_total': data_facture['montant_total'],
+                'date_paiement':  toSQLDate($( '#date_versement' ).val()),
+                'date_debut':   toSQLDate(date_debut),
+                'date_facture':  toSQLDate(date_facture),
+                'date_fin':  toSQLDate(date_fin),
          };
 
          console.log(data);
@@ -102,23 +100,23 @@ use App\Helpers\Helpers;
             data: date_facture,
             dataType: 'json',
             beforeSend:function(){
-                // $("#btn_save").hide();
-                // $("#btn_back").hide();
+                // $('#btn_save').hide();
+                // $('#btn_back').hide();
                 $(loading).show();
             },
             success:function(data){
-                //$("#btn_save").hide();
-                $("#btn_home").show();
-                //$("#btn_back").hide();
-                $("#btn_print").show();
+                //$('#btn_save').hide();
+                $('#btn_home').show();
+                //$('#btn_back').hide();
+                $('#btn_print').show();
                 $(loading).hide();
 
                console.log(data);
 
             },
             error: function (textStatus, errorThrown) {
-                $("#btn_save").show();
-                $("#btn_back").show();
+                $('#btn_save').show();
+                $('#btn_back').show();
                 Success = false;
                 console.log(textStatus, errorThrown);
             }

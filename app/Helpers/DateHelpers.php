@@ -212,6 +212,207 @@ trait DateHelpers
         return $index_mois;
     }
     
+    public static function getStrEnMonth($mois)
+    {
+        switch ($mois) {
+            case ($mois == 'Janvier' || $mois == 'janvier'):
+                $str_en_month = 'January';
+                break;
+            
+            case ($mois == 'Février' || $mois == 'février' || $mois == 'fevrier' || $mois == 'Fevrier'):
+                $str_en_month = 'February';
+                break;
+            
+            case ($mois == 'Mars' || $mois == 'mars'):
+                $str_en_month = 'March';
+                break;
+            
+            case ($mois == 'Avril' || $mois == 'avril'):
+                $str_en_month = 'April';
+                break;
+
+                
+            case ($mois == 'Mai' || $mois == 'mai'):
+                $str_en_month = 'May';
+                break;
+
+
+            case ($mois == 'Juin' || $mois == 'juin'):
+                $str_en_month = 'June';
+                break;
+                
+            
+            case ($mois == 'Juillet' || $mois == 'juillet'):
+                $str_en_month = 'July';
+                break;
+                
+
+            case ($mois == 'Aout' || $mois == 'aout' || $mois == 'Août' || $mois == 'août'):
+                $str_en_month = 'August';
+                break;
+                    
+            case ($mois == 'Septembre' || $mois == 'septembre'):
+                $str_en_month = 'September';
+                break;
+            
+            case ($mois == 'Octobre' || $mois == 'octobre'):
+                $str_en_month = 'October';
+                break;
+            
+            case ($mois == 'Novembre' || $mois == 'novembre'):
+                $str_en_month = 'November';
+                break;
+
+                
+            case ($mois == 'Decembre' || $mois == 'decembre'):
+                $str_en_month = 'December';
+                break;
+            default: 
+                $str_en_month = -1;
+        }
+
+        return $str_en_month;
+    }
+    
+    public static function getIndexToEnStrMonth($index)
+    {
+        switch ($index) {
+            case ($index == ((int)'01') ): 
+                $str_fr_month = 'Janvier';
+                break;
+            
+            case ($index == ((int)'02') ): 
+                $str_fr_month = 'Février';
+                break;
+            
+            case ($index == ((int)'03') ): 
+                $str_fr_month = 'Mars';
+                break;
+            
+            case ($index == ((int)'04') ): 
+                $str_fr_month = 'Avril';
+                break;
+
+                
+            case ($index == ((int)'05') ): 
+                $str_fr_month ='Mai';
+                break;
+
+
+            case ($index == ((int)'06') ): 
+                $str_fr_month = 'Juin';
+                break;
+                
+            
+            case ($index == ((int)'07') ): 
+                $str_fr_month = 'Juillet';
+                break;
+                
+
+            case ($index == ((int)'08') ): 
+                $str_fr_month = 'Aout';
+                break;
+                    
+            case ($index == ((int)'09') ): 
+                $str_fr_month = 'Septembre';
+                break;
+            
+            case ($index == ((int)'10') ): 
+                $str_fr_month = 'Octobre';
+                break;
+            
+            case ($index == ((int)'11') ): 
+                $str_fr_month = 'Novembre';
+                break;
+
+                
+            case ($index == ((int)'12') ): 
+                $str_fr_month = 'Decembre';
+                break;
+            default: 
+                $str_fr_month = -1;
+        }
+
+        return $str_fr_month;
+    }
+
+    public static function getIndexMonth($mois)
+    {
+        switch ($mois) {
+            case ($mois == 'January'): 
+                $index_mois = '01';
+                break;
+            
+            case ($mois == 'February'): 
+                $index_mois = '02';
+                break;
+            
+            case ($mois == 'March'): 
+                $index_mois = '03';
+            break;
+            
+            case ($mois == 'April'): 
+                $index_mois = '04';
+                break;
+
+            case ($mois == 'May'): 
+                $index_mois = '05';
+                break;
+
+            case ($mois == 'June'): 
+                $index_mois = '06';
+                break;
+                
+            case ($mois == 'July'): 
+                $index_mois = '07';
+                break;
+
+            case ($mois == 'August'): 
+                $index_mois = '08';
+                break;
+                    
+            case ($mois == 'September'): 
+                $index_mois = '09';
+                break;
+            
+            case ($mois == 'October'): 
+                $index_mois = '10';
+                break;
+            
+            case ($mois == 'November'): 
+                $index_mois = '11';
+                break;
+
+                
+            case ($mois == 'December'): 
+                $index_mois = '12';
+                break;
+            default: 
+                $index_mois = -1;
+        }
+
+        return (int)$index_mois;
+    }
+    
+    public static function getFirstDayOfMonthByStrFrMonth($str_fr_mois)
+    {
+        $str_en_month = self::getStrEnMonth($str_fr_mois);
+        $index_month = self::getIndexMonth($str_en_month);
+        $current_index_month = (int)date('m');
+        $index_year = (int)date('Y');
+
+        $index_year = ($current_index_month > $index_month)? $index_year + 1 : $index_year; 
+
+        $str_index_month = (strlen(''.$index_month) == 2)? $index_month : '0'.$index_month;
+        $str_date = $index_year.'-'.$str_index_month.'-01';
+        return $str_date;
+    }
+    
+    public static function  getLastDayOfMonthByStrFrMonth($str_fr_mois)
+    {
+        return self::getLastDayMonth(self::getFirstDayOfMonthByStrFrMonth($str_fr_mois));
+    }
+
 
     public static function getYearOld($old)
     {
@@ -269,7 +470,7 @@ trait DateHelpers
     }
 
     
-    public static function getFirstDayNextMonth($query_date)
+    public static function getFirstDayNextYear()
     {
         $endDate = new DateTime('1st January Next Year');
         return $endDate->format('Y-m-d');

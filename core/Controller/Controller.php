@@ -4,6 +4,9 @@ namespace Core\Controller;
 
 use App;
 use App\Helpers\Helpers;
+use Spipu\Html2Pdf\Html2Pdf;
+use Spipu\Html2Pdf\Exception\Html2PdfException;
+use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
 abstract class Controller
 {
@@ -22,6 +25,28 @@ abstract class Controller
         require $this->viewPath . str_replace('.', '/', $nameView) . '.php';
         $content = ob_get_clean();
         require ($this->viewPath . 'templates/' . $tmp_template . '.php');
+    }
+
+    protected function renderPDF(String $nameView, array $variables = [], $pdfname='')
+    {
+        $pdfname = ($pdfname == '')? $nameView.'_'.App::SCHOOLL_NAME.'_'.date('Y-m-d') : $nameView.'_'.App::SCHOOLL_NAME.'_'.date('Y-m-d');
+
+        try 
+        {
+            ob_start();
+            extract($variables);
+            require $this->viewPath . str_replace('.', '/', $nameView) . '.php';
+            $content = ob_get_clean();
+
+            $html2pdf = new Html2Pdf('P', 'A4', 'fr');
+            $html2pdf->pdf->SetDisplayMode('fullpage');
+            $html2pdf->writeHTML($content);
+            $html2pdf->output($pdfname.'.pdf');
+        } catch (Html2PdfException $e) {
+            $html2pdf->clean();
+            $formatter = new ExceptionFormatter($e);
+            echo $formatter->getHtmlMessage();
+        }
     }
 
 
@@ -109,9 +134,7 @@ abstract class Controller
         sendResponseAndExit(false, 404, "Not Found");
 
     */
-    function sendResponseAndExit($JSONResponse = "", $isJSON = FALSE, $success = TRUE, $code = "200", $description = "OK", $extraHeader=false) {
-
-
+    function sendResponseAndExit($JSONResponse = '', $isJSON = FALSE, $success = TRUE, $code = '200', $description = 'OK', $extraHeader= false) {
         if ($success) {
             if ($extraHeader)
                 header($extraHeader);
@@ -140,7 +163,7 @@ abstract class Controller
 	 * @return none
 	 */
 	protected function error404() {
-		App::abort(404, "Page inaccessible !!!");
+		App::abort(404, 'Page inaccessible !!!');
 	}
 
 	/**
