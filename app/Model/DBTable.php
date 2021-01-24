@@ -14,61 +14,61 @@ use App\Model\AbonnementCantine;
 class DBTable
 {
 
-    const ACTIVITE = "activite";
-    const TYPE_ACTIVITE = "type_activite";
-    const INSCRIPTION_ACTIVITE = "inscription_activite";
-    const ABONNEMENT_ACTIVITE = "abonnement_activite";
-    const ABONNEMENT_DETAIL = "abonnement_detail";
-    const ABONNEMENT_CANTINE = "abonnement_cantine";
-    const PERSONNEL_ACTIVITE = "personnel_activite";
-    const ABONNEMENT_CONSOMME = "abonnement_consomme";
-    const ABONNEMENT_RESTO = "abonnement_resto";
-    const ANNEE_SCOLAIRE = "annee_scolaire";
-    const ANTECEDENT_SCOLAIRE = "antecedent_scolaire";
-    const CLASSE = "classe";
-    const COMPOSER = "composer";
-    const COURS = "cours";
-    const CYCLE = "cycle";
-    const DEPENSE = "depense";
-    const DETTE = "dette";
-    const DISCIPLINE = "discipline";
-    const DOCUMENT = "document";
-    const DOMAINE = "domaine";
-    const DOSSIER_MEDICAL = "dossier_medical";
-    const DOSSIER_PARENTAL = "dossier_parental";
-    const CAISSE = "caisse";
-    const ELEVE = "eleve";
-    const EMPRUNT = "emprunt";
-    const ETAT_DOCUMENT = "etat_document";
-    const EXEMPLAIRE = "exemplaire";
-    const JOUR_OUVRABLE = "jour_ouvrable";
-    const MATIERE = "matiere";
-    const PARCOURS = "parcours";
-    const PAYS = "pays";
-    const PENSION_CLASSE = "pension_classe";
-    const PENSION_ELEVE = "pension_eleve";
-    const PENSION = "pension";
-    const PERIODE = "periode";
-    const PERSONNEL = "personnel";
-    const PLANNING_COURS = "planning_cours";
-    const PLANNING_RESTO = "planning_resto";
-    const REMBOURSEMENT = "remboursement";
-    const REPAS = "repas";
-    const RESERVATION = "reservation";
-    const RESTITUTION = "restitution";
-    const SALAIRE = "salaire";
-    const SALLE_CLASSE = "salle_classe";
-    const SESSION = "session";
-    const STATUT_APPRENANT = "statut_apprenant";
-    const TRANCHE_HORAIRE = "tranche_horaire";
-    const TRANCHE_SCOLAIRE = "tranche_scolaire";
-    const TYPE_PAIEMENT = "type_paiement";
-    const TYPE_PENSION = "type_pension";
-    const TYPE_PERSONNEL = "type_personnel";
-    const PRIX_ABONNEMENT = "prix_abonnement";
-    const VIEW_BULLETIN = "bulletin";
-    const CANTINE_LISTE = "cantineliste";
-    const AFFECTATION_CLASSE_MATIERE = "affectation_classe_matiere";
+    const ACTIVITE = 'activite';
+    const TYPE_ACTIVITE = 'type_activite';
+    const INSCRIPTION_ACTIVITE = 'inscription_activite';
+    const ABONNEMENT_ACTIVITE = 'abonnement_activite';
+    const ABONNEMENT_DETAIL = 'abonnement_detail';
+    const ABONNEMENT_CANTINE = 'abonnement_cantine';
+    const PERSONNEL_ACTIVITE = 'personnel_activite';
+    const ABONNEMENT_CONSOMME = 'abonnement_consomme';
+    const ABONNEMENT_RESTO = 'abonnement_resto';
+    const ANNEE_SCOLAIRE = 'annee_scolaire';
+    const ANTECEDENT_SCOLAIRE = 'antecedent_scolaire';
+    const CLASSE = 'classe';
+    const COMPOSER = 'composer';
+    const COURS = 'cours';
+    const CYCLE = 'cycle';
+    const DEPENSE = 'depense';
+    const DETTE = 'dette';
+    const DISCIPLINE = 'discipline';
+    const DOCUMENT = 'document';
+    const DOMAINE = 'domaine';
+    const DOSSIER_MEDICAL = 'dossier_medical';
+    const DOSSIER_PARENTAL = 'dossier_parental';
+    const CAISSE = 'caisse';
+    const ELEVE = 'eleve';
+    const EMPRUNT = 'emprunt';
+    const ETAT_DOCUMENT = 'etat_document';
+    const EXEMPLAIRE = 'exemplaire';
+    const FACTURE = 'facture';
+    const JOUR_OUVRABLE = 'jour_ouvrable';
+    const MATIERE = 'matiere';
+    const PARCOURS = 'parcours';
+    const PAYS = 'pays';
+    const PENSION_CLASSE = 'pension_classe';
+    const PENSION_ELEVE = 'pension_eleve';
+    const PENSION = 'pension';
+    const PERIODE = 'periode';
+    const PERSONNEL = 'personnel';
+    const PLANNING_COURS = 'planning_cours';
+    const PLANNING_RESTO = 'planning_resto';
+    const REMBOURSEMENT = 'remboursement';
+    const REPAS = 'repas';
+    const RESERVATION = 'reservation';
+    const RESTITUTION = 'restitution';
+    const SALAIRE = 'salaire';
+    const SALLE_CLASSE = 'salle_classe';
+    const SESSION = 'session';
+    const STATUT_APPRENANT = 'statut_apprenant';
+    const TRANCHE_HORAIRE = 'tranche_horaire';
+    const TRANCHE_SCOLAIRE = 'tranche_scolaire';
+    const TYPE_PAIEMENT = 'type_paiement';
+    const TYPE_PENSION = 'type_pension';
+    const TYPE_PERSONNEL = 'type_personnel';
+    const PRIX_ABONNEMENT = 'prix_abonnement';
+    const VIEW_BULLETIN = 'bulletin';
+    const AFFECTATION_CLASSE_MATIERE = 'affectation_classe_matiere';
 
 
     public static function getModel($class_name){
@@ -76,9 +76,7 @@ class DBTable
             case DBTable::ACTIVITE:
                 return Activite::table();
             break;
-            case DBTable::CANTINE_LISTE:
-                return cantineliste::table();
-            break;
+            
             case DBTable::TYPE_ACTIVITE:
                 return TypeActivite::table();
             break;
@@ -131,6 +129,9 @@ class DBTable
             break;
             case DBTable::EXEMPLAIRE:
                 return Exemplaire::table();
+            break;
+            case DBTable::FACTURE:
+                return Facture::table();
             break;
             case DBTable::JOUR_OUVRABLE:
                 return JourOuvrable::table();

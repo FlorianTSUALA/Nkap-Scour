@@ -7,9 +7,16 @@ use Core\Database\Database;
 use Core\Model\HydrahonModel;
 use Core\HTML\Form\FormModel;        
 
-class Pays extends Model implements FrequentlyReapeat
+class Facture extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
+
+    const REFERENCE = "reference";
+    const MONTANT = "montant";
+    const REDUCTION = "reduction";
+    const DATE_FACTURE = "date_facture";
+    const BENEFICAIRE = "beneficaire";
+    const GESTIONNAIRE = "gestionnaire";
     
     public function __construct(Database $db, $entity = null){
         parent::__construct($db);
@@ -18,6 +25,8 @@ class Pays extends Model implements FrequentlyReapeat
             [
                 new FormModel(true, self::LIBELLE),
                 new FormModel(true, self::DESCRIPTION),
+               //to complete
+
             ];
     }
 }

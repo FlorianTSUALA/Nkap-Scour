@@ -30,7 +30,7 @@ Top extension for Dev Web
 2 - html extension package
 3 - Git Source Control
 4 - Html Preview triangel.html-preview === ctrl + l
-5 - 
+5 - Change-case wmaurer.change-case
 6 - 
 7 - 
 8 - 
