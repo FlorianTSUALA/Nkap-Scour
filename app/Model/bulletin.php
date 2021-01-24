@@ -59,7 +59,7 @@ class Bulletin extends Model implements FrequentlyReapeat
 
     }
 
-    public function getEleveInscriptionInfoby(){
+    public function getSalleDeClasseListeby(){
         $req =
         " select  
         InfoEleve.libelle_cours as libelle_cours, InfoEleve.nom_personnel as nom_personnel, InfoEleve.prenom_personnel as prenom_personnel, InfoEleve.note as note,

@@ -38,6 +38,7 @@ use App\Controller\AbonnementActiviteController;
 use App\Controller\DocumentController;
 use App\Controller\BulletinController;
 use App\Controller\AffectationClasseMatiereController;
+//use App\Controller\CantineListeController;
 
 //Login
 $router->addRoute('login', '', [LoginController::class, 'index']);
@@ -74,6 +75,9 @@ $router->crudRoute('type_activite', TypeActiviteController::class);
 
 //Eleve
 $router->crudRoute('inscription_activite', InscriptionActiviteController::class);
+
+//cantine_liste
+//$router->crudRoute('cantine_liste', CantineListeController::class);
 
 //prix_abonnement
 $router->crudRoute('prix_abonnement', PrixAbonnementController::class);

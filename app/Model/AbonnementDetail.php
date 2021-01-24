@@ -31,7 +31,7 @@ class AbonnementDetail extends Model implements FrequentlyReapeat
                 new FormModel(true, self::DATE_FIN, self::DATE_FIN, InputType::DATE, [], '', '', false),
                 new FormModel(true, self::MONTANT, self::MONTANT, InputType::NUMBER, [], '', '', false),
                 new FormModel(true, self::PERIODE, self::PERIODE, InputType::SELECT2, $periodes, '', '', false),
-                new FormModel(true, self::REFERENCE, 'Référence', InputType::TEXT, [], '', '', false),
+               
             ];
         
     }

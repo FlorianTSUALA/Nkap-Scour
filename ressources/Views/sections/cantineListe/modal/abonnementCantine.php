@@ -1,8 +1,12 @@
 <?php ?>
 <!-- 
     ******  VARIABLES *****
-        
-    --- $title 
+
+    $delete_title;
+    $msg_delete;
+    
+-->
+
 
 -->
 
@@ -10,14 +14,14 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel40"> Suppression d'un pays</h4>
+				<h4 class="modal-title" id="myModalLabel40">  <?= $delete_title; ?></h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 
             <div id="modal-delete-body" class="modal-body">
-                <h4>Voulez-vous vraiment supprimer ce pays ?</h4>
+                <h4> <?= $msg_delete; ?> </h4>
             </div>
 
             <div id="del-loading" class="spinner-grow text-warning" role="status"> <span class="sr-only">Loading...</span></div>

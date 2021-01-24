@@ -67,6 +67,7 @@ class DBTable
     const TYPE_PERSONNEL = "type_personnel";
     const PRIX_ABONNEMENT = "prix_abonnement";
     const VIEW_BULLETIN = "bulletin";
+    const CANTINE_LISTE = "cantineliste";
     const AFFECTATION_CLASSE_MATIERE = "affectation_classe_matiere";
 
 
@@ -74,6 +75,9 @@ class DBTable
         switch($class_name){
             case DBTable::ACTIVITE:
                 return Activite::table();
+            break;
+            case DBTable::CANTINE_LISTE:
+                return cantineliste::table();
             break;
             case DBTable::TYPE_ACTIVITE:
                 return TypeActivite::table();

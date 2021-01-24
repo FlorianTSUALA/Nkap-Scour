@@ -18,6 +18,8 @@ class Router{
 
     public function add(Route $route):self
     {
+
+        
         if($this->has($route->getName()))
             throw new RouteAlreadyExistsException();
         

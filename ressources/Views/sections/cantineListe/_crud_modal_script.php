@@ -1,14 +1,19 @@
 <?php 
 
 use Core\Routing\URL;
+use Core\HTML\Form\InputType;
+
+include dirname(__DIR__)."/_common_lib/_select2_script.php";
 
 ?>
 <!-- 
     ******  VARIABLES *****
-
+     $base_route
+     $fillables
+     $msg_delete
 -->
 
-<!-- create  -->
+
 <script> 
      (function(){  
           
@@ -19,7 +24,7 @@ use Core\Routing\URL;
                if (form.checkValidity() === true) {
                     form = $('#create-form');
                     $.ajax({  
-                         url: "<?= URL::link('pays-create'); ?>",  
+                         url: "<?= URL::link($base_route.'-create'); ?>",  
                          method: "POST",  
                          data: form.serialize(),  
                          beforeSend:function(){
@@ -28,7 +33,7 @@ use Core\Routing\URL;
                          },  
                          success:function(data){ 
                               form[0].reset();  
-                              $('#button-form-update').show();  
+                              $('#button-form-create').show();  
                               $('#upt-loading').hide();
 
                               $('#modal-create').modal('hide');  
@@ -46,7 +51,6 @@ use Core\Routing\URL;
      })(); 
 </script>
 
-
 <!-- update  -->
 <script> 
      (function(){  
@@ -56,13 +60,54 @@ use Core\Routing\URL;
           {  
                var id = $(this).data("id");
                $.ajax({  
-                    url: '<?= URL::link('pays-read'); ?>'+id,
+                    url: '<?= URL::link($base_route.'-read'); ?>'+id,
                     method: 'GET',
                     dataType: 'json',  
                     success: function(data){ 
-                         $('#upd-id').val(data.id);  
-                         $('#upd-libelle').val(data.libelle);  
-                         $('#upd-description').val(data.description);  
+                         $('#upd-code').val(data.code);
+                         console.log(data);  
+                    <?php
+                         $js = '';
+                         foreach($fillables as $fillable)
+                              switch($fillable->type){
+                                   case InputType::FILE:
+                                        $js .= "$('#upd-{$fillable->name}').val(data.{$fillable->name});";
+                                   break;
+                                   case InputType::DATE:
+                                        $js .= "$('#upd-{$fillable->name}').val(moment(new Date(data.{$fillable->name})).format('YYYY-MM-DD'));";
+                                   break;
+                                   case InputType::DATE_TIME_LOCAL:
+                                        $js .= "$('#upd-{$fillable->name}').val(moment(new Date(data.{$fillable->name})).format('YYYY-MM-DD HH-mm-ss'));";
+                                   break;
+                                   case InputType::TIME:
+                                        $js .= "$('#upd-{$fillable->name}').val(moment(new Date(data.{$fillable->name})).format('HH-mm-ss'));";
+                                   break;
+                                   case InputType::CHECKBOX:
+                                        $js .= "$('#upd-{$fillable->name}').val(data.{$fillable->name});";
+                                   break;
+                                   case InputType::SELECT2:
+                                   case InputType::SELECT:
+                                        $js .= "$('#upd-{$fillable->name}').val(data.{$fillable->name}).trigger('change');";
+                                   break;
+                                   case InputType::RADIO:
+                                        $js .= " var {$fillable->name} = '#upd-'+data.{$fillable->name}; $({$fillable->name}).prop('checked',true);";
+                                   break;
+                                   case InputType::TEXT:
+                                   case InputType::HIDDEN:
+                                   case InputType::PASSWORD:
+                                   case InputType::NUMBER:
+                                   case InputType::EMAIL:
+                                   case InputType::TEXTAREA:
+                                   case InputType::TEL:
+                                   default:
+                                        $js .= "$('#upd-{$fillable->name}').val(data.{$fillable->name});";
+                              }
+                        
+                         echo "
+                         " ;
+                         echo $js;
+                    ?>  
+
                          $('#modal-update').modal('show');  
                     }  
                });  
@@ -77,7 +122,7 @@ use Core\Routing\URL;
                if (form.checkValidity() === true) {
                     form = $('#update-form');
                     $.ajax({  
-                         url: '<?= URL::link('pays-update'); ?>'+ $('#upd-id').val(),  
+                         url: '<?= URL::link($base_route.'-update'); ?>'+ $('#upd-code').val(),  
                          method: 'POST',  
                          data: form.serialize(),  
                          beforeSend:function(){
@@ -105,8 +150,6 @@ use Core\Routing\URL;
 
 </script>
 
-
-
 <!-- delete  -->
 <script> 
      (function(){  
@@ -120,7 +163,7 @@ use Core\Routing\URL;
                $entity = $row.find("td:nth-child(2)");
    
                $.each($entity, function() {
-                    $('#modal-delete-body').html('<h4>Voulez-vous vraiment supprimer le pays <strong>' + $(this).text() + ' </strong> ?</h4>');
+                    $('#modal-delete-body').html("<h4> <?= $msg_delete; ?> "+ $(this).text() + ' </strong> ?</h4>');
                });
 
           });
@@ -130,7 +173,7 @@ use Core\Routing\URL;
           {  
                //var id = $(this).data("id");  
                $.ajax({  
-                    url: '<?= URL::link('pays-delete'); ?>'+id,  
+                    url: '<?= URL::link($base_route.'-delete'); ?>'+id,  
                     method: 'GET',
                     beforeSend:function(){
                               $('#button-form-delete').hide();  
@@ -154,12 +197,11 @@ use Core\Routing\URL;
 <!-- read  -->
 <script> 
      (function(){  
-          //Get Data to Update
           $('#data-table').on('click', '.btn_read_data', function(e)
           {  
                var id = $(this).data("id");
                $.ajax({  
-                    url: '<?= URL::link('pays-detail'); ?>'+id,
+                    url: '<?= URL::link($base_route.'-detail'); ?>'+id,
                     method: 'GET',
                     //dataType: 'json',  
                     success: function(data){  
@@ -171,3 +213,4 @@ use Core\Routing\URL;
           });  
      })();  
 </script>
+

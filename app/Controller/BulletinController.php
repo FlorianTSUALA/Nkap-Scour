@@ -50,6 +50,9 @@ class BulletinController extends AppController
         $update_title = $this->update_title;
         $delete_title = $this->delete_title;
         $msg_delete = $this->msg_delete;
+       // $eleves = $this->eleve->getEleveInscriptionInfo();
+        $salle_classes = DBTable::getModel(DBTable::SALLE_CLASSE)->select(['code' => 'id', 'libelle' => 'value'])->where('visibilite', '=', 1)->get();
+        
         $this->render('sections.'.$this->folder_view_index, compact('items', 'class_name', 'fillables', 'base_route', 'title', 'create_title', 'view_title', 'update_title', 'delete_title', 'msg_delete'));
     }
 

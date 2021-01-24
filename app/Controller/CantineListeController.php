@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Model\DBTable;
 use App\Repository\EleveRepository;
 
-class EleveController extends AppController
+class CantineListeController extends AppController
 {
     private $eleve_repository;
 
@@ -13,15 +13,16 @@ class EleveController extends AppController
     {
         parent::__construct();
 
-        $this->eleve_repository = new EleveRepository;
+        //$this->eleve_repository = new EleveRepository;
 
-        $this->vairant = DBTable::ELEVE;
-        $this->folder_view_index = 'eleve.index1';
-        
+        $this->vairant = DBTable::CANTINE_LISTE;
+        $this->folder_view_index = 'cantineliste.index1';
+
         $this->loadModel($this->vairant);
 
-        $this->base_route = 'eleve';
-        $this->class_name = 'eleve';
+        
+        $this->base_route = 'cantineliste';
+        $this->class_name = 'cantineliste';
 
         $this->title_page = 'Gestion des eleves - Comelines';
         $this->title_home = 'Gestion des eleves';
@@ -39,7 +40,7 @@ class EleveController extends AppController
         $eleves = $this->eleve->getEleveInscriptionInfo();
         $classes = DBTable::getModel(DBTable::CLASSE)->select(['code' => 'id', 'libelle' => 'value'])->where('visibilite', '=', 1)->get();
         //die();
-        $this->render('sections.eleve.index1', compact('eleves', 'title', 'classes'));
+        $this->render('cantineliste.index1', compact('eleves', 'title', 'classes'));
     }
 
     public function eleve_detail(string $code)
