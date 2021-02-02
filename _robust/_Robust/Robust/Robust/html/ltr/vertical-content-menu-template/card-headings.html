@@ -16,6 +16,16 @@
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/forms/toggle/bootstrap-switch.min.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/forms/toggle/switchery.min.css">
     <!-- END VENDOR CSS-->
+
+
+        <!-- BEGIN VENDOR CSS-->
+        <link rel="stylesheet" type="text/css" href="../../../app-assets/css/vendors.css">
+        <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/pickers/daterange/daterangepicker.css">
+        <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
+        <!-- END VENDOR CSS-->
+
+        <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/pickers/daterange/daterange.css">
+
     <!-- BEGIN ROBUST CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/app.css">
     <!-- END ROBUST CSS-->
@@ -1530,7 +1540,24 @@
 							</div>
 						</fieldset>
 					</div>
-				</div>
+        </div>
+        
+
+        <div class="form-group">
+          <label> </label>
+          <div class='input-group'>
+            <input type='text' class="form-control localeRange" />
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <span class="fa fa-calendar"></span>
+              </span>
+            </div>
+          </div>
+          <small class="text-muted">Allows you to provide localized strings for buttons and labels, customize the date display format, and change the first day of week for the calendars.</small>
+        </div>
+
+
+
 				<div class="card-content">
 					<div class="card-body">
 						<h4 class="card-title">Content title</h4>
@@ -1573,24 +1600,24 @@
 					<h4 class="card-title" id="heading-select">With Basic Select</h4>
 					<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
         			<div class="heading-elements">
-						<fieldset>
-							<select class="form-control" id="basicSelect">
-								<option>Select City</option>
-								<option>Amsterdam</option>
-	                            <option>Antwerp</option>
-	                            <option>Athens</option>
-	                            <option>Barcelona</option>
-	                            <option>Berlin</option>
-	                            <option>Birmingham</option>
-	                            <option>Bradford</option>
-	                            <option>Bremen</option>
-	                            <option>Brussels</option>
-	                            <option>Bucharest</option>
-	                            <option>Budapest</option>
-							</select>
-						</fieldset>
-					</div>
-				</div>
+                <fieldset>
+                  <select class="form-control" id="basicSelect">
+                    <option>Select City</option>
+                    <option>Amsterdam</option>
+                                  <option>Antwerp</option>
+                                  <option>Athens</option>
+                                  <option>Barcelona</option>
+                                  <option>Berlin</option>
+                                  <option>Birmingham</option>
+                                  <option>Bradford</option>
+                                  <option>Bremen</option>
+                                  <option>Brussels</option>
+                                  <option>Bucharest</option>
+                                  <option>Budapest</option>
+                  </select>
+                </fieldset>
+              </div>
+        </div>
 				<div class="card-content">
 					<div class="card-body">
 						<h4 class="card-title">Content title</h4>
@@ -2036,9 +2063,17 @@
     </footer>
 
     <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN VENDOR JS-->
     <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
     <!-- BEGIN VENDOR JS-->
     <!-- BEGIN PAGE VENDOR JS-->
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+    <!-- END PAGE VENDOR JS-->
     <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
     <script src="../../../app-assets/vendors/js/charts/jquery.sparkline.min.js"></script>
     <script src="../../../app-assets/vendors/js/ui/headroom.min.js"></script>
@@ -2047,6 +2082,10 @@
     <script src="../../../app-assets/vendors/js/forms/toggle/switchery.min.js"></script>
     <script src="../../../app-assets/js/core/libraries/jquery_ui/jquery-ui.min.js"></script>
     <!-- END PAGE VENDOR JS-->
+
+
+ 
+
     <!-- BEGIN ROBUST JS-->
     <script src="../../../app-assets/js/core/app-menu.js"></script>
     <script src="../../../app-assets/js/core/app.js"></script>
@@ -2054,6 +2093,10 @@
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="../../../app-assets/js/scripts/ui/breadcrumbs-with-stats.js"></script>
     <script src="../../../app-assets/js/scripts/forms/switch.js"></script>
+
+
+    <script src="../../../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
+
     <!-- END PAGE LEVEL JS-->
   </body>
 </html>

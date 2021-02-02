@@ -150,7 +150,7 @@ trait DateHelpers
         return $mois[$month];
     }
 
-    public static function getStrIndexMonth($mois)
+    public static function strFrMonth2Index($mois)
     {
         switch ($mois) {
             case ($mois == 'Janvier' || $mois == 'janvier'):
@@ -212,7 +212,7 @@ trait DateHelpers
         return $index_mois;
     }
     
-    public static function getStrEnMonth($mois)
+    public static function strFrMonth2EnMonth($mois)
     {
         switch ($mois) {
             case ($mois == 'Janvier' || $mois == 'janvier'):
@@ -274,7 +274,7 @@ trait DateHelpers
         return $str_en_month;
     }
     
-    public static function getIndexToEnStrMonth($index)
+    public static function index2StrFrMonth($index)
     {
         switch ($index) {
             case ($index == ((int)'01') ): 
@@ -396,7 +396,7 @@ trait DateHelpers
     
     public static function getFirstDayOfMonthByStrFrMonth($str_fr_mois)
     {
-        $str_en_month = self::getStrEnMonth($str_fr_mois);
+        $str_en_month = self::strFrMonth2EnMonth($str_fr_mois);
         $index_month = self::getIndexMonth($str_en_month);
         $current_index_month = (int)date('m');
         $index_year = (int)date('Y');
@@ -411,6 +411,13 @@ trait DateHelpers
     public static function  getLastDayOfMonthByStrFrMonth($str_fr_mois)
     {
         return self::getLastDayMonth(self::getFirstDayOfMonthByStrFrMonth($str_fr_mois));
+    }
+
+    
+    
+    public static function  addFrMonth($str_fr_mois, $offset)
+    {
+        return self::index2StrFrMonth(self::strFrMonth2Index($str_fr_mois) + $offset)  ;
     }
 
 

@@ -33,7 +33,13 @@ class Helpers{
         
         function vd($expression, ...$_ ){
             // echo '<pre>' . var_export($expression, true) . '</pre>';
-            var_dump($expression, $_);
+            // var_dump($expression, $_);
+
+            $background="#EEEEEE";
+            $color="#000000";
+            $title = " -NKAP-SCOUR- ";
+            echo '<pre><br><br></pre>';
+            dump($expression, $title, $background, $color, $_);
         }
     
         function dump($data, $title="", $background="#EEEEEE", $color="#000000", ...$_){
@@ -86,7 +92,7 @@ class Helpers{
             //=== Content            
             echo "<pre style='background:$background; color:$color; padding:10px 20px; border:2px inset $color'>";
             echo    "<h2>$title</h2>";
-                    var_dump($data, $_); 
+            var_dump($data); 
             echo "</pre>";
         
         }

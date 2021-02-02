@@ -4,6 +4,9 @@ namespace Core\Session;
 
 use App\Helpers\Helpers;
 
+use function Core\Helper\dd;
+use function Core\Helper\vd;
+
 class Request
 {
     /**
@@ -58,19 +61,29 @@ class Request
 			return $default;
 		}
 
-		if (self::isPost() ){
+		if (self::isPost()){
 			if(isset($_POST[$key])){
-				$local_data = ($data == null)? $_POST[$key] : $data ;
+				if($data == null){
+					$local_data = ($default != null && empty($_POST[$key]) )? $default : $_POST[$key];
+				}else{
+					$local_data = $data;
+				}
 			}
 		}
 		else if (self::isGet()) {
 			if(isset($_GET[$key])){
-				$local_data = ($data == null)? $_GET[$key]: $data;
+				if($data == null){
+					$local_data = ($default != null && empty($_GET[$key]) )? $default : $_GET[$key];
+				}else{
+					$local_data = $data;
+				}
 			}
 
 		}else{
 			return $default;
 		}
+		
+		if(empty($local_data)) return $default;
 
 		if(isset($local_data)) {
 			if(is_array($local_data)){
@@ -91,7 +104,7 @@ class Request
 			}
 		}
 
-		return $default;
+		return $local_data;
 	}
 	
  /////////////////////////////////

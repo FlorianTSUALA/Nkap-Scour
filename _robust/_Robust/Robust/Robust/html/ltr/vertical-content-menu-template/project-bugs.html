@@ -1821,16 +1821,27 @@
 
             <!-- bug-list view -->
             <div class="card-body ">
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">All Bugs</a>
-                    <a href="#" class="list-group-item list-group-item-action">All Open</a>
-                    <a href="#" class="list-group-item list-group-item-action">All Closed</a>
-                    <a href="#" class="list-group-item list-group-item-action">My Open</a>
-                    <a href="#" class="list-group-item list-group-item-action">My Closed</a>
-                    <a href="#" class="list-group-item list-group-item-action">Overdue Bugs</a>
-                    <a href="#" class="list-group-item list-group-item-action disabled">Created Today</a>
-                    <a href="#" class="list-group-item list-group-item-action">Bugs I Follow</a>
+                <div  class="main-menu menu-static  menu-accordion menu-shadow"  >
+                  <div  class="main-menu-content" >
+                      <div class="list-group navigation navigation-main">
+                        <li class='list-group-item-action'> <a href="#" class="active">All Bugs</a></li>
+                        <li><a href="#"><i class="fa fa-star-o"></i> Second level menu</a>
+                          <ul>
+                            <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i>  Third level</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Third level</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Third level</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Third level</a></li>
+                          </ul>
+                        </li>
+                        <li class='list-group-item-action'> <a href="#" class="list-group-item-action">All Closed</a></li>
+                        <li class='list-group-item-action'> <a href="#" class="list-group-item-action">My Open</a></li>
+                        <li class='list-group-item-action'> <a href="#" class="list-group-item-action">My Closed</a></li>
+                        <li class='list-group-item-action'> <a href="#" class="list-group-item-action">Overdue Bugs</a></li>
+                        <li class='list-group-item-action'> <a href="#" class="list-group-item-action disabled">Created Today</a></li>
+                        <li class='list-group-item-action'> <a href="#" class="list-group-item-action">Bugs I Follow</a></li>
+                      </div>
                 </div>
+              </div>
             </div>
         </div>
     </div>

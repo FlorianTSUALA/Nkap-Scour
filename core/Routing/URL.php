@@ -3,7 +3,6 @@
 namespace Core\Routing;
 
 use App;
-use App\Helpers\Helpers;
 use core\Routing\URLNotFoundException;
 
 class  URL{
@@ -24,7 +23,7 @@ class  URL{
             throw new URLNotFoundException("Le nom de route specifiée est introuvable !!!");
 		}
 		$path = self::$router->get($name)->getPath();
-		if( Helpers::contains('{', $path) ){
+		if( strpos($path, '{') !== false ){
 			$path = explode('{', $path)[0];
 		} 
         return  App::base_url() . $path;
@@ -52,7 +51,7 @@ class  URL{
 	 * 
 	 * @return Core\Routing\Router
 	 */
-	function getRouter(): Core\Routing\Router {
+	function getRouter(): Router {
 		return $this->router;
 	}
 	
@@ -61,7 +60,7 @@ class  URL{
 	 * @param Core\Routing\Router $router 
 	 * @return URL
 	 */
-	function setRouter(Core\Routing\Router $router): self {
+	function setRouter(Router $router): self {
 		$this->router = $router;
 		return $this;
 	}

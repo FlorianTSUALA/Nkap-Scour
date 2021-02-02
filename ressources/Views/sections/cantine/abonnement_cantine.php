@@ -31,7 +31,7 @@ echo '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/toggle/boot
 
 require 'abonnement_cantine-script.php';
 
-require 'script-init.php';
+require 'script-component-init.php';
 // require 'script-update-etat.php';
 require 'script-save.php';
 

@@ -21,8 +21,7 @@ Raccourci clavier de visual studio code
 17 - Ctrl + Alt + Down  =   duplicate line or selection
 18 - Ctrl + Alt + Up    =   duplicate line or selection
 19 - Ctrl + :           =   commenter ou décommenter une ligne ou un block
-20 - 
-
+20 - Alt + Z            =   Ramener le texte long à la ligne
 
 
 Top extension for Dev Web
@@ -31,7 +30,7 @@ Top extension for Dev Web
 3 - Git Source Control
 4 - Html Preview triangel.html-preview === ctrl + l
 5 - Change-case wmaurer.change-case
-6 - 
+6 - HTML Preview ty4z2008.html-preview
 7 - 
 8 - 
 9 - 

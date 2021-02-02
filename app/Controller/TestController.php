@@ -2,18 +2,22 @@
 
 namespace App\Controller;
 
-use App\Model\AntecedentScolaire;
+use App\Model\Eleve;
 use App\Model\DBTable;
+use App\Model\Parcours;
+use Core\Helper\DBHelper;
+use Core\Session\Request;
+use App\Model\PensionEleve;
+use Core\HTML\FlashMessages;
+use function Core\Helper\dd;
+use Spipu\Html2Pdf\Html2Pdf;
 use App\Model\DossierMedical;
 use App\Model\DossierParental;
-use App\Model\Eleve;
-use App\Model\Parcours;
-use App\Model\PensionEleve;
 use App\Model\StatutApprenant;
-use Core\Session\Request;
-use Core\HTML\FlashMessages;
+use App\Model\AntecedentScolaire;
+use App\Repository\ClasseRepository;
 use Core\HTML\MessageFlash\FlashMessagesStatic;
-use Spipu\Html2Pdf\Html2Pdf;
+
 use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
@@ -51,7 +55,9 @@ class TestController extends AppController
 
     public function testSQL()
     {
-        // $this->    
+        $classeRepository = new ClasseRepository();
+        $salle_classes = $classeRepository->getSalleClasseGroupByClasse();
+        dd($salle_classes);
     }
 
     public function testpdf()
@@ -77,12 +83,16 @@ class TestController extends AppController
 
     public function testA()
     {
-        // $this->    
+        $classeRepository = new ClasseRepository();
+        $salle_classes = $classeRepository->getSalleClasseGroupByClasse();
+        dd($salle_classes); 
     }
 
     public function testB()
     {
-        // $this->    
+        $classeRepository = new ClasseRepository();
+        $salle_classes = $classeRepository->getSalleClasseGroupByClasse();
+        dd($salle_classes);
     }
 
     public function testC()

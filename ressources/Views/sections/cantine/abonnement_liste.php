@@ -5,39 +5,42 @@ use App\Helpers\Helpers;
 
 
 $include_res_header = '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">';
-$include_res_header .= '
-<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/extensions/rowReorder.dataTables.min.css">';
-$include_res_header .= '
-<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/extensions/responsive.dataTables.min.css">';
-$include_res_header .= '
-<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/icheck/icheck.css">';
-$include_res_header .= '
-<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/icheck/custom.css">';
-$include_res_header .= '
-<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/ui/jquery-ui.min.css">';
-$include_res_header .= '
-<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/selects/select2.min.css">';
+$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/extensions/rowReorder.dataTables.min.css">';
+$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/extensions/responsive.dataTables.min.css">';
+// $include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/icheck/icheck.css">';
+// $include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/icheck/custom.css">';
+$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/ui/jquery-ui.min.css">';
+$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/selects/select2.min.css">';
+
+$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/pickers/daterange/daterangepicker.css">';
+$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/pickers/pickadate/pickadate.css">';
 $include_res_header .= '';
 
 
 $include_res_footer = '';
-$include_res_footer .= '
-<script src="'.URL::base().'assets/app-assets/vendors/js/tables/jquery.dataTables.min.js"></script>';
-$include_res_footer .= '
-<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>';
-$include_res_footer .= '
-<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>';
-$include_res_footer .= '
-<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.rowReorder.min.js"></script>';
-$include_res_footer .= '
-<script src="'.URL::base().'assets/app-assets/vendors/js/charts/echarts/echarts.js"></script>';
-$include_res_footer .= '
-<script src="'.URL::base().'assets/app-assets/vendors/js/forms/icheck/icheck.min.js"></script>';
-$include_res_footer .= "
-";
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/jquery.dataTables.min.js"></script>';
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>';
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>';
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.rowReorder.min.js"></script>';
+// $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/charts/echarts/echarts.js"></script>';
+// $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/icheck/icheck.min.js"></script>';
+
+// <!-- BEGIN DATE PICKER VENDOR JS-->
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/pickadate/picker.js"></script>';
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>';
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>';
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/pickadate/legacy.js"></script>';
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>';
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>';
+// <!-- END DATE PICKER VENDOR JS-->
+
+$include_res_footer .= "";
 
 ob_start();
-include "index-script.php";
+
+
+include 'script-component-init.php';
+include 'abonnement_liste-script.php';
 $include_footer_script = ob_get_clean();
 ?>
 <!--
@@ -82,21 +85,73 @@ $include_footer_script = ob_get_clean();
     <div class="col-12">
         <div class="card">
             <div class="card-header">
+                            <div class="form-group">
+								<label>Localization</label>
+								<div class='input-group'>
+									<input type='text' class="form-control localeRange" />
+									<div class="input-group-append">
+										<span class="input-group-text">
+											<span class="fa fa-calendar"></span>
+										</span>
+									</div>
+								</div>
+								<small class="text-muted">Allows you to provide localized strings for buttons and labels, customize the date display format, and change the first day of week for the calendars.</small>
+							</div>
             	<h4 class="card-title">Abonnements</h4>
             	<a class="heading-elements-toggle"><i class="ft-ellipsis-h font-medium-3"></i></a>
         		<div class="heading-elements">
-                    <button class="btn btn-primary btn-sm"><i class="ft-plus white"></i> Enregistrer </button>
-        			<span class="dropdown">
-                        <button id="btnSearchDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-warning btn-sm dropdown-toggle dropdown-menu-right"><i class="ft-download white"></i></button>
-                        <span aria-labelledby="btnSearchDrop1" class="dropdown-menu mt-1 dropdown-menu-right">
-                            <a href="#" class="dropdown-item"><i class="fa fa-file-excel-o"></i> Excel </a>                       <a href="#" class="dropdown-item"><i class="fa fa-file-word-o"></i> Word</a>
-                            <a href="#" class="dropdown-item"><i class="fa fa-file-pdf-o"></i> PDF </a>
+                        <!-- 
+                        <div class='input-group'>
+                            <input type='text' class="form-control localeRange" />
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <small class="text-muted">Vous permet de filtrer les resultats selon une date précise ou une période donnée.</small> -->
+                        <div class="input-group input-group-sm">
+
+							<div class="d-inline-block custom-control  mr-1">
+                                <input  id="datepicker" type='text' class="form-control localeRange" />
+                                <!--    
+                                <div class="">
+                                        <span class="input-group-text">
+                                        <span class="fa fa-calendar"></span>
+                                    </span>
+                                </div> -->
+                                <!-- <label class="custom-control-label" for="datepicker">Choix de la [Date ou Periode]</label> -->
+                            </div>
+                            
+
+							<div class="d-inline-block custom-control custom-checkbox mr-1">
+								<input type="checkbox" class="custom-control-input" id="customCheck2">
+								<label class="custom-control-label" for="customCheck2">2</label>
+							</div>
+							<div class="d-inline-block custom-control custom-checkbox mr-4">
+								<input type="checkbox" class="custom-control-input" id="customCheck3">
+								<label class="custom-control-label" for="customCheck3">3</label>
+                            </div>
+                            
+                            <button class="btn btn-primary btn-sm"><i class="ft-plus white"></i> Enregistrer </button>
+                            <span class="dropdown">
+                                <button id="btnSearchDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-warning btn-sm dropdown-toggle dropdown-menu-right"><i class="ft-download white"></i></button>
+                                <span aria-labelledby="btnSearchDrop1" class="dropdown-menu mt-1 dropdown-menu-right">
+                                    <a href="#" class="dropdown-item"><i class="fa fa-file-excel-o"></i> Excel </a>                       <a href="#" class="dropdown-item"><i class="fa fa-file-word-o"></i> Word</a>
+                                    <a href="#" class="dropdown-item"><i class="fa fa-file-pdf-o"></i> PDF </a>
 
 
-                        </span>
-                    </span>
-        			<button class="btn btn-success btn-sm"><i class="ft-settings white"></i></button>
-            	</div>
+                                </span>
+                            </span>
+                            <button class="btn btn-success btn-sm"><i class="ft-settings white"></i></button>
+						</div>
+                    
+                </div>
+
+
+            
+
+
             </div>
             <div class="card-content">
                 <div class="card-body">
@@ -115,13 +170,17 @@ $include_footer_script = ob_get_clean();
 					        </thead>
 					        <tbody>
 
+                            <!-- <span class="badge badge-info">In Progress</span> -->
+                            <!-- <span class="badge badge-danger">Reopen</span> -->
+                            <!-- <span class="badge badge-warning">Reopen</span> -->
+
                                 <?php $i = 0;
                                 foreach($abonnements as $abonnement){
                                     ?>
                                     <tr>
                                         <td style="width: 30px;"><a href="#" class="text-bold-600"><?= ++$i;?></a></td>
                                         <td>
-                                            <ul class="list-inline clearfix mt-1" align="center">
+                                            <ul class="list-inline clearfix mt-1" style="align:  center;">
                                                 <li class="mr-3"><a href="#" class="text-bold-600"> <?= $abonnement->nom_eleve  ;?> </a></li><br>
                                                 <li class="mr-3"><a href="#" class="text-bold-600"> <?= $abonnement->date_debut  ;?> </a></li><br>
                                                 <li class="mr-3"><a href="#" class="text-bold-600"> <?= $abonnement->date_fin  ;?> </a></li><br>
@@ -173,16 +232,35 @@ $include_footer_script = ob_get_clean();
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">Liste des Classes</h4>
-            <a class="heading-elements-toggle"><i class="ft-ellipsis-h font-medium-3"></i></a>
+            <!-- <a class="heading-elements-toggle"><i class="ft-ellipsis-h font-medium-3"></i></a> -->
             <div class="heading-elements">
                 <ul class="list-inline mb-0">
                     <li><a data-action="collapse"><i class="ft-plus"></i></a></li>
-
                 </ul>
             </div>
         </div>
         <!-- bug-list search -->
+                                                                       
         <div class="card-content">
+
+
+            
+            <div class="card-body">
+              <div id="menu" class="navigation navigation-main">
+                <div class="list-group">
+                <a href="<?= "#" ;?>" class="list-group-item active"> Voir tout</a>
+                   <?php foreach($classes as $classe){ ?>
+                        <a href="#" class="list-group-item" data-toggle="collapse" data-target="#ID_<?= $classe['classe_id']?>" data-parent="#menu"><?= $classe['classe']; ?> <span class="badge  badge-pill bg-<?= Helpers::getRandromBootstrapColor() ?> float-right mr-2 badge-glow"><?= count($classe['salles']); ?></span></a>
+                        <div id="ID_<?= $classe['classe_id']?>" class=" collapse">
+                            <?php foreach($classe['salles'] as $salle){ ?>
+                                <a id="ID_<?= $salle['salle_classe_id']?>" class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> <?= $salle['salle_classe']; ?></a>
+                            <?php } ?>
+                        </div>
+                   <?php } ?>
+
+                </div>
+              </div>
+            </div>
             <!-- <div class="card-body border-top-blue-grey border-top-lighten-5">
                 <div class="bug-list-search">
                     <div class="bug-list-search-content">
@@ -200,16 +278,7 @@ $include_footer_script = ob_get_clean();
             <!-- /bug-list search -->
 
             <!-- bug-list view -->
-            <div class="card-body ">
-                <div class="list-group">
-                    <a href="<?= "" ;?>" class="list-group-item active">Voir tout</a>
-                   <?php
-                    foreach($classes as $classe){
-                        ?>
-                     <a href="<?=""?><?= $classe['id']?>" class="list-group-item "><?= $classe['libelle']; ?></a>
-                   <?php } ?>
-                </div>
-            </div>
+            
         </div>
     </div>
     <!--/ Predefined Views -->
@@ -319,7 +388,7 @@ $include_footer_script = ob_get_clean();
         </div>
     </div> -->
     <!--/ QA Team -->
-</div>
+</div> 
           </div>
         </div>
       </div>

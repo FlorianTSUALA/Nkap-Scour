@@ -6,18 +6,20 @@ use App\Helpers\S;
 use App\Model\Classe;
 use Core\Model\Model;
 use App\Model\DBTable;
+use App\Model\Periode;
 use App\Helpers\Helpers;
+use Core\Helper\DBHelper;
 use Core\Session\Request;
 use App\Helpers\DateHelpers;
+use function Core\Helper\dd;
+use function Core\Helper\vd;
 use App\Model\AbonnementDetail;
 use App\Model\AbonnementCantine;
 use App\Helpers\TraitCRUDController;
-use App\Controller\Admin\AppController;
-use App\Model\Periode;
-use ClanCats\Hydrahon\Query\Expression as Ex;
+use App\Repository\ClasseRepository;
 use App\Repository\CantineRepository;
-use function Core\Helper\dd;
-use function Core\Helper\vd;
+use App\Controller\Admin\AppController;
+use ClanCats\Hydrahon\Query\Expression as Ex;
 
 class CantineController extends AppController
 {
@@ -204,34 +206,34 @@ class CantineController extends AppController
 
     public function liste_abonnee()
     {
-     
-        $classes = DBTable::getModel('classe')->select(['code'=>'id', 'libelle' => 'libelle'])->where('visibilite', '=', 1)->get();
-      
+        $classeRepository = new ClasseRepository();
+        $classes = $classeRepository->getSalleClasseGroupByClasse();
+               
         $annee_scolaire =  DBTable::getModel(DBTable::ANNEE_SCOLAIRE)->select(['id'])
-                ->where('statut', '=', 1)
-                ->one()['id'];
+        ->where('statut', '=', 1)
+        ->one()['id'];
                
         $abonnements = DBTable::getModel(DBTable::ABONNEMENT_CANTINE)
-                ->select(
-                    [
-                        'abonnement_cantine.code'=> 'id', 
-                        'abonnement_cantine.date_paiement'=> 'date_paiement', 
-                        'abonnement_cantine.date_debut'=> 'date_debut ', 
-                        'abonnement_cantine.date_fin'=> 'date_fin', 
-                        'abonnement_cantine.montant_total'=> 'montant_total', 
-                        'classe.libelle'=> 'classe', 
-                        'classe.code'=> 'code_classe', 
-                        new Ex("concat(eleve.nom,' ',eleve.prenom) as nom_eleve"),
-                        'eleve.code' => 'eleve_id'
-                    ]
-                )
-                ->join('eleve', 'eleve.id', '=', 'abonnement_cantine.eleve_id')
-                ->join('parcours', 'eleve.id', '=', 'parcours.eleve_id')
-                ->join('classe', 'parcours.classe_id', '=', 'classe.id')
-                ->join('pension_classe', 'pension_classe.classe_id', '=', 'parcours.classe_id')
-                // ->where('parcours.visibilite', '=', 1)
-                ->where('parcours.annee_scolaire_id', '=', $annee_scolaire)
-                ->get();
+        ->select(
+            [
+                'abonnement_cantine.code'=> 'id', 
+                'abonnement_cantine.date_paiement'=> 'date_paiement', 
+                'abonnement_cantine.date_debut'=> 'date_debut ', 
+                'abonnement_cantine.date_fin'=> 'date_fin', 
+                'abonnement_cantine.montant_total'=> 'montant_total', 
+                'classe.libelle'=> 'classe', 
+                'classe.code'=> 'code_classe', 
+                new Ex("concat(eleve.nom,' ',eleve.prenom) as nom_eleve"),
+                'eleve.code' => 'eleve_id'
+            ]
+        )
+        ->join('eleve', 'eleve.id', '=', 'abonnement_cantine.eleve_id')
+        ->join('parcours', 'eleve.id', '=', 'parcours.eleve_id')
+        ->join('classe', 'parcours.classe_id', '=', 'classe.id')
+        ->join('pension_classe', 'pension_classe.classe_id', '=', 'parcours.classe_id')
+        // ->where('parcours.visibilite', '=', 1)
+        ->where('parcours.annee_scolaire_id', '=', $annee_scolaire)
+        ->get();
 
 
         $this->render('sections.cantine.abonnement_liste', compact( 'classes','abonnements'));
