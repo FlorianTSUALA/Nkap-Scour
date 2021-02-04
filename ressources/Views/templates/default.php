@@ -13,7 +13,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-	<meta name="description" content="NKAPSKOUR, using to perform web application features">
+	<meta name="description" content="NKAP-SKOUR, using to perform web application features">
 	<meta name="keywords" content="">
 	<meta name="author" content="PRO Elite Team">
 
@@ -26,6 +26,7 @@
 	<link rel="stylesheet" type="text/css" href="<?= URL::base() ?>assets/css/font.css">
 
 	<link rel="stylesheet" type="text/css" href="<?= URL::base() ?>assets/app-assets/css/vendors.css">
+	<link rel="stylesheet" type="text/css" href="<?= URL::base() ?>assets/vendors/css/forms/selects/select2.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= URL::base() ?>assets/app-assets/vendors/css/forms/selects/select2.min.css">
     <link rel="stylesheet" type="text/css" href="<?= URL::base() ?>assets/app-assets/css/core/menu/menu-types/vertical-menu.css">
 

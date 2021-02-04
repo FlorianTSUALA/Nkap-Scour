@@ -15,17 +15,12 @@
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/vendors.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/forms/toggle/bootstrap-switch.min.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/forms/toggle/switchery.min.css">
+
+
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/pickers/daterange/daterangepicker.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/pickers/pickadate/pickadate.css"> -->
+
     <!-- END VENDOR CSS-->
-
-
-        <!-- BEGIN VENDOR CSS-->
-        <link rel="stylesheet" type="text/css" href="../../../app-assets/css/vendors.css">
-        <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/pickers/daterange/daterangepicker.css">
-        <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
-        <!-- END VENDOR CSS-->
-
-        <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/pickers/daterange/daterange.css">
-
     <!-- BEGIN ROBUST CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/app.css">
     <!-- END ROBUST CSS-->
@@ -33,6 +28,9 @@
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-content-menu.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/forms/switch.min.css">
+
+    <!-- <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/pickers/daterange/daterange.css"> -->
+
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
@@ -1540,24 +1538,7 @@
 							</div>
 						</fieldset>
 					</div>
-        </div>
-        
-
-        <div class="form-group">
-          <label> </label>
-          <div class='input-group'>
-            <input type='text' class="form-control localeRange" />
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <span class="fa fa-calendar"></span>
-              </span>
-            </div>
-          </div>
-          <small class="text-muted">Allows you to provide localized strings for buttons and labels, customize the date display format, and change the first day of week for the calendars.</small>
-        </div>
-
-
-
+				</div>
 				<div class="card-content">
 					<div class="card-body">
 						<h4 class="card-title">Content title</h4>
@@ -1600,24 +1581,24 @@
 					<h4 class="card-title" id="heading-select">With Basic Select</h4>
 					<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
         			<div class="heading-elements">
-                <fieldset>
-                  <select class="form-control" id="basicSelect">
-                    <option>Select City</option>
-                    <option>Amsterdam</option>
-                                  <option>Antwerp</option>
-                                  <option>Athens</option>
-                                  <option>Barcelona</option>
-                                  <option>Berlin</option>
-                                  <option>Birmingham</option>
-                                  <option>Bradford</option>
-                                  <option>Bremen</option>
-                                  <option>Brussels</option>
-                                  <option>Bucharest</option>
-                                  <option>Budapest</option>
-                  </select>
-                </fieldset>
-              </div>
-        </div>
+						<fieldset>
+							<select class="form-control" id="basicSelect">
+								<option>Select City</option>
+								<option>Amsterdam</option>
+	                            <option>Antwerp</option>
+	                            <option>Athens</option>
+	                            <option>Barcelona</option>
+	                            <option>Berlin</option>
+	                            <option>Birmingham</option>
+	                            <option>Bradford</option>
+	                            <option>Bremen</option>
+	                            <option>Brussels</option>
+	                            <option>Bucharest</option>
+	                            <option>Budapest</option>
+							</select>
+						</fieldset>
+					</div>
+				</div>
 				<div class="card-content">
 					<div class="card-body">
 						<h4 class="card-title">Content title</h4>
@@ -1795,7 +1776,83 @@
 		</div>
 	</div>
 
+	<div class="row">
+		<div class="col-md-6 col-sm-12">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="card-title" id="heading-pagination">With Pagination</h4>
+					<div class="heading-elements heading-top-elements">
+						<nav aria-label="Page navigation">
+							<ul>
+								<li class="page-item">
+									<a class="page-link border-0" href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+									</a>
+								</li>
+								<li class="page-item"><a class="page-link border-0" href="#">1</a></li>
+								<li class="page-item active"><a class="page-link border-0" href="#">2</a></li>
+								<li class="page-item"><a class="page-link border-0" href="#">3</a></li>
+								<li class="page-item">
+									<a class="page-link border-0" href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<div class="card-body">
+					<h4 class="card-title">Content title</h4>
+					<p class="card-text">Sweet roll marzipan pastry halvah. Cake bear claw sweet. Tootsie roll pie marshmallow lollipop.</p>
+					<p class="card-text">Tart lollipop carrot cake sugar plum. Jelly beans sugar plum cheesecake cookie oat cake soufflé.</p>
+					<p class="card-text">Soufflé soufflé tart gummies marshmallow. Wafer pie cheesecake marshmallow cookie tiramisu chocolate sweet roll. Marzipan bonbon carrot cake soufflé pudding halvah topping candy canes.Fruitcake halvah candy.</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="d-flex ">
+            <div class="p-0  col-md-3 mr-auto "><h4 class="card-title" id="heading-prev-next">ProDigit &amp; Previous</h4></div>
+            <div class="p-0 mr-1 flex-grow-2 ">
+              
+              <fieldset class="input-group">
+                <!-- <div class="input-group-prepend">
+                  <span class="input-group-text">L &nbsp; <span class="fa fa-calendar"></span></span>
+                </div> -->
+                <input id="localization" type='text' class="form-control form-control-sm localeRange" />
+                <div class="input-group-append">
+                  <span class="input-group-text">L &nbsp; <span class="fa fa-calendar"></span></span>
+                </div>
+                <!-- <small class="text-muted">Allows you to provide.</small> -->
+              </fieldset>
+              
 
+
+            </div>
+            <div class="p-0  col-md-3 ">
+              <fieldset class="position-relative">
+                <input type="text" class="form-control form-control-sm">
+                <div class="form-control-position">
+                  <i class="ft-refresh-cw spinner"></i>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+				
+				</div>
+				<div class="card-body">
+					<h4 class="card-title">Content title</h4>
+					<p class="card-text">Cake icing chocolate cake gummi bears cupcake. Cheesecake cupcake icing cotton candy sugar plum caramels bonbon pastry. Danish jujubes icing sesame snaps.Gingerbread wafer sweet macaroon.</p>
+					<p class="card-text">Jelly beans sugar plum cheesecake cookie oat cake soufflé.Tootsie roll bonbon liquorice tiramisu pie powder.</p>
+					<p class="card-text">Liquorice apple pie cookie tart. Chocolate cake danish chupa chups marshmallow liquorice danish biscuit oat cake. Cake halvah candy.</p>
+				</div>
+			</div>
+		</div>
+  </div>
+  
 	<div class="row">
 		<div class="col-md-6 col-sm-12">
 			<div class="card">
@@ -2063,17 +2120,9 @@
     </footer>
 
     <!-- BEGIN VENDOR JS-->
-    <!-- BEGIN VENDOR JS-->
     <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
     <!-- BEGIN VENDOR JS-->
     <!-- BEGIN PAGE VENDOR JS-->
-    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
-    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
-    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
-    <script src="../../../app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
-    <script src="../../../app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
-    <script src="../../../app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
-    <!-- END PAGE VENDOR JS-->
     <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
     <script src="../../../app-assets/vendors/js/charts/jquery.sparkline.min.js"></script>
     <script src="../../../app-assets/vendors/js/ui/headroom.min.js"></script>
@@ -2081,11 +2130,18 @@
     <script src="../../../app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js"></script>
     <script src="../../../app-assets/vendors/js/forms/toggle/switchery.min.js"></script>
     <script src="../../../app-assets/js/core/libraries/jquery_ui/jquery-ui.min.js"></script>
+
+
+
+    <!-- <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/legacy.js"></script> -->
+    <script src="../../../app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+
+
     <!-- END PAGE VENDOR JS-->
-
-
- 
-
     <!-- BEGIN ROBUST JS-->
     <script src="../../../app-assets/js/core/app-menu.js"></script>
     <script src="../../../app-assets/js/core/app.js"></script>
@@ -2095,7 +2151,38 @@
     <script src="../../../app-assets/js/scripts/forms/switch.js"></script>
 
 
-    <script src="../../../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
+    <script >
+      (function(window, document, $) {
+        'use strict';
+
+
+
+        // Localization
+        $('.localeRange').daterangepicker({
+          ranges: {
+            "Aujourd'hui": [moment(), moment()],
+            'Hier': [moment().subtract('days', 1), moment().subtract('days', 1)],
+            'Les 7 derniers jours': [moment().subtract('days', 6), moment()],
+            'Les 30 derniers jours': [moment().subtract('days', 29), moment()],
+            'Ce mois-ci': [moment().startOf('month'), moment().endOf('month')],
+            'le mois dernier': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+          },
+          locale: {
+            applyLabel: "Chercher",
+            cancelLabel: 'Annuler',
+            startLabel: 'Date initiale',
+            endLabel: 'Date limite',
+            customRangeLabel: 'Choisir une date/période',
+            // daysOfWeek: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi','Samedi'],
+            daysOfWeek: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve','Sa'],
+            monthNames: ['Janvier', 'février', 'Mars', 'Avril', 'Маi', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+            firstDay: 1
+          },
+          min: [2016,8,20],
+		      max: [2016,10,30]
+        });
+      })(window, document, jQuery);
+    </script>
 
     <!-- END PAGE LEVEL JS-->
   </body>

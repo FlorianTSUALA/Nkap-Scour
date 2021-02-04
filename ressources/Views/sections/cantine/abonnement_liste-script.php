@@ -67,7 +67,7 @@ ft-list
   </div>
 </div> -->
 
-
+<!-- 
 <script>
     $("#accordion").on("hidden.bs.collapse", function (e) {
         $(e.target).closest(".panel-primary")
@@ -81,13 +81,11 @@ ft-list
             .removeClass("glyphicon glyphicon-plus")
             .addClass("glyphicon glyphicon-minus");
     });
-</script>
+</script> -->
 
 <script>
   // C:\laragon\www\Nkap-Scour\_robust\_Robust\Robust\Robust\app-assets\js\scripts\pickers\dateTime\pick-a-datetime.js
   (function(window, document, $){
-      // Basic date
-      $('.pickadate').pickadate();
 
     	// Localization
       $('.localeRange').daterangepicker({
@@ -102,17 +100,34 @@ ft-list
           'le mois dernier': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
         },
         locale: {
-          applyLabel: "Vers l'avant",
-          cancelLabel: 'Annulation',
+          applyLabel: "Chercher",
+          cancelLabel: 'Annuler',
           startLabel: 'Date initiale',
           endLabel: 'Date limite',
           customRangeLabel: 'Sélectionner une date',
           // daysOfWeek: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi','Samedi'],
           daysOfWeek: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve','Sa'],
           monthNames: ['Janvier', 'février', 'Mars', 'Avril', 'Маi', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
-          firstDay: 1
+          firstDay: 1,
+          format: 'DD-MM-YYYY'
         },
-      
+
+      // Max and Min date
+      min: [2019,8,20],
+      max: [2022,10,30],
+        
+      // Using Javascript
+      // min: new Date(2015,3,20,7),
+      // max: new Date(2015,7,14,18,30)
+
+      // formatSubmit: 'dd/mm/yyyy',
+      //Buttons class
+      drops: "down",
+      buttonClasses: "btn",
+      applyClass: "btn-info",
+      cancelClass: "btn-danger",
+
+      //Events
       onStart: function() {
         console.log('Hi there!!!');
       },
@@ -131,7 +146,10 @@ ft-list
       onSet: function(context) {
         console.log('All stuff:', context);
       }
-	});
+  }
+  
+  
+  );
 
 
   

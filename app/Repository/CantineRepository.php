@@ -2,10 +2,6 @@
 
 namespace App\Repository;
 
-use App\Model\Eleve;
-use App\Model\Facture;
-use App\Model\AbonnementCantine;
-
 class CantineRepository{
     
         

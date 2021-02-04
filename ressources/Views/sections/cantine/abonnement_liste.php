@@ -4,34 +4,27 @@ use Core\Routing\URL;
 use App\Helpers\Helpers;
 
 
-$include_res_header = '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">';
-$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/extensions/rowReorder.dataTables.min.css">';
-$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/extensions/responsive.dataTables.min.css">';
-// $include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/icheck/icheck.css">';
-// $include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/icheck/custom.css">';
-$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/ui/jquery-ui.min.css">';
-$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/selects/select2.min.css">';
-
-$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/pickers/daterange/daterangepicker.css">';
-$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/pickers/pickadate/pickadate.css">';
-$include_res_header .= '';
+$include_res_header = '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">'. "\n";
+$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/extensions/rowReorder.dataTables.min.css">'. "\n";
+$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/extensions/responsive.dataTables.min.css">'. "\n";
+// $include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/icheck/icheck.css">'. "\n";
+$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/app-assets/vendors/css/pickers/daterange/daterangepicker.css">'. "\n";
+$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/ui/jquery-ui.min.css">'. "\n";
+$include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/selects/select2.min.css">'. "\n";
+$include_res_header .= ''. "\n";
 
 
-$include_res_footer = '';
-$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/jquery.dataTables.min.js"></script>';
-$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>';
-$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>';
-$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.rowReorder.min.js"></script>';
-// $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/charts/echarts/echarts.js"></script>';
-// $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/icheck/icheck.min.js"></script>';
+$include_res_footer = ''. "\n";
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/jquery.dataTables.min.js"></script>'. "\n";
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>'. "\n";
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>'. "\n";
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.rowReorder.min.js"></script>'. "\n";
+// $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/charts/echarts/echarts.js"></script>'. "\n";
+// $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/icheck/icheck.min.js"></script>'. "\n";
 
 // <!-- BEGIN DATE PICKER VENDOR JS-->
-$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/pickadate/picker.js"></script>';
-$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>';
-$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>';
-$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/pickadate/legacy.js"></script>';
-$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>';
-$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>';
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>'. "\n";
+$include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>'. "\n";
 // <!-- END DATE PICKER VENDOR JS-->
 
 $include_res_footer .= "";
@@ -39,7 +32,7 @@ $include_res_footer .= "";
 ob_start();
 
 
-include 'script-component-init.php';
+// include 'script-component-init.php';
 include 'abonnement_liste-script.php';
 $include_footer_script = ob_get_clean();
 ?>
@@ -85,74 +78,56 @@ $include_footer_script = ob_get_clean();
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                            <div class="form-group">
-								<label>Localization</label>
-								<div class='input-group'>
-									<input type='text' class="form-control localeRange" />
-									<div class="input-group-append">
-										<span class="input-group-text">
-											<span class="fa fa-calendar"></span>
-										</span>
-									</div>
-								</div>
-								<small class="text-muted">Allows you to provide localized strings for buttons and labels, customize the date display format, and change the first day of week for the calendars.</small>
-							</div>
-            	<h4 class="card-title">Abonnements</h4>
-            	<a class="heading-elements-toggle"><i class="ft-ellipsis-h font-medium-3"></i></a>
-        		<div class="heading-elements">
-                        <!-- 
-                        <div class='input-group'>
-                            <input type='text' class="form-control localeRange" />
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <span class="fa fa-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                        <small class="text-muted">Vous permet de filtrer les resultats selon une date précise ou une période donnée.</small> -->
-                        <div class="input-group input-group-sm">
-
-							<div class="d-inline-block custom-control  mr-1">
-                                <input  id="datepicker" type='text' class="form-control localeRange" />
-                                <!--    
-                                <div class="">
-                                        <span class="input-group-text">
-                                        <span class="fa fa-calendar"></span>
-                                    </span>
-                                </div> -->
-                                <!-- <label class="custom-control-label" for="datepicker">Choix de la [Date ou Periode]</label> -->
-                            </div>
-                            
-
-							<div class="d-inline-block custom-control custom-checkbox mr-1">
-								<input type="checkbox" class="custom-control-input" id="customCheck2">
-								<label class="custom-control-label" for="customCheck2">2</label>
-							</div>
-							<div class="d-inline-block custom-control custom-checkbox mr-4">
-								<input type="checkbox" class="custom-control-input" id="customCheck3">
-								<label class="custom-control-label" for="customCheck3">3</label>
-                            </div>
-                            
-                            <button class="btn btn-primary btn-sm"><i class="ft-plus white"></i> Enregistrer </button>
-                            <span class="dropdown">
-                                <button id="btnSearchDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-warning btn-sm dropdown-toggle dropdown-menu-right"><i class="ft-download white"></i></button>
-                                <span aria-labelledby="btnSearchDrop1" class="dropdown-menu mt-1 dropdown-menu-right">
-                                    <a href="#" class="dropdown-item"><i class="fa fa-file-excel-o"></i> Excel </a>                       <a href="#" class="dropdown-item"><i class="fa fa-file-word-o"></i> Word</a>
-                                    <a href="#" class="dropdown-item"><i class="fa fa-file-pdf-o"></i> PDF </a>
-
-
-                                </span>
-                            </span>
-                            <button class="btn btn-success btn-sm"><i class="ft-settings white"></i></button>
-						</div>
+                <div class="d-flex">
+                    <div class="p-0  col-md-3 mr-auto "><h4 class="card-title" id="heading-prev-next">Abonnement Cantines</h4><small class="text-muted">Allows you to provide.</small></div>
                     
+                    <div class="p-0 mr-1 ">
+                        <fieldset class="input-group">
+                            <!-- <div class="input-group-prepend">
+                            <span class="input-group-text">L &nbsp; <span class="fa fa-calendar"></span></span>
+                            </div> -->
+                            <input id="localization" type='text' class="form-control form-control-sm localeRange" />
+                            <div class="input-group-append">
+                            <span class="input-group-text">Date | Periode  &nbsp; <span class="fa fa-calendar"></span></span>
+                            </div>
+                            <!-- <small class="text-muted">Allows you to provide.</small> -->
+                        </fieldset>
+                    </div>
+
+                    <div class="p-0   ">
+                        <span class="dropdown">
+                            <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-settings mr-1"></i>Rapport</button>
+                            <span class="dropdown-menu arrow  dropdown-menu-left">
+                                <a href="#" class="dropdown-item"><i class="fa fa-file-excel-o"></i> Excel </a>                       
+                                <a href="#" class="dropdown-item"><i class="fa fa-file-word-o"></i> Word</a>
+                                <a href="#" class="dropdown-item"><i class="fa fa-file-pdf-o"></i> PDF </a>
+                            </span>
+                        </span>
+                    </div>
                 </div>
+                <div class="d-flex  mt-1">
+                        <div class="alert bg-success alert-icon-left" role="alert">
+                            <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
+                            <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
+                            Robust Admin Template default layout is 2 columns. If you do not define pageConfig block on padefault.
+                        </div>
+                </div>
+            	<!-- <h4 class="card-title">Abonnements</h4> -->
+            	<!-- <a class="heading-elements-toggle"><i class="ft-ellipsis-h font-medium-3"></i></a>
+        		<div class="heading-elements">
+                    <div class="input-group input-group-sm">
 
+                        <div class="d-inline-block custom-control  mr-1">
+                            <input  id="datepicker" type='text' class="form-control localeRange" />
+                        </div>
 
-            
+                        
 
+                    </div>
 
+                </div> -->
             </div>
+
             <div class="card-content">
                 <div class="card-body">
 	                <!-- Task List table -->
@@ -162,9 +137,9 @@ $include_footer_script = ob_get_clean();
 					            <tr>
 					                <th style="width: 7%;">N°</th>
 					                <th>nom_eleve</th>
-					                <th>date_debut</th>
-					                <th>date_fin</th>
-					                <th>montant_total</th>
+					                <!-- <th>date_debut</th> -->
+					                <!-- <th>date_fin</th> -->
+					                <!-- <th>montant_total</th> -->
 					                <th>classe</th>
 					            </tr>
 					        </thead>
@@ -182,9 +157,9 @@ $include_footer_script = ob_get_clean();
                                         <td>
                                             <ul class="list-inline clearfix mt-1" style="align:  center;">
                                                 <li class="mr-3"><a href="#" class="text-bold-600"> <?= $abonnement->nom_eleve  ;?> </a></li><br>
-                                                <li class="mr-3"><a href="#" class="text-bold-600"> <?= $abonnement->date_debut  ;?> </a></li><br>
-                                                <li class="mr-3"><a href="#" class="text-bold-600"> <?= $abonnement->date_fin  ;?> </a></li><br>
-                                                <li class="mr-3"><a href="#" class="text-bold-600"> <?= $abonnement->montant_total  ;?> </a></li><br>
+                                                <!-- <li class="mr-3"><a href="#" class="text-bold-600"> <?= $abonnement->date_debut  ;?> </a></li><br> -->
+                                                <!-- <li class="mr-3"><a href="#" class="text-bold-600"> <?= $abonnement->date_fin  ;?> </a></li><br> -->
+                                                <!-- <li class="mr-3"><a href="#" class="text-bold-600"> <?= $abonnement->montant_total  ;?> </a></li><br> -->
                                                 <li class="mr-3"><a href="#" class="text-bold-600"> <?= $abonnement->classe  ;?> </a></li><br>
                                             </ul>
                                         </td>
@@ -210,9 +185,9 @@ $include_footer_script = ob_get_clean();
 					            <tr>
                                 <th style="width: 7%;">N°</th>
 					                <th>nom_eleve</th>
-					                <th>date_debut</th>
+					                <!-- <th>date_debut</th>
 					                <th>date_fin</th>
-					                <th>montant_total</th>
+					                <th>montant_total</th> -->
 					                <th>classe</th>
 					            </tr>
 					        </tfoot>
@@ -395,3 +370,4 @@ $include_footer_script = ob_get_clean();
     </div>
     </div>
 
+:
