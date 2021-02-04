@@ -6,24 +6,39 @@ use App\Model\Eleve;
 use App\Model\Facture;
 use App\Model\AbonnementCantine;
 
+use function Core\Helper\dd;
+
 class CantineRepository{
     
-        
-    public function getInfoByPeriod( $start_date, $end_date){
 
-    }
 
-    public function getInfoByClassePeriod( $start_date, $end_date){
+    public function getInfoByclassePeriod( $day_date, string $salle_classe_id){
 
-    }
+        $abonnement = Abonnementcantine::table();
 
-    public function getInfoBySalleClassePeriod( $start_date, $end_date){
+        if(!$salle_classe_id){
+            $abonnement = $abonnement->select(['nom', 'prenom', 'salle_classe.libelle'=>'classe'])
+            ->join('eleve', 'eleve.id','=','abonnement_cantine.eleve_id')
+            ->join('parcours','parcours.eleve_id','=','eleve.id')
+            ->join('salle_classe','parccours.salle_classe_id','=','salle_classe.id')
+            ->where($day_date)
+            -> BETWEEN ('abonnement_cantine.date_debut'  AND 'abonnement_cantine.date_fin');
 
-    }
-
-        
-    public function getInfo(string $classe_id){
+        }
+       else {
+        $abonnement = $abonnement->select(['nom', 'prenom', 'salle_classe.libelle'=>'classe'])
+        ->join('eleve', 'eleve.id','=','abonnement_cantine.eleve_id')
+        ->join('parcours','parcours.eleve_id','=','eleve.id')
+        ->join('salle_classe','parccours.salle_classe_id','=','salle_classe.id')
+        ->where($day_date)
+        -> BETWEEN ('abonnement_cantine.date_debut'  AND 'abonnement_cantine.date_fin')
+        ->where('salle_class.id','=','$salle_classe_id');
+       
+       }
+       dd($abonnement);
        
     }
+       
+    
 
 }
