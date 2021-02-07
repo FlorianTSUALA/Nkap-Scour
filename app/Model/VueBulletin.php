@@ -11,7 +11,7 @@ use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
 use App\Helpers\HelpersBusinessLogic;
 
-class Bulletin extends Model implements FrequentlyReapeat
+class VueBulletin extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
 

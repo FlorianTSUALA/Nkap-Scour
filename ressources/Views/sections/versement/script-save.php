@@ -35,7 +35,7 @@ use App\Helpers\Helpers;
                 'nom_eleve':  $('#eleve_nom_complet option:selected').text(),
                 'date_paie':  $('#date_paie').val(),
                 'reference':  $('#reference').val(),
-                'date_facture':  <?= date('Y-m-d') ?> ,
+                'date_facture':  '<?= date('Y-m-d') ?>' ,
                 'date_paiement':  $('#date_paie').val(),
                 // "reference": reference,
                 // "date_facture":  date_facture,

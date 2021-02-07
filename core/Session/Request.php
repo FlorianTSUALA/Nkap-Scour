@@ -113,9 +113,13 @@ class Request
 	{
 		$data = [];
 
-		foreach($items as $item){
-			$item = (array)$item;
-			$data += [$item['name'] => self::getSecParam($item['name'])];
+		if(is_array($items)){
+			foreach($items as $item){
+				$item = (array)$item;
+				$data += [$item['name'] => self::getSecParam($item['name'])];
+			}
+		}else{
+			$data = self::getSecParam($items);
 		}
 
 		return $data;

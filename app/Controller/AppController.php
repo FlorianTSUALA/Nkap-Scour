@@ -27,6 +27,7 @@ class AppController extends \Core\Controller\Controller
 
         $this->viewPath = ROOT . '/ressources/views/';
 
+
         $this->app = App::getInstance();
         
         $this->form = new BootstrapForm();

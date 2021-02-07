@@ -1,91 +1,67 @@
-<!-- http://jsfiddle.net/cLqv5bo8/1/ -->
+<?php
 
-<!-- <a href="index.html">
-    <i class="icon-home"></i>
-    <span class="menu-title" data-i18n="nav.dash.main">Dashboard</span>
-    <span class="badge badge badge-info badge-pill float-right mr-2">5</span>
-</a>
+use Core\Routing\URL;
+use Core\HTML\Form\InputType;
 
-<button class="dropdown-item" type="button">
-    <span class="mr-1 badge badge-pill badge-default badge-success badge-glow">10</span> More Options
-</button>
+include dirname(__DIR__)."/_common_lib/_select2_script.php";
 
-ft-chevrons-right
+?>
+<!--
+    ******  VARIABLES *****
+     $base_route
+     $fillables
+     $msg_delete
+-->
 
-ft-chevrons-down
-ft-menu
-ft-list
-
-<button class="dropdown-item" type="button"><i class="ft-link float-right"></i> Another action</button>
-
-
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-primary">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            <span class="glyphicon glyphicon-minus" ></span>
-          Collapsible Group Item #1
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-        Collapsible Body 1
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-primary">
-    <div class="panel-heading" role="tab" id="headingTwo">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            <span class="glyphicon glyphicon-plus" ></span>
-          Collapsible Group Item #2
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body">
-        Collapsible Body 2
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-primary">
-    <div class="panel-heading" role="tab" id="headingThree">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            <span class="glyphicon glyphicon-plus" ></span>
-          Collapsible Group Item #3
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-      <div class="panel-body">
-        Collapsible Body 3
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- 
-<script>
-    $("#accordion").on("hidden.bs.collapse", function (e) {
-        $(e.target).closest(".panel-primary")
-            .find(".panel-heading span")
-            .removeClass("glyphicon glyphicon-minus")
-            .addClass("glyphicon glyphicon-plus");
-    });
-    $("#accordion").on("shown.bs.collapse", function (e) {
-        $(e.target).closest(".panel-primary")
-            .find(".panel-heading span")
-            .removeClass("glyphicon glyphicon-plus")
-            .addClass("glyphicon glyphicon-minus");
-    });
-</script> -->
 
 <script>
   // C:\laragon\www\Nkap-Scour\_robust\_Robust\Robust\Robust\app-assets\js\scripts\pickers\dateTime\pick-a-datetime.js
-  (function(window, document, $){
+    var filter_by = 'ALL'
+    var start_date = moment()
+    var end_date = moment()
+    var code = ''
+
+    var printCounter = 0
+        var table
+        var start = moment()
+        var end = moment()
+
+        function getDateStart(){
+            console.log(start_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ))
+            return start_date.format( 'YYYY-MM-DD  HH:mm:ss.000' )
+        }
+        
+        function getDateEnd(){
+            console.log(end_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ))
+            return end_date.format( 'YYYY-MM-DD  HH:mm:ss.000' )
+        }
+        
+        function init_data_table() {
+
+            table = $('#table-cantine').DataTable({
+                //"serverSide": true,
+                //Server-side processing is useful when working with large data sets (typically >50'000 records) as it means a database engine can be used to perform the sorting etc calculations - operations that modern database engines are highly optimised for, allowing use of DataTables with massive data sets (millions of rows).
+                ajax:{
+                    url: '<?= URL::link('cantine_abonnement_info') ?>',
+                    data: function(data){
+                        data.code =  code,
+                        data.filter_by = filter_by,
+                        data.start_date = start_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ),
+                        data.end_date = end_date.format( 'YYYY-MM-DD  HH:mm:ss.000' )
+                    } ,
+                    type: 'POST'
+                },
+               
+            })
+
+            //Reload table data every 30 seconds (paging retained):
+            setInterval( function () {
+                table.ajax.reload( null, false ); // user paging is not reset on reload
+            }, 5550000 );
+        }
+
+
+    (function(window, document, $){
 
     	// Localization
       $('.localeRange').daterangepicker({
@@ -129,30 +105,82 @@ ft-list
 
       //Events
       onStart: function() {
-        console.log('Hi there!!!');
+        console.log('pro - - - > Hi there!!!')
       },
       onRender: function() {
-        console.log('Holla... rendered new');
+        console.log('pro - - - > Holla... rendered new')
       },
       onOpen: function() {
-        console.log('Picker Opened');
+        console.log('pro - - - > Picker Opened')
       },
       onClose: function() {
-        console.log("I'm Closed now");
+        console.log("pro - - - > I'm Closed now")
       },
       onStop: function() {
-        console.log('Have a great day ahead!!');
+        console.log('pro - - - > Have a great day ahead!!')
       },
       onSet: function(context) {
-        console.log('All stuff:', context);
+        console.log('pro - - - > All stuff:', context)
       }
-  }
-  
-  
-  );
+  }, cb)
 
-
+  init_data_table()
   
+  function cb(start, end) {
+    $('#resume_filtre').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+    start_date = start
+    end_date = end
+    console.log(start_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ))         
+    console.log(end_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ))         
+    table.ajax.reload()
+    // table.ajax({
+    //               url: '<?= URL::link('cantine_abonnement_info') ?>',
+    //               data: {
+    //                   'code':  code,
+    //                   'filter_by': filter_by,
+    //                   'start_date': start_date,
+    //                   'end_date': end_date
+    //               },
+    //               type: 'POST'
+    //             })
+    // table.ajax.url( "<?= URL::link('cantine_abonnement_info')?>?code="+code+"&filter_by="+filter_by+"&start_date="+start_date.format( 'YYYY-MM-DD  HH:mm:ss.000' )+"&end_date="+end_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ) ).load()
+}
 
   })(window, document, jQuery)
+</script>
+
+
+
+<script>
+// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_active_element
+// Add active class to the current menu item (highlight it)
+var menu = document.getElementById("menu");
+var links = menu.getElementsByClassName("list-group-item");
+
+
+for (var i = 0; i < links.length; i++) {
+  links[i].addEventListener('click', function() {
+      var current = document.getElementsByClassName('active')
+      if (current.length > 0) { 
+        current[0].className = current[0].className.replace(' active', '')
+      }
+      this.className += ' active'
+      if(this.id.includes('ID_')){
+        let current_id = this.id.replace('ID_', '')
+        if(current_id.includes('SALL'))
+          filter_by ='SALLE_CLASSE'
+        else
+          filter_by = 'CLASSE'
+        code  =  current_id
+      }else{
+        filter_by = 'ALL'
+        code = ''
+      }
+
+      start_date = moment()
+      end_date = moment()
+      alert(code)
+      table.ajax.reload()
+  })
+}
 </script>

@@ -76,12 +76,7 @@ class VersementController extends AppController
         //Liste des prix associés aux offres de la cantine
         //$abonnement_cantine = DBTable::getModel('abonnement_cantine')->select(['code'=>'id', 'libelle' => 'libelle', 'montant'=>'montant'])->where('code', '=', 'MOIS')->where('visibilite', '=', 1)->one();
         // var_dump($abonnement_cantine); die();
-        $annee_scolaires = DBTable::getModel('annee_scolaire')
-                            ->select(['code'=>'id', 'libelle' => 'libelle'])
-                            ->where('visibilite', '=', 1)
-                            ->where('statut', '=', 1)
-                            ->orderBy('date_creation', 'desc')
-                            ->get();
+        
 
 
         $statut_apprenants = DBTable::getModel('statut_apprenant')

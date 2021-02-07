@@ -23,8 +23,11 @@ trait HTMLHelper
     ];
 
 
-    public static function getRandromBootstrapColor(){
-        $arrX = array("warning", "info","success", "danger", "primary", "light", "dark");
+    public static function getRandromBootstrapColor($with_light_color = false){
+        $arrX = array("warning", "info","success", "danger", "primary", "dark");
+        if($with_light_color)
+            $arrX += array('light');
+
         // get random index from array $arrX
         $randIndex = array_rand($arrX);
         // output the value for the random index

@@ -12,16 +12,16 @@ $funtion_signataire = "Le Sécrétariat";
 
 
 
-    var reference = "<?= Helpers::generateReference(); ?>";
-    var date_facture = "<?= Helpers::getFullDate(date("Y-m-d H:i:s")); ?>";
+    var reference = '<?= Helpers::generateReference(); ?>';
+    var date_facture = '<?= Helpers::getFullDate(date('Y-m-d H:i:s')); ?>';
 
     $(document).on('click', '#btn_preview', function(e)
     {
-        $('#recap-body').html("");
+        $('#recap-body').html('');
         $('#recap-reference').text(reference);
         $('#recap-somme').text( $('#somme').text() );
 
-        var body = "";
+        var body = '';
         var sous_total = 0;
         var _montant_total = 0;
         var i = 0;
@@ -46,7 +46,7 @@ $funtion_signataire = "Le Sécrétariat";
                 _recapitulatif = (isNaN(_recapitulatif))? 0 : _recapitulatif;
                 if(_recapitulatif == 0) continue;
 
-                body += "<tr>";
+                body += '<tr>';
                 body += '   <th scope="row">'+i+'</th>'
                 body += '       <td>'
                 body += '           <p>Pension : '+current['type_pension']+'</p>'

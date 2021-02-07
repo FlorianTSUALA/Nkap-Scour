@@ -29,9 +29,8 @@ echo '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/toggle/boot
 echo '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js"></script>';
 // echo '<script src="'.URL::base().'assets/"></script>';
 
-require 'abonnement_cantine-script.php';
-
 require 'script-component-init.php';
+require 'abonnement_cantine-script.php';
 // require 'script-update-etat.php';
 require 'script-save.php';
 

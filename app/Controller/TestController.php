@@ -10,14 +10,18 @@ use Core\Session\Request;
 use App\Model\PensionEleve;
 use Core\HTML\FlashMessages;
 use function Core\Helper\dd;
+use function Core\Helper\vd;
+
 use Spipu\Html2Pdf\Html2Pdf;
 use App\Model\DossierMedical;
 use App\Model\DossierParental;
 use App\Model\StatutApprenant;
 use App\Model\AntecedentScolaire;
 use App\Repository\ClasseRepository;
+use App\Repository\CantineRepository;
+use App\Repository\AnneeScolaireRepository;
+use ClanCats\Hydrahon\Query\Expression;
 use Core\HTML\MessageFlash\FlashMessagesStatic;
-
 use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
@@ -55,9 +59,9 @@ class TestController extends AppController
 
     public function testSQL()
     {
-        $classeRepository = new ClasseRepository();
-        $salle_classes = $classeRepository->getSalleClasseGroupByClasse();
-        dd($salle_classes);
+        $annee_scolaire_repository = new AnneeScolaireRepository();
+        $result = $annee_scolaire_repository->getActive();
+        dd($result);
     }
 
     public function testpdf()
@@ -83,16 +87,45 @@ class TestController extends AppController
 
     public function testA()
     {
-        $classeRepository = new ClasseRepository();
-        $salle_classes = $classeRepository->getSalleClasseGroupByClasse();
-        dd($salle_classes); 
+        $filter_by = 'ALL';
+        $code = '';
+        $start_date = '2022-01-01';
+        // $end_date = '';
+        
+        $cantine_repository = new CantineRepository();
+        $items = $cantine_repository->getInfoByClasseDate($start_date, $filter_by, $code);
+        dd($items);
     }
 
     public function testB()
     {
-        $classeRepository = new ClasseRepository();
-        $salle_classes = $classeRepository->getSalleClasseGroupByClasse();
-        dd($salle_classes);
+        $annee_scolaire =  DBTable::getModel(DBTable::ANNEE_SCOLAIRE)->select(['id'])
+        ->where('statut', '=', 1)
+        ->one()['id'];
+        dd($annee_scolaire);
+
+        $abonnements = DBTable::getModel(DBTable::ABONNEMENT_CANTINE)
+        ->select(
+            [
+                'abonnement_cantine.code'=> 'id', 
+                'abonnement_cantine.date_paiement'=> 'date_paiement', 
+                'abonnement_cantine.date_debut'=> 'date_debut ', 
+                'abonnement_cantine.date_fin'=> 'date_fin', 
+                'abonnement_cantine.montant_total'=> 'montant_total', 
+                'classe.libelle'=> 'classe', 
+                'classe.code'=> 'code_classe', 
+                new Expression("concat(eleve.nom,' ',eleve.prenom) as nom_eleve"),
+                'eleve.code' => 'eleve_id'
+            ]
+        )
+        ->join('eleve', 'eleve.id', '=', 'abonnement_cantine.eleve_id')
+        ->join('parcours', 'eleve.id', '=', 'parcours.eleve_id')
+        ->join('classe', 'parcours.classe_id', '=', 'classe.id')
+        ->join('pension_classe', 'pension_classe.classe_id', '=', 'parcours.classe_id')
+        // ->where('parcours.visibilite', '=', 1)
+        // ->where('parcours.annee_scolaire_id', '=', $annee_scolaire)
+        ->get();
+        dd($abonnements);
     }
 
     public function testC()

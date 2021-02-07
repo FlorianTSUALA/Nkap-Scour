@@ -109,7 +109,7 @@ $include_footer_script = ob_get_clean();
                         <div class="alert bg-success alert-icon-left" role="alert">
                             <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
                             <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
-                            Robust Admin Template default layout is 2 columns. If you do not define pageConfig block on padefault.
+                            <span id='resume_filtre' >Robust Admin Template default layout is 2 columns. If you do not define pageConfig block on padefault.</span>
                         </div>
                 </div>
             	<!-- <h4 class="card-title">Abonnements</h4> -->
@@ -132,7 +132,7 @@ $include_footer_script = ob_get_clean();
                 <div class="card-body">
 	                <!-- Task List table -->
 	                <div class="table-responsive">
-		                <table id="class-list" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
+		                <table id="table-cantine" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
 					        <thead>
 					            <tr>
 					                <th style="width: 7%;">N°</th>
@@ -225,10 +225,10 @@ $include_footer_script = ob_get_clean();
                 <div class="list-group">
                 <a href="<?= "#" ;?>" class="list-group-item active"> Voir tout</a>
                    <?php foreach($classes as $classe){ ?>
-                        <a href="#" class="list-group-item" data-toggle="collapse" data-target="#ID_<?= $classe['classe_id']?>" data-parent="#menu"><?= $classe['classe']; ?> <span class="badge  badge-pill bg-<?= Helpers::getRandromBootstrapColor() ?> float-right mr-2 badge-glow"><?= count($classe['salles']); ?></span></a>
+                        <a href="#" id="ID_<?= $classe['classe_id']?>" class="list-group-item" data-toggle="collapse" data-target="#ID_<?= $classe['classe_id']?>" data-parent="#menu"><?= $classe['classe']; ?> <span class="badge  badge-pill bg-<?= Helpers::getRandromBootstrapColor() ?> float-right mr-2 badge-glow"><?= count($classe['salles']); ?></span></a>
                         <div id="ID_<?= $classe['classe_id']?>" class=" collapse">
                             <?php foreach($classe['salles'] as $salle){ ?>
-                                <a id="ID_<?= $salle['salle_classe_id']?>" class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> <?= $salle['salle_classe']; ?></a>
+                                <a id="ID_<?= $salle['salle_classe_id']?>" class="list-group-item small "><span class="glyphicon glyphicon-chevron-right"></span> <?= $salle['salle_classe']; ?></a>
                             <?php } ?>
                         </div>
                    <?php } ?>

@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Model\Cours;
 use App\Model\Composer;
 use App\Model\SalleClasse;
+use App\Model\VueBulletin;
 use App\Model\PensionEleve;
 use App\Model\PrixAbonnement;
 use App\Model\AbonnementDetail;
@@ -67,8 +68,14 @@ class DBTable
     const TYPE_PENSION = 'type_pension';
     const TYPE_PERSONNEL = 'type_personnel';
     const PRIX_ABONNEMENT = 'prix_abonnement';
-    const VIEW_BULLETIN = 'bulletin';
+
     const AFFECTATION_CLASSE_MATIERE = 'affectation_classe_matiere';
+
+
+
+    //MANAGE CUSTOM VIEW
+    const VIEW_BULLETIN = 'bulletin';
+    const VIEW_CANTINE_ABONNEMENT_INFO = 'cantine_abonnement_info';
 
 
     public static function getModel($class_name){
@@ -146,7 +153,10 @@ class DBTable
                 return Pays::table();
             break;
             case DBTable::VIEW_BULLETIN:
-                return bulletin::table();
+                return VueBulletin::table();
+            break;
+            case DBTable::VIEW_CANTINE_ABONNEMENT_INFO:
+                return VueAbonnementCantine::table();
             break;
             case DBTable::PERIODE:
                 return Periode::table();

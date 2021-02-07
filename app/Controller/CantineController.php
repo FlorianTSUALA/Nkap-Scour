@@ -6,13 +6,16 @@ use App\Helpers\S;
 use App\Model\Classe;
 use Core\Model\Model;
 use App\Model\DBTable;
+use App\Model\Facture;
 use App\Model\Periode;
 use App\Helpers\Helpers;
 use Core\Helper\DBHelper;
 use Core\Session\Request;
+use App\Helpers\HTMLHelper;
 use App\Helpers\DateHelpers;
 use function Core\Helper\dd;
 use function Core\Helper\vd;
+use Core\HTML\Form\FormModel;
 use App\Model\AbonnementDetail;
 use App\Model\AbonnementCantine;
 use App\Helpers\TraitCRUDController;
@@ -130,34 +133,63 @@ class CantineController extends AppController
 
     public function save($code)
     {
-        dd($_POST['cantines']['data']);
+        // dd($_POST['cantines']['data']);
+
+        $montant_paye = Request::getSecParam('montant_total', 0);
+        $nom_eleve = Request::getSecParam('nom_eleve', '------/|\--/|\--/|\------');
+        $reduction = Request::getSecParam('reduction', 0);
+        $date_facture = date('Y-m-d') ;
+        $reference =  Request::getSecParam('reference', 0);
+
+        $type_paiement_id = Model::getId(DBTable::TYPE_PAIEMENT, Request::getSecParam('type_paiement_id', ''));
+       
+    
+    //Facture
+        $model_facture = DBTable::getModel(DBTable::FACTURE);
+        $code_facture = Facture::generateCode();
+        $data_facture = [
+            'code' => $code_facture,
+            'type_paiement_id' => $type_paiement_id,
+            'libelle' => 'Facture versement',
+            'reference' => $reference,
+            'beneficiaire' => $nom_eleve,
+            'gestionnaire' => 'Secretaire',
+            'montant' => $montant_paye,
+            'reduction' => $reduction,
+            'date_facture' => $date_facture,
+            'description' => '',
+        ];
+        $result_facture = $model_facture->insert($data_facture)->execute();
+        $facure_id = Model::getId(DBTable::FACTURE, $code_facture);
+
+        vd($result_facture);
+    //Facture
+
 
         $model = DBTable::getModel(DBTable::ABONNEMENT_CANTINE);
         $code_cantine = AbonnementCantine::generateCode();
 
-        $id_eleve = Model::getId(DBTable::ELEVE, Request::getSecParam('eleve_id', ''));
+        $eleve_id = Model::getId(DBTable::ELEVE, Request::getSecParam('eleve_id', ''));
         
         $data_abonnment = [
             'code' => $code_cantine,
-            'montant_total' => Request::getSecParam('montant_total', ''),
-            'reduction' => Request::getSecParam('reduction', ''),
-            'eleve_id' => $id_eleve,
-            'reference' => Request::getSecParam('reference', ''),
+            'montant_total' => $montant_paye,
+            'reduction' => $reduction,
+            'eleve_id' => $eleve_id,
+            'facture_id' => $facure_id,
             'date_debut' => Request::getSecParam('date_debut', ''),
             'date_fin' => Request::getSecParam('date_fin', ''),
-            'date_paiement' => Request::getSecParam('date_paiement', '')
         ];
-
+    
         $result_cantine = $model->insert($data_abonnment)->execute();
         
         vd($result_cantine);
 
+
         $abonnement_detail = DBTable::getModel(DBTable::ABONNEMENT_DETAIL);
         $items = $_POST['cantines']['data'];
 
-        dd($items);
-
-        $id_cantine = Model::getId(DBTable::ABONNEMENT_CANTINE, $code_cantine);
+        $abonnement_cantine_id = Model::getId(DBTable::ABONNEMENT_CANTINE, $code_cantine);
 
         $dayCount  = 0; 
         $start_day = Request::getSecParam('date_debut', '');
@@ -171,7 +203,7 @@ class CantineController extends AppController
 
             $data_abonnment_detail = [
                 'code' => AbonnementDetail::generateCode(),
-                'cantine_id' => $id_cantine,
+                'abonnement_id' => $abonnement_cantine_id,
                 'periode' =>  $item['periode'],
                 'multiplicateur' =>  $item['duree'],
                 'total' =>  $item['sous_total'],
@@ -179,14 +211,17 @@ class CantineController extends AppController
                 'date_debut' =>  $start_day,
                 'date_fin' =>  $end_day
             ];
-            
+                    
             $start_day = $end_day;
 
-            $abonnement_detail->insert($data_abonnment_detail)->execute();
+            $result_abonnement_detail = $abonnement_detail->insert($data_abonnment_detail)->execute();
+            vd($result_abonnement_detail);
         }
+ 
+        vd('OKAY');
 
         vd($result_cantine);
-
+        dd('stop');
         if ($result_cantine) {
             // $this->setupSessionVerement();
 
@@ -260,6 +295,26 @@ class CantineController extends AppController
     
         $this->renderPDF('reports.cantine', compact('date_facturation', 'eleve', 'classe', 'reference', 'remise', 'reste', 'solde_paye', 'sous_total', 'items'), 'facture_cantine' );  
 
+    }
+
+    public function abonnement_info()
+    {
+        $filter_by = Request::getSecParam('filter_by');
+        $code = Request::getSecParam('code');
+        $start_date = Request::getSecParam('start_date');
+        $end_date = Request::getSecParam('end_date');
+        
+       $result = true;
+       $cantine_repository = new CantineRepository();
+        $items = $cantine_repository->getInfoByClasseDate($start_date, $filter_by, $code);
+        $data = HTMLHelper::genBodyTable($items, $this->class_name, $this->fill(['label','name', 'type', FormModel::EXTERNAL_TYPE], $this->{$this->vairant}->fillables));
+        dd($data);
+        if($result){
+            
+            $this->sendResponseAndExit($data);
+        }else{
+            $this->sendResponseAndExit($data, FALSE, 400, 'DB Error');
+        }
     }
 
 }

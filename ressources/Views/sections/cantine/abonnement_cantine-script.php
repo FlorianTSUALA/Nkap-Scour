@@ -6,6 +6,20 @@
     $funtion_signataire = 'Le Sécrétariat';
 
 ?>
+ <script>
+         function addDaysToStr(date, days){
+            date = strToLocaleDateTime(date)
+            let _date = new Date(date)
+            _date.setDate(_date.getDate() + days)
+            return  _date.toLocaleDateString()
+        }
+
+        function strToLocaleDateTime(str_date){
+            let pattern = /(\d{2})\/(\d{2})\/(\d{4})/
+            let date = new Date(str_date.toString().replace(pattern,'$3-$2-$1'))
+            return  date
+        }
+ </script>
 
 
 <script>
@@ -14,7 +28,7 @@
     var data_facture = []
     var date_debut
     var date_fin
-    var date_facture = '<?= Helpers::getFullDate(date('Y-m-d')) ?>'
+    var long_date_facture = '<?= Helpers::getFullDate(date('Y-m-d')) ?>'
 
     // Variable pour la generation des etats
     var reduction;
@@ -87,9 +101,6 @@
     (function(window, document, $) {
         //'use strict'
 
-        
-
-
         $('#section_versement').on('change', ".prix_unitaire", function(){
             let parent = $(this).parent().parent().parent().parent()
             updateItem(parent, false)
@@ -102,7 +113,6 @@
 
         let target = $('.periode').parent().parent().parent().parent()
         initItem(target)
-
 
         //Gerer le cas ou le montant_total total peut etre negatif
         
@@ -217,17 +227,7 @@
             current = items.data
         }
 
-        function addDaysToStr(date, days){
-            let _date = new Date(date)
-            _date.setDate(_date.getDate() + days)
-            return  _date.toLocaleDateString()
-        }
 
-        function strToLocaleDateTime(str_date){
-            let pattern = /(\d{2})\/(\d{2})\/(\d{4})/
-            let date = new Date(str_date.replace(pattern,'$3-$2-$1'))
-            return  date
-        }
 
         let i = 0
         let body = ''
@@ -242,7 +242,7 @@
             let tmp_item = []
 
             function addDaysToStr(date, days){
-                date.replaceAll('/', '-')
+                date = strToLocaleDateTime(date)
 
                 console.log(date, days)
                 let _date = new Date(date)
@@ -296,17 +296,16 @@
             data_facture['montant_total'] += tmp_item['sous_total']
         })
 
-
         data_facture['data_items'] = data_items
         
         data_facture['reference'] = reference
         data_facture['total_day'] = total_day
 
         data_facture['date_debut'] = (addDaysToStr(date_debut, 0))
-        data_facture['date_fin'] = addDaysToStr( strToLocaleDateTime(data_facture['date_debut']), data_facture['total_day'])
+        data_facture['date_fin'] = addDaysToStr( data_facture['date_debut'], data_facture['total_day'])
         data_facture['date_versement'] =  $( "#date_versement" ).text()
 
-        data_facture['date_facture'] = "<?= Helpers::getFullDate(date("Y-m-d H:i:s")) ?>"
+        data_facture['long_date_facture'] = "<?= Helpers::getFullDate(date("Y-m-d H:i:s")) ?>"
         data_facture['description'] = $('#motif').text()
         // data_facture['montant_total'] = $('#montant_total').text()
         data_facture['quantite'] = $('#quantite').text()
@@ -334,7 +333,7 @@
         $('#recap-nom').text( data_facture['nom_complet'] )
         $('#recap-classe').text( data_facture['classe'] )
 
-        $('#recap-date').text( date_facture )
+        $('#recap-date').text( long_date_facture )
 
         $('#recap-description').text( data_facture['description'] )
         $('#recap-prix').text( data_facture['prix'] )
