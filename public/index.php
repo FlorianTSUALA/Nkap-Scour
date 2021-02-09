@@ -1,7 +1,10 @@
 <?php
 
-require_once dirname(__DIR__) . '/app/App.php';
+// require_once dirname(__DIR__) . '/app/App.php';
+session_start();
+require '../vendor/autoload.php';
 
+use App\App;
 use Core\Routing\URL;
 use Core\Helper\Helpers;
 use Core\Routing\Router;
@@ -18,7 +21,7 @@ if(DEBUG_MODE){
     error_reporting(E_ALL);
 }
 
-App::load();
+// App::load();
 
 $router = new Router();
 require_once "../routes/api.php";

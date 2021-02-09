@@ -1,9 +1,10 @@
 <?php
 
-namespace Core\Invariant;
+namespace Config\Invariant;
 
 class Query
 {
+    
     const OPERATOR = "OPERATOR";
     const CLAUSE_RIGHT = "RIGHT";
     const CLAUSE_LEFT = "LEFT";

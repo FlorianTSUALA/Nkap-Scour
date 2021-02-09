@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App;
+use App\App;
 use DateTime;
 use App\Helpers\S;
 use App\Model\Pays;

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Helpers\S;
 use App\Model\Classe;
 use Core\Model\Model;
+use Core\Routing\URL;
 use App\Model\DBTable;
 use App\Model\Facture;
 use App\Model\Periode;
@@ -81,6 +82,7 @@ class CantineController extends AppController
                     abonnement_cantine.prenom,
                     abonnement_cantine.bibliographie')
                 ->where('abonnement_cantine.visibilite', 1)
+
                 ->join('type_abonnement_cantine', 'abonnement_cantine.type_abonnement_cantine_id', '=', 'type_abonnement_cantine.id')
                 ->join('pays', 'abonnement_cantine.pays_id', '=', 'pays.id')
                 ->get();        
@@ -133,74 +135,59 @@ class CantineController extends AppController
 
     public function save($code)
     {
-        // dd($_POST['cantines']['data']);
-
+        // dd($_POST['cantines']['data']);      
         $montant_paye = Request::getSecParam('montant_total', 0);
         $nom_eleve = Request::getSecParam('nom_eleve', '------/|\--/|\--/|\------');
         $reduction = Request::getSecParam('reduction', 0);
         $date_facture = date('Y-m-d') ;
         $reference =  Request::getSecParam('reference', 0);
-
         $type_paiement_id = Model::getId(DBTable::TYPE_PAIEMENT, Request::getSecParam('type_paiement_id', ''));
-       
     
-    //Facture
-        $model_facture = DBTable::getModel(DBTable::FACTURE);
-        $code_facture = Facture::generateCode();
-        $data_facture = [
-            'code' => $code_facture,
-            'type_paiement_id' => $type_paiement_id,
-            'libelle' => 'Facture versement',
-            'reference' => $reference,
-            'beneficiaire' => $nom_eleve,
-            'gestionnaire' => 'Secretaire',
-            'montant' => $montant_paye,
-            'reduction' => $reduction,
-            'date_facture' => $date_facture,
-            'description' => '',
-        ];
-        $result_facture = $model_facture->insert($data_facture)->execute();
-        $facure_id = Model::getId(DBTable::FACTURE, $code_facture);
-
-        vd($result_facture);
-    //Facture
-
+        //Facture
+            $model_facture = DBTable::getModel(DBTable::FACTURE);
+            $code_facture = Facture::generateCode();
+            $data_facture = [
+                'code' => $code_facture,
+                'type_paiement_id' => $type_paiement_id,
+                'libelle' => 'Facture versement',
+                'reference' => $reference,
+                'beneficiaire' => $nom_eleve,
+                'gestionnaire' => 'Secretaire',
+                'montant' => $montant_paye,
+                'reduction' => $reduction,
+                'date_facture' => $date_facture,
+                'description' => '',
+            ];
+            $result_facture = $model_facture->insert($data_facture)->execute();
+            $facure_id = Model::getId(DBTable::FACTURE, $code_facture);
+        //Facture
 
         $model = DBTable::getModel(DBTable::ABONNEMENT_CANTINE);
         $code_cantine = AbonnementCantine::generateCode();
 
         $eleve_id = Model::getId(DBTable::ELEVE, Request::getSecParam('eleve_id', ''));
-        
         $data_abonnment = [
             'code' => $code_cantine,
             'montant_total' => $montant_paye,
             'reduction' => $reduction,
             'eleve_id' => $eleve_id,
             'facture_id' => $facure_id,
+            'date_paiement' => Request::getSecParam('date_paiement', ''),
             'date_debut' => Request::getSecParam('date_debut', ''),
             'date_fin' => Request::getSecParam('date_fin', ''),
         ];
-    
         $result_cantine = $model->insert($data_abonnment)->execute();
-        
-        vd($result_cantine);
-
 
         $abonnement_detail = DBTable::getModel(DBTable::ABONNEMENT_DETAIL);
         $items = $_POST['cantines']['data'];
-
         $abonnement_cantine_id = Model::getId(DBTable::ABONNEMENT_CANTINE, $code_cantine);
-
         $dayCount  = 0; 
         $start_day = Request::getSecParam('date_debut', '');
         $end_day = Request::getSecParam('date_debut', '');
-
         foreach($items as $item){
             
-            $dayCount = Periode::getDayCount($item['periode']);
-
+            $dayCount = Periode::getDayCount($item['periode']) * $item['duree'] - 1; //On reduit un puisqu'on compte la date du jour
             $end_day = DateHelpers::addDays($start_day, $dayCount);
-
             $data_abonnment_detail = [
                 'code' => AbonnementDetail::generateCode(),
                 'abonnement_id' => $abonnement_cantine_id,
@@ -212,30 +199,15 @@ class CantineController extends AppController
                 'date_fin' =>  $end_day
             ];
                     
-            $start_day = $end_day;
+            $start_day = DateHelpers::addDays($end_day, 1); // On recompte à partir du jour d'apres
 
             $result_abonnement_detail = $abonnement_detail->insert($data_abonnment_detail)->execute();
-            vd($result_abonnement_detail);
         }
- 
-        vd('OKAY');
-
-        vd($result_cantine);
-        dd('stop');
-        if ($result_cantine) {
-            // $this->setupSessionVerement();
-
-            // $_SESSION[S::DATA_TRANSPORT][S::VERS_CODE_CANTINE] = $code_cantine ;
-            // $_SESSION[S::DATA_TRANSPORT][S::VERS_CODE_CLASSE] = $this->classe->code(Request::getSecParam('classe_cantine', ''), Classe::LIBELLE) ;
-            // $_SESSION[S::DATA_TRANSPORT][S::VERS_CLASSE] = Request::getSecParam('classe_cantine', '');
-
-            $this->session->flash("Abonnement enregistrée avec success");
-
-            // $this->render('sections.abonnement.abonnement_list');
-            $this->sendResponseAndExit($code, false, 200, 'Good');
-            
+        
+        if (isset($abonnement_cantine_id)) {
+            $this->sendResponseAndExit(Helpers::toJSON('Abonnement enregistrée avec success', TRUE));
         } else {
-            $this->sendResponseAndExit($result_cantine, false, 400, 'DB Error');
+            $this->sendResponseAndExit(Helpers::toJSON('Erreur d\'enregistement à la base de données !!!', TRUE), false, 400, 'BD error : data '. $code);
         }
     }
 
@@ -274,26 +246,36 @@ class CantineController extends AppController
         $this->render('sections.cantine.abonnement_liste', compact( 'classes','abonnements'));
     }
 
-    public function print_facture(){
+    public function imprimer_facture(){
+        
+        $data = $_POST;
+        
+        $data['data_items'] = json_decode($data['data_items'], true);
+        // dd($data);
+        //Acces au données de la facture par session et dans les cookies()
+        $_SESSION[$data['reference']] = $data;
+        // setcookie($data['reference'], $data, TIME_COOKIE_LONG, URL::link('facture_cantine'));
 
-        $date_facturation = Request::getSecParam('date_facturation', '');
-        $eleve = Request::getSecParam('eleve', '');
-        $classe = Request::getSecParam('classe', '');
-        $reference = Request::getSecParam('reference', '');
-        $remise = Request::getSecParam('remise', '');
-        $reste = Request::getSecParam('reste', '');
-        $solde_paye = Request::getSecParam('solde_paye', '');
-        $sous_total = Request::getSecParam('sous_total', '');
-        $items = $_POST['items'];
+        // dd($data);
 
-        // $periode
-        // $date_debut
-        // $date_fin
-        // $prix_unitaire
-        // $quantite
-        // $total
-    
-        $this->renderPDF('reports.cantine', compact('date_facturation', 'eleve', 'classe', 'reference', 'remise', 'reste', 'solde_paye', 'sous_total', 'items'), 'facture_cantine' );  
+        $this->renderPDF('reports.cantine', compact('data'), 'facture_cantine' );  
+
+    }
+
+    public function push_facture($reference){
+        
+        //Acces au données de la facture par session et dans les cookies()
+        
+        if($_SESSION[$reference]){
+            $data = $_SESSION[$reference];
+        }else{
+            if($_COOKIE[$reference]){
+                $data = $_COOKIE[$reference];
+            }else{
+
+            }
+        }
+        $this->renderPDF('reports.cantine', compact('data'), 'facture_cantine' );  
 
     }
 

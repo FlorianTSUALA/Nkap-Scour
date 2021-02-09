@@ -14,14 +14,18 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
 -->
 
 
-<script>
-  // C:\laragon\www\Nkap-Scour\_robust\_Robust\Robust\Robust\app-assets\js\scripts\pickers\dateTime\pick-a-datetime.js
-    var filter_by = 'ALL'
-    var start_date = moment()
-    var end_date = moment()
-    var code = ''
+<script> 
 
-    var printCounter = 0
+  let msg  = 'Bienvenue à la section des paiement cantine'
+  block_notification(msg)
+
+        // C:\laragon\www\Nkap-Scour\_robust\_Robust\Robust\Robust\app-assets\js\scripts\pickers\dateTime\pick-a-datetime.js
+        var filter_by = 'ALL'
+        var start_date = moment()
+        var end_date = moment()
+        var code = ''
+
+        var printCounter = 0
         var table
         var start = moment()
         var end = moment()
@@ -65,16 +69,17 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
 
     	// Localization
       $('.localeRange').daterangepicker({
-        ranges: {
-          "Aujourd'hui": [moment(), moment()],
-          'Hier': [moment().subtract('days', 1), moment().subtract('days', 1)],
-          'Demain': [moment().add(1, 'days'), moment().add(1, 'days')],
-          'Les 7 derniers jours': [moment().subtract('days', 6), moment()],
-          'Les 7 prochains jours': [moment(), moment().add('days', 6)],
-          'Les 30 derniers jours': [moment().subtract('days', 29), moment()],
-          'Ce mois-ci': [moment().startOf('month'), moment().endOf('month')],
-          'le mois dernier': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
-        },
+        singleDatePicker: true,
+        // ranges: {
+        //   "Aujourd'hui": [moment(), moment()],
+        //   'Hier': [moment().subtract('days', 1), moment().subtract('days', 1)],
+        //   'Demain': [moment().add(1, 'days'), moment().add(1, 'days')],
+        //   'Les 7 derniers jours': [moment().subtract('days', 6), moment()],
+        //   'Les 7 prochains jours': [moment(), moment().add('days', 6)],
+        //   'Les 30 derniers jours': [moment().subtract('days', 29), moment()],
+        //   'Ce mois-ci': [moment().startOf('month'), moment().endOf('month')],
+        //   'le mois dernier': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+        // },
         locale: {
           applyLabel: "Chercher",
           cancelLabel: 'Annuler',
@@ -179,7 +184,7 @@ for (var i = 0; i < links.length; i++) {
 
       start_date = moment()
       end_date = moment()
-      alert(code)
+      // alert(code)
       table.ajax.reload()
   })
 }

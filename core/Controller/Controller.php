@@ -2,7 +2,7 @@
 
 namespace Core\Controller;
 
-use App;
+use App\App;
 use App\Helpers\Helpers;
 use Spipu\Html2Pdf\Html2Pdf;
 use Spipu\Html2Pdf\Exception\Html2PdfException;

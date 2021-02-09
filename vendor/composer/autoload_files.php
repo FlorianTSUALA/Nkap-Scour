@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    '0031cd8ee1bcd589d47bd23f4e5a9c79' => $baseDir . '/core/Invariant/constants.php',
+    '68f8ba2b0d9c3efadeac35a6b319cf28' => $baseDir . '/config/Invariant/constants.php',
 );

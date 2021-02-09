@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use \App;
+use App\App;
 use Core\Session\Session;
 use Core\HTML\Form\FormField;
 use Core\HTML\Form\FormModel;

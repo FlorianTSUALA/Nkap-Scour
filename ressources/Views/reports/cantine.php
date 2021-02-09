@@ -1,4 +1,39 @@
+<?php 
 
+use Core\Routing\URL; 
+
+/*
+
+    Varaible in this page
+*****************************
+
+reference
+solde_paye
+long_date_facture
+eleve
+classe
+sous_total
+reduction
+reste
+montant_total
+        
+data_items  ****************
+            date_debut
+            date_fin
+            quantite
+            periode
+            prix_unitaire
+            sous_total
+            resume
+            sous_total
+            ****************
+
+*****************************
+
+
+*/
+    
+    ?>
 
 <!-- <link rel="stylesheet" type="text/css" href="http://127.0.0.1/nkap-scour/public/assets/app-assets/images/logo/cantineList2.css"> -->
 <style type="text/css">
@@ -15,15 +50,14 @@ th, td {
 
 <table  style="width:100%">
     <tr>
-        <td  rowspan="4"  style="width: 13%"><img src="http://127.0.0.1/nkap-scour/public/assets/app-assets/images/logo/logo-80x80.png"> </td>
+        <td  rowspan="4"  style="width: 13%"><img src="<?= URL::base() ?>/assets/app-assets/images/logo/logo-80x80.png"> </td>
         <td style="text-align: left;    width: 22%"><b>Les comelines</b></td>
-        <td style="text-align: right;    width: 65%">  <b>REÇU DE VERSEMENT</b> </td>
+        <td style="text-align: right;    width: 65%">  <b>REÇU DE PAIEMENT DE LA CANTINE</b> </td>
     </tr>
   
     <tr>
         <td></td>
-       
-        <td  style="text-align: right;">  <?= $reference ?></td>
+        <td  style="text-align: right;">  <?= $data['reference'] ?></td>
     </tr>    
    
     <tr>
@@ -36,7 +70,7 @@ th, td {
         <td colspan="3" style="text-align: right;">Solde à payer</td>
     </tr>
     <tr>
-        <td colspan="3" style="text-align: right;"><strong class="text-danger" ><?= $solde_paye ?></strong></td>
+        <td colspan="3" style="text-align: right;"><strong class="text-danger" ><?= $data['montant_total'] ?></strong></td>
     </tr> 
     <tr>
         <td colspan="3" style="text-align: right;"> </td>
@@ -46,13 +80,13 @@ th, td {
     </tr> 
     <tr>
         <td colspan="2" style="text-align: left;"><strong class="text-danger" >Facture de</strong></td>
-        <td  style="text-align: right;">Date de facturation :<strong class="text-danger" > <?= $date_facturation ?> </strong></td>
+        <td  style="text-align: right;">Date de facturation :<strong class="text-danger" > <?= $data['long_date_facture'] ?> </strong></td>
     </tr> 
     <tr>
-        <td colspan="3" style="text-align: left;">Elève : <strong class="text-danger" > <?= $eleve ?></strong></td>
+        <td colspan="3" style="text-align: left;">Elève : <strong class="text-danger" > <?= $data['eleve'] ?></strong></td>
     </tr> 
     <tr>
-        <td colspan="3" style="text-align: left;">Classe : <strong class="text-danger" > <?= $classe ?></strong></td>
+        <td colspan="3" style="text-align: left;">Classe : <strong class="text-danger" > <?= $data['classe'] ?></strong></td>
     </tr> 
     <tr>
         <td colspan="3" style="text-align: right;"> </td>
@@ -79,16 +113,16 @@ th, td {
     </thead>
     <tbody>
 
-    <?php $i = 1; foreach($items as $item){  ?>
+    <?php $i = 1; foreach($data['data_items'] as $item){  ?>
             <tr>   
                 <th scope="row"><?= $i++ ?></th>       
                 <td> 
-                    <p>Periode : <?= $periode ?> </p>  
-                    <em class="text-muted"> <?= $resume ?> </em>       
+                    <p>Periode : <?= $item['periode'] ?> </p>  
+                    <em class="text-muted"> <?= $item['resume'] ?> </em>       
                 </td>       
-                <td class="text-right"><?= $prix_unitaire ?> Fcfa</td>       
-                <td class="text-right"><?= $quantite ?></td>       
-                <td class="text-right"><?= $sous_total ?> Fcfa</td>
+                <td class="text-right"><?= $item['prix_unitaire'] ?> Fcfa</td>       
+                <td class="text-right"><?= $item['quantite'] ?></td>       
+                <td class="text-right"><?= $item['sous_total'] ?> Fcfa</td>
             </tr>
     <?php } ?>
 
@@ -111,22 +145,22 @@ th, td {
     <tr>
         <td style="text-align: left;"></td>
         <td style="text-align: left; padding: 5px 10px 5px 5px;">Sous-Total</td>
-        <td style="text-align: right;"><?= $sous_total ?></td>
+        <td style="text-align: right;"><?= $data['montant_total'] - $data['reduction'] ?></td>
     </tr>
     <tr>
         <td style="text-align: left;"></td>
         <td style="text-align: left; padding: 5px 10px 5px 5px;">Remise</td>
-        <td style="text-align: right;"><?= $remise ?></td>
+        <td style="text-align: right;"><?= $data['reduction'] ?></td>
     </tr>
-    <tr>
+    <!-- <tr>
         <td style="text-align: left;"></td>
         <td style="text-align: left; padding: 5px 10px 5px 5px;">Reste</td>
-        <td style="text-align: right;"><?= $reste ?></td>
-    </tr>
+        <td style="text-align: right;"><?= $data['reste'] ?></td>
+    </tr> -->
     <tr>
         <td style="text-align: left;"></td>
         <td style="text-align: left; padding: 5px 10px 5px 5px;">Solde à payer</td>
-        <td style="text-align: right;"><?= $solde_paye ?></td>
+        <td style="text-align: right;"> <?= $data['montant_total'] ?></td>
     </tr>
 
 

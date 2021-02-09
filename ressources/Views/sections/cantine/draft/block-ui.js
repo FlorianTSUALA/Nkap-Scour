@@ -135,7 +135,28 @@ $(document).ready(function(){
     });
 
 
-
+    // Message Animation
+    $('.block-msg-animation').on('click', function() {
+        var block_ele = $(this).closest('.card');
+        $(block_ele).block({
+			message: '<div class="semibold"><span class="ft-refresh-cw icon-spin text-left"></span>&nbsp; Loading ...</div>',
+            fadeIn: 1000,
+            fadeOut: 1000,
+			timeout: 2000, //unblock after 2 seconds
+            overlayCSS: {
+                backgroundColor: '#fff',
+                opacity: 0.8,
+                cursor: 'wait'
+            },
+            css: {
+                border: 0,
+                padding: '10px 15px',
+                color: '#fff',
+                width: 'auto',
+                backgroundColor: '#333'
+            }
+        });
+    });
 
 
     // Multiple messages
@@ -168,9 +189,9 @@ $(document).ready(function(){
 			message.html('<div class="semibold">Just a minute...</div>');
         }, 2000);
 
-        // window.setTimeout(function () {
-		// 	message.addClass('bg-success').html('<div class="semibold"><span class="icon-thumbs-o-up text-left"></span>&nbsp; Success</div>');
-        // }, 4000);
+        window.setTimeout(function () {
+			message.addClass('bg-success').html('<div class="semibold"><span class="icon-thumbs-o-up text-left"></span>&nbsp; Success</div>');
+        }, 4000);
 
         // window.setTimeout(function () {
         //    $(block_ele).unblock({
@@ -280,8 +301,7 @@ $(document).ready(function(){
     // onBlock callback
     $('.onblock-callback').on('click', function() {
         $.blockUI({
-            // message: '<div class="ft-refresh-cw icon-spin font-medium-2">Enregsitrement en cours</div>',
-            message: '<div class="semibold"><span class="ft-refresh-cw icon-spin text-left"></span>&nbsp; Chargement ...</div>',
+            message: '<div class="ft-refresh-cw icon-spin font-medium-2"></div>',
             fadeIn: 1000,
             timeout: 2000, //unblock after 2 seconds
             overlayCSS: {
@@ -291,39 +311,16 @@ $(document).ready(function(){
             },
             css: {
                 border: 0,
-                padding: '10px 15px',
-                color: '#fff',
-                width: 'auto',
-                backgroundColor: '#333'
+                padding: 0,
+                color: '#333',
+                backgroundColor: 'transparent'
             },
             onBlock: function() {
-                alert(' blocked, FadeIn complete.');
+                alert('Page is now blocked, FadeIn complete.');
             }
         });
     });
 
-    // Message Animation
-    $('.block-msg-animation').on('click', function() {
-        var block_ele = $(this).closest('.card');
-        $(block_ele).block({
-			message: '<div class="semibold"><span class="ft-refresh-cw icon-spin text-left"></span>&nbsp; Loading ...</div>',
-            fadeIn: 1000,
-            fadeOut: 1000,
-			timeout: 2000, //unblock after 2 seconds
-            overlayCSS: {
-                backgroundColor: '#fff',
-                opacity: 0.8,
-                cursor: 'wait'
-            },
-            css: {
-                border: 0,
-                padding: '10px 15px',
-                color: '#fff',
-                width: 'auto',
-                backgroundColor: '#333'
-            }
-        });
-    });
 
     // onUnblock callback
     $('.onunblock-callback').on('click', function() {

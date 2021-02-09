@@ -6,30 +6,45 @@
     $funtion_signataire = 'Le Sécrétariat';
 
 ?>
- <script>
-         function addDaysToStr(date, days){
-            date = strToLocaleDateTime(date)
-            let _date = new Date(date)
-            _date.setDate(_date.getDate() + days)
-            return  _date.toLocaleDateString()
-        }
-
-        function strToLocaleDateTime(str_date){
-            let pattern = /(\d{2})\/(\d{2})\/(\d{4})/
-            let date = new Date(str_date.toString().replace(pattern,'$3-$2-$1'))
-            return  date
-        }
- </script>
 
 
 <script>
+
+
+/*
+
+data_facture['classe_id']
+data_facture['classe']
+data_facture['data_items']
+data_facture['date_debut']
+data_facture['date_fin']
+data_facture['date_paiement']
+data_facture['date_versement']
+data_facture['description']
+data_facture['eleve_id']
+data_facture['eleve']
+data_facture['html_body']
+data_facture['long_date_facture']
+data_facture['mode_paiement']
+data_facture['montant_paye']
+data_facture['montant_total']
+data_facture['montant_total']
+data_facture['nom_complet']
+data_facture['prix']
+data_facture['quantite']
+data_facture['reduction']
+data_facture['reference']
+data_facture['somme']
+data_facture['total_day']
+
+*/
     var items = []
-    var data_items = []
-    var data_facture = []
+    // var data_items = {}
+    var data_facture = {}
     var date_debut
     var date_fin
-    var long_date_facture = '<?= Helpers::getFullDate(date('Y-m-d')) ?>'
-
+    data_facture['long_date_facture']  = '<?= Helpers::getFullDate(date('Y-m-d')) ?>'
+    data_facture['reference'] = "<?= Helpers::generateReference(); ?>";
     // Variable pour la generation des etats
     var reduction;
     var type_paiement;
@@ -217,16 +232,30 @@
 
         //Cantines
         date_debut = $('#date_debut').val()
-        date_fin
+        date_fin = $('#date_debut').val()
         let current = []
         items = $('.repeater').repeaterVal()
-        data_items = []
+        let data_items = []
         let sum = 0
 
         if( items !== undefined && items.data != undefined ){
             current = items.data
         }
 
+        data_facture['eleve_id'] = $('#eleve_nom_complet option:selected').val()
+        data_facture['classe_id'] = $('#classe option:selected').val()
+        data_facture['eleve'] = $('#eleve_nom_complet option:selected').text()
+        data_facture['classe'] = $('#classe option:selected').text()
+        data_facture['montant_total'] = $( '#montant_total' ).val()
+        console.log("# date_versement : "+$( "#date_versement" ).val())
+        data_facture['date_paiement'] = ($( "#date_versement" ).val())
+        data_facture['date_versement'] =  $( "#date_versement" ).val()
+        data_facture['description'] = $('#motif').text()
+        data_facture['quantite'] = $('#quantite').text()
+        data_facture['somme'] = $('#somme').text()
+        data_facture['reduction'] = $('#reduction').val()
+        data_facture['nom_complet'] = $('#eleve_nom_complet option:selected').text()
+        data_facture['mode_paiement'] = $('#type_paiement option:selected').text()
 
 
         let i = 0
@@ -239,7 +268,7 @@
 
         current.forEach( (item, index) =>{
 
-            let tmp_item = []
+            let tmp_item = {}
 
             function addDaysToStr(date, days){
                 date = strToLocaleDateTime(date)
@@ -273,7 +302,7 @@
             console.log(item)
             tmp_item['date_debut'] = addDaysToStr(date_debut, total_day)
             total_day += ( dayCount * item.duree )
-            tmp_item['date_fin'] = addDaysToStr(date_debut, total_day)
+            tmp_item['date_fin'] = addDaysToStr(date_debut, total_day -1)
             tmp_item['quantite'] = item.duree
             tmp_item['periode'] = item.periode
             tmp_item['prix_unitaire'] = item.prix_unitaire
@@ -292,31 +321,20 @@
 
             body += '</tr>'
 
-            data_items.push(tmp_item)
+            data_items.push(tmp_item) // = tmp_item
+            // data_items += {i, tmp_item} // = tmp_item
             data_facture['montant_total'] += tmp_item['sous_total']
         })
 
         data_facture['data_items'] = data_items
-        
-        data_facture['reference'] = reference
+
         data_facture['total_day'] = total_day
 
         data_facture['date_debut'] = (addDaysToStr(date_debut, 0))
-        data_facture['date_fin'] = addDaysToStr( data_facture['date_debut'], data_facture['total_day'])
-        data_facture['date_versement'] =  $( "#date_versement" ).text()
-
-        data_facture['long_date_facture'] = "<?= Helpers::getFullDate(date("Y-m-d H:i:s")) ?>"
-        data_facture['description'] = $('#motif').text()
-        // data_facture['montant_total'] = $('#montant_total').text()
-        data_facture['quantite'] = $('#quantite').text()
-        data_facture['somme'] = $('#somme').text()
-        data_facture['reduction'] = $('#reduction').val()
-
-        data_facture['nom_complet'] = $('#eleve_nom_complet option:selected').text()
-        data_facture['classe'] = $('#classe option:selected').text()
-        data_facture['mode_paiement'] = $('#type_paiement option:selected').text()
-        data_facture['montant_paye'] = data_facture['montant_total'] - data_facture['reduction']
+        data_facture['date_fin'] = addDaysToStr( data_facture['date_debut'], data_facture['total_day'] - 1) //retrait du jour actuel
         
+        data_facture['montant_paye'] = data_facture['montant_total'] - data_facture['reduction']
+
         $('#recap-body').html('')
 
         body += "<tr>"
@@ -328,18 +346,20 @@
         body += '       </td>'
         body += '</tr>'
 
-        $('#recap-body').html(body)
+        data_facture['html_body'] = body
+
+        $('#recap-body').html(data_facture['html_body'])
         $('#recap-mode_paiement').text( data_facture['mode_paiement'] )
         $('#recap-nom').text( data_facture['nom_complet'] )
         $('#recap-classe').text( data_facture['classe'] )
 
-        $('#recap-date').text( long_date_facture )
+        $('#recap-date').text( data_facture['long_date_facture'] )
 
         $('#recap-description').text( data_facture['description'] )
         $('#recap-prix').text( data_facture['prix'] )
         $('#recap-quantite').text( data_facture['quantite'] )
         $('#recap-somme').text( data_facture['somme'] )
-        $('#recap-reference').text(reference)
+        $('#recap-reference').text(data_facture['reference'])
 
         //NON PRIS EN COMPTE
         $('#recap-banque').hide()
@@ -386,10 +406,11 @@
 
         $(btn_save).click(function() {
             sauvegarderVersement()
+            //check file : script-save.js
         })
 
         $(btn_print).click(function() {
-            sauvegarderVersement()
+            imprimerRecuVersement()
         })
 
     })

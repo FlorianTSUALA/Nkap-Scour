@@ -12,7 +12,14 @@
      */
     define("NBRE_ELEMENT_PAR_PAGE", 1000);
     define("NBRE_PAGE_MAX_GAUCHE_ET_DROITE", 3);
+    
 
+    /**
+     * COOKIE TIME DURATION
+     */
+    define("TIME_COOKIE_LONG", time() + 86400);
+    
+    
     /**
      * REDIRECTION RESSOURCES
      */

@@ -2,7 +2,7 @@
 
 namespace Core\Routing;
 
-use App;
+use App\App;
 use core\Routing\URLNotFoundException;
 
 class  URL{

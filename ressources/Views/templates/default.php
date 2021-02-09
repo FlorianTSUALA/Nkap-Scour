@@ -1,9 +1,9 @@
 <?php
 
+	use App\App;
 	use Core\Routing\URL;
 
 ?>
-
 
 <!DOCTYPE html>
 
@@ -17,7 +17,7 @@
 	<meta name="keywords" content="">
 	<meta name="author" content="PRO Elite Team">
 
-	<title><?= \App::getInstance()->getTitle(); ?></title>
+	<title><?= App::getInstance()->getTitle(); ?></title>
 
 	<link rel="apple-touch-icon" href="<?= URL::base() ?>assets/app-assets/images/ico/apple-icon-120.png">
 	<link rel="shortcut icon" type="image/x-icon" href="<?= URL::base() ?>assets/app-assets/images/ico/favicon.ico">
@@ -41,8 +41,6 @@
 	<?= $include_res_header??""; ?>
 
     <style>
-
-
         :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
             color:    #909;
             opacity:  1;
@@ -63,6 +61,7 @@
 
 	<script src="<?= URL::base() ?>assets/app-assets/vendors/js/vendors.min.js"></script>
     <script src="<?= URL::base() ?>assets/app-assets/vendors/js/menu/jquery.mmenu.all.min.js"></script>
+	<?php require "common/javascript_function.php" ?>
 	
 	<?= $include_res_footer??""; ?>
 	<script src="<?= URL::base() ?>assets/app-assets/js/core/app-menu.js"></script>

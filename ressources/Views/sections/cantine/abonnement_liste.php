@@ -88,7 +88,7 @@ $include_footer_script = ob_get_clean();
                             </div> -->
                             <input id="localization" type='text' class="form-control form-control-sm localeRange" />
                             <div class="input-group-append">
-                            <span class="input-group-text">Date | Periode  &nbsp; <span class="fa fa-calendar"></span></span>
+                            <span class="input-group-text">Date &nbsp; <span class="fa fa-calendar"></span></span>
                             </div>
                             <!-- <small class="text-muted">Allows you to provide.</small> -->
                         </fieldset>

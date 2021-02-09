@@ -158,10 +158,24 @@ $router->addRoute('ajout_personnel', 'personnel/nouveau', [PersonnelController::
 $router->crudRoute('cantine', CantineController::class);
 $router->addRoute('abonnement_cantine', 'cantine/abonnement', [CantineController::class, 'abonnement_cantine']);
 $router->addRoute('enregistrement_cantine', 'cantine/create/{code}', [CantineController::class, 'save']);
-$router->addRoute('facture_cantine', 'cantine/facture/{code}', [CantineController::class, 'print_facture']);
+$router->addRoute('facture_cantine', 'cantine/facture/{code}', [CantineController::class, 'imprimer_facture']);
 
 $router->addRoute('cantine_liste', 'cantine/detail', [CantineController::class, 'liste_abonnee']);
 $router->addRoute('cantine_abonnement_info', 'cantine/abonnement_info/', [CantineController::class, 'abonnement_info']);
+
+
+//BIBLIOTHEQUE
+$router->addRoute('abonnement_cantine', 'cantine/abonnement', [CantineController::class, 'abonnement_cantine']);
+$router->addRoute('enregistrement_cantine', 'cantine/create/{code}', [CantineController::class, 'save']);
+$router->addRoute('facture_cantine', 'cantine/facture/{code}', [CantineController::class, 'imprimer_facture']);
+
+•	Interface d’enregistrement d’un exemplaire
+•	Dashboard pour la biblio = activité de la biblio = statistique
+•	Interface d’emprunt des livres
+•	Interface d’historisation des opérations de la biblio
+    o	Restituions
+    o	Emprunt
+•	Alerte pour la visualisation des pour savoir ce qui sont en retard dans la remise de leurs livres
 
 
 

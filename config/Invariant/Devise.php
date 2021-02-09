@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Invariant;
+namespace Config\Invariant;
 
 class Devise
 {

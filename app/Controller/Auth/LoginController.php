@@ -2,7 +2,7 @@
 
 namespace App\Controller\Auth;
 
-use App;
+use App\App;
 use App\Helpers\S;
 use Core\Auth\DBAuth;
 use App\Controller\AppController;

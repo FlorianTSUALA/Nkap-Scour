@@ -2,151 +2,152 @@
 
 use Core\Routing\URL;
 use App\Helpers\Helpers;
+use App\Controller\PrinterController;
 
 ?>
 
-<script>
-    //CORE FUNCTION DEFINITION
-    function pad(number, length = 2) {
-        var str = '' + number;
-        while (str.length < length) str = '0' + str
-        return str;
-    }
-    
-    function strToLocaleDateTime(str_date){
-        let pattern = /(\d{2})\/(\d{2})\/(\d{4})/
-        let date = new Date(str_date.toString().replace(pattern,'$3-$2-$1'))
-        return  date
-    }
 
-    function isValidDate(d) {
-       return d instanceof Date && !isNaN(d);
-    }
-
-    function toSQLDateTime(str_date){
-        let dt = new Date(str_date)
-        if(isValidDate(dt)){ //---> '27/07/2021' Invalid Date
-            dt = strToLocaleDateTime(dt)
-        }
-        console.log(dt)
-
-        // don't remove console
-        return dt.getFullYear() + '-' + pad(dt.getMonth()+1) + '-' + pad(dt.getDate()) + ' ' + 
-                pad(dt.getHours()) + ':' + pad(dt.getMinutes()) + ':' + pad(dt.getSeconds())
-    }
-    
-</script>
 
 <script>
 
-    var reference = "<?= Helpers::generateReference(); ?>";
-    // var long_date_facture = "<?= Helpers::getFullDate(date('Y-m-d H:i:s')); ?>";
+/*
+data_facture['classe_id']
+data_facture['classe']
+data_facture['data_items']
+data_facture['date_debut']
+data_facture['date_fin']
+data_facture['date_paiement']
+data_facture['date_versement']
+data_facture['description']
+data_facture['eleve_id']
+data_facture['eleve']
+data_facture['html_body']
+data_facture['long_date_facture']
+data_facture['mode_paiement']
+data_facture['montant_paye']
+data_facture['montant_total']
+data_facture['montant_total']
+data_facture['nom_complet']
+data_facture['prix']
+data_facture['quantite']
+data_facture['reduction']
+data_facture['reference']
+data_facture['somme']
+data_facture['total_day']
+
+*/
 
 
     function sauvegarderVersement(){
-        console.log(data_facture['date_fin'])
-        console.log(new Date(data_facture['date_fin']))
-        console.log(toSQLDateTime(data_facture['date_fin']))
-
+        
         data = {
+                'data_facture': data_facture,
                 'cantines': items,
-                'eleve_id':  $('#eleve_nom_complet option:selected').val(),
-                'classe_id':  $('#classe option:selected').val(),
-                'nom_eleve':  $('#eleve_nom_complet option:selected').text(),
+                'eleve_id':  data_facture['eleve_id'],
+                'classe_id':  data_facture['classe_id'],
+                'nom_eleve':  data_facture['nom_complet'],
                 // 'annee_scolaire_id':  $('#annee_scolaire option:selected').val(),
-                'type_paiement_id':  $('#type_paiement option:selected').val(),
+                'type_paiement_id':  data_facture['type_paiement'],
                 // 'motif':  $('#motif').val(),
                 // 'reste':  $('#reste').val(),
                 // 'autre':  $('#autres').val(),
-                'reduction':  $('#reduction').val(),
-                'reference': reference,
-                'montant_total': $( "#montant_total" ).val(),
-                'date_paiement':  toSQLDateTime($( "#date_versement" ).val()),
-                'date_debut':   toSQLDateTime(date_debut),
-                // 'date_facture': '<?= date('Y-m-d') ?>' ,
+                'reduction':  data_facture['reduction'],
+                'reference': data_facture['reference'],
+                'montant_total': data_facture['montant_total'],
+                'date_paiement':  (data_facture['date_paiement']),
+                'date_debut':   toSQLDateTime(data_facture['date_debut']),
                 'date_fin':  toSQLDateTime(data_facture['date_fin']),
-         };
+        };
 
-         console.log(data);
-
-        $.ajax({
-            url: '<?= URL::link('enregistrement_cantine');?>'+$('#eleve_nom_complet option:selected').val(),
-            type: 'post',
-            data: data,
-            dataType: 'json',
-            beforeSend:function(){
-                // $('#btn_save').hide();
-                // $('#btn_back').hide();
-                $(loading).show();
+        console.log(data);
+        $.blockUI({
+            // message: '<div class="ft-refresh-cw icon-spin font-medium-2">Enregsitrement en cours</div>',
+            message: '<div class="semibold"><span class="ft-refresh-cw icon-spin text-left"></span>&nbsp; Chargement ...</div>',
+            fadeIn: 1000,
+            timeout: 2000, //unblock after 2 seconds
+            overlayCSS: {
+                backgroundColor: '#FFF',
+                opacity: 0.8,
+                cursor: 'wait'
             },
-            success:function(data){
-                //$('#btn_save').hide();
-                $('#btn_home').show();
-                //$('#btn_back').hide();
-                $('#btn_print').show();
-                $(loading).hide();
-
-               console.log(data);
-
+            css: {
+                border: 0,
+                padding: '10px 15px',
+                color: '#fff',
+                width: 'auto',
+                left: '45%',
+                backgroundColor: '#333'
             },
-            error: function (textStatus, errorThrown) {
-                $('#btn_save').show();
-                $('#btn_back').show();
-                Success = false;
-                console.log(textStatus, errorThrown);
+            onBlock: function() {
+                $.ajax({
+                    url: '<?= URL::link('enregistrement_cantine');?>'+$('#eleve_nom_complet option:selected').val(),
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    beforeSend:function(){
+                        // $('#btn_save').hide()
+                        // $('#btn_back').hide()
+                        $(loading).show()
+                    },
+                    success:function(data){
+                        $('#btn_save').hide()
+                        $('#btn_back').hide()
+
+                        $('#btn_home').show()
+                        $('#btn_print').show()
+
+                        $(loading).hide()
+                        // message de notification
+                        flash_msg(data)
+
+                    console.log(data)
+
+                    },
+                    error: function (textStatus, errorThrown) {
+                        $('#btn_save').show()
+                        $('#btn_back').show()
+                        Success = false
+                        console.log(textStatus, errorThrown)
+                    }
+                });
             }
         });
-
-
+        
     }
 
 
-    function PrintVersement(){
-        data_facture['eleve_id'] = $('#eleve_nom_complet option:selected').val()
-        data_facture['classe_id'] = $('#classe option:selected').val()
-        data_facture['montant_total'] = $( '#montant_total' ).val()
-        data = {
-                
-                'reduction':  $('#reduction').val(),
-                'reference': reference,
-                'montant_total': data_facture['montant_total'],
-                'date_paiement':  toSQLDateTime($( '#date_versement' ).val()),
-                'date_debut':   toSQLDateTime(date_debut),
-                'date_facture':  toSQLDateTime(date_facture),
-                'date_fin':  toSQLDateTime(date_fin),
-         };
+    function imprimerRecuVersement(){
+ 
+        gotoUrl('<?= URL::link('facture_cantine');?>'+$('#eleve_nom_complet option:selected').val(), data_facture);
+        console.log(data_facture);
 
-         data_facture['data'] = $data
-         console.log(data);
-
-        $.ajax({
-            url: '<?= URL::link('enregistrement_cantine');?>'+$('#eleve_nom_complet option:selected').val(),
+        /*$.ajax({
+            url: '<?= URL::link('facture_cantine');?>'+$('#eleve_nom_complet option:selected').val(),
             type: 'post',
             data: data_facture,
             dataType: 'json',
             beforeSend:function(){
-                // $('#btn_save').hide();
-                // $('#btn_back').hide();
-                $(loading).show();
+                // $('#btn_save').hide()
+                // $('#btn_back').hide()
+                $(loading).show()
             },
             success:function(data){
-                //$('#btn_save').hide();
-                $('#btn_home').show();
-                //$('#btn_back').hide();
-                $('#btn_print').show();
-                $(loading).hide();
-
-               console.log(data);
+                //$('#btn_save').hide()
+                // $('#btn_home').show()
+                //$('#btn_back').hide()
+                // $('#btn_print').show()
+                // $(loading).hide()
+                // location.href='<?= URL::link('print').PrinterController::SCOLARITE?>';
+               console.log(data)
 
             },
             error: function (textStatus, errorThrown) {
-                $('#btn_save').show();
-                $('#btn_back').show();
-                Success = false;
-                console.log(textStatus, errorThrown);
+                // $('#btn_save').show()
+                // $('#btn_back').show()
+                Success = false
+                console.log(textStatus, errorThrown)
             }
-        });
-
+        });*/
 
     }
 

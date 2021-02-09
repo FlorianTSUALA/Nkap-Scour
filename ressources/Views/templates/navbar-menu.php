@@ -2,6 +2,14 @@
 
 use App\Helpers\S;
 use Core\Routing\URL;
+use App\Repository\AnneeScolaireRepository;
+
+//@TODO
+//LA GESTION DES ANNEE SCOLAIRE DOIT ETRE LOCALE
+//ON DOIT GERER CELA AVEC LES SESSIONS. POUR NE PAS BASCULER TOUS LES UTILISATEURS
+//VERS UNE ANNEE SCOLAIRE DONNEE
+$annee_scolaire_courante = ( new AnneeScolaireRepository() )->getActive('libelle');
+$annee_scolaires = ( new AnneeScolaireRepository() )->getAll();
 
 ?>
 
@@ -47,6 +55,18 @@ use Core\Routing\URL;
 				</ul>
 
 				<ul class="nav navbar-nav float-right">
+					<li class="dropdown dropdown-language">
+						<a class="nav-link" id="dropdown-flag" ><b>Annee scolaire :</b></a>
+					</li>
+					<li class="dropdown dropdown-language nav-item">
+						<a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><?= $annee_scolaire_courante ?></span><span class="selected-language"></span></a>
+						<div class="dropdown-menu" aria-labelledby="dropdown-flag">
+						<?php foreach($annee_scolaires as $annee_scolaire){ ?>
+							<a class="dropdown-item" href="#"> <?= $annee_scolaire['libelle']; ?></a>
+						<?php } ?>
+						</div>
+					</li>
+
 					<li class="dropdown dropdown-notification nav-item">
 						<a class="nav-link nav-link-label" href="" data-toggle="dropdown">
 							<i class="ficon ft-bell"></i>

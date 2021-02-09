@@ -45,15 +45,9 @@ class S //Alias of Sessions
 
     //Facture versement
 
-    const FAC_DATE = "FAC_DATE";
-    const FAC_NOM = "FAC_NOM";
-    const FAC_PRENOM = "FAC_PRENOM";
-    const FAC_CLASSE = "FAC_CLASSE";
+
     const FAC_REF = "FAC_REF";
-    const FAC_PENSION = "FAC_PENSION";
-    const FAC_ACTIVITE = "FAC_ACTIVITE";
-    const FAC_CANTINE = "FAC_CANTINE";
-    const FAC_AUTRE = "FAC_AUTRE";
+    const FAC_DATA = "FAC_PENSION";
 
     //Flash Message
     const FLASH_TAG = 'FLASH';

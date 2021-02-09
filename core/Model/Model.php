@@ -89,6 +89,7 @@ class Model
 		}
 	}
     
+
     public function genCode(){
         return strtoupper(substr( $this->class, 0, 4)."_".Date('U'));
 	}

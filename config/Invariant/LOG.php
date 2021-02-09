@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Invariant;
+namespace Config\Invariant;
 
 /*
  * DEFINITION DE LA CLASSE CONCERNANTS LES TAGS D'API
@@ -16,8 +16,6 @@ class LOG
 
     const NO_NAME = "INCONNU";
     const USERNAME = "Android";
-
-    const AGENT_PVIT = "Agent pvit";
 
     const TYPE_ADMIN = "a";
     const TYPE_USER = "u";

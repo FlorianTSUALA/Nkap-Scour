@@ -7,7 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e
 {
     public static $files = array (
-        '0031cd8ee1bcd589d47bd23f4e5a9c79' => __DIR__ . '/../..' . '/core/Invariant/constants.php',
+        '68f8ba2b0d9c3efadeac35a6b319cf28' => __DIR__ . '/../..' . '/config/Invariant/constants.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -22,6 +22,7 @@ class ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e
         'C' => 
         array (
             'Core\\' => 5,
+            'Config\\' => 7,
             'ClanCats\\Hydrahon\\' => 18,
         ),
         'A' => 
@@ -42,6 +43,10 @@ class ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e
         'Core\\' => 
         array (
             0 => __DIR__ . '/../..' . '/core',
+        ),
+        'Config\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/config',
         ),
         'ClanCats\\Hydrahon\\' => 
         array (
