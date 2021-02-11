@@ -4,8 +4,9 @@ namespace App\Repository;
 
 use App\Model\Eleve;
 use App\Model\Parcours;
+use Core\Controller\BaseRepository;
 
-class EleveRepository{
+class EleveRepository extends BaseRepository{
     
         
     public function info(string $search){

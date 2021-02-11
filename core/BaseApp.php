@@ -129,7 +129,6 @@ class BaseApp
 
 	/* Setters Getters */
 
-
 	/**
 	 * Renvoie le $title
 	 * @param none

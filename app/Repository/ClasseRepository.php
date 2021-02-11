@@ -8,6 +8,7 @@ use App\Model\Parcours;
 
 use function Core\Helper\dd;
 use function Core\Helper\vd;
+use Core\Controller\BaseRepository;
 
 class ClasseRepository extends BaseRepository{
     

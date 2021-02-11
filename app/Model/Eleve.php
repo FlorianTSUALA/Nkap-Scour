@@ -7,7 +7,6 @@ use Core\Model\Model;
 use App\Helpers\Helpers;
 use Core\HTML\Form\FormModel;
 use Core\HTML\Form\InputType;
-use App\Helpers\HelpersBusinessLogic;
 use Core\Model\HydrahonModel;
 
 class Eleve extends Model implements FrequentlyReapeat

@@ -4,8 +4,9 @@ namespace App\Repository;
 
 use App\Model\DBTable;
 use function Core\Helper\dd;
+use Core\Controller\BaseRepository;
 
-class AnneeScolaireRepository{
+class AnneeScolaireRepository extends BaseRepository{
     
     public function getActive($tag = null){
 
