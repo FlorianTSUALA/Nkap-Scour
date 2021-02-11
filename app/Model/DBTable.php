@@ -11,6 +11,7 @@ use App\Model\PrixAbonnement;
 use App\Model\AbonnementDetail;
 use App\Model\AbonnementCantine;
 
+use Core\Model\HydrahonModel;
 
 class DBTable
 {

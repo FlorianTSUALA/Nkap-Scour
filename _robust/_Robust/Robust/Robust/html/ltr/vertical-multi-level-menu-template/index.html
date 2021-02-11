@@ -1976,5 +1976,56 @@
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="../../../app-assets/js/scripts/pages/dashboard-crm.js"></script>
     <!-- END PAGE LEVEL JS-->
+
+    <script>
+
+      function searchMenu(list) {
+          
+          var input = $(".menu-search");
+          $(input)
+              .change( function () {
+                var filter = $(this).val();
+                if(filter) {
+                  // Hide Main Navigation Headers
+                  $('.navigation-header').hide();
+                  // this finds all links in a list that contain the input,
+                  // and hide the ones not containing the input while showing the ones that do
+                  $(list).find("li a:not(:Contains(" + filter + "))").hide().parent().hide();
+                  // $(list).find("li a:Contains(" + filter + ")").show().parents('li').show().addClass('open').closest('li').children('a').show();
+                  var searchFilter = $(list).find("li a:Contains(" + filter + ")");
+                  if( searchFilter.parent().hasClass('has-sub') ){
+                    searchFilter.show()
+                    .parents('li').show()
+                    .addClass('open')
+                    .closest('li')
+                    .children('a').show()
+                    .children('li').show();
+
+                    // searchFilter.parents('li').find('li').show().children('a').show();
+                    if(searchFilter.siblings('ul').length > 0){
+                      searchFilter.siblings('ul').children('li').show().children('a').show();
+                    }
+
+                  }
+                  else{
+                    searchFilter.show().parents('li').show().addClass('open').closest('li').children('a').show();
+                  }
+                } else {
+                  // return to default
+                  $('.navigation-header').show();
+                  $(list).find("li a").show().parent().show().removeClass('open');
+                }
+                $.app.menu.manualScroller.update();
+                return false;
+              })
+            .keyup( function () {
+                // fire the above change event after every letter
+                $(this).change();
+            });
+      }
+
+    </script>
+
+
   </body>
 </html>

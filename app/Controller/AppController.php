@@ -3,54 +3,22 @@
 namespace App\Controller;
 
 use App\App;
-use Core\Session\Session;
-use Core\HTML\Form\FormField;
 use Core\HTML\Form\FormModel;
-use Core\HTML\Form\BootstrapForm;
+use Core\Controller\BaseController;
 
-class AppController extends \Core\Controller\Controller
+class AppController extends BaseController
 {
-    /** @var Object \App $app Instance du singleton App */
-    protected $app;
-
-    /** @var Object $form Instance de BootstrapForm pour créer les formulaires de modif et d'ajout */
-    protected $form;
-
-    protected $session;
 
     /**
      * Initialise les variables pour cette application
      **/
     public function __construct()
     {
+        parent::__construct(App::getAppInstance());
         $this->template = 'default';
-
         $this->viewPath = ROOT . '/ressources/views/';
-
-
-        $this->app = App::getInstance();
-        
-        $this->form = new BootstrapForm();
-        
-        $this->field = new FormField();
-
-        $this->session = new Session();
-        
     }
 
-    /**
-     * Charge les Models
-     *
-     * @param string $modelName Nom du Model à charger
-     * @return type
-     * @throws conditon
-     **/
-    protected function loadModel(string $modelName)
-    {
-        $this->$modelName = $this->app->getModel($modelName);
-
-    }
- 
     protected function fill($to_extract, $fillables){
 
 

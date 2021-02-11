@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;        
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
@@ -11,6 +10,7 @@ use Core\Model\HydrahonModel;
 class PlanningCours extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
+    protected $entity;   
     
     const Classe_ID = "classe_id";
     const MATIERE_ID = "matiere_id";
@@ -18,9 +18,7 @@ class PlanningCours extends Model implements FrequentlyReapeat
     const TRANCHE_HORAIRE_ID = "tranche_horaire_id";
     const JOURNEE = "journee";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $this->fillables =
             [
                 new FormModel(false, 'class','Classe'),

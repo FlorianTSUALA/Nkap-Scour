@@ -2,9 +2,14 @@
 
 namespace Core;
 
-use App\Helpers\Helpers;
 use Core\Config;
 use Core\Database\Builder;
+use Core\Database\Database;
+use Core\Helper\BaseHelpers;
+
+use function Core\Helper\dd;
+use function Core\Helper\vd;
+
 use Core\Database\HydrahonDatabase;
 
 /**
@@ -16,16 +21,17 @@ class BaseApp
 
 	protected $title = 'Bienvenue aux Comelines';
 	const TEAM = 'NKAP-SCOUR';
-	static $_instance = null;
+	
+	private static $_instance = null;
+	private static $db_instance_mysql = null;
 
 	/**
 	 * Instancie une nouvelle connection à la bdd
 	 * @param none
 	 * @return none
 	 */
-	protected function __construct() {
+	public function __construct() {
 		$this->config = Config::getInstance(ROOT . '/config/config.php');
-		// $this->title = $title;
 	}
 
     public  function __call($method, $arguments) {
@@ -33,6 +39,10 @@ class BaseApp
 			case 'render':
 				if(count($arguments) == 0) {
 					return call_user_func_array(array($this, 'table_0'), []);
+				}
+			case 'getDBInstance':
+				if(count($arguments) == 0) {
+					return call_user_func_array(array($this, 'getDB'), []);
 				}
 			break;
 			default:
@@ -47,6 +57,11 @@ class BaseApp
 					return call_user_func_array(array('Core\Model\Model' , '_table'), array($class_name));
 				}
 			break;
+			case 'getDBInstance':
+				if(count($arguments) == 0) {
+					return call_user_func_array(array('Core\BaseApp' , 'getDBStaticIntance'), []);
+				}
+			break;
 			default:
 		}
     }
@@ -56,11 +71,10 @@ class BaseApp
 	 * @param none
 	 * @return object App Renvoie l'instance unique de App
 	 */
-	public static function getInstance() {
+	public static function getAppInstance() {
 		if (self::$_instance === null) {
-			self::$_instance = new BaseApp();
+			self::$_instance = new self();
 		}
-
 		return self::$_instance;
 	}
 
@@ -74,32 +88,39 @@ class BaseApp
 		require '../vendor/autoload.php';
 	}
 
-
 	/**
 	 * Factory pour les Modèles
 	 * @param string $model Nom du modèle qu'on va charger
 	 * @return object Retourne le modèle demandé
 	 */
-	public function getModel(string $model) {
-		// $className = 'App\Model\\' . ucfirst($model);
-		$className = 'App\Model\\' . Helpers::toPascalCase($model);
-		return	new $className($this->getDb());
+	public function geMtModel(string $model) {
+		$className = 'App\Model\\' . BaseHelpers::toPascalCase($model);
+		return	new $className($model);
 	}
-
 
 	/**
 	 * Factory pour la bdd
 	 * @param none
 	 * @return object Database Retourne un singleton de Database
 	 */
-	public function getDB()
+	public static function getDBStaticIntance():Database
     {
         $config = Config::getInstance('config/config.php');
-        if (empty($this->db_instance_mysql))
+        if (self::$db_instance_mysql === null)
         {
-            $this->db_instance_mysql = new HydrahonDatabase($config->get('db_name'), $config->get('db_user'), $config->get('db_host'), $config->get('db_pass'));
-        }
-        return $this->db_instance_mysql;
+            self::$db_instance_mysql = new HydrahonDatabase($config->get('db_name'), $config->get('db_user'), $config->get('db_host'), $config->get('db_pass'));
+		}
+        return self::$db_instance_mysql;
+    }
+
+	/**
+	 * Factory pour la bdd
+	 * @param none
+	 * @return object Database Retourne un singleton de Database
+	 */
+	public function getDB(): Database
+    {
+        return self::getDBStaticIntance();
     }
 
 	public static function table(string $model) {

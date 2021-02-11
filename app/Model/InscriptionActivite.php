@@ -3,25 +3,23 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;
 use Core\HTML\Form\InputType;
-use Core\Model\HydrahonModel;
 use ClanCats\Hydrahon\Query\Expression as Ex;
+use Core\Model\HydrahonModel;
 
 class InscriptionActivite extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
-
+    protected $entity;
+    
     const ELEVE_ID = "eleve_id";
     const PERSONNEL_ACTIVITE_ID = "personnel_activite_id";
     const DATE_INSCRIPTION = "date_inscription";
     const DATE_ARRET = "date_arret";
     const MONTANT = "montant";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $eleves = Eleve::table()->select([ 'code' => 'id' , new Ex("concat(eleve.nom,' ',eleve.prenom) as libelle"),])->where('visibilite', 1)->get();
         $personel_activites = PersonnelActivite::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $this->fillables =

@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
@@ -11,7 +10,8 @@ use Core\Model\HydrahonModel;
 class Depense extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
-    
+    protected $entity;
+
     const PERSONNEL_ID = "personnel_id";
     const MOTIF = "motif";
     const MONTANT = "montant";
@@ -19,16 +19,14 @@ class Depense extends Model implements FrequentlyReapeat
     const QUANTITE = "quantite";
     const DATE_ACHAT = "date_achat";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $this->fillables =
         [
             new FormModel(false, 'personnel', 'Personnel'),
             new FormModel(true, self::MOTIF),
             new FormModel(true, self::MONTANT, 'Montant', InputType::NUMBER),
-            new FormModel(true, self::DATE_DEBUT, 'Date de debut', InputType::DATE),
-            new FormModel(true, self::DATE_FIN, 'Date de fin', InputType::DATE),
+            // new FormModel(true, self::DATE_DEBUT, 'Date de debut', InputType::DATE),
+            // new FormModel(true, self::DATE_FIN, 'Date de fin', InputType::DATE),
         ];
 }
 }

@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;        
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
@@ -11,7 +10,8 @@ use Core\Model\HydrahonModel;
 class Caisse extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
-    
+    protected $entity;
+
     const PAYS_MERE_ID = "pays_mere_id";
     const PAYS_PERE_ID = "pays_pere_id";
     const NOM_PERE = "nom_pere";
@@ -40,9 +40,7 @@ class Caisse extends Model implements FrequentlyReapeat
     const PRENOM_PERSONNE_URGENCE = "prenom_personne_urgence";
     const TELEPHONE_PERSONNE_URGENCE = "telephone_personne_urgence";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $this->fillables =
         [
             new FormModel(false,'pays_mere','Pays de la mère'),

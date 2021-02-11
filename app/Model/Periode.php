@@ -4,7 +4,6 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
@@ -12,14 +11,13 @@ use Core\Model\HydrahonModel;
 class Periode extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
+    protected $entity;   
     
     const SESSION_ID = "session_id";
     const DATE_DEBUT = "date_debut";
     const DATE_FIN = "date_fin";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $this->fillables =
             [
                 new FormModel(false, self::SESSION_ID, 'Session', InputType::SELECT2),

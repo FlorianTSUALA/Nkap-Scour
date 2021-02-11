@@ -1,0 +1,110 @@
+<?php
+
+namespace Core\Model;
+
+use App\Helpers\Helpers;
+use Core\BaseApp;
+use Core\Database\Builder;
+use Core\Database\Database;
+use Core\Table\Table;
+
+/**
+* Classe mère de tous les appels à la bd
+*/
+class Model_v1
+{
+
+	use Table;
+	/** @var string $table Nom de la Table en ligne */
+	protected $table;
+
+	/** @var string $class Nom de la Classe */
+	protected $class;
+
+	//Represente la classe qui permettra de caster les resultats renvoyés dans les requetes de la bd
+	protected $entity;
+
+	/** @var string $class Nom de la Classe */
+	public $has_table = false;
+
+
+	/** @var Object \Core\Database $db Instance de la DB */
+	protected $db;
+	
+	public $fillables = [];
+
+	/**
+	 * Initialise le nom de la table
+	 * 
+	 * @param none
+	 * @return none
+	 */
+	public function __construct(Database $db = null, $entity = null) {
+
+		$this->has_table = true;
+		$this->entity = $entity;
+		$this->init_table_name(get_class($this));
+		$this->db = $db?? BaseApp::getDBInstance();
+	}
+
+	public static function _table($table_name) {
+		return Builder::get()->table($table_name);
+	}
+	
+
+	public function table_0() {
+		if($this->table !== '' || $this->table !== null)
+			return Builder::get()->table($this->table);
+		return null;
+	}
+
+	public function table_1($table_name) {
+		return Builder::get()->table($table_name);
+	}
+	
+	private function init_table_name($full_class_name){
+		if ($this->table === null) {
+			$this->class = $this->class_name($full_class_name);
+			$this->table = $this->class;
+			
+			//$this->table = str_replace('ry', 'rie', $this->class) . 's';
+		}
+		$this->table = $this->has_table? $this->table : null;
+		
+		return $this->table;
+	}
+
+	//Renvoie le nom de la table suivant les conventions définies
+	public static function class_name($full_class_name){
+			$tmp = explode('\\', $full_class_name);
+			return (Helpers::toCamelCase(end($tmp)));
+	}
+
+	public function query(string $statement, array $attributes = [], bool $onlyOne = false) {
+		if($this->entity instanceof Model)
+			$this->entity = null;
+		if (empty($attributes)) {
+			return $this->db->query($statement, $this->entity, $onlyOne);
+		} else {
+			return $this->db->prepareSQL($statement, $attributes, $this->entity, $onlyOne);
+		}
+	}
+
+	public function query(string $statement, array $ = [], bool $onlyOne = false) {
+		if($this->entity instanceof Model)
+			$this->entity = null;
+		if (empty($attributes)) {
+			return $this->db->query($statement, $this->entity, $onlyOne);
+		} else {
+			return $this->db->prepareSQL($statement, $attributes, $this->entity, $onlyOne);
+		}
+	}
+
+    public function genCode(){
+        return strtoupper(substr( $this->class, 0, 4)."_".Date('U'));
+	}
+
+	public static function generateCode(){
+        return strtoupper(substr( __CLASS__, 0, 4)."_".Date('U'));
+	}
+}

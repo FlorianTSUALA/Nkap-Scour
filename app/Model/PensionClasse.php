@@ -5,15 +5,15 @@ namespace App\Model;
 use App\Model\Classe;
 use Core\Model\Model;
 use App\Model\TypePension;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;
 use Core\HTML\Form\InputType;
-use Core\Model\HydrahonModel;
 use App\Model\FrequentlyReapeat;
+use Core\Model\HydrahonModel;
 
 class PensionClasse extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
+    protected $entity;   
     
     const TYPE_PENSION_ID = "type_pension_id";
     const Classe_ID = "classe_id";
@@ -23,9 +23,7 @@ class PensionClasse extends Model implements FrequentlyReapeat
     const EST_MENSUEL = "est_mensuel";
 
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-        $type_pensions = TypePension::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
+    public function __construct(){        $type_pensions = TypePension::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $classes = Classe::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $this->fillables =
             [

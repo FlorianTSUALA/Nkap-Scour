@@ -2,11 +2,14 @@
 
 namespace Core\Helper;
 
-class Helpers{
+trait DebugHelpers{
 
     // https://stackoverflow.com/questions/4458837/how-to-define-global-functions-in-php
     // https://www.sigerr.org/make-php-lib-functions-like-dump-or-dd-globally-available
     // https://stackoverflow.com/questions/19816438/make-var-dump-look-pretty
+
+    //https://stackoverflow.com/questions/1214043/find-out-which-class-called-a-method-in-another-class
+
     function declareDebug(){
         // we can delcalre all funciton that we want to use in projet
 
@@ -24,13 +27,46 @@ class Helpers{
         }
 
         function dd($expression , $title = " -NKAP-SCOUR- ", ...$_){
+
             $background="#EEEEEE";
-            $color="#000000";
+            $color="#000000";            
             
-            dump($expression, $title, $background, $color, $_);
+            //Print File called function
+            $trace = debug_backtrace();
+            if (isset($trace[1])) {
+                // $trace[0] is ourself
+                // $trace[1] is our caller
+                // and so on...
+                $function = $trace[1]['function']??'None';
+                $class = $trace[1]['class']??'None';
+                $line = $trace[1]['line']??'None';
+                // var_dump($trace[1]);
+                // echo  format('called by', true) ." {$class} ::  ".format('function', true)."  {$function} :: at ".format('line', true)." {$line}";
+            }
+
+
+
+            dump($expression, $title, $background, $color, $class, $function, $line, $_);
+            echo "<br>";
+            
+          
+            
+
             die();
         }
         
+        function format($text, $isKey =  false){
+            
+            $color="#000000";
+            
+            if($isKey){
+                $color="#a70c27";
+                return    "<span style='color:$color;'><b>$text</b> </span>";
+            }else{
+                return   "<span style='color:$color;'><b>$text</b> </span>";
+            }        
+        }
+
         function vd($expression, ...$_ ){
             // echo '<pre>' . var_export($expression, true) . '</pre>';
             // var_dump($expression, $_);
@@ -39,10 +75,24 @@ class Helpers{
             $color="#000000";
             $title = " -NKAP-SCOUR- ";
             echo '<pre><br><br></pre>';
-            dump($expression, $title, $background, $color, $_);
+
+            //Print File called function
+            $trace = debug_backtrace();
+            if (isset($trace[1])) {
+                // $trace[0] is ourself
+                // $trace[1] is our caller
+                // and so on...
+                $function = $trace[1]['function']??'None';
+                $class = $trace[1]['class']??'None';
+                $line = $trace[1]['line']??'None';
+                // var_dump($trace[1]);
+                // echo  format('called by', true) ." {$class} ::  ".format('function', true)."  {$function} :: at ".format('line', true)." {$line}";
+            }
+
+            dump($expression, $title, $background, $color, $class, $function, $line, $_);
         }
     
-        function dump($data, $title="", $background="#EEEEEE", $color="#000000", ...$_){
+        function dump($data, $title="", $background="#EEEEEE", $color="#000000", $class, $function, $line, ...$_){
             //=== Style  
             echo "  
             <style>
@@ -93,6 +143,15 @@ class Helpers{
             echo "<pre style='background:$background; color:$color; padding:10px 20px; border:2px inset $color'>";
             echo    "<h2>$title</h2>";
             var_dump($data); 
+            
+            $caller = format('Called by', true);
+            $at_line = format('Line', true);
+            $at_function = format('Function', true);
+            // var_dump($class);
+            echo "<br>";
+
+            echo  "$caller :: $class | $at_function :: $function | $at_line :: $line";
+
             echo "</pre>";
         
         }

@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
@@ -11,6 +10,7 @@ use Core\Model\HydrahonModel;
 class Composer extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
+    protected $entity;
     
     const ClASSE_ID = "classe_Id";
     const MATIERE_ID = "matiere_id";
@@ -21,9 +21,7 @@ class Composer extends Model implements FrequentlyReapeat
     const NOTE = "note";
     const MENTION = "mention";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $this->fillables =
         [
             new FormModel(true,'classe','Classe'),

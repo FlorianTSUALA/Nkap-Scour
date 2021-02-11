@@ -14,9 +14,7 @@ interface Common
    const DATE_SUPPRESSION = "date_suppression";
    const VISIBILITE = "visibilite";
 
-/*   public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+/*   public function __construct(){
         $this->fillables =
         [
             new FormModel(true,self::ID),

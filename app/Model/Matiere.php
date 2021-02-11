@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;        
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
@@ -11,14 +10,13 @@ use Core\Model\HydrahonModel;
 class Matiere extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
+    protected $entity;   
     
     const DISCIPLINE_ID = "discipline_id";
     const COULEUR = "couleur";
     const ABREVIATION = "abreviation";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-        $disciplines = Discipline::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
+    public function __construct(){        $disciplines = Discipline::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $this->fillables =
             [
                 new FormModel(false, self::DISCIPLINE_ID, 'Discipline', InputType::SELECT2, $disciplines, '', 'Choisir un cycle', true, 'select2 form-control'),

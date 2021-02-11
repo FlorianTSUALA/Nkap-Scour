@@ -3,14 +3,14 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
-use Core\Model\HydrahonModel;
 use Core\HTML\Form\FormModel;        
+use Core\Model\HydrahonModel;
 
 class Facture extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
-
+    protected $entity;
+    
     const REFERENCE = "reference";
     const MONTANT = "montant";
     const REDUCTION = "reduction";
@@ -18,9 +18,7 @@ class Facture extends Model implements FrequentlyReapeat
     const BENEFICAIRE = "beneficaire";
     const GESTIONNAIRE = "gestionnaire";
     
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $this->fillables =
             [
                 new FormModel(true, self::LIBELLE),

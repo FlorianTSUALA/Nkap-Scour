@@ -4,7 +4,6 @@ namespace App\Model;
 
 use Core\Model\Model;
 use App\Model\Activite;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
@@ -12,16 +11,15 @@ use Core\Model\HydrahonModel;
 class PrixAbonnement extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
-
+    protected $entity;
+    
     const MONTANT = "montant";
     const PERIODE = "periode"; // ENUM JOUR / MOIS / SEMAINE / ANNEE
     const TYPE_ABONNEMENT = "type_abonnement"; // ENUM ACTVITE / CANTINE
     const TYPE_ABONNEMENT_ID = "type_abonnement_id";
 
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $type_abonnements = Activite::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         array_push($type_abonnements, array('id' => 0, 'value' => 'Cantine'));
         $periode = array(['id' => 'JOUR', 'value' => 'Jour'], ['id' => 'SEMAINE', 'value' => 'Semaine'], ['id' => 'MOIS', 'value' => 'Mois'], ['id' => 'ANNEE', 'value' => 'Année']);

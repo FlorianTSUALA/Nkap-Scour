@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
@@ -11,16 +10,15 @@ use Core\Model\HydrahonModel;
 class AnneeScolaire extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
-    
+    protected $entity;
+
     const SLOGAN = "slogan";
     const MISSION = "mission";
     const DEBUT_ANNEE = "debut_annee";
     const FIN_ANNEE = "fin_annee";
     const STATUT = "statut";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $this->fillables = 
         [
             new FormModel(true, self::LIBELLE, self::LIBELLE, InputType::TEXT, [], '2019-2020' ),

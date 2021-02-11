@@ -27,7 +27,7 @@ class Config
 	 */
 	public static function getInstance(string $files) {
 		if (self::$_instance === null) {
-			self::$_instance = new Config($files);
+			self::$_instance = new self($files);
 		}
 
 		return self::$_instance;

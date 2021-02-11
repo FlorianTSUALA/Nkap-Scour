@@ -23,7 +23,6 @@ class EmploieTempsController extends AppController
         $this->loadModel('type_personnel');
         $this->loadModel('classe');
         // $this->loadModel('activite');
-        // $thx&is->loadModel('type_activite');
         $this->loadModel('matiere');
         $this->loadModel('cours');
         $this->loadModel('tranche_horaire');

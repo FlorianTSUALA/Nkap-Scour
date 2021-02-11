@@ -10,7 +10,7 @@ class AppController extends \App\Controller\AppController
     {
         parent::__construct();
 
-        $auth = new DBAuth($this->app->getDb());
+        $auth = new DBAuth($this->app->getDB());
 
         if (!$auth->logged()) {
             $this->forbidden();

@@ -62,14 +62,9 @@ trait HydrahonModel{
 					return call_user_func_array(array('Core\Model\Model', '_table'), $arguments);
 				}
 			break;
-
-			
 			default:
 		}
     } 
 
-    public function toObject($data) {
-		return json_decode(json_encode($data));
-	}
 
 }

@@ -5,15 +5,16 @@ namespace App\Model;
 use DateTime;
 use Core\Model\Model;
 use App\Helpers\Helpers;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;
 use Core\HTML\Form\InputType;
-use Core\Model\HydrahonModel;
 use App\Helpers\HelpersBusinessLogic;
+use Core\Model\HydrahonModel;
 
 class VueBulletin extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
+    protected $entity;
+    
 
     const CLASSE_ID = "classe_id";
     const MATIERE_ID = "matiere_id";
@@ -33,9 +34,7 @@ class VueBulletin extends Model implements FrequentlyReapeat
    
 
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $this->fillables =
             [
         

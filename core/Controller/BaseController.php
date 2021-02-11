@@ -2,19 +2,66 @@
 
 namespace Core\Controller;
 
-use App\App;
-use App\Helpers\Helpers;
+use Core\BaseApp;
+use Core\Session\Session;
 use Spipu\Html2Pdf\Html2Pdf;
+use Core\HTML\Form\FormField;
+use Core\HTML\Form\BootstrapForm;
 use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
-abstract class Controller
+use function Core\Helper\dd;
+
+abstract class BaseController
 {
     /** @var String $viewPath Chemin par défaut des vues */
     protected $viewPath;
 
     /** @var String $template Nom du template à charger */
     protected $template;
+
+    /** @var Object \App $app Instance du singleton App */
+    public $app;
+
+    /** @var Object $form Instance de BootstrapForm pour créer les formulaires de modif et d'ajout */
+    protected $form;
+
+    protected $session;
+
+    /**
+     * Initialise les variables pour cette application
+     **/
+    public function __construct(BaseApp $app_instance)
+    {
+        $this->template = 'default';
+
+        $this->viewPath = ROOT . '/ressources/views/';
+
+
+        $this->app = $app_instance;
+
+        $this->form = new BootstrapForm();
+        
+        $this->field = new FormField();
+
+        $this->session = new Session();
+        
+    }
+
+
+
+    /**
+     * Charge les Models
+     *
+     * @param string $modelName Nom du Model à charger
+     * @return type
+     * @throws conditon
+     **/
+    protected function loadModel(string $modelName)
+    {
+        $this->$modelName = $this->app->getModel($modelName);
+    }
+ 
 
     protected function render(String $nameView, array $variables = [], string $template = 'default')
     {
@@ -29,7 +76,7 @@ abstract class Controller
 
     protected function renderPDF(String $nameView, array $variables = [], $pdfname='')
     {
-        $pdfname = ($pdfname == '')? $nameView.'_'.App::SCHOOLL_NAME.'_'.date('Y-m-d') : $nameView.'_'.App::SCHOOLL_NAME.'_'.date('Y-m-d');
+        $pdfname = ($pdfname == '')? $nameView.'_'. $this->app::SCHOOLL_NAME.'_'.date('Y-m-d') : $nameView.'_'.$this->app::SCHOOLL_NAME.'_'.date('Y-m-d');
 
         try 
         {
@@ -163,7 +210,7 @@ abstract class Controller
 	 * @return none
 	 */
 	protected function error404() {
-		App::abort(404, 'Page inaccessible !!!');
+		$this->app::abort(404, 'Page inaccessible !!!');
 	}
 
 	/**
@@ -172,7 +219,7 @@ abstract class Controller
 	 * @return none
 	 */
 	protected function forbidden() {
-		App::abort(403, 'Accès interdit');
+		$this->app::abort(403, 'Accès interdit');
     }
 
 }

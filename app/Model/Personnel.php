@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
@@ -11,6 +10,7 @@ use Core\Model\HydrahonModel;
 class Personnel extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
+    protected $entity;
 
     const TYPE_PERSONNEL_ID = "type_personnel_id";
     const PAYS_ID = "pays_id";
@@ -29,9 +29,7 @@ class Personnel extends Model implements FrequentlyReapeat
     const ASSURANCE = "assurance";
     const PIECE_JOINTES = "piece_jointes";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $type_personnels = TypePersonnel::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $pays = Pays::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $this->fillables =

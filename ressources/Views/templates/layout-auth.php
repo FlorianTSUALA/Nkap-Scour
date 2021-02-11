@@ -1,5 +1,6 @@
 <?php 
 
+use App\App;
 use Core\Routing\URL;
 
 ?>
@@ -15,7 +16,7 @@ use Core\Routing\URL;
     <meta name="keywords" content="">
     <meta name="author" content="Stéphane KAMGA">
 
-    <title><?= \App::getInstance()->getTitle(); ?></title>
+    <title><?= App::getAppInstance()->getTitle(); ?></title>
 	
     <link rel="apple-touch-icon" href="<?= URL::base() ?>assets/app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="<?= URL::base() ?>assets/app-assets/images/ico/favicon.ico">

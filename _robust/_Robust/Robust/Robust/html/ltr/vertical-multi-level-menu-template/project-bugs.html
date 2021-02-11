@@ -1836,7 +1836,7 @@
                     <div class="bug-list-search-content">
                         <form action="#">
                             <div class="position-relative">
-                                <input type="search" class="form-control" placeholder="Search project bugs...">
+                                <input type="search" class="form-control menu-search"  placeholder="Search project bugs...">
                                 <div class="form-control-position">
                                     <i class="ft-search text-size-base text-muted"></i>
                                 </div>
@@ -1847,17 +1847,35 @@
             </div>
             <!-- /bug-list search -->
 
+            <div class="card-body">
+              <div id="menu" class="navigation navigation-main"  data-menu="menu-navigation">
+                <div class="list-group menu-content">
+                 <li><a href="#" class="list-group-item " data-toggle="collapse" data-target="#sm" data-parent="#menu">MESSAGE <span class="label label-info">5</span> <span class="glyphicon glyphicon-envelope pull-right"></span></a></li>
+                 <div id="sm" class=" collapse menu-content show">
+                  <li><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> inbox</a></li>
+                  <li><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> sent</a></li>
+                 </div>
+                 <li><a href="#" class="list-group-item" data-toggle="collapse" data-target="#sl" data-parent="#menu">TASKS <span class="glyphicon glyphicon-tag pull-right"></span></a></li>
+                 <div id="sl" class=" collapse">
+                  <li><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> saved tasks</a></li>
+                  <li><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> add new task</a></li>
+                 </div>
+                 <li><a href="#" class="list-group-item">ANOTHER LINK ...<span class="glyphicon glyphicon-stats pull-right"></span></a></li>
+                </div>
+              </div>
+            </div>
+
             <!-- bug-list view -->
             <div class="card-body ">
                 <div class="list-group">
-                    <a href="#" class="list-group-item active">All Bugs</a>
-                    <a href="#" class="list-group-item list-group-item-action">All Open</a>
-                    <a href="#" class="list-group-item list-group-item-action">All Closed</a>
-                    <a href="#" class="list-group-item list-group-item-action">My Open</a>
-                    <a href="#" class="list-group-item list-group-item-action">My Closed</a>
-                    <a href="#" class="list-group-item list-group-item-action">Overdue Bugs</a>
-                    <a href="#" class="list-group-item list-group-item-action disabled">Created Today</a>
-                    <a href="#" class="list-group-item list-group-item-action">Bugs I Follow</a>
+                    <li><a href="#" class="list-group-item active">All Bugs</a></li>
+                    <li><a href="#" class="list-group-item list-group-item-action">All Open</a></li>
+                    <li><a href="#" class="list-group-item list-group-item-action">All Closed</a></li>
+                    <li><a href="#" class="list-group-item list-group-item-action">My Open</a></li>
+                    <li><a href="#" class="list-group-item list-group-item-action">My Closed</a></li>
+                    <li><a href="#" class="list-group-item list-group-item-action">Overdue Bugs</a></li>
+                    <li><a href="#" class="list-group-item list-group-item-action disabled">Created Today</a></li>
+                    <li><a href="#" class="list-group-item list-group-item-action">Bugs I Follow</a></li>
                 </div>
             </div>
         </div>
@@ -1984,5 +2002,72 @@
     <script src="../../../app-assets/js/scripts/pages/project-summary-bug.js"></script>
     <script src="../../../app-assets/js/scripts/ui/jquery-ui/date-pickers.js"></script>
     <!-- END PAGE LEVEL JS-->
+    <script>
+      
+      $(document).ready(function () {
+        console.log($('#menu').find("li a"))
+        console.log($('#menu').find("li>a"))
+      })
+      function searchMenu(list) {
+      
+      var input = $(".menu-search");
+      $(input)
+        .change( function () {
+          var filter = $(this).val();
+          if(filter) {
+            let li = $(list).find("li a");
+            for (i = 0; i < li.length; i++) {
+              a = li[i]//.getElementsByTagName("a")[0];
+              
+              if (a.innerText.toUpperCase().indexOf(filter) > -1) {
+                console.log(a.innerText)
+                li[i].style.display = "";
+              } else {
+                li[i].style.display = "none";
+              }
+            }
+            
+            // not_contains = $(list).find("li a:not(:Contains(" + filter + "))").hide();
+            // console.log(not_contains)
+            // return
+            
+            // not_contains.hide().parent().hide()
+            // $(list).find("li a:Contains(" + filter + ")").show().parents('li').show().addClass('open').closest('li').children('a').show();
+            var searchFilter = $(list).find("li a:Contains(" + filter + ")");
+            if( searchFilter.parent().hasClass('has-sub') ){
+              searchFilter.show()
+              .parents('li').show()
+              .addClass('open')
+              .closest('li')
+              .children('a').show()
+              .children('li').show();
+              alert('has')
+              // searchFilter.parents('li').find('li').show().children('a').show();
+              if(searchFilter.siblings('ul').length > 0){
+                searchFilter.siblings('ul').children('li').show().children('a').show();
+              }
+      
+            }
+            else{
+
+              searchFilter.show().parents('li').show().addClass('open').closest('li').children('a').show();
+            }
+          } else {
+            // return to default
+          //--   $('.navigation-header').show();
+            $(list).find("li a").show().parent().show().removeClass('open');
+          }
+          // $.app.menu.manualScroller.update();
+          return false;
+        })
+        .keyup( function () {
+            // fire the above change event after every letter
+            $(this).change();
+        });
+      }
+      searchMenu('#menu');
+      </script>
+
+
   </body>
 </html>

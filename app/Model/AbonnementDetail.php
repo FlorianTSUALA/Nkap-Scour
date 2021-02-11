@@ -3,15 +3,15 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;        
 use Core\HTML\Form\InputType;
-use Core\Model\HydrahonModel;
 use EnumModel;
+use Core\Model\HydrahonModel;
 
 class AbonnementDetail extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
+    protected $entity;
 
     const MULTIPLICATEUR = "multiplicateur";
     const DATE_DEBUT = "date_debut";
@@ -20,9 +20,7 @@ class AbonnementDetail extends Model implements FrequentlyReapeat
     const PERIODE = "periode";
     const REFERENCE = "reference";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-        $periodes = EnumModel::PERIODE;
+    public function __construct(){        $periodes = EnumModel::PERIODE;
 
         $this->fillables =
             [

@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
@@ -11,7 +10,8 @@ use Core\Model\HydrahonModel;
 class Document extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
-    
+    protected $entity;
+
     const DOMAINE_ID = "domaine_id";
     const NUMERO_ENREGISTREMENT = "numero_enregistrement";
     const CODE_ISBN = "code_isbn";
@@ -22,9 +22,7 @@ class Document extends Model implements FrequentlyReapeat
     const DATE_PUBLICATION = "date_publication";
     const MAISON_EDITION = "maison_edition";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $this->fillables =
             [
                 new FormModel(true,'domaine' , 'Domaine'),

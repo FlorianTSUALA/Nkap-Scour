@@ -2,18 +2,21 @@
 
 namespace Core\Model;
 
+use Core\BaseApp;
+use Core\Table\Table;
 use App\Helpers\Helpers;
 use Core\Database\Builder;
-use Core\Database\Database;
-use Core\Table\Table;
+use Core\Model\HydrahonModel;
+
+use function Core\Helper\vd;
 
 /**
 * Classe mère de tous les appels à la bd
 */
 class Model 
-{
-
-	use Table;
+{	
+	
+	use Table, HydrahonModel;
 	/** @var string $table Nom de la Table en ligne */
 	protected $table;
 
@@ -38,14 +41,14 @@ class Model
 	 * @param none
 	 * @return none
 	 */
-	public function __construct(Database $db, $entity = null) {
+	public function __construct() {
 		$this->has_table = true;
-		$this->entity = $entity;
 		$this->init_table_name(get_class($this));
-		$this->db = $db;
+		$this->db = BaseApp::getDBInstance();
 	}
 
 	public static function _table($table_name) {
+		// vd($table_name);
 		return Builder::get()->table($table_name);
 	}
 	
@@ -88,7 +91,6 @@ class Model
 			return $this->db->prepareSQL($statement, $attributes, $this->entity, $onlyOne);
 		}
 	}
-    
 
     public function genCode(){
         return strtoupper(substr( $this->class, 0, 4)."_".Date('U'));

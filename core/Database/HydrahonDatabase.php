@@ -2,18 +2,20 @@
 
 namespace Core\Database;
 
-use App;
 use PDO;
+use Exception;
+use Core\BaseApp;
 use PDOException;
 use ClanCats\Hydrahon\Builder;
 use ClanCats\Hydrahon\Query\Sql\FetchableInterface;
-use Exception;
+
+use function Core\Helper\vd;
 
 class HydrahonDatabase extends Database
 {
     use QueryTrait;
 
-    public function __construct($db_name='nkap-scour', $db_user='root', $db_host = 'localhost', $db_pass = '', $db_charset='UTF-8')
+    public function __construct($db_name='ktame', $db_user='root', $db_host = 'localhost', $db_pass = '', $db_charset='UTF-8')
     {
         parent::__construct($db_name, $db_charset, $db_user, $db_host, $db_pass);
     }
@@ -28,8 +30,7 @@ class HydrahonDatabase extends Database
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $this->pdo = $pdo;
             } catch (PDOException $ex) {
-                //die($ex);
-                App::abort(502, "Erreur de connexion avec la base de données !!!");
+                BaseApp::abort(502, "Erreur de connexion avec la base de données !!!");
             }
         }
         return $this->pdo;
@@ -41,13 +42,10 @@ class HydrahonDatabase extends Database
         $connection = $this->getPDO();
         $this->builder = new Builder('mysql', function ($query, $queryString, $queryParameters) use ($connection) {
             $statement = $connection->prepare($queryString);
-            //var_dump($queryString);
-            //var_dump($queryParameters);
             try {
                 $statement->execute($queryParameters);
             } catch (Exception  $e) {
-                // var_dump( $e );
-                var_dump($e->getMessage());
+                vd($e->getMessage());
             }
 
             // when the query is fetchable return all results and let hydrahon do the rest

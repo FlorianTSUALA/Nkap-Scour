@@ -1,4 +1,5 @@
 <?php
+use Core\Model\HydrahonModel;
 
 class EnumModel{
 

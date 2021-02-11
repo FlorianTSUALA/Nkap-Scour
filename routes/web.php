@@ -1,42 +1,43 @@
 <?php
 
-use App\Controller\Auth\LoginController;
-
 use App\Controller\HomeController;
+
 use App\Controller\PaysController;
 use App\Controller\TestController;
 use App\Controller\CoursController;
-use App\Controller\CantineController;
 use App\Controller\CycleController;
 use App\Controller\EleveController;
 use App\Controller\RepasController;
+use App\Controller\BiblioController;
 use App\Controller\ClasseController;
+use App\Controller\CantineController;
 use App\Controller\DomaineController;
 use App\Controller\MatiereController;
 use App\Controller\PeriodeController;
 use App\Controller\PrinterController;
 use App\Controller\SessionController;
+use App\Controller\ActiviteController;
+use App\Controller\BulletinController;
+use App\Controller\DocumentController;
 use App\Controller\PersonnelController;
 use App\Controller\VersementController;
+use App\Controller\Auth\LoginController;
 use App\Controller\DisciplineController;
 use App\Controller\InscriptionController;
 use App\Controller\SalleClasseController;
 use App\Controller\TypePensionController;
 use App\Controller\EmploieTempsController;
+use App\Controller\TypeActiviteController;
 use App\Controller\TypePaiementController;
 use App\Controller\AnneeScolaireController;
 use App\Controller\PensionClasseController;
 use App\Controller\TypePersonnelController;
+use App\Controller\PrixAbonnementController;
 use App\Controller\TrancheHoraireController;
 use App\Controller\StatutApprenantController;
 use App\Controller\TrancheScolaireController;
-use App\Controller\ActiviteController;
-use App\Controller\PrixAbonnementController;
-use App\Controller\TypeActiviteController;
-use App\Controller\InscriptionActiviteController;
 use App\Controller\AbonnementActiviteController;
-use App\Controller\DocumentController;
-use App\Controller\BulletinController;
+use App\Controller\InscriptionActiviteController;
 use App\Controller\AffectationClasseMatiereController;
 //use App\Controller\CantineListeController;
 
@@ -165,18 +166,15 @@ $router->addRoute('cantine_abonnement_info', 'cantine/abonnement_info/', [Cantin
 
 
 //BIBLIOTHEQUE
-$router->addRoute('abonnement_cantine', 'cantine/abonnement', [CantineController::class, 'abonnement_cantine']);
-$router->addRoute('enregistrement_cantine', 'cantine/create/{code}', [CantineController::class, 'save']);
-$router->addRoute('facture_cantine', 'cantine/facture/{code}', [CantineController::class, 'imprimer_facture']);
-
-•	Interface d’enregistrement d’un exemplaire
-•	Dashboard pour la biblio = activité de la biblio = statistique
-•	Interface d’emprunt des livres
-•	Interface d’historisation des opérations de la biblio
-    o	Restituions
-    o	Emprunt
-•	Alerte pour la visualisation des pour savoir ce qui sont en retard dans la remise de leurs livres
-
+$router->addRoute('biblio_ajout_livre', 'biblio/ajout_livre', [BiblioController::class, 'ajouterLivre']);
+$router->addRoute('biblio_ajout_exemplaire', 'biblio/ajout_exemplaire', [BiblioController::class, 'ajouterExemplaire']);
+$router->addRoute('biblio_activite', 'biblio/activite', [BiblioController::class, 'activite']);
+$router->addRoute('biblio_historique', 'biblio/historique', [BiblioController::class, 'afficherHistorique']);
+$router->addRoute('biblio_dashboard', 'biblio/dashboard', [BiblioController::class, 'dashboard']);
+$router->addRoute('biblio_emprunt', 'biblio/emprunt', [BiblioController::class, 'emprunt']);
+$router->addRoute('biblio_api_emprunt', 'biblio/api/emprunt/{code}', [BiblioController::class, 'enregistrerEmprunt']);
+$router->addRoute('biblio_api_restitution', 'biblio/api/restitution/{code}', [BiblioController::class, 'enregistrerRestitution']);
+$router->addRoute('biblio_api_alerte', 'biblio/api/alerte/{code}', [BiblioController::class, 'alerte']);
 
 
 //Cours - Affectation des matieres aux enseignants dans des classes

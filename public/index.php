@@ -5,8 +5,8 @@ session_start();
 require '../vendor/autoload.php';
 
 use App\App;
+use Core\Helper\BaseHelpers;
 use Core\Routing\URL;
-use Core\Helper\Helpers;
 use Core\Routing\Router;
 use Core\Routing\RouteNotFoundException;
 
@@ -27,7 +27,7 @@ $router = new Router();
 require_once "../routes/api.php";
 require_once "../routes/web.php";
 
-$helper = new Helpers();
+$helper = new BaseHelpers();
 $helper->declareDebug();
 
 $action = str_replace( strtolower(App::base_url()) , "", strtolower(App::full_url()) );

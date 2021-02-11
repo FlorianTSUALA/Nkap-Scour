@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;        
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
@@ -11,6 +10,7 @@ use Core\Model\HydrahonModel;
 class Remboursement extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
+    protected $entity;   
     
     const PERSONNEL_ID = "personnel_id";
     const DETTE_ID = "dette_id";
@@ -18,9 +18,7 @@ class Remboursement extends Model implements FrequentlyReapeat
     const MONTANT = "montant";
     const DATE_REMBOURSEMENT = "date_remboursement";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $this->fillables =
             [
                 new FormModel(false, 'personnel','Personnel'),

@@ -9,7 +9,7 @@ use App\Model\Parcours;
 use function Core\Helper\dd;
 use function Core\Helper\vd;
 
-class ClasseRepository{
+class ClasseRepository extends BaseRepository{
     
         
     public function getSalleClasseGroupByClasse(){

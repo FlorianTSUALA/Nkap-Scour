@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;        
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
@@ -11,15 +10,14 @@ use Core\Model\HydrahonModel;
 class AntecedentScolaire extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
-    
+    protected $entity;
+
     const CLASSE = "classe";
     const TELEPHONE = "telephone";
     const EMAIL = "email";
     const ECOLE = "ecole";
 
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
-
+    public function __construct(){
         $this->fillables =
         [
             new FormModel(true,self::CLASSE),

@@ -7,6 +7,8 @@ use App\Helpers\S;
 use Core\Auth\DBAuth;
 use App\Controller\AppController;
 
+use function Core\Helper\dd;
+
 class LoginController extends AppController
 {
     /**
@@ -15,9 +17,9 @@ class LoginController extends AppController
     public function login()
     {
         $error = "Aucune valeur saisie";
-       
         if (!empty($_POST)) {
-            $auth = new DBAuth($this->app->getDb());
+
+            $auth = new DBAuth($this->app->getDBInstance());
             
             if ($auth->login($_POST['user-name'], $_POST['user-password'])) {
                 $this->home();

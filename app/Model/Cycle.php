@@ -3,17 +3,15 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\Database\Database;
 use Core\HTML\Form\FormModel;
 use Core\Model\HydrahonModel;
 
 class Cycle extends Model implements FrequentlyReapeat
 {
     use HydrahonModel;
-    
-    public function __construct(Database $db, $entity = null){
-        parent::__construct($db);
+    protected $entity;
 
+    public function __construct(){
         $this->fillables =
             [
                 new FormModel(true, self::LIBELLE ),
