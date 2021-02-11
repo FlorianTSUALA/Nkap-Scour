@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Controller;
+namespace Core\Repository;
 
 use Core\BaseApp;
 use Core\Model\Model;

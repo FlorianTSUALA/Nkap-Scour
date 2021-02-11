@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Model\DBTable;
 use function Core\Helper\dd;
-use Core\Controller\BaseRepository;
+use Core\Repository\BaseRepository;
 
 class AnneeScolaireRepository extends BaseRepository{
     
