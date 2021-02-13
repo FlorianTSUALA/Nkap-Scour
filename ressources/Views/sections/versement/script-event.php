@@ -214,7 +214,7 @@
                 var data = JSON.parse( JSON.stringify(select.select2('data')))
                 var tranches = [];
                 data.forEach(function(element){
-                    console.log(element)
+                    //console.log(element)
                     tranches.push({'id': element.id, 'value': element.text})
                 })
 

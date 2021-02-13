@@ -13,7 +13,6 @@ use App\Helpers\Helpers;
 use Core\Helper\DBHelper;
 use Core\Session\Request;
 use App\Helpers\HTMLHelper;
-use App\Helpers\DateHelpers;
 use function Core\Helper\dd;
 use function Core\Helper\vd;
 use Core\HTML\Form\FormModel;
@@ -158,7 +157,7 @@ class CantineController extends AppController
                 'date_facture' => $date_facture,
                 'description' => '',
             ];
-            $result_facture = $model_facture->insert($data_facture)->execute();
+            $model_facture->insert($data_facture)->execute();
             $facure_id = Model::getId(DBTable::FACTURE, $code_facture);
         //Facture
 
@@ -176,7 +175,7 @@ class CantineController extends AppController
             'date_debut' => Request::getSecParam('date_debut', ''),
             'date_fin' => Request::getSecParam('date_fin', ''),
         ];
-        $result_cantine = $model->insert($data_abonnment)->execute();
+        $model->insert($data_abonnment)->execute();
 
         $abonnement_detail = DBTable::getModel(DBTable::ABONNEMENT_DETAIL);
         $items = $_POST['cantines']['data'];
@@ -187,7 +186,7 @@ class CantineController extends AppController
         foreach($items as $item){
             
             $dayCount = Periode::getDayCount($item['periode']) * $item['duree'] - 1; //On reduit un puisqu'on compte la date du jour
-            $end_day = DateHelpers::addDays($start_day, $dayCount);
+            $end_day = Helpers::addDays($start_day, $dayCount);
             $data_abonnment_detail = [
                 'code' => AbonnementDetail::generateCode(),
                 'abonnement_id' => $abonnement_cantine_id,
@@ -199,9 +198,9 @@ class CantineController extends AppController
                 'date_fin' =>  $end_day
             ];
                     
-            $start_day = DateHelpers::addDays($end_day, 1); // On recompte à partir du jour d'apres
+            $start_day = Helpers::addDays($end_day, 1); // On recompte à partir du jour d'apres
 
-            $result_abonnement_detail = $abonnement_detail->insert($data_abonnment_detail)->execute();
+            $abonnement_detail->insert($data_abonnment_detail)->execute();
         }
         
         if (isset($abonnement_cantine_id)) {

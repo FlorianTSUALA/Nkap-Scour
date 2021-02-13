@@ -20,7 +20,8 @@ define("APP_SESSION_TIME_OUT", 1440);
 
  //if (!OFFLINE_DB) {
     if (OFFLINE_DB) {
-        return array(
+        return array(        
+        "ORGANISATION" => "Les Comelines",
         "db_user" => "root",
         "db_pass" => "",
         "db_host" => "localhost",
@@ -30,6 +31,7 @@ define("APP_SESSION_TIME_OUT", 1440);
     } else {
         //PHP ADMIN http://www.phpmyadmin.co/
         return array(
+        "ORGANISATION" => "Les Comelines",
         "db_user" => "Fqy2hYVwUB",
         "db_pass" => "hdG3urVvRi",
         "db_host" => "remotemysql.com",

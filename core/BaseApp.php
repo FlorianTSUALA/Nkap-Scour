@@ -21,6 +21,7 @@ class BaseApp
 
 	protected $title = 'Bienvenue aux Comelines';
 	const TEAM = 'NKAP-SCOUR';
+	public $ORGANISATION = '';
 	
 	private static $_instance = null;
 	private static $db_instance_mysql = null;
@@ -32,6 +33,7 @@ class BaseApp
 	 */
 	public function __construct() {
 		$this->config = Config::getInstance(ROOT . '/config/config.php');
+		$this->ORGANISATION = $this->config->get('ORGANISATION');
 	}
 
     public  function __call($method, $arguments) {

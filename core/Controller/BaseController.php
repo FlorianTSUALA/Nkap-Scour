@@ -76,7 +76,7 @@ abstract class BaseController
 
     protected function renderPDF(String $nameView, array $variables = [], $pdfname='')
     {
-        $pdfname = ($pdfname == '')? $nameView.'_'. $this->app::SCHOOLL_NAME.'_'.date('Y-m-d') : $nameView.'_'.$this->app::SCHOOLL_NAME.'_'.date('Y-m-d');
+        $pdfname = ($pdfname == '')? $nameView.'_'. $this->app->ORGANISATION.'_'.date('Y-m-d') : $nameView.'_'.$this->app->ORGANISATION.'_'.date('Y-m-d');
 
         try 
         {

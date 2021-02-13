@@ -14,8 +14,6 @@ use App\Helpers\Helpers;
         // console.log(activites);
         // console.log(autres);
         
-
-
         data = {
 
                 'pension_classe': items,
@@ -37,8 +35,6 @@ use App\Helpers\Helpers;
                 'reference':  data_versement['reference'],
                 'date_paiement':  data_versement['date_paiement'],
          };
-
-
 
 
         $.blockUI({
@@ -91,6 +87,12 @@ use App\Helpers\Helpers;
             }
         });
 
+    }
+
+
+    function imprimerRecuVersement(){
+        gotoUrl('<?= URL::link('versement_facture');?>'+$('#eleve_nom_complet option:selected').val(), data_versement);
+        console.log(data_versement);
     }
 
 </script>

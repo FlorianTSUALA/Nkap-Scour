@@ -62,8 +62,11 @@ $router->addRoute('eleve_search_detail', 'eleve_detail/search/{code}', [EleveCon
 //versement
 $router->addRoute('versement', 'versement', [VersementController::class, 'index']);
 $router->addRoute('versement-create', 'versement/create/{code}', [VersementController::class, 'save']);
-$router->addRoute('versement-print', 'versement/print/{code}', [VersementController::class, 'print']);
+$router->addRoute('versement_facture', 'versement/print/{code}', [VersementController::class, 'imprimer_facture']);
 $router->addRoute('versement-preview', 'versement/preview/{code}', [VersementController::class, 'preview']);
+
+$router->addRoute('versement_liste', 'versement/detail', [VersementController::class, 'liste_abonnee']);
+$router->addRoute('versement_info', 'versement/info/', [VersementController::class, 'info']);
 
 //Printer Report
 $router->addRoute('print', 'print/{model}', [PrinterController::class, 'index']);

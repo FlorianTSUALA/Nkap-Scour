@@ -1,232 +1,195 @@
-<?php
-    //session_start();
-?>
-<!DOCTYPE html>
+<?php 
 
-<html class="loaded" data-textdirection="ltr">
-    <?php
-        // RECUPERATION DES DONNEES VENANT DE L'INSCRIPTION
-        // array(
-        //       "eleve_id" => $eleve_id,
-        //       "classe_id" => $classe_id,
-        //       "classe_information" => $classe_information
-        // );
-        //$data = $_SESSION["DATA_TRANSPORT"];
+use Core\Routing\URL; 
 
-        require_once "head.php";
-        // require_once "../app/Helpers/_magic_tools.php";
-    ?>
+/*
 
-    <body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">
-    <?php
-        require_once "navbar.php";
-    ?>
-    <div class="app-content content bg-warningcreated22">
-        <div class="content-wrapper">
+    Varaible in this page
+*****************************
 
-            <div class="content-body">
+reference
+solde_paye
+long_date_facture
+eleve
+classe
+sous_total
+reduction
+reste
+montant_paye
+        
+data_items  ****************
+            date_debut
+            date_fin
+            quantite
+            periode
+            prix_unitaire
+            sous_total
+            resume
+            sous_total
+            ****************
 
-            <section class="row" id="recapitulatif">
-                    <div class="col-sm-12">
-                        <!-- ESPACE DE TRAVAIL -->
-                        <div id="kick-start" class="border-2 border-warning card box-shadow-2">
-                            <div class="card-header border-bottom-2 border-bottom-warning card-header-inverse ">
-                                <h4 class="card-title center text-uppercase">
-                                    Vérification des informations de paiement
-                                </h4>
-                            </div>
+*****************************
 
-                            <div class="card-content collapse show">
-                                <div class="card-body">
-                                    <section class="card">
-                                        <div id="invoice-template" class="card-body bg-light rounded">
-                                            <!-- Invoice Company Details -->
-                                            <div id="invoice-company-details" class="row">
-                                                <div class="col-md-6 col-sm-12 text-center text-md-left">
-                                                    <div class="media">
-                                                        <img src="app-assets/images/logo/logo-80x80.png" alt="company logo" class=""/>
-                                                        <div class="media-body">
-                                                            <ul class="ml-2 px-0 list-unstyled">
-                                                                <li class="text-bold-800"><h2>Les comilines</h2></li>
-                                                                <li>Batterie 4 </li>
-                                                                <li>Libreville, Gabon</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12 text-center text-md-right">
-                                                    <h2>REÇU DE VERSEMENT</h2>
-                                                    <p class="pb-3"># FAC-001001</p>
-                                                    <ul class="px-0 list-unstyled">
-                                                        <li>Solde à payer</li>
-                                                        <li class="lead text-bold-800"><strong class="text-danger">165 000 Fcfa </strong></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <!--/ Invoice Company Details -->
 
-                                            <!-- Invoice Customer Details -->
-                                            <div id="invoice-customer-details" class="row pt-2">
-                                                <div class="col-sm-12 text-center text-md-left">
-                                                    <p class="text-muted">Facture de</p>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12 text-center text-md-left">
-                                                    <ul class="px-0 list-unstyled">
-                                                        <li class="text-bold-800">Elève : <strong>MBA NGUEMA Franck</strong></li>
-                                                        <li>Salle de classe : <strong>Cours-Moyen I</strong></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12 text-center text-md-right">
-                                                    <p><span class="text-muted">Date de facturation :</span> <strong>06/05/2020</strong></p>
-
-                                                </div>
-                                            </div>
-                                            <!--/ Invoice Customer Details -->
-
-                                            <!-- Invoice Items Details -->
-                                            <div id="invoice-items-details" class="pt-2">
-                                                <div class="row">
-                                                    <div class="table-responsive col-sm-12">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>Objet et description</th>
-                                                                    <th class="text-right">Montant</th>
-                                                                    <th class="text-right">Quantité</th>
-                                                                    <th class="text-right">Montant Total</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th scope="row">1</th>
-                                                                    <td>
-                                                                        <p>Tranche d'inscription</p>
-                                                                        <em class="text-muted">Il s'agit d'une tranche spéciale réservé à l'inscription de l'élève.</em>
-                                                                    </td>
-                                                                    <td class="text-right">80 000 Fcfa</td>
-                                                                    <td class="text-right">1</td>
-                                                                    <td class="text-right">80 000 Fcfa</td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <th scope="row">2</th>
-                                                                    <td>
-                                                                        <p>Tranche mensuelle</p>
-                                                                        <em class="text-muted">Il s'agit de la scolarité mensuelle d'un élève.</em>
-                                                                    </td>
-                                                                    <td class="text-right">20 000 Fcfa</td>
-                                                                    <td class="text-right">5</td>
-                                                                    <td class="text-right">100 000 Fcfa</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-7 col-sm-12 text-center text-md-left">
-                                                        <p class="lead">Mode de paiement:&nbsp;<strong>Par chèque</strong></p>
-                                                        <div class="row">
-                                                            <div class="col-md-8">
-                                                                <table class="table table-borderless table-sm">
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>Nom de la banque:</td>
-                                                                            <td class="text-right">UBA Bank</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>N° du chèque:</td>
-                                                                            <td class="text-right">UBA165461646546AA</td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-5 col-sm-12">
-                                                        <p class="lead">Montant total dû</p>
-                                                        <div class="table-responsive">
-                                                            <table class="table">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>Sous-Total</td>
-                                                                        <td class="text-right"><strong>180 000 Fcfa</strong></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Remise</td>
-                                                                        <td class="text-right"><strong>15 000 Fcfa</strong></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-bold-800">Total</td>
-                                                                        <td class="text-bold-800 text-right"> <strong>165 000 Fcfa</strong></td>
-                                                                    </tr>
-                                                                    <tr class="bg-grey bg-lighten-4">
-                                                                        <td class="text-bold-800">Solde à payer</td>
-                                                                        <td class="text-bold-800 text-right text-danger"><strong>165 000 Fcfa</strong></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <div class="text-center">
-                                                            <p>Personne habilitée</p>
-                                                            <img src="app-assets/images/pages/signature-scan.png" alt="signature" class="height-100"/>
-                                                            <h6>Charbonnier LaRose</h6>
-                                                            <p class="text-muted">Le Sécrétariat</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <hr />
-                                            <!-- Invoice Footer -->
-                                            <div id="invoice-footer">
-                                                <div class="row">
-                                                    <div class="col-md-6 col-sm-12">
-                                                        <h6>Conditions générales</h6>
-                                                        <p>Après paiement, votre argent est non-remboursable.</p>
-                                                    </div>
-                                                    <div class="col-md-6 col-sm-12 text-right">
-
-                                                        <button type="button" class="btn btn-green my-1"><i class="fa fa-floppy-o"></i> Enregistrer</button>
-                                                        <button type="button" class="btn btn-blue my-1"><i class="fa fa-home"></i> Accueil</button>
-
-                                                        <button type="button" class="btn btn-warning my-1"><i class="fa fa-arrow-left"></i> Retour</button>
-                                                        <button type="button" class="btn btn-danger my-1"><i class="fa fa-print"></i> Imprimer</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--/ Invoice Footer -->
-
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
-
-                            <div class="card-footer border-top-2 border-top-warning">
-                                <span>Les Comelines</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
-
+*/
     
+    ?>
+
+<!-- <link rel="stylesheet" type="text/css" href="http://127.0.0.1/nkap-scour/public/assets/app-assets/images/logo/cantineList2.css"> -->
+<style type="text/css">
+table, th, td {
+  border: 0px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 8px;
+  text-align: left;    
+}
+</style>
+<page>
+
+<table  style="width:100%">
+    <tr>
+        <td  rowspan="4"  style="width: 13%"><img src="<?= URL::base() ?>/assets/app-assets/images/logo/logo-80x80.png"> </td>
+        <td style="text-align: left;    width: 22%"><b>Les comelines</b></td>
+        <td style="text-align: right;    width: 65%">  <b>REÇU DE PAIEMENT DE LA CANTINE</b> </td>
+    </tr>
+  
+    <tr>
+        <td></td>
+        <td  style="text-align: right;">  <?= $data['reference'] ?></td>
+    </tr>    
    
-    <?php  require_once "footer.php"; ?>
+    <tr>
+        <td>Batterie 4</td>
+    </tr>    
+    <tr>
+        <td>Libreville, Gabon</td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-align: right;">Solde à payer</td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-align: right;"><strong class="text-danger" ><?= $data['montant_paye'] ?></strong></td>
+    </tr> 
+    <tr>
+        <td colspan="3" style="text-align: right;"> </td>
+    </tr> 
+    <tr>
+        <td colspan="3" style="text-align: right;"> </td>
+    </tr> 
+    <tr>
+        <td colspan="2" style="text-align: left;"><strong class="text-danger" >Facture de</strong></td>
+        <td  style="text-align: right;">Date de facturation :<strong class="text-danger" > <?= $data['long_date_facture'] ?> </strong></td>
+    </tr> 
+    <tr>
+        <td colspan="3" style="text-align: left;">Elève : <strong class="text-danger" > <?= $data['eleve'] ?></strong></td>
+    </tr> 
+    <tr>
+        <td colspan="3" style="text-align: left;">Classe : <strong class="text-danger" > <?= $data['classe'] ?></strong></td>
+    </tr> 
+    <tr>
+        <td colspan="3" style="text-align: right;"> </td>
+    </tr> 
+</table>
+
+           
+<table cellspacing='0'>
+    <colgroup>
+        <col style="width: 8%">
+        <col style="width: 47%">
+        <col style="width: 15%">
+        <col style="width: 15%">
+        <col style="width: 15%">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Numero</th>
+            <th>Object et description</th>
+            <th>Montant</th>
+            <th>Quantité</th>
+            <th>Montant total</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    <?= $data['html_table_body'] ?>
+
+    </tbody>
     
-    <script>
-        var elems = document.getElementsByClassName('ajouter-montant');
+</table>
 
-        var myLength = elems.length,
-            total = 0;
 
-        for (var i = 0; i < myLength; ++i) {
-            total += elems[i].value;
-        }
 
-        document.getElementById('montant').value = total;
-    </script>
-    </body>
-</html>
+<table  style="width:100%">
+    <tr>
+        <td style="text-align: left;    width: 65%"></td>
+        <td style="text-align: left;    width: 15%"></td>
+        <td style="text-align: right;    width: 20%"></td>
+    </tr>
+    <tr>
+        <td style="text-align: left;"></td>
+        <td style="text-align: left;" colspan="2" >Montant total du versement</td>
+    </tr>
+    <tr>
+        <td style="text-align: left;"></td>
+        <td style="text-align: left; padding: 5px 10px 5px 5px;">Sous-Total</td>
+        <td style="text-align: right;"><?= $data['montant_paye'] - $data['reduction'] ?></td>
+    </tr>
+    <tr>
+        <td style="text-align: left;"></td>
+        <td style="text-align: left; padding: 5px 10px 5px 5px;">Remise</td>
+        <td style="text-align: right;"><?= $data['reduction'] ?></td>
+    </tr>
+    <!-- <tr>
+        <td style="text-align: left;"></td>
+        <td style="text-align: left; padding: 5px 10px 5px 5px;">Reste</td>
+        <td style="text-align: right;"><?= $data['reste'] ?></td>
+    </tr> -->
+    <tr>
+        <td style="text-align: left;"></td>
+        <td style="text-align: left; padding: 5px 10px 5px 5px;">Solde à payer</td>
+        <td style="text-align: right;"> <?= $data['montant_paye'] ?></td>
+    </tr>
+
+
+</table>
+
+
+
+<page_footer>
+    <table style="width: 100%; border: solid 1px black;">
+        <tr>
+            <td style="text-align: left;     width: 60%"></td>
+            <td style="text-align: center;    width: 40%" colspan="2" >Personne habilitée</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;"></td>
+            <td style="text-align: center;" colspan="2" >Charbonnier LaRose</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;"></td>
+            <td style="text-align: center;" colspan="2" >Le Sécrétariat</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;"></td>
+            <td style="text-align: right;" colspan="2" ></td>
+        </tr>
+
+        <tr>
+            <td style="text-align: left;"><b>Conditions générales</b></td>
+            <td style="text-align: right;" colspan="2" ></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Après paiement, votre argent est non-remboursable.</td>
+            <td style="text-align: right;" colspan="2" ></td>
+        </tr>
+
+        <!-- <tr>
+            <td style="text-align: left;    width: 50%">Facture de paiement</td>
+            <td style="text-align: right;    width: 50%">page [[page_cu]]/[[page_nb]]</td>
+        </tr> -->
+    </table>
+</page_footer>
+
+</page>

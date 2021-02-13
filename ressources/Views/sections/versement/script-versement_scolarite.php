@@ -216,7 +216,11 @@ use App\Helpers\S;
         $(btn_save).click(function() {
             sauvegarderVersement()
         })
-
+        
+        $(btn_print).click(function() {
+            imprimerRecuVersement()
+        })
+        
         init()
 
     })

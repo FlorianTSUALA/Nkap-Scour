@@ -165,35 +165,26 @@ class VersementController extends AppController
     */
     public function save($code)
     {
-
+        $debug = false;
 
         $ids_pension_eleve = [];
         $ids_pension_abonnement_detail = [];
         $ids_pension_cantine = [];
         $ids_pension_activite = [];
 
-
-        // vd('welcome');
         $eleve_id = DBTable::getModel('eleve')->select()->find($code, 'code')['id'];
         $classe_id = DBTable::getModel('classe')->select()->find(Request::getSecParam('classe_id', ''), 'code')['id'];
-        // var_dump($classe_id);
+        
         $montant_paye = Request::getSecParam('montant_paye', 0);
         $nom_eleve = Request::getSecParam('nom_eleve', 0);
         $reduction = Request::getSecParam('reduction', 0);
         $date_facture = date('Y-m-d') ;
-        // $motif =  Request::getSecParam('motif');
-        // $reste =  Request::getSecParam('reste');
-        // $autre =  Request::getSecParam('autre');
-        // $reduction =  Request::getSecParam('reduction');
+        
         $reference =  Request::getSecParam('reference', 0);
         $date_paiement =  Request::getSecParam('date_paiement');
-        // $date_paiement =  date('Y-m-d H:i:s');
 
-        $statut_apprenant_id = Model::getId(DBTable::STATUT_APPRENANT, Request::getSecParam('statut_apprenant_id', ''));
         $annee_scolaire_id = Model::getId(DBTable::ANNEE_SCOLAIRE, Request::getSecParam('annee_scolaire_id', ''));
         $type_paiement_id = Model::getId(DBTable::TYPE_PAIEMENT, Request::getSecParam('type_paiement_id', ''));
-    //    vd('ok begin '.$montant_paye);
-        
         //Facture
             $model_facture = DBTable::getModel(DBTable::FACTURE);
             $code_facture = Facture::generateCode();
@@ -207,12 +198,13 @@ class VersementController extends AppController
                 'montant' => $montant_paye,
                 'reduction' => $reduction,
                 'date_facture' => $date_facture,
+                'date_paiement' => $date_paiement,
                 'description' => '',
             ];
-            $result_facture = $model_facture->insert($data_facture)->execute();
+            $model_facture->insert($data_facture)->execute();
             $facure_id = Model::getId(DBTable::FACTURE, $code_facture);
         //Facture
-        //  vd('ok Facture');
+        if($debug)   vd('ok Facture');
 
         
     
@@ -220,7 +212,7 @@ class VersementController extends AppController
             $data_pension = $_POST['pension_classe'];
 
 
-            //vd( $data_pension );
+            // if($debug) vd( $data_pension );
             foreach ($data_pension as $item) {
 
                 $motif = $item['type_pension'];
@@ -291,7 +283,7 @@ class VersementController extends AppController
                     }
                 }
             }
-        //  vd('ok Pension eleve');
+        if($debug)  vd('ok Pension eleve');
 
     //PENSION ELEVE
     
@@ -314,9 +306,7 @@ class VersementController extends AppController
             $i = 0;
             $j = 0;
 
-            // vd(($items));
-            // vd(($activites));
-            $z = 0;
+            if($debug)  $z = 0;
             for ($i = 0; $i<count($items); $i++) {
 
                 $prev_index_month = Helpers::strFrMonth2Index($items[$i]['value']);
@@ -339,8 +329,7 @@ class VersementController extends AppController
 
                 $offset = $j - 1 - $i;
                 $quantite = $offset + 1;
-                // vd(" --- OFFSET : $offset ----");
-                $total = count($items);
+                if($debug)  $total = count($items);
                 // echo "---- TOtal = {$total}i = $i; j = $j; --- OFFSET : $offset ---- <br/>";
                 
                 if ($quantite < 0) break;
@@ -362,7 +351,7 @@ class VersementController extends AppController
                     'date_fin' => $end_date,
                 ];
                 
-                $result_abonnement_activite = $model_abonnement_activite->insert($data_abonnement_activite)->execute();
+                $model_abonnement_activite->insert($data_abonnement_activite)->execute();
                 $abonnement_activite_id = Model::getId(DBTable::ABONNEMENT_CANTINE, $code_abonnement_activite);
                 array_push($ids_pension_activite, $abonnement_activite_id);
 
@@ -382,38 +371,35 @@ class VersementController extends AppController
                     'date_fin' =>  $end_date
                 ];
                 
-                $result_abonnement_detail = $abonnement_detail->insert($data_abonnment_detail)->execute();
+                $abonnement_detail->insert($data_abonnment_detail)->execute();
                 $abonnement_detail_id = Model::getId(DBTable::ABONNEMENT_DETAIL, $code_abonnement_detail);
                 array_push($ids_pension_abonnement_detail, $abonnement_detail_id);
 
                 $i = $j - 1;
 
                 if ($isLast) break; 
-                if ($z == 100) die('upd to 10'); 
-                $z++;
+                if($debug)  if ($z == 100) die('upd to 10'); 
+                if($debug)  $z++;
             }
-            //vd('yep -+ Pro');
         
-            if ($k == 10) die('upd to 100'); 
-            $k++;
+            if($debug)  if ($k == 10) die('upd to 100'); 
+            if($debug)  $k++;
         
         }
-        // vd('ok Activité');
+        if($debug)  vd('ok Activité');
+
     //ACTIVITE
 
         
     //CANTINE
             
-        
         $cantines = $_POST['cantines'];
            
         $items = $cantines['recapitulatif'];
         
-        $hasDiscountinous = true;
         $i = 0;
         $j = 0;
-        $k = 0;
-        //vd('--- total ---'. count($items));
+        if ($debug) $k = 0;
 
         for ($i = 0; $i<count($items); $i++) {
 
@@ -437,11 +423,11 @@ class VersementController extends AppController
 
             $offset = $j - 1 - $i;
             $quantite = $offset + 1;
-            // vd(" --- OFFSET : $offset ----");
-            
             
             if ($quantite < 0) break;
             $quantite = ($isLast)? 1 : $offset;
+            $total = count($items);
+            if ($debug) echo "---- total = {$total} i = $i; j = $j; ----- LAST : {$isLast} --- OFFSET : $offset ---- <br/>";
 
             $start_date = Helpers::getFirstDayOfMonthByStrFrMonth( $items[$i]['value'] );
             $end_date = Helpers::getLastDayOfMonthByStrFrMonth(  Helpers::addFrMonth( $items[$i]['value'], $offset) );
@@ -458,12 +444,11 @@ class VersementController extends AppController
                 'date_fin' => $end_date,
             ];
             
-            $result_abonnement_cantine = $model_cantine->insert($data_abonnment_cantine)->execute();
+            $model_cantine->insert($data_abonnment_cantine)->execute();
             $abonnement_cantine_id = Model::getId(DBTable::ABONNEMENT_CANTINE, $code_cantine);
             array_push($ids_pension_cantine, $abonnement_cantine_id);
 
             $abonnement_detail = DBTable::getModel(DBTable::ABONNEMENT_DETAIL);
-            // vd('ok -- Cant ---');
             $code_abonnement_detail = AbonnementDetail::generateCode();
 
             $data_abonnment_detail = [
@@ -479,12 +464,14 @@ class VersementController extends AppController
             $abonnement_detail->insert($data_abonnment_detail)->execute();
             $abonnement_detail_id = Model::getId(DBTable::ABONNEMENT_DETAIL, $code_abonnement_detail);
             array_push($ids_pension_abonnement_detail, $abonnement_detail_id);
-            $i = $j - 1;
+            if ($debug) $k++;
+
+            if ($debug) if($k==10) die('KO');
+
+            if ($isLast) break; 
+            $i = $j - 1; 
         }
-        //vd('ok Cantine');
-
-
-   
+        if($debug) vd('ok Cantine');
 
     //CANTINE
 
@@ -494,7 +481,6 @@ class VersementController extends AppController
         $motif = $autres['type_pension'];
         $montant = $autres['montant'];
         $reduction = $autres['remise'];
-        
 
         $model_pension_eleve = DBTable::getModel(DBTable::PENSION_ELEVE);
 
@@ -511,7 +497,7 @@ class VersementController extends AppController
             'motif' => $motif,
             'quantite' => 1
         ];
-        $result_pension_eleve = $model_pension_eleve->insert($data_pension_eleve_autre)->execute();
+        $model_pension_eleve->insert($data_pension_eleve_autre)->execute();
     //AUTRES
     
     //vd('ok Autres');
@@ -524,7 +510,24 @@ class VersementController extends AppController
         }else{
             $this->sendResponseAndExit(Helpers::toJSON('Erreur d\'enregistement à la base de données !!!', TRUE), false, 400, 'BD error : data '. $code);
         }
+
+    }
+    
+    public function imprimer_facture(){
         
+        $data = $_POST;
+        
+        //encodage des tables qui seront transferer dans une variable de session avec pour clé la reference de la facture du versement
+        $data['pension_classe'] = json_decode($data['pension_classe'], true);
+        $data['cantines'] = json_decode($data['cantines'], true);
+        $data['autres'] = json_decode($data['autres'], true);
+        $data['activites'] = json_decode($data['activites'], true);
+
+        //Acces au données de la facture par session et dans les cookies()
+        $_SESSION[$data['reference']] = $data;
+        // setcookie($data['reference'], $data, TIME_COOKIE_LONG, URL::link('facture_cantine'));
+
+        $this->renderPDF('reports.versement', compact('data'), 'facture_versement' );  
 
     }
 
