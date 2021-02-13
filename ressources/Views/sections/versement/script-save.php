@@ -10,9 +10,11 @@ use App\Helpers\Helpers;
 
 
     function sauvegarderVersement(){
-        console.log(cantines);
-        console.log(activites);
-        console.log(autres);
+        // console.log(cantines);
+        // console.log(activites);
+        // console.log(autres);
+        
+
 
         data = {
 
@@ -20,49 +22,74 @@ use App\Helpers\Helpers;
                 'cantines': cantines,
                 'autres': autres,
                 'activites': activites,
-                'eleve_id':  $('#eleve_nom_complet option:selected').val(),
-                'classe_id':  $('#classe option:selected').val(),
-                'statut_apprenant_id':  $('#statut_apprenant option:selected').val(),
-                'annee_scolaire_id':  $('#annee_scolaire option:selected').val(),
-                'type_paiement_id':  $('#type_paiement option:selected').val(),
-                'motif':  $('#motif').val(),
+                'eleve_id':  data_versement['eleve_id'],
+                'classe_id':  data_versement['classe_id'],
+                'statut_apprenant_id':  data_versement['statut_apprenant'],
+                'annee_scolaire_id':  data_versement['annee_scolaire'],
+                'type_paiement_id':  data_versement['type_paiement_id'],
+                'motif':  data_versement['motif'],
                 // "reste":  $('#reste').val(),
-                'autre':  $('#autres').val(),
-                // "reduction":  reduction,
-                'montant_paye':  $('#recap-total-bottom').val(),
-                'sous_total':  $('#recap-sous_total').val(),
-                'reduction':  $('#recap-remise').val(),
-                'nom_eleve':  $('#eleve_nom_complet option:selected').text(),
-                'date_paie':  $('#date_paie').val(),
-                'reference':  $('#reference').val(),
-                'date_facture':  '<?= date('Y-m-d') ?>' ,
-                'date_paiement':  $('#date_paie').val(),
-                // "reference": reference,
-                // "date_facture":  date_facture,
+                'autre':  data_versement['autres'],
+                'montant_paye':  data_versement['montant_paye'],
+                'sous_total':  data_versement['sous_total'],
+                'reduction':  data_versement['reduction'],
+                'nom_eleve':  data_versement['eleve_nom_complet'],
+                'reference':  data_versement['reference'],
+                'date_paiement':  data_versement['date_paiement'],
          };
 
-        $.ajax({
-            url: '<?= URL::link('versement-create');?>'+$('#eleve_nom_complet option:selected').val(),
-            type: 'post',
-            data: data,
-            dataType: 'json',
-            beforeSend:function(){
-                $(loading).show();
-            },
-            success:function(data){
-                $("#btn_home").show();
-                $("#btn_print").show();
-                $(loading).hide();
 
-               console.log(data);
 
+
+        $.blockUI({
+            // message: '<div class="ft-refresh-cw icon-spin font-medium-2">Enregsitrement en cours</div>',
+            message: '<div class="semibold"><span class="ft-refresh-cw icon-spin text-left"></span>&nbsp; Chargement ...</div>',
+            fadeIn: 1000,
+            timeout: 10000, //unblock after 2 seconds
+            overlayCSS: {
+                backgroundColor: '#FFF',
+                opacity: 0.8,
+                cursor: 'wait'
             },
-            error: function (textStatus, errorThrown) {
-                Success = false;
-                console.log(textStatus, errorThrown);
+            css: {
+                border: 0,
+                padding: '10px 15px',
+                color: '#fff',
+                width: 'auto',
+                left: '45%',
+                backgroundColor: '#333'
+            },
+            onBlock: function() {
+                $.ajax({
+                    url: '<?= URL::link('versement-create');?>'+$('#eleve_nom_complet option:selected').val(),
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    beforeSend:function(){
+                        $(loading).show();
+                    },
+                    success:function(data){
+                        $('#btn_save').hide()
+                        $('#btn_back').hide()
+
+                        $('#btn_home').show()
+                        $('#btn_print').show()
+
+                        $(loading).hide()
+                        // message de notification
+
+                        flash_msg(data)
+
+                        console.log(data)
+
+                    },
+                    error: function (textStatus, errorThrown) {
+                        Success = false;
+                        console.log(textStatus, errorThrown);
+                    }
+                });               
             }
         });
-
 
     }
 

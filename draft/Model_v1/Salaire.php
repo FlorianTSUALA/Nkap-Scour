@@ -14,7 +14,7 @@ class Salaire_v1 extends Model implements FrequentlyReapeat
     
     const PERSONNEL_ID = "personnel_id";
     const MONTANT = "montant";
-    const DATE_PAIE = "date_paie";
+    const DATE_PAIEMENT = "date_paiement";
 
     public function __construct(Database $db, $entity = null){
         parent::__construct($db);
@@ -23,7 +23,7 @@ class Salaire_v1 extends Model implements FrequentlyReapeat
             [
                 new FormModel(false, 'personnel','Personnel' ),
                 new FormModel(true, self::MONTANT , 'Montant', InputType::NUMBER),
-                new FormModel(true, self::DATE_PAIE ,'Date de paie',InputType::DATE ),
+                new FormModel(true, self::DATE_PAIEMENT ,'Date de paie',InputType::DATE ),
 
             ];
 

@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Model\Eleve;
 use App\Model\Parcours;
-use Core\Controller\BaseRepository;
+use Core\Repository\BaseRepository;
 
 class EleveRepository extends BaseRepository{
     

@@ -5,6 +5,7 @@
 
 
     var items = []
+    var data_versement = { 'cantine': {}, 'active': {}, 'autre': {}, 'scolarite': {}, 'inscription': {}, }
     // var item = {"pension_classe_code": '', 'type_pension_code' : '', "multiplicateur": '', "recapitulatif": '', "montant": 0, "mensualite": 0, "est_mensuel": false};
 
     var cantines = {}
@@ -108,7 +109,7 @@
                         var data = JSON.parse( JSON.stringify(select.select2('data')))
                         var tranches = [];
                         data.forEach(function(element){
-                            console.log(element)
+                            // console.log(element)
                             tranches.push({'id': element.id, 'value': element.text})
                         })
 
@@ -155,7 +156,7 @@
                 var data = JSON.parse( JSON.stringify(select.select2('data')))
                 var liste_activite = [];
                 data.forEach(function(element){
-                    console.log(element)
+                    // console.log(element)
                     liste_activite.push({'id': element.id, 'value': element.text, 'montant': element.title})
                 })
 
@@ -172,7 +173,7 @@
                 var data = JSON.parse( JSON.stringify(select.select2('data')))
                 var tranches = [];
                     data.forEach(function(element){
-                    console.log(element)
+                    //console.log(element)
                     tranches.push({'id': element.id, 'value': element.text})
                 })
 

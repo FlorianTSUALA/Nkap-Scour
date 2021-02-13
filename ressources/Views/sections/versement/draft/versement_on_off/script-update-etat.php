@@ -97,9 +97,9 @@ $funtion_signataire = "Le Sécrétariat";
         $('#recap-nom').text( $('#eleve_nom_complet option:selected').text() );
         $('#recap-classe').text( $('#classe option:selected').text() );
         
-        let date_paie = $( "#date_paie" ).text();
-        console.log('date_paie');
-        console.log(date_paie);
+        let date_paiement = $( "#date_paiement" ).text();
+        console.log('date_paiement');
+        console.log(date_paiement);
         let classe = $( "#classe option:selected" ).text();
         let type_paiement = $( "#type_paiement option:selected" ).text();
         let date_facture = "<?= Helpers::getFullDate(date("Y-m-d H:i:s")); ?>";
@@ -120,7 +120,7 @@ $funtion_signataire = "Le Sécrétariat";
         $('#recap-numero_cheque').hide();
         
         $('#recap-total').text( $('#montant').val() );
-        $('#recap-remise').text( $('#reduction').val() );
+        $('#recap-reduction').text( $('#reduction').val() );
         $('#recap-reste').text( $('#reste').val() );
         $('#recap-sous_total').text( sous_total );
 

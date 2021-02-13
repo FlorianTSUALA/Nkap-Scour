@@ -79,7 +79,7 @@
                                 </tr>
                                 <tr>
                                     <td>Remise</td>
-                                    <td class="text-right"><strong id="recap-remise">0</strong></td>
+                                    <td class="text-right"><strong id="recap-reduction">0</strong></td>
                                 </tr>
                                 <!-- <tr>
                                     <td>Reste</td>

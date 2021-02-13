@@ -93,7 +93,7 @@
                                     </tr>
                                     <tr>
                                         <td>Remise</td>
-                                        <td class="text-right"><strong id="recap-remise">38983</strong></td>
+                                        <td class="text-right"><strong id="recap-reduction">38983</strong></td>
                                     </tr>
                                     <tr>
                                         <td>Reste</td>

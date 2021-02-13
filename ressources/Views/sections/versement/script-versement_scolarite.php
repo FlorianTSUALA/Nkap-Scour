@@ -35,7 +35,7 @@ use App\Helpers\S;
     var _montant = 0
     var _est_mensuel = 0
     var _mensualite = 0
-    var _reduction = 0
+    // var _reduction = 0
     var _reste = 0
 
     var cantine_prix_mois = <?= $prix_abonnement_cantine;?>
@@ -121,7 +121,7 @@ use App\Helpers\S;
             _remise = parseFloat(current['remise'])
             _remise = (isNaN(_remise))? 0 : _remise
             
-            console.log('MES MES MES '+_remise)
+            // console.log('MES MES MES '+_remise)
 
             sub_total = _montant*_multiplicateur - _remise
             msg = _multiplicateur+'*'+_montant+'-'+_remise+ ' = ' +sub_total
@@ -164,7 +164,7 @@ use App\Helpers\S;
         //Activite
 
         // //Reste
-            _reduction = parseFloat($(reduction).val())
+            // _reduction = parseFloat($(reduction).val())
             // _reste = parseFloat($(reste).val())
             // _montant_total -= _reduction
             _montant_total -= _reste

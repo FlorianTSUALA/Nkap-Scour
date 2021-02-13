@@ -45,6 +45,7 @@ class HydrahonDatabase extends Database
             try {
                 $statement->execute($queryParameters);
             } catch (Exception  $e) {
+                var_dump($e);
                 vd($e->getMessage());
             }
 

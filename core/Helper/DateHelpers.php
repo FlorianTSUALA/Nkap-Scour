@@ -157,7 +157,7 @@ trait DateHelpers
                 $index_mois = '01';
                 break;
             
-            case ($mois == 'Février' || $mois == 'février' || $mois == 'fevrier' || $mois == 'Fevrier'):
+            case ($mois == 'Février' || $mois == 'février' || $mois == 'fevrier' || $mois == 'Fevrier' || $mois == 'FÃ©vrier'):
                 $index_mois = '02';
                 break;
             

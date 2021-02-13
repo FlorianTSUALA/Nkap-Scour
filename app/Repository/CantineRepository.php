@@ -8,7 +8,7 @@ use App\Model\Facture;
 use function Core\Helper\dd;
 use App\Model\AbonnementCantine;
 
-use Core\Controller\BaseRepository;
+use Core\Repository\BaseRepository;
 use ClanCats\Hydrahon\Query\Sql\Func as F;
 
 class CantineRepository extends BaseRepository{

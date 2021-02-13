@@ -361,7 +361,7 @@
 
             $('#recap-total-top').text( $('#montant').val())
             $('#recap-total-bottom').text( $('#montant').val())
-            $('#recap-remise').text( $('#remise').val() )
+            $('#recap-reduction').text( $('#remise').val() )
             $('#recap-sous_total').text( parseInt($('#montant').val() ) )
 
             $('#recap-signataire').text( "<?=  $signataire; ?>" )

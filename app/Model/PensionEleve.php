@@ -23,7 +23,7 @@ class PensionEleve extends Model implements FrequentlyReapeat
     const MONTANT = "montant";
     const QUANTITE = "quantite";
     // const MOIS = "mois";
-    // const DATE_PAIE = "date_paie";
+    // const DATE_PAIEMENT = "date_paiement";
     // const RESTE = "reste";
     const REDUCTION = "reduction";
     // const AUTRES = "autres";
@@ -42,7 +42,7 @@ class PensionEleve extends Model implements FrequentlyReapeat
                 new FormModel(true, self::MONTANT,'Montant',InputType::NUMBER ),
                 new FormModel(true, self::QUANTITE , 'Quantite', InputType::NUMBER),
                 // new FormModel(true, self::MOIS ,'Mois',InputType::DATE ),
-                // new FormModel(true, self::DATE_PAIE ,'Date de paie',InputType::DATE ),
+                // new FormModel(true, self::DATE_PAIEMENT ,'Date de paie',InputType::DATE ),
                 // new FormModel(true, self::RESTE ,'Reste',InputType::NUMBER ),
                 new FormModel(true, self::REDUCTION , 'Réduction', InputType::NUMBER),
                 // new FormModel(true, self::AUTRES ),

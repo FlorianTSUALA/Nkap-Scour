@@ -24,7 +24,7 @@ use App\Helpers\Helpers;
                 "autres":  $('#autres').val(),
                 "reduction":  $('#reduction').val(),
                 "reference": reference,
-                "date_paie":  $( "#date_paie" ).text(),
+                "date_paiement":  $( "#date_paiement" ).text(),
                 "date_facture":  date_facture,
          };
 

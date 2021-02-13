@@ -159,7 +159,7 @@ use App\Controller\PrinterController;
                                                     </tr>
                                                     <tr>
                                                         <td>Remise</td>
-                                                        <td class="text-right"><strong id="recap-remise"><?= $remise??"";?> Fcfa</strong></td>
+                                                        <td class="text-right"><strong id="recap-reduction"><?= $remise??"";?> Fcfa</strong></td>
                                                     </tr>
                                                     <!-- <tr>
                                                         <td>Reste</td>
@@ -219,7 +219,7 @@ use App\Controller\PrinterController;
                         </div>
                     </section>
                 </div>
-            </div>
+            </div>²
 
             <div class="card-footer border-top-2 border-top-warning">
                 <span>Les Comelines</span>

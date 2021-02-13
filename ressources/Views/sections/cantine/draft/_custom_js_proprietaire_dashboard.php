@@ -217,8 +217,8 @@
                     {
                         for (var key in json) {
                             if(json.hasOwnProperty(key)){
-                                data_montant.push([new Date(json[key].date_paie), parseFloat(json[key].Montant) ]);
-                                data_total.push([new Date(json[key].date_paie), parseInt(json[key].Nombre) ]);
+                                data_montant.push([new Date(json[key].date_paiement), parseFloat(json[key].Montant) ]);
+                                data_total.push([new Date(json[key].date_paiement), parseInt(json[key].Nombre) ]);
                             }
                         }
                     }

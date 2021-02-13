@@ -60,7 +60,7 @@
                 $est_mensuel = $item['est_mensuel'];
 
                 $data['reduction'] = $reduction;
-                $data['date_paie'] = $date_paiement;
+                $data['date_paiement'] = $date_paiement;
                 $data['quantite'] = $quantite;
                 $data['libelle'] = $reference;
                 $data['motif'] = $motif;

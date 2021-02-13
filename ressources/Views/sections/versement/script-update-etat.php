@@ -10,8 +10,6 @@ $funtion_signataire = "Le Sécrétariat";
 
 <script>
 
-
-
     var reference = '<?= Helpers::generateReference(); ?>';
     var date_facture = '<?= Helpers::getFullDate(date('Y-m-d H:i:s')); ?>';
 
@@ -21,6 +19,49 @@ $funtion_signataire = "Le Sécrétariat";
         $('#recap-reference').text(reference);
         $('#recap-somme').text( $('#somme').text() );
 
+        // var data_versement = { 'cantine': {}, 'active': {}, 'autre': {}, 'scolarite': {}, 'inscription': {}, }
+        // data_versement['montant_paye_str'] = $('#recap-total-bottom').text()
+        data_versement['date_paiement'] = $('#date_paiement').val()
+
+        data_versement['eleve_nom_complet'] = $('#eleve_nom_complet option:selected').text()
+        data_versement['eleve_id'] = $('#eleve_nom_complet option:selected').val()
+
+        data_versement['reference'] = $('#reference').val()
+
+        
+        // data_versement['montant_paye'] = $('#recap-total-bottom').val()
+        
+        
+        data_versement['autres'] = $('#autres').text()
+
+        data_versement['statut_apprenant'] = $('#statut_apprenant option:selected').val()
+        data_versement['annee_scolaire'] = $('#annee_scolaire option:selected').val()
+
+
+        data_versement['type_paiement'] = $('#type_paiement option:selected').text()
+        data_versement['type_paiement_id'] = $('#type_paiement option:selected').val()
+
+        data_versement['classe'] = $( "#classe option:selected" ).text()
+        data_versement['classe_id'] = $('#classe option:selected').val()
+        console.log( data_versement['classe'] )
+        console.log( data_versement['classe_id'] )
+        data_versement['date_facture'] = "<?= Helpers::getFullDate(date("Y-m-d H:i:s")); ?>"
+        
+        // data_versement['motif'] = $('#motif').text()
+        data_versement['montant'] = $('#montant').val()
+        // data_versement['quantite'] = $('#quantite').val()
+        data_versement['somme'] = $('#somme').val()
+        
+
+        let classe = $( "#classe option:selected" ).text();
+
+
+        /***
+        
+        
+        data_versement['autres'] = $('#autres').val()
+        ***/
+       
         var body = '';
         var sous_total = 0;
         var _montant_total = 0;
@@ -62,11 +103,10 @@ $funtion_signataire = "Le Sécrétariat";
 
                         for(var tranche in current['multiplicateur'])
                         {
-                            periode += current['multiplicateur'][tranche]['value']
-                            periode += (size = ++j)? '.' : ', '
+                            periode += (current['multiplicateur'][tranche]['value'] + ((size = ++j)? '.' : ', '))
                         }
 
-                        console.log(periode);
+                        // console.log(periode);
 
                         body += '           <em class="text-muted">Concernant les tranches suivantes : '+periode+'.</em>'
 
@@ -116,21 +156,22 @@ $funtion_signataire = "Le Sécrétariat";
                 sub_total = 0;
                 tmp_montant = 0;
                 tmp_montant = cantine_prix_mois;
-                sub_total = tmp_montant*_multiplicateur - _remise;
+                sub_total = tmp_montant * _multiplicateur - _remise;
                 msg = _multiplicateur+"*"+tmp_montant+"-"+_remise+ " = " +sub_total;
 
                 // $('#COL4-Cantine').val(msg);
                 _montant_total += sub_total;
                 let j = 0;
                 let periode = ''
-                for(var tranche in current['multiplicateur'])
-                {
-                    if(size = ++j){
-                        periode += current['multiplicateur'][tranche]['value']+'.'
-                    }else{
-                        periode += current['multiplicateur'][tranche]['value'] +', '
-                    }
-                }
+                console.log("Cantine ")
+                console.log(current)
+                console.log(current['multiplicateur'])
+                console.log('++++++++++++++++++++')
+                console.log('++++++++++++++++++++')
+                console.log('++++++++++++++++++++')
+                for(var tranche in current['recapitulatif'])
+                    periode += (current['recapitulatif'][tranche]['value'] + ((size = ++j)? '.' : ', '))
+
                 body += '           <em class="text-muted">Concernant les tranches suivantes : '+periode+'.</em>'
 
                 body += '       </td>'
@@ -152,24 +193,23 @@ $funtion_signataire = "Le Sécrétariat";
             _remise = parseFloat(current['remise']);
             _remise = (isNaN(_remise))? 0 : _remise;
 
-            console.log(current)
-            console.log(parseInt(current['recapitulatif']))
+            // console.log(current)
+            // console.log(parseInt(current['recapitulatif']))
 
             let nbre_tranche = parseInt(current['recapitulatif']);
             nbre_tranche = (isNaN(nbre_tranche))? 0 : nbre_tranche;
-            console.log(parseInt(nbre_tranche))
+            // console.log(parseInt(nbre_tranche))
 
             sub_total = 0;
-            tmp_montant = 0;
             if(nbre_tranche != 0 ){
             // if(nbre_tranche != 0 && activites_souscrits != undefined && activites_souscrits.length !== 0){
                 ++i;
-                body += "<tr>";
-                body += '   <th scope="row">'+i+'</th>'
+                body += '<tr>'
+                body += '   <th scope="row">' + i + '</th>'
                 body += '       <td>'
 
 
-                tmp_montant = 0;
+                let tmp_montant = 0;
                 let tmp_montant_txt = ''
                 let msg = ''
 
@@ -178,17 +218,20 @@ $funtion_signataire = "Le Sécrétariat";
                     if(j == activites_souscrits.length - 1){
                         msg += activites_souscrits[j]['value'] + '. '
                         tmp_montant_txt += activites_souscrits[j]['montant'] ;
+                        tmp_montant += activites_souscrits[j]['montant'] ;
                     }else{
                         msg += activites_souscrits[j]['value'] + ', '
                         tmp_montant_txt += activites_souscrits[j]['montant'] + ' + '
+                        tmp_montant += activites_souscrits[j]['montant']
                     }
-                    tmp_montant += activites_souscrits[j]['montant'] ;
+                    // tmp_montant += activites_souscrits[j]['montant'] ;
                 }
 
-                sub_total += (tmp_montant*nbre_tranche);
-                tmp_montant_txt = '('+ tmp_montant_txt+')*'+nbre_tranche
+                sub_total += (tmp_montant * nbre_tranche);
+                tmp_montant = (tmp_montant * nbre_tranche);
+                tmp_montant_txt = '(' + tmp_montant_txt+')*' + nbre_tranche
 
-                body += '           <p>Pension des activités : '+msg+'</p>'
+                body += '           <p>Pension des activités : ' + msg + '</p>'
 
                 sub_total = sub_total - _remise;
 
@@ -198,21 +241,24 @@ $funtion_signataire = "Le Sécrétariat";
                 console.log(current['multiplicateur'])
                 for(var tranche in current['multiplicateur'])
                 {
-
+                    periode += (current['multiplicateur'][tranche]['value'] + ((size = ++j)? '.' : ', '))
+                }
+                
+                /*for(var tranche in current['multiplicateur'])
+                {
                     if(size = ++j){
                         periode += current['multiplicateur'][tranche]['value']+'.'
                     }else{
                         periode += current['multiplicateur'][tranche]['value'] +', '
                     }
-
-                }
+                }*/
 
                 body += '           <em class="text-muted">Concernant les tranches suivantes : '+periode+'.</em>'
                 body += '       </td>'
                 body += '       <td class="text-right">'+tmp_montant_txt +' Fcfa</td>'
                 body += '       <td class="text-right">'+ nbre_tranche +'</td>'
                 sub_total = tmp_montant * _recapitulatif * nbre_tranche;
-                body += '       <td class="text-right">'+ sub_total +' Fcfa</td>'
+                body += '       <td class="text-right">'+ tmp_montant +' Fcfa</td>'
                 body += '</tr>'
             }
         //Activite
@@ -227,7 +273,7 @@ $funtion_signataire = "Le Sécrétariat";
 
             if(_montant !== 0){
                 ++i;
-                body += "<tr>";
+                body += '<tr>';
                 body += '   <th scope="row">'+i+'</th>'
                 body += '       <td>'
                 body += '           <p>Pension : '+ current['type_pension']+'</p>'
@@ -243,24 +289,14 @@ $funtion_signataire = "Le Sécrétariat";
 
         $('#recap-body').html(body);
 
-        $('#recap-nom').text( $('#eleve_nom_complet option:selected').text() );
-        $('#recap-classe').text( $('#classe option:selected').text() );
-
-        let date_paie = $( "#date_paie" ).text();
-        console.log('date_paie');
-        console.log(date_paie);
-        let classe = $( "#classe option:selected" ).text();
-        let type_paiement = $( "#type_paiement option:selected" ).text();
-        let date_facture = "<?= Helpers::getFullDate(date("Y-m-d H:i:s")); ?>";
-
-        $('#recap-date').text( date_facture );
-
-        $('#recap-description').text( $('#motif').text() );
-        $('#recap-prix').text( $('#montant').text() );
-        $('#recap-quantite').text( $('#quantite').text() );
-        $('#recap-somme').text( $('#somme').text() );
-
-        $('#recap-mode_paiement').text( $('#type_paiement option:selected').text() );
+        $('#recap-nom').text( data_versement['eleve_nom_complet'] );
+        $('#recap-classe').text( data_versement['classe'] );
+        $('#recap-date').text( data_versement['date_facture'] );
+        $('#recap-description').text( data_versement['motif'] );
+        $('#recap-prix').text( data_versement['montant'] );
+        $('#recap-quantite').text( data_versement['quantite'] );
+        $('#recap-somme').text( data_versement['somme'] );
+        $('#recap-mode_paiement').text( data_versement['type_paiement'] );
 
         //NON PRIS EN COMPTE
         $('#recap-banque').hide();
@@ -275,12 +311,18 @@ $funtion_signataire = "Le Sécrétariat";
             reduction += (isNaN(parseFloat($(this).val())))? 0 : parseFloat($(this).val());
         });
 
-        $('#recap-total-top').text(   $('#montant').val());
-        $('#recap-total-bottom').text( $('#montant').val());
-        $('#recap-remise').text( reduction );
+
+        data_versement['reduction'] = reduction
+        data_versement['montant_paye'] =  $('#somme').val()
+        data_versement['sous_total'] = data_versement['montant_paye'] -  data_versement['reduction']
+
+
+        $('#recap-total-top').text(   data_versement['montant'] );
+        $('#recap-total-bottom').text( data_versement['montant'] );
+        $('#recap-reduction').text( data_versement['reduction'] );
         // $('#recap-reste').text( $('#reste').val() );
-        $('#recap-sous_total').text( parseInt($('#montant').val()) );
-        // $('#recap-sous_total').text( parseInt($('#montant').val() -  $('#reste').val()) );
+        // $('#recap-sous_total').text( parseInt(data_versement['montant'] ) );
+        $('#recap-sous_total').text( parseInt( data_versement['montant'] ) -  data_versement['reduction'] )
 
         $('#recap-signataire').text( "<?=  $signataire; ?>" );
         $('#recap-funtion_signataire').text(  "<?= $funtion_signataire; ?>" );

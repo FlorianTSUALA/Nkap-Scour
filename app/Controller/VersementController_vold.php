@@ -19,7 +19,7 @@ use App\Model\AbonnementCantine;
 use App\Model\AbonnementActivite;
 use ClanCats\Hydrahon\Query\Expression as Ex;
 
-class VersementController extends AppController
+class VersementController_old extends AppController
 {
     
     public function __construct()
@@ -178,7 +178,7 @@ class VersementController extends AppController
         // $autre =  Request::getSecParam('autre');
         // $reduction =  Request::getSecParam('reduction');
         $reference =  Request::getSecParam('reference', 0);
-        $date_paiement =  Request::getSecParam('date_paie');
+        $date_paiement =  Request::getSecParam('date_paiement');
         // $date_paiement =  date('Y-m-d H:i:s');
 
         $statut_apprenant_id = Model::getId(DBTable::STATUT_APPRENANT, Request::getSecParam('statut_apprenant_id', ''));
@@ -434,7 +434,7 @@ class VersementController extends AppController
                 $reduction = $data_pension['remise'];
                 $type_pension_id = $data_pension['type_pension_code'];
                 $pension_classe_id = $data_pension['pension_classe_code'];
-                $est_mensuel = $data_pension['est_mentuel'];
+                $est_mensuel = $data_pension['est_mensuel'];
                 $quantite = $data_pension['recapitulatif'];
 
                 if($est_mensuel == 1){    

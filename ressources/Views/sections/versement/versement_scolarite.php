@@ -349,7 +349,7 @@
                                                                             <fieldset class="mb-1">
                                                                                 <h5>Autres</h5>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" class="form-control " value=""  id="COL2-Autres"  name="COL2-Autres"  placeholder="" />   
+                                                                                    <input type="text" value="Boisson" class="form-control " value=""  id="COL2-Autres"  name="COL2-Autres"  placeholder="" />   
                                                                                 </div>
                                                                             </fieldset>
                                                                         </div>
@@ -358,7 +358,7 @@
                                                                             <fieldset class="mb-1">
                                                                                 <h5>Montant</h5>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" class="form-control " value="0"  id="NUMBER-COL3-Autres"  name=""    placeholder="">
+                                                                                    <input type="number" value="5000" class="form-control " value="0"  id="NUMBER-COL3-Autres"  name=""    placeholder="">
                                                                                 </div>
                                                                             </fieldset>
                                                                         </div> 
@@ -368,7 +368,7 @@
                                                                             <fieldset class="mb-1">
                                                                                 <h5>Reduction</h5>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" class="form-control reduction"  id="COL5-Autres" value="0"  name="COL5-Autres"   placeholder="" />
+                                                                                    <input type="number" value="500" class="form-control reduction"  id="COL5-Autres" value="0"  name="COL5-Autres"   placeholder="" />
                                                                                 </div>
                                                                             </fieldset>
                                                                         </div>
@@ -404,9 +404,9 @@
 <!-- Date de versement -->
                                                                         <div class="col-md-6">
                                                                             <div class="form-group row">
-                                                                                <label for="date_paie" class="col-4 col-form-label">Date de versement&nbsp;:</label>
+                                                                                <label for="date_paiement" class="col-4 col-form-label">Date de versement&nbsp;:</label>
                                                                                 <div class="col-8">
-                                                                                    <input type="date" class="form-control" value="<?= date("Y-m-d");?>" id="date_paie" name="date_paie" />
+                                                                                    <input type="date" class="form-control" value="<?= date("Y-m-d");?>" id="date_paiement" name="date_paiement" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>

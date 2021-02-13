@@ -100,7 +100,7 @@ data_facture['total_day']
                         // message de notification
                         flash_msg(data)
 
-                    console.log(data)
+                        console.log(data)
 
                     },
                     error: function (textStatus, errorThrown) {

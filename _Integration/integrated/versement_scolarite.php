@@ -224,9 +224,9 @@
 
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group row">
-                                                                                    <label for="date_paie" class="col-4 col-form-label">Date de versement&nbsp;:</label>
+                                                                                    <label for="date_paiement" class="col-4 col-form-label">Date de versement&nbsp;:</label>
                                                                                     <div class="col-8">
-                                                                                        <input type="date" class="form-control" value="<?= date("Y-m-d");?>" id="date_paie" name="date_paie" />
+                                                                                        <input type="date" class="form-control" value="<?= date("Y-m-d");?>" id="date_paiement" name="date_paiement" />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

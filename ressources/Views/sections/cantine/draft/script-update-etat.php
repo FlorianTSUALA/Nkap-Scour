@@ -237,9 +237,9 @@ $funtion_signataire = "Le Sécrétariat";
         $('#recap-nom').text( $('#eleve_nom_complet option:selected').text() )
         $('#recap-classe').text( $('#classe option:selected').text() )
 
-        let date_paie = $( "#date_paie" ).text()
-        console.log('date_paie')
-        console.log(date_paie)
+        let date_paiement = $( "#date_paiement" ).text()
+        console.log('date_paiement')
+        console.log(date_paiement)
         
         let classe = $( "#classe option:selected" ).text()
 
@@ -265,7 +265,7 @@ $funtion_signataire = "Le Sécrétariat";
 
         $('#recap-total-top').text( $('#montant_total').val())
         $('#recap-total-bottom').text( $('#montant_total').val())
-        $('#recap-remise').text( $('#reduction').val() )
+        $('#recap-reduction').text( $('#reduction').val() )
         console.log("La reduction "+$('#reduction').val())
         $('#recap-reste').text( $('#reste').val() )
         $('#recap-sous_total').text( parseInt($('#montant_total').val() -  $('#reste').val()) )
