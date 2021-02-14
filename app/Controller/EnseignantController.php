@@ -10,7 +10,7 @@ use App\Model\DossierParental;
 use App\Model\Parcours;
 use App\Model\StatutApprenant;
 
-class EmploieTempsController extends AppController
+class EnseignantController extends AppController
 {
     /**
      * Initialise les Models qu'on charge dans ce controller
@@ -19,6 +19,7 @@ class EmploieTempsController extends AppController
     {
         parent::__construct();
         $this->loadModel('matiere');
+
     }
 
     public function index()
@@ -29,5 +30,11 @@ class EmploieTempsController extends AppController
         // $this->render('sections.emploie_temps.emploie_temps', compact('pays', 'classes', 'statut_apprenants'));
     }
 
+ 
+    public function accueil()
+    {
+        $exemple = [];
+        $this->render('sections.enseignant.accueil', compact('exemple'));
+    }
 
 }

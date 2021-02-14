@@ -38,6 +38,13 @@ class BiblioController extends AppController
     }
     
     
+    public function accueil()
+    {
+        $exemple = [];
+        $this->render('sections.biblio.accueil', compact('exemple'));
+    }
+    
+    
     public function ajouterLivre()
     {
         # code... 

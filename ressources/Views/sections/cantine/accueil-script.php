@@ -1,17 +1,12 @@
-/*=========================================================================================
-    File Name: dashboard-fitness.js
-    Description: Dahsboard fitness js
-    ----------------------------------------------------------------------------------------
-    Item Name: Robust - Responsive Admin Theme
-    Version: 1.2
-    Author: GeeksLabs
-    Author URL: http://www.themeforest.net/user/geekslabs
-==========================================================================================*/
-(function(window, document, $) {
-    'use strict';
-    // Checkbox & Radio 1
+<?php
 
-    /*****************************************************
+use Core\Routing\URL;
+
+?>
+
+<script>
+
+      /*****************************************************
     *               Knob Card Statistics              *
     *****************************************************/
     var rtl = false;
@@ -69,61 +64,56 @@
         element: 'weekly-activity-chart',
         data: [{
             "day": Date.parse('2016-12-05'),
-            "Running": 100,
             "Walking": 40,
             "Cycling": 62
         }, {
             "day": Date.parse('2016-12-06'),
-            "Running": 150,
             "Walking": 200,
             "Cycling": 120
         }, {
             "day": Date.parse('2016-12-07'),
-            "Running": 200,
             "Walking": 105,
             "Cycling": 70
         }, {
             "day": Date.parse('2016-12-08'),
-            "Running": 125,
             "Walking": 150,
             "Cycling": 75
         }, {
             "day": Date.parse('2016-12-09'),
-            "Running": 150,
             "Walking": 275,
             "Cycling": 100
         }, {
             "day": Date.parse('2016-12-10'),
-            "Running": 200,
             "Walking": 325,
             "Cycling": 80
         }, {
             "day": Date.parse('2016-12-11'),
-            "Running": 260,
             "Walking": 130,
             "Cycling": 90
         }],
         xkey: 'day',
         xLabels:['day'],
-        ykeys: ['Running', 'Walking', 'Cycling'],
-        labels: ['Running', 'Walking', 'Cycling'],
+        ykeys: ['Walking', 'Cycling'],
+        labels: [ 'Walking', 'Cycling'],
         resize: true,
         smooth: true,
         pointSize: 3,
-        pointStrokeColors:['#967ADC', '#37BC9B', '#F6BB42'],
+        pointStrokeColors:['#37BC9B', '#F6BB42'],
         gridLineColor: '#e3e3e3',
         behaveLikeLine: true,
         numLines: 6,
         gridtextSize: 14,
         lineWidth: 3,
         hideHover: 'auto',
-        lineColors: ['#967ADC', '#37BC9B', '#F6BB42'],
+        lineColors: ['#37BC9B', '#F6BB42'],
         xLabelFormat:
                     function(x){var day=x.getDay();
                     var days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
                     return days[day];}
     });
 
+
+    
     /************************************
     *       Top Selling Categories      *
     ************************************/
@@ -133,7 +123,7 @@
 
     require.config({
         paths: {
-            echarts: '../../../app-assets/vendors/js/charts/echarts'
+            echarts: '<?= URL::base() ?>assets/app-assets/vendors/js/charts/echarts'
         }
     });
 
@@ -251,59 +241,5 @@
         }
     );
 
-    /************************************************************
-    *               Social Cards Content Slider                 *
-    ************************************************************/
-    // RTL Support
-    var rtl = false;
-    if($('html').data('textdirection') == 'rtl'){
-        rtl = true;
-    }
-    if(rtl === true)
-        $(".tweet-slider").attr('dir', 'rtl');
-    if(rtl === true)
-        $(".fb-post-slider").attr('dir', 'rtl');
-
-    // Tweet Slider
-    $(".tweet-slider").unslider({
-        autoplay: true,
-        arrows: false,
-        nav: false,
-        infinite: true
-    });
-
-    // FB Post Slider
-    $(".fb-post-slider").unslider({
-        autoplay: true,
-        delay: 3500,
-        arrows: false,
-        nav: false,
-        infinite: true
-    });
-
-})(window, document, jQuery);
-
-
-$(window).on("load", function(){
-
-    /************************************************************
-    *                           Maps Route                      *
-    ************************************************************/
-
-    routes_map = new GMaps({
-        div: '#routes',
-        lat: 40.673266,
-        lng: -73.943119,
-        scrollwheel: false,
-        styles: [{"featureType":"landscape","stylers":[{"hue":"#FFBB00"},{"saturation":43.400000000000006},{"lightness":37.599999999999994},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#FFC200"},{"saturation":-61.8},{"lightness":45.599999999999994},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":51.19999999999999},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":52},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#0078FF"},{"saturation":-13.200000000000003},{"lightness":2.4000000000000057},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#00FF6A"},{"saturation":-1.0989010989011234},{"lightness":11.200000000000017},{"gamma":1}]}]
-    });
-
-    routes_map.drawRoute({
-        origin: [40.674072, -73.944525],
-        destination: [40.670084, -73.950436],
-        travelMode: 'walking',
-        strokeColor: '#37BC9B',
-        strokeOpacity: 0.6,
-        strokeWeight: 6
-    });
-});
+    
+</script>

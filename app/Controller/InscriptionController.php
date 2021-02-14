@@ -14,6 +14,8 @@ use App\Model\DossierParental;
 use App\Model\StatutApprenant;
 use App\Controller\Admin\AppController;
 
+use function Core\Helper\dd;
+
 class InscriptionController extends AppController
 {
     /**
@@ -37,6 +39,8 @@ class InscriptionController extends AppController
     public function index()
     {
         $this->app->setTitle('Inscription d\'un(e) élève  - Comelines');
+        dd( $this->pays);
+        
         $pays = $this->pays->all();
         $classes = $this->classe->all();
         $statut_apprenants = $this->statut_apprenant->all();

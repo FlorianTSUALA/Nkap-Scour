@@ -10,7 +10,7 @@ use App\Model\DossierParental;
 use App\Model\Parcours;
 use App\Model\StatutApprenant;
 
-class EmploieTempsController extends AppController
+class EmploiTempsController extends AppController
 {
     /**
      * Initialise les Models qu'on charge dans ce controller
@@ -27,6 +27,13 @@ class EmploieTempsController extends AppController
         
         $this->render('sections.emploie_temps.emploie_temps');
         // $this->render('sections.emploie_temps.emploie_temps', compact('pays', 'classes', 'statut_apprenants'));
+    }
+
+    
+    public function accueil()
+    {
+        $exemple = [];
+        $this->render('sections.emploi_temps.accueil', compact('exemple'));
     }
 
 

@@ -369,5 +369,3 @@ $include_footer_script = ob_get_clean();
       </div>
     </div>
     </div>
-
-:

@@ -1,6 +1,6 @@
 <?php
 
-use App\Helpers\HTMLHelper;
+use App\Helpers\Helpers;
 use Core\Routing\URL;
 
 ?>
@@ -38,7 +38,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Nom :</strong>
 
-                                        <em  id="recap-nom_eleve" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-nom_eleve" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -50,7 +50,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Prénom :</strong>
 
-                                        <em  id="recap-prenom_eleve" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-prenom_eleve" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Lieu de naissance :</strong>
 
-                                        <em  id="recap-lieu_naissance_eleve" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-lieu_naissance_eleve" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -72,7 +72,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Date de naissance:</strong>
 
-                                        <em  id="recap-date_naissance_eleve" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-date_naissance_eleve" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Sexe :</strong>
 
-                                        <em  id="recap-sexe_eleve" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-sexe_eleve" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -94,7 +94,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Pays :</strong>
 
-                                        <em  id="recap-pays_eleve" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-pays_eleve" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Classe :</strong>
 
-                                        <em  id="recap-classe_eleve" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-classe_eleve" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -116,7 +116,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Statut de l'élève :</strong>
 
-                                        <em  id="recap-statut_apprenant_eleve" class="col-6"><?= HTMLHelper::repeatChar();?> </em>
+                                        <em  id="recap-statut_apprenant_eleve" class="col-6"><?= Helpers::repeatChar();?> </em>
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Nom de l'ancienne école  :</strong>
 
-                                        <em  id="recap-ecole" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-ecole" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -140,7 +140,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Classe de l'an dernier :</strong>
 
-                                        <em  id="recap-classe" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-classe" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Contact de l'école :</strong>
 
-                                        <em  id="recap-telephone" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-telephone" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -164,7 +164,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Prénom d'usage :</strong>
 
-                                        <em  id="recap-prenom_usage" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-prenom_usage" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -198,7 +198,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Nom du père :</strong>
 
-                                        <em  id="recap-nom_pere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-nom_pere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -210,7 +210,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Prénom du père :</strong>
 
-                                        <em  id="recap-prenom_pere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-prenom_pere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +221,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Pays du père:</strong>
 
-                                        <em  id="recap-pays_pere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-pays_pere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -233,7 +233,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Employeur du père:</strong>
 
-                                        <em  id="recap-employeur_pere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-employeur_pere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -244,7 +244,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Profession du père:</strong>
 
-                                        <em  id="recap-profession_pere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-profession_pere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -256,7 +256,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">BP du père:</strong>
 
-                                        <em  id="recap-lieu_travail_pere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-lieu_travail_pere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -268,7 +268,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Téléphone du père:</strong>
 
-                                        <em  id="recap-telephone_pere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-telephone_pere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -280,7 +280,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Bureau du père :</strong>
 
-                                        <em  id="recap-bureau_pere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-bureau_pere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -291,7 +291,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Adresse email du père:</strong>
 
-                                        <em  id="recap-email_pere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-email_pere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -303,7 +303,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Quartier du père:</strong>
 
-                                        <em  id="recap-quartier_pere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-quartier_pere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -326,7 +326,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Nom de la mère :</strong>
 
-                                        <em  id="recap-nom_mere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-nom_mere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -338,7 +338,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Prénom de la mère:</strong>
 
-                                        <em  id="recap-prenom_mere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-prenom_mere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -349,7 +349,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Pays de la mère :</strong>
 
-                                        <em  id="recap-pays_mere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-pays_mere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -359,7 +359,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Employeur de la mère:</strong>
 
-                                        <em  id="recap-employeur_mere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-employeur_mere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -374,7 +374,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Profession de la mère:</strong>
 
-                                        <em  id="recap-profession_mere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-profession_mere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -386,7 +386,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">BP de la mère:</strong>
 
-                                        <em  id="recap-lieu_travail_mere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-lieu_travail_mere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -396,7 +396,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Téléphone de la mère :</strong>
 
-                                        <em  id="recap-telephone_mere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-telephone_mere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -408,7 +408,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Bureau la de mère:</strong>
 
-                                        <em  id="recap-bureau_mere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-bureau_mere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -418,7 +418,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Adresse email de la mère :</strong>
 
-                                        <em  id="recap-email_mere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-email_mere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -430,7 +430,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Quartier de la mère :</strong>
 
-                                        <em  id="recap-quartier_mere" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-quartier_mere" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -451,7 +451,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Nom de la personne à contacter en cas d'urgence:</strong>
 
-                                        <em  id="recap-nom_personne_urgence" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-nom_personne_urgence" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -463,7 +463,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Prénom de la personne à contacter en cas d'urgence:</strong>
 
-                                        <em  id="recap-prenom_personne_urgence" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-prenom_personne_urgence" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -473,7 +473,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Téléphone de la personne à contacter en cas d'urgence :</strong>
 
-                                        <em  id="recap-telephone_personne_urgence" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-telephone_personne_urgence" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -485,7 +485,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Lien :</strong>
 
-                                        <em  id="recap-lien" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-lien" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div> 
                             </div>
@@ -511,7 +511,7 @@ use Core\Routing\URL;
 
                                         <strong class="col-6">Allergies :</strong>
 
-                                        <em  id="recap-allergie" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-allergie" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -523,7 +523,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Groupe sanguin:</strong>
 
-                                        <em  id="recap-groupe_sanguin" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-groupe_sanguin" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -534,7 +534,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Maladies récurrentes :</strong>
 
-                                        <em  id="recap-maladie_recurrente" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-maladie_recurrente" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -546,7 +546,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Nom du médecin :</strong>
 
-                                        <em  id="recap-nom_medecin" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-nom_medecin" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -556,7 +556,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Téléphone du médecin:</strong>
 
-                                        <em  id="recap-telephone_medecin" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-telephone_medecin" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -568,7 +568,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Email du médecin :</strong>
 
-                                        <em  id="recap-email_medecin" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-email_medecin" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
                             </div>
@@ -578,7 +578,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Problèmes particuliers:</strong>
 
-                                        <em  id="recap-probleme_particulier" class="col-6"><?= HTMLHelper::repeatChar();?></em>
+                                        <em  id="recap-probleme_particulier" class="col-6"><?= Helpers::repeatChar();?></em>
                                     </div>
                                 </div>
 
@@ -590,7 +590,7 @@ use Core\Routing\URL;
                                     <div class="row">
                                         <strong class="col-6">Autres informations :</strong>
 
-                                        <em  id="recap-autres" class="col-6"><?= HTMLHelper::repeatChar();?> </em>
+                                        <em  id="recap-autres" class="col-6"><?= Helpers::repeatChar();?> </em>
                                     </div>
                                 </div>
                             </div>

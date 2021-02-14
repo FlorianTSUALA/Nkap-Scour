@@ -17,11 +17,12 @@ Raccourci clavier de visual studio code
 13 - Ctrl + F           =   Recherche sur la page
 14 - Ctrl + Schift + F  =   Recherche dans le projet
 15 - Ctrl + +           =   Zoom +
-16 - Ctrl + -           =   Zoom -
+16 d- Ctrl + -           =   Zoom -
 17 - Ctrl + Alt + Down  =   duplicate line or selection
 18 - Ctrl + Alt + Up    =   duplicate line or selection
 19 - Ctrl + :           =   commenter ou décommenter une ligne ou un block
 20 - Alt + Z            =   Ramener le texte long à la ligne
+20 - Ctrl + B            =   Ouvrir et fermer la sidebar
 
 
 Top extension for Dev Web

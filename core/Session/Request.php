@@ -125,7 +125,7 @@ class Request
 		return $data;
 	}
 
-    public static function saveImg(string $photo = "photo_eleve", string $name, $local_folder="img/eleve/"){
+    public static function saveImg(string $name, string $photo = "photo_eleve", $local_folder="img/eleve/"){
         // Check if the form was submitted
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Check if file was uploaded without errors
@@ -143,7 +143,7 @@ class Request
                 $maxsize = 5 * 1024 * 1024;
                 if($filesize > $maxsize) die("Errer: Erreur la taile du fichier depasse la taille limite.");
 
-                // Verify MYME type of the file
+                // Verify MYME t ype of the file
                 if(in_array($filetype, $allowed)){
                     // Check whether file exists before uploading it
                     if(file_exists("../ressources/uploads/".$local_folder . $filename)){

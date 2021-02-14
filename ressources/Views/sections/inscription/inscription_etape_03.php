@@ -1,6 +1,5 @@
 <?php
 
-use App\Helpers\HTMLHelper;
 
 ?>
 <!-- Step 3 -->

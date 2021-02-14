@@ -26,6 +26,8 @@ trait TraitCRUDController
         $this->render('sections.'.$this->folder_view_index, compact('items', 'class_name', 'fillables', 'base_route', 'title', 'create_title', 'view_title', 'update_title', 'delete_title', 'msg_delete'));
     }
 
+    
+
     public function save()
     {
         //  var_dump("Heyyyy");

@@ -22,7 +22,7 @@
                     <div class="row">
                         <div  class="col-4">
 
-                            <a href='<?= URL::link("eleve");?>' style="cursor:pointer; text-decoration: none;">
+                            <a href='<?= URL::link('scolarite_accueil');?>' style="cursor:pointer; text-decoration: none;">
                                 <div id="mydiv" class="card border-0 shadow bg-Orange  ">
                                     <div class="card-body kgs-bg-yellow">
                                         <div class="row align-items-end h3 kgs-green">
@@ -41,7 +41,7 @@
                         </div>
 
                         <div class="col-4">
-                            <a href="" style="cursor:pointer; text-decoration: none;">
+                            <a href="<?= URL::link('emploi_temps_accueil') ?>" style="cursor:pointer; text-decoration: none;">
                                 <div id="mydiv" class="card border-0 shadow  ">
                                     <div class="card-body kgs-bg-yellow">
                                         <div class="row align-items-end h3 kgs-green">
@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="col-4">
-                            <a href="" style="cursor:pointer; text-decoration: none;">
+                            <a href="<?= URL::link('biblio_accueil') ?>" style="cursor:pointer; text-decoration: none;">
                                 <div id="mydiv" class="card border-0 shadow  ">
                                     <div class="card-body kgs-bg-yellow">
                                         <div class="row align-items-end h3 kgs-green">
@@ -83,7 +83,7 @@
 
 
                         <div class="col-4">
-                            <a href="" style="cursor:pointer; text-decoration: none;">
+                            <a href="<?= URL::link('bulletin_accueil') ?>" style="cursor:pointer; text-decoration: none;">
                                 <div id="mydiv" class="card border-0 shadow  ">
                                     <div class="card-body kgs-bg-yellow">
                                         <div class="row align-items-end h3 kgs-green">
@@ -101,7 +101,7 @@
                         </div>
 
                         <div class="col-4">
-                            <a href="" style="cursor:pointer; text-decoration: none;">
+                            <a href="<?= URL::link('cantine_accueil') ?>" style="cursor:pointer; text-decoration: none;">
                                 <div id="mydiv" class="card border-0 shadow  ">
                                     <div class="card-body kgs-bg-yellow">
                                         <div class="row align-items-end h3 kgs-green">
@@ -119,7 +119,7 @@
                         </div>
 
                         <div class="col-4">
-                            <a href="" style="cursor:pointer; text-decoration: none;">
+                            <a href="<?= URL::link('club_accueil') ?>" style="cursor:pointer; text-decoration: none;">
                                 <div  id="mydiv" class="card border-0 shadow  ">
                                     <div class="card-body kgs-bg-yellow">
                                         <div class="row align-items-end h3 kgs-green">
@@ -146,7 +146,7 @@
 
                     <div class="row">
                         <div class="col-4">
-                            <a href="" style="cursor:pointer; text-decoration: none;">
+                            <a href="<?= URL::link('personnel_accueil') ?>" style="cursor:pointer; text-decoration: none;">
                                 <div id="mydiv" class="card border-0 shadow  ">
                                     <div class="card-body kgs-bg-yellow">
                                         <div class="row align-items-end h3 kgs-green">
@@ -164,7 +164,7 @@
                         </div>
 
                         <div class="col-4">
-                            <a href="" style="cursor:pointer; text-decoration: none;">
+                            <a href="<?= URL::link('enseignant_accueil') ?>" style="cursor:pointer; text-decoration: none;">
                                 <div id="mydiv" class="card border-0 shadow  ">
                                     <div class="card-body kgs-bg-yellow">
                                         <div class="row align-items-end h3 kgs-green">
@@ -182,7 +182,7 @@
                         </div>
 
                         <div class="col-4">
-                            <a href="" style="cursor:pointer; text-decoration: none;">
+                            <a href="<?= URL::link('comptabilite_accueil') ?>" style="cursor:pointer; text-decoration: none;">
                                 <div id="mydiv" class="card border-0 shadow  ">
                                     <div class="card-body kgs-bg-yellow">
                                         <div class="row align-items-end h3 kgs-green">
@@ -202,7 +202,7 @@
 
                     <div class="row">
                     <div class="col-4">
-                        <a href="" style="cursor:pointer; text-decoration: none;">
+                        <a href="<?= URL::link('parametrage_accueil') ?>" style="cursor:pointer; text-decoration: none;">
                             <div id="mydiv" class="card border-0 shadow  ">
                                 <div class="card-body kgs-bg-yellow">
                                     <div class="row align-items-end h3 kgs-green">

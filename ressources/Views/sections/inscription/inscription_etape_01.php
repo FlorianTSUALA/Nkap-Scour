@@ -1,10 +1,10 @@
 <?php
 
-use App\Model\Classe;
 use App\Model\Pays;
-use App\Model\StatutApprenant;
-use App\Helpers\HTMLHelper;
+use App\Model\Classe;
 use Core\Routing\URL;
+use App\Helpers\Helpers;
+use App\Model\StatutApprenant;
 
 ?>
 
@@ -31,7 +31,7 @@ use Core\Routing\URL;
     <div class="row">
         <div class="col-md-6">
             <div class="form-group row">
-                <label for="nom_eleve" class="col-4 col-form-label">Nom<?= HTMLHelper::required_input(); ?>:</label>
+                <label for="nom_eleve" class="col-4 col-form-label">Nom<?= Helpers::required_input(); ?>:</label>
                 <div class="col-8">
                     <input placeholder="Nom de l'élève" type="text" class="form-control required" id="nom_eleve" name="nom_eleve" autofocus
                            required="required" />
@@ -52,7 +52,7 @@ use Core\Routing\URL;
     <div class="row">
         <div class="col-md-6">
             <div class="form-group row">
-                <label for="date_naissance_eleve" class="col-4 col-form-label">Date de naissance<?= HTMLHelper::required_input(); ?>:</label>
+                <label for="date_naissance_eleve" class="col-4 col-form-label">Date de naissance<?= Helpers::required_input(); ?>:</label>
                 <div class="col-8">
                     <input type="date" class="form-control required" id="date_naissance_eleve" name="date_naissance_eleve"
                            required="required" />
@@ -62,7 +62,7 @@ use Core\Routing\URL;
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label for="lieu_naissance_eleve" class="col-4 col-form-label">Lieu de naissance<?= HTMLHelper::required_input(); ?>:</label>
+                <label for="lieu_naissance_eleve" class="col-4 col-form-label">Lieu de naissance<?= Helpers::required_input(); ?>:</label>
                 <div class="col-8">
                     <input placeholder="Lieu de naissance" type="text" class="form-control required" id="lieu_naissance_eleve" name="lieu_naissance_eleve"
                            required="required" />
@@ -74,7 +74,7 @@ use Core\Routing\URL;
     <div class="row">
         <div class="col-md-6">
             <div class="form-group row">
-                <label for="pays_eleve" class="col-4 col-form-label">Pays d'origine<?= HTMLHelper::required_input(); ?>:</label>
+                <label for="pays_eleve" class="col-4 col-form-label">Pays d'origine<?= Helpers::required_input(); ?>:</label>
                 <div class="col-8">
                     <select id="pays_eleve" class="select2 form-control" name="pays_eleve" required>
 
@@ -90,7 +90,7 @@ use Core\Routing\URL;
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label for="classe_eleve" class="col-4 col-form-label">Salle de classe<?= HTMLHelper::required_input(); ?>:</label>
+                <label for="classe_eleve" class="col-4 col-form-label">Salle de classe<?= Helpers::required_input(); ?>:</label>
                 <div class="col-8">
                     <select id="classe_eleve" class="select2 form-control" name="classe_eleve" required>
 
@@ -107,7 +107,7 @@ use Core\Routing\URL;
     <div class="row">
         <div class="col-md-6">
             <div class="form-group row">
-                <label class="col-4">Sexe<?= HTMLHelper::required_input(); ?>:</label>
+                <label class="col-4">Sexe<?= Helpers::required_input(); ?>:</label>
                 <div class="col-8">
                     <div class="row">
                         <div class="col-5">
@@ -128,7 +128,7 @@ use Core\Routing\URL;
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label for="statut_apprenant_eleve" class="col-4 col-form-label">Statut de l'apprenant<?= HTMLHelper::required_input(); ?>:</label>
+                <label for="statut_apprenant_eleve" class="col-4 col-form-label">Statut de l'apprenant<?= Helpers::required_input(); ?>:</label>
                 <div class="col-8">
                     <select id="statut_apprenant_eleve" class="select2 form-control" name="statut_apprenant_eleve" required>
 

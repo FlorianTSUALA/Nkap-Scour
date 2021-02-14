@@ -38,16 +38,35 @@ use App\Controller\StatutApprenantController;
 use App\Controller\TrancheScolaireController;
 use App\Controller\AbonnementActiviteController;
 use App\Controller\InscriptionActiviteController;
-use App\Controller\AffectationClasseMatiereController;
+
+use App\Controller\EnseignantController;
+use App\Controller\EmploiTempsController;
+use App\Controller\ParametrageController;
+use App\Controller\ClubController;
+use App\Controller\ScolariteController;
+use App\Controller\ComptabiliteController;
+
 //use App\Controller\CantineListeController;
+
+//ACCUEIL
+$router->addRoute('acceuil', 'acceuil', [HomeController::class, 'home']);
+
+$router->addRoute('biblio_accueil', 'biblio/accueil', [BiblioController::class, 'accueil']);
+$router->addRoute('cantine_accueil', 'cantine/accueil', [CantineController::class, 'accueil']);
+$router->addRoute('club_accueil', 'club/accueil', [ClubController::class, 'accueil']);
+$router->addRoute('personnel_accueil', 'personnel/accueil', [PersonnelController::class, 'accueil']);
+$router->addRoute('enseignant_accueil', 'enseignant/accueil', [EnseignantController::class, 'accueil']);
+$router->addRoute('bulletin_accueil', 'bulletin/accueil', [BulletinController::class, 'accueil']);
+$router->addRoute('emploi_temps_accueil', 'emploi_temps/accueil', [EmploiTempsController::class, 'accueil']);
+$router->addRoute('parametrage_accueil', 'parametrage/accueil', [ParametrageController::class, 'accueil']);
+$router->addRoute('comptabilite_accueil', 'comptabilite/accueil', [ComptabiliteController::class, 'accueil']);
+$router->addRoute('scolarite_accueil', 'scolarite/accueil', [ScolariteController::class, 'accueil']);
+
 
 //Login
 $router->addRoute('login', '', [LoginController::class, 'index']);
 $router->addRoute('postlogin', 'login', [LoginController::class, 'login']);
 $router->addRoute('logout', 'logout', [LoginController::class, 'logout']);
-
-//Acceuil
-$router->addRoute('acceuil', 'acceuil', [HomeController::class, 'home']);
 
 //Inscription
 $router->addRoute('inscrire', 'inscription', [InscriptionController::class, 'index']);
@@ -60,6 +79,7 @@ $router->addRoute('eleve_search_info', 'eleve_info/search/{search}', [EleveContr
 $router->addRoute('eleve_search_detail', 'eleve_detail/search/{code}', [EleveController::class, 'eleve_detail']);
 
 //versement
+$router->addRoute('versement_accueil', 'versement/accueil', [VersementController::class, 'accueil']);
 $router->addRoute('versement', 'versement', [VersementController::class, 'index']);
 $router->addRoute('versement-create', 'versement/create/{code}', [VersementController::class, 'save']);
 $router->addRoute('versement_facture', 'versement/print/{code}', [VersementController::class, 'imprimer_facture']);
@@ -163,7 +183,6 @@ $router->crudRoute('cantine', CantineController::class);
 $router->addRoute('abonnement_cantine', 'cantine/abonnement', [CantineController::class, 'abonnement_cantine']);
 $router->addRoute('enregistrement_cantine', 'cantine/create/{code}', [CantineController::class, 'save']);
 $router->addRoute('facture_cantine', 'cantine/facture/{code}', [CantineController::class, 'imprimer_facture']);
-
 $router->addRoute('cantine_liste', 'cantine/detail', [CantineController::class, 'liste_abonnee']);
 $router->addRoute('cantine_abonnement_info', 'cantine/abonnement_info/', [CantineController::class, 'abonnement_info']);
 

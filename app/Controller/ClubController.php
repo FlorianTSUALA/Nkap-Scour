@@ -2,15 +2,8 @@
 
 namespace App\Controller;
 
-use App\Model\Classe;
-use App\Model\Pays;
-use App\Model\Eleve;
-use Core\Session\Request;
-use App\Model\DossierParental;
-use App\Model\Parcours;
-use App\Model\StatutApprenant;
 
-class EmploieTempsController extends AppController
+class ClubController extends AppController
 {
     /**
      * Initialise les Models qu'on charge dans ce controller
@@ -19,6 +12,7 @@ class EmploieTempsController extends AppController
     {
         parent::__construct();
         $this->loadModel('matiere');
+
     }
 
     public function index()
@@ -29,5 +23,11 @@ class EmploieTempsController extends AppController
         // $this->render('sections.emploie_temps.emploie_temps', compact('pays', 'classes', 'statut_apprenants'));
     }
 
+ 
+    public function accueil()
+    {
+        $exemple = [];
+        $this->render('sections.club.accueil', compact('exemple'));
+    }
 
 }

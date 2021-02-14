@@ -51,6 +51,14 @@ class CantineController extends AppController
         
     }
 
+    public function accueil()
+    {
+        $welcome_msg = '';
+        
+        $exemple = [];
+        $this->render('sections.cantine.accueil', compact('exemple'));
+    }
+
     /*
 
         $eleves = DBTable::getModel('eleve')
