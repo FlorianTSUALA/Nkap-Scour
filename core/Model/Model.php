@@ -8,6 +8,7 @@ use App\Helpers\Helpers;
 use Core\Database\Builder;
 use Core\Model\HydrahonModel;
 
+use function Core\Helper\dd;
 use function Core\Helper\vd;
 
 /**
@@ -41,12 +42,16 @@ class Model
 	 * @param none
 	 * @return none
 	 */
-	public function __construct() {
+	public function __construct($modelName = NULL) {
 		$this->has_table = true;
-		$this->init_table_name(get_class($this));
+		if($modelName == NULL)
+			$this->init_table_name(get_class($this));
+		else
+			$this->init_table_name($modelName);
+
 		$this->db = BaseApp::getDBInstance();
 	}
-
+	
 	public static function _table($table_name) {
 		// vd($table_name);
 		return Builder::get()->table($table_name);
@@ -82,7 +87,6 @@ class Model
 	}
 
 	public function query(string $statement, array $attributes = [], bool $onlyOne = false) {
-		
 		if($this->entity instanceof Model)
 			$this->entity = null;
 		if (empty($attributes)) {

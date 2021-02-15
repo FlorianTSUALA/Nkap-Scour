@@ -19,6 +19,7 @@ class VueAbonnementCantine extends Model implements FrequentlyReapeat
     const Matricule = "matricule";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(false, self::CLASSE, 'classe'),

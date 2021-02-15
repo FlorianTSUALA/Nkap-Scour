@@ -18,6 +18,7 @@ class Periode extends Model implements FrequentlyReapeat
     const DATE_FIN = "date_fin";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(false, self::SESSION_ID, 'Session', InputType::SELECT2),

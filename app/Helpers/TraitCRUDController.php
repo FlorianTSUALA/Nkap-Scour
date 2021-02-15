@@ -7,6 +7,8 @@ use Core\Session\Request;
 use App\Helpers\HTMLHelper;
 use Core\HTML\Form\FormModel;
 
+use function Core\Helper\dd;
+
 trait TraitCRUDController
 {
 
@@ -46,10 +48,7 @@ trait TraitCRUDController
     }
 
     public function getall(){
-        // echo '<pre>';
-        // var_dump($this->{$this->vairant}->all());
-        // echo '</pre>';
-        // die();
+        // dd($this->{$this->vairant}->all());
         return $this->{$this->vairant}->all();
     }
 

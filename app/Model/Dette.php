@@ -19,6 +19,7 @@ class Dette extends Model implements FrequentlyReapeat
     const MONTANT_INTERET = "montant_interet";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
         [
             new FormModel(true, self::MOTIF, 'Motif'),

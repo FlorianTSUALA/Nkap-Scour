@@ -18,6 +18,7 @@ class AntecedentScolaire extends Model implements FrequentlyReapeat
     const ECOLE = "ecole";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
         [
             new FormModel(true,self::CLASSE),

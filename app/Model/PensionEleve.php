@@ -29,6 +29,7 @@ class PensionEleve extends Model implements FrequentlyReapeat
     // const AUTRES = "autres";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(false, 'type_pension','Type de pension'),

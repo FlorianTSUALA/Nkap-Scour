@@ -95,7 +95,7 @@ class BaseApp
 	 * @param string $model Nom du modèle qu'on va charger
 	 * @return object Retourne le modèle demandé
 	 */
-	public function geMtModel(string $model) {
+	public function getModel(string $model) {
 		$className = 'App\Model\\' . BaseHelpers::toPascalCase($model);
 		return	new $className($model);
 	}

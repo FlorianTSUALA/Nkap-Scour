@@ -15,6 +15,7 @@ class TrancheHoraire extends Model implements FrequentlyReapeat
     const TEMPS_FIN = "temps_fin";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(true, self::LIBELLE ),

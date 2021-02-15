@@ -57,12 +57,12 @@ class LoginController extends AppController
      **/
     public function home()
     {
-        $this->app->setTitle('Acceuil - Comelines');
+        $this->app->setTitle('accueil - Comelines');
         
         $this->session->flash("Hello  ".$this->session->get(S::PERS_NOM)."!!!<br> Nous sommes ravis de vous revoir!!!");
 
         header("HTTP/1.1 200 OK");
-        header('Location: acceuil');
+        header('Location: accueil');
         
     }
 

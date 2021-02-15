@@ -200,7 +200,7 @@ use Core\Routing\URL;
         if (form.checkValidity() === true) {
             form = $('#form_versement');
             $.ajax({  
-                    url: "<?= URL::link('acceuil'); ?>",  
+                    url: "<?= URL::link('accueil'); ?>",  
                     method: "POST",  
                     data: form.serialize(),  
                     beforeSend:function(){

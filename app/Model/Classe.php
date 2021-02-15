@@ -15,6 +15,7 @@ class Classe extends Model implements FrequentlyReapeat
     const CYCLE_ID = "cycle_id";
 
     public function __construct(){
+        parent::__construct();
         $cycles = Cycle::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $this->fillables =
         [

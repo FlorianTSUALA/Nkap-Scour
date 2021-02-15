@@ -18,7 +18,7 @@ class InputType
 	const TIME = 'time';
 	const TEL = 'tel';
 	const CHECKBOX = 'checkbox';
-
+	//@TODO FILE/ISBN format
 
 
 	const TEXTAREA = 'textarea';

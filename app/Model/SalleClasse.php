@@ -15,6 +15,7 @@ class SalleClasse extends Model implements FrequentlyReapeat
     const CLASSE_ID = "classe_id";
 
     public function __construct(){
+        parent::__construct();
         $classes = Classe::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $this->fillables =
         [

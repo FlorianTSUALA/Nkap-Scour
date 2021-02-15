@@ -16,7 +16,9 @@ class Matiere extends Model implements FrequentlyReapeat
     const COULEUR = "couleur";
     const ABREVIATION = "abreviation";
 
-    public function __construct(){        $disciplines = Discipline::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
+    public function __construct(){        
+        parent::__construct();
+        $disciplines = Discipline::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $this->fillables =
             [
                 new FormModel(false, self::DISCIPLINE_ID, 'Discipline', InputType::SELECT2, $disciplines, '', 'Choisir un cycle', true, 'select2 form-control'),

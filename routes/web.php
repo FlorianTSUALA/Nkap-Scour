@@ -1,7 +1,8 @@
 <?php
 
-use App\Controller\HomeController;
+use App\Controller\ClubController;
 
+use App\Controller\HomeController;
 use App\Controller\PaysController;
 use App\Controller\TestController;
 use App\Controller\CoursController;
@@ -20,17 +21,24 @@ use App\Controller\ActiviteController;
 use App\Controller\BulletinController;
 use App\Controller\DocumentController;
 use App\Controller\PersonnelController;
+use App\Controller\ScolariteController;
 use App\Controller\VersementController;
 use App\Controller\Auth\LoginController;
 use App\Controller\DisciplineController;
+use App\Controller\EnseignantController;
+use App\Controller\EmploiTempsController;
 use App\Controller\InscriptionController;
+use App\Controller\ParametrageController;
 use App\Controller\SalleClasseController;
 use App\Controller\TypePensionController;
+use App\Controller\ComptabiliteController;
 use App\Controller\EmploieTempsController;
+use App\Controller\EtatDocumentController;
 use App\Controller\TypeActiviteController;
 use App\Controller\TypePaiementController;
 use App\Controller\AnneeScolaireController;
 use App\Controller\PensionClasseController;
+
 use App\Controller\TypePersonnelController;
 use App\Controller\PrixAbonnementController;
 use App\Controller\TrancheHoraireController;
@@ -39,17 +47,10 @@ use App\Controller\TrancheScolaireController;
 use App\Controller\AbonnementActiviteController;
 use App\Controller\InscriptionActiviteController;
 
-use App\Controller\EnseignantController;
-use App\Controller\EmploiTempsController;
-use App\Controller\ParametrageController;
-use App\Controller\ClubController;
-use App\Controller\ScolariteController;
-use App\Controller\ComptabiliteController;
-
 //use App\Controller\CantineListeController;
 
 //ACCUEIL
-$router->addRoute('acceuil', 'acceuil', [HomeController::class, 'home']);
+$router->addRoute('accueil', 'accueil', [HomeController::class, 'home']);
 
 $router->addRoute('biblio_accueil', 'biblio/accueil', [BiblioController::class, 'accueil']);
 $router->addRoute('cantine_accueil', 'cantine/accueil', [CantineController::class, 'accueil']);
@@ -127,6 +128,9 @@ $router->crudRoute('pension_classe', PensionClasseController::class);
 
 //document
 $router->crudRoute('document', DocumentController::class);
+
+//etat_document
+$router->crudRoute('etat_document', EtatDocumentController::class);
 
 //domaine
 $router->crudRoute('domaine', DomaineController::class);
@@ -214,6 +218,7 @@ $router->crudRoute('emploie_temps', EmploieTempsController::class);
 
 // FOR DEVELOPEMENT TEST FUNCTION
 $router->addRoute('test', 'test', [TestController::class, 'test']);
+$router->addRoute('testr', 'testr', [TestController::class, 'testr']);
 $router->addRoute('test-sql', 'testsql', [TestController::class, 'testSQL']);
 $router->addRoute('test-pdf', 'testpdf', [TestController::class, 'testpdf']);
 $router->addRoute('test-alert', 'test', [TestController::class, 'testAlert']);

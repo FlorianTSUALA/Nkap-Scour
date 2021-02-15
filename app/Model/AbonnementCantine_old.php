@@ -18,10 +18,11 @@ class AbonnementCantine_old extends Model implements FrequentlyReapeat
     const DATE_PAIEMENT = "date_paiement";
     const DATE_DEBUT = "date_debut";
     const DATE_FIN = "date_fin";
-    const MONTANT = "montant";
+    // const MONTANT = "montant";
     const PERIODE = "periode";
     
     public function __construct(){
+        parent::__construct();
         $this->fillables =
         [
             new FormModel(true, self::MONTANT, self::MONTANT, InputType::NUMBER, [], '', '', false),

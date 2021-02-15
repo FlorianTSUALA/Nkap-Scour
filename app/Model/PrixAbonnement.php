@@ -20,9 +20,13 @@ class PrixAbonnement extends Model implements FrequentlyReapeat
 
 
     public function __construct(){
+        parent::__construct();
+        
         $type_abonnements = Activite::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         array_push($type_abonnements, array('id' => 0, 'value' => 'Cantine'));
-        $periode = array(['id' => 'JOUR', 'value' => 'Jour'], ['id' => 'SEMAINE', 'value' => 'Semaine'], ['id' => 'MOIS', 'value' => 'Mois'], ['id' => 'ANNEE', 'value' => 'Année']);
+        // $periode = array(['id' => 'JOUR', 'value' => 'Jour'], ['id' => 'SEMAINE', 'value' => 'Semaine'], ['id' => 'MOIS', 'value' => 'Mois'], ['id' => 'ANNEE', 'value' => 'Année']);
+        $periode = array(['id' => 'JOUR', 'value' => 'Jour'], ['id' => 'SEMAINE', 'value' => 'Semaine'], ['id' => 'MOIS', 'value' => 'Mois']);
+        
         $this->fillables =
             [
                 new FormModel(true, self::TYPE_ABONNEMENT_ID, 'Motif', InputType::SELECT2, $type_abonnements, '', 'Choisir un motif', true, 'select2 form-control'),

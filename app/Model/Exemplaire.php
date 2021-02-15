@@ -3,9 +3,11 @@
 namespace App\Model;
 
 use Core\Model\Model;
-use Core\HTML\Form\FormModel;        
+use App\Model\Document;
+use App\Model\EtatDocument;
 use Core\HTML\Form\InputType;
 use Core\Model\HydrahonModel;
+use Core\HTML\Form\FormModel;        
 
 class Exemplaire extends Model implements FrequentlyReapeat
 {
@@ -14,15 +16,23 @@ class Exemplaire extends Model implements FrequentlyReapeat
     
     const DOCUMENT_ID = "document_id";
     const ETAT_DOCUMENT_ID = "etat_document_id";
-    const CODE = "code";
+    const CODE_ENREGISTRMENT = "code_enregistrment";
+    const CODE_BARRE = "code_barre";
+    const PRIX = "prix";
     const DATE_ACQUISITION = "date_acquisition";
 
+
     public function __construct(){
+        parent::__construct();
+        //Tenir compte de l'edition du livre et de bien d'autres choses
+        $documents = Document::table()->select([ 'code' => 'id' , 'titre' => 'value'])->where('visibilite', 1)->get();
+        $etat_documents = EtatDocument::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
+
         $this->fillables =
             [
-                new FormModel(false, 'document','Document'),
-                new FormModel(false, 'etat_document','Etat du document'),
-                new FormModel(true, self::CODE ,'Code',InputType::TEXT ),
+                new FormModel(false, self::DOCUMENT_ID, 'Document', InputType::SELECT2, $documents, '', 'Choisir un document', true, 'select2 form-control'),
+                new FormModel(false, self::ETAT_DOCUMENT_ID,'Etat du document', InputType::SELECT2, $etat_documents, '', 'Choisir un état du document', true, 'select2 form-control'),
+                new FormModel(true, self::CODE_ENREGISTRMENT ,'Numero d\'enregistrement', InputType::TEXT ),
                 new FormModel(true, self::DATE_ACQUISITION ,'Date d\'acquisition',InputType::DATE ),
 
             ];

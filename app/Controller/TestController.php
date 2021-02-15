@@ -20,6 +20,7 @@ use App\Model\StatutApprenant;
 use App\Model\AntecedentScolaire;
 use App\Repository\ClasseRepository;
 use App\Repository\CantineRepository;
+use App\Repository\DocumentRepository;
 use ClanCats\Hydrahon\Query\Expression;
 use App\Repository\AnneeScolaireRepository;
 use Core\HTML\MessageFlash\FlashMessagesStatic;
@@ -83,11 +84,6 @@ class TestController extends AppController
 
     public function testAlert()
     {
-        // $this->    
-    }
-
-    public function testA()
-    {
         $filter_by = 'ALL';
         $code = '';
         $start_date = '2022-01-01';
@@ -95,6 +91,14 @@ class TestController extends AppController
         
         $cantine_repository = new CantineRepository();
         $items = $cantine_repository->getInfoByClasseDate($start_date, $filter_by, $code);
+        dd($items);   
+    }
+
+    public function testA()
+    {
+        
+        $repository = new DocumentRepository();
+        $items = $repository->getDocumentGroupByDomaine();
         dd($items);
     }
 

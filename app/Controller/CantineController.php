@@ -22,6 +22,7 @@ use App\Helpers\TraitCRUDController;
 use App\Repository\ClasseRepository;
 use App\Repository\CantineRepository;
 use App\Controller\Admin\AppController;
+use App\Repository\AnneeScolaireRepository;
 use ClanCats\Hydrahon\Query\Expression as Ex;
 
 class CantineController extends AppController
@@ -220,13 +221,10 @@ class CantineController extends AppController
 
     public function liste_abonnee()
     {
-        $classeRepository = new ClasseRepository();
-        $classes = $classeRepository->getSalleClasseGroupByClasse();
-               
-        $annee_scolaire =  DBTable::getModel(DBTable::ANNEE_SCOLAIRE)->select(['id'])
-        ->where('statut', '=', 1)
-        ->one()['id'];
-               
+        $classes = (new ClasseRepository())->getSalleClasseGroupByClasse();
+        
+        $annee_scolaire =  (new AnneeScolaireRepository())->getActive('id');
+
         $abonnements = DBTable::getModel(DBTable::ABONNEMENT_CANTINE)
         ->select(
             [

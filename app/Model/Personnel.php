@@ -30,6 +30,7 @@ class Personnel extends Model implements FrequentlyReapeat
     const PIECE_JOINTES = "piece_jointes";
 
     public function __construct(){
+        parent::__construct();
         $type_personnels = TypePersonnel::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $pays = Pays::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $this->fillables =

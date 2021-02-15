@@ -16,6 +16,7 @@ class Session extends Model implements FrequentlyReapeat
     const DATE_FIN = "date_fin";
 
     public function __construct(){
+        parent::__construct();
         $anneeScolaires = AnneeScolaire::table(DBTable::ANNEE_SCOLAIRE)
         ->select([ AnneeScolaire::CODE.' as id', AnneeScolaire::DEBUT_ANNEE.' as value'])
         ->where('visibilite', 1)->get();

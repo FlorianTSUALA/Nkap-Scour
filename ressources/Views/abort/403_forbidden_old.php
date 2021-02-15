@@ -48,7 +48,7 @@ use Core\Routing\URL;
                                     </fieldset>
                                     <div class="row py-2">
                                         <div class="col-12">
-                                            <a href="<?= URL::link('acceuil') ;?>" class="btn button1 btn-block btn-lg"><i class="fa fa-home"></i> Acceuil </a>
+                                            <a href="<?= URL::link('accueil') ;?>" class="btn button1 btn-block btn-lg"><i class="fa fa-home"></i> accueil </a>
                                         </div>
                                     </div>
                                 </div>

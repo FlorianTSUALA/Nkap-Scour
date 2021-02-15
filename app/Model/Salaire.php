@@ -17,6 +17,7 @@ class Salaire extends Model implements FrequentlyReapeat
     const DATE_PAIEMENT = "date_paiement";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(false, 'personnel','Personnel' ),

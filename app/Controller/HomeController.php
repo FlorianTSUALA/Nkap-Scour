@@ -14,7 +14,7 @@ class HomeController extends AppController
 
     public function home()
     {
-        $this->app->setTitle('Acceuil - Comelines');
+        $this->app->setTitle('accueil - Comelines');
         $this->render('home');
     }
 

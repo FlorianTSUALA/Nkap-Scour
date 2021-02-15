@@ -32,7 +32,7 @@ use Core\Routing\URL;
                 </fieldset>
                 <div class="row py-2">
                     <div class="col-12 col-sm-6 col-md-6">
-                        <a href="<?= URL::link('acceuil') ?>" class="btn btn-warning btn-block"><i class="ft-home"></i> Acceuil</a>
+                        <a href="<?= URL::link('accueil') ?>" class="btn btn-warning btn-block"><i class="ft-home"></i> accueil</a>
                     </div>
                     <div class="col-12 col-sm-6 col-md-6">
                         <a href="<?= URL::link('login') ?>" class="btn btn-danger btn-block"><i class="ft-user"></i>  Connexion</a>

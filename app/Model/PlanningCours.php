@@ -19,6 +19,7 @@ class PlanningCours extends Model implements FrequentlyReapeat
     const JOURNEE = "journee";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(false, 'class','Classe'),

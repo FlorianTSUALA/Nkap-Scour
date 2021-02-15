@@ -18,6 +18,7 @@ class AbonnementConsomme extends Model implements FrequentlyReapeat
     const DATE_EFFECTIVE = "date_effective";
 
     public function __construct(){
+        parent::__construct();
         $repas = [];
         
         $this->fillables =

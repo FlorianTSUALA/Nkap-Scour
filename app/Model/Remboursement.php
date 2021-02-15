@@ -19,6 +19,7 @@ class Remboursement extends Model implements FrequentlyReapeat
     const DATE_REMBOURSEMENT = "date_remboursement";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(false, 'personnel','Personnel'),

@@ -81,4 +81,10 @@ trait QueryTrait
         $pdo = $this->getPDO();
         return $pdo->prepare($statement);
     }
+
+    
+	public function toObject($data) {
+		return json_decode(json_encode($data));
+	}
+
 }

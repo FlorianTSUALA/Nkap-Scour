@@ -20,6 +20,7 @@ class InscriptionActivite extends Model implements FrequentlyReapeat
     const MONTANT = "montant";
 
     public function __construct(){
+        parent::__construct();
         $eleves = Eleve::table()->select([ 'code' => 'id' , new Ex("concat(eleve.nom,' ',eleve.prenom) as libelle"),])->where('visibilite', 1)->get();
         $personel_activites = PersonnelActivite::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $this->fillables =

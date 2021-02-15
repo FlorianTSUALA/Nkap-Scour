@@ -11,6 +11,7 @@ use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
 use function Core\Helper\dd;
+use function Core\Helper\vd;
 
 abstract class BaseController
 {
@@ -60,6 +61,7 @@ abstract class BaseController
     protected function loadModel(string $modelName)
     {
         $this->$modelName = $this->app->getModel($modelName);
+        // dd($this->$modelName);
     }
  
 

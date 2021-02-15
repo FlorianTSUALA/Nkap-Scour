@@ -275,7 +275,7 @@
 
 
                                                         <a href="#"  id="btn_annuler" class="btn btn-danger my-1"> Annuler</a>
-                                                        <a href="http://127.0.0.1/nkap-scour/public/acceuil" id="btn_valider" class="btn btn-warning my-1">Valider</a>
+                                                        <a href="http://127.0.0.1/nkap-scour/public/accueil" id="btn_valider" class="btn btn-warning my-1">Valider</a>
 
                                                     </div>
                                                 </div>

@@ -14,6 +14,7 @@ class GroupeFamilial extends Model implements FrequentlyReapeat
     const REFENCE = 'reference';
     
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(true, self::LIBELLE),

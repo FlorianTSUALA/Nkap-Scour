@@ -19,6 +19,7 @@ class Facture extends Model implements FrequentlyReapeat
     const GESTIONNAIRE = "gestionnaire";
     
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(true, self::LIBELLE),

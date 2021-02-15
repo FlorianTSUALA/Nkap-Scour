@@ -16,6 +16,7 @@ class Activite extends Model implements FrequentlyReapeat
     const MONTANT = "montant";
 
     public function __construct(){
+        parent::__construct();
         $type_activites = TypeActivite::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
 
         $this->fillables =

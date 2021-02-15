@@ -17,6 +17,7 @@ class Restitution extends Model implements FrequentlyReapeat
     const COMMENTAIRE = "commentaire";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(false, 'emprunt','Emprunt' ),

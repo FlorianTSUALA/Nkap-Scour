@@ -19,6 +19,7 @@ class Parcours extends Model implements FrequentlyReapeat
     const DATE_INSCRIPTION = "date_inscription";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(false, 'classe','Classe'),

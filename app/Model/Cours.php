@@ -21,6 +21,7 @@ class Cours extends Model implements FrequentlyReapeat
     const COEFFICIENT = "coefficient";
 
     public function __construct(){
+        parent::__construct();
         $classes = Classe::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $salle_classes = SalleClasse::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $matieres =  Matiere::table()->select([ 'code' => 'id', 'libelle' => 'value'])->where('visibilite', 1)->get();

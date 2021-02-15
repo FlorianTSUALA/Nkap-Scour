@@ -18,6 +18,7 @@ class PlanningResto extends Model implements FrequentlyReapeat
     const DATE_FIN = "date_fin";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(false, 'abonnement','Abonnement' ),

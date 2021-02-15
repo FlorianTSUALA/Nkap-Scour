@@ -296,8 +296,8 @@ $include_res_header .=  '<link rel="stylesheet" type="text/css" href="'.URL::bas
                                                                     </div>
 
 
-                                                                    <a href="<?= URL::link('acceuil') ?>" id="btn_acceuil" class="btn btn-danger my-1">
-                                                                        Acceuil</a>
+                                                                    <a href="<?= URL::link('accueil') ?>" id="btn_accueil" class="btn btn-danger my-1">
+                                                                        accueil</a>
                                                                     <a href="#" id="btn_preview" class="btn btn-warning my-1">Prévisualiser</a>
 
                                                                 </div>

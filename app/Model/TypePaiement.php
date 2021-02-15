@@ -13,6 +13,7 @@ class TypePaiement extends Model implements FrequentlyReapeat
     protected $entity;
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(true, self::LIBELLE ),

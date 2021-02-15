@@ -207,7 +207,7 @@ use App\Controller\PrinterController;
                                         
 
                                         <a href="#"  id="btn_save" class="btn btn-green my-1"><i class="fa fa-floppy-o"></i> Enregistrer</a>
-                                        <a href="<?= URL::link('acceuil')?>" id="btn_home" class="btn btn-blue my-1"><i class="fa fa-home"></i> Liste des élèves</a>
+                                        <a href="<?= URL::link('accueil')?>" id="btn_home" class="btn btn-blue my-1"><i class="fa fa-home"></i> Liste des élèves</a>
                                         
                                         <a href="#"  id="btn_back" class="btn btn-warning my-1"><i class="fa fa-arrow-left"></i> Retour</a>
                                         <a href="<?= URL::link('print').PrinterController::SCOLARITE?>" target="_blank"  id="btn_print" class="btn btn-danger my-1"><i class="fa fa-print"></i> Imprimer</a>

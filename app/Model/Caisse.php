@@ -41,6 +41,7 @@ class Caisse extends Model implements FrequentlyReapeat
     const TELEPHONE_PERSONNE_URGENCE = "telephone_personne_urgence";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
         [
             new FormModel(false,'pays_mere','Pays de la mère'),

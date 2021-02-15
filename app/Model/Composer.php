@@ -22,6 +22,7 @@ class Composer extends Model implements FrequentlyReapeat
     const MENTION = "mention";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
         [
             new FormModel(true,'classe','Classe'),

@@ -20,6 +20,7 @@ class AffectationClasseMatiere extends Model implements FrequentlyReapeat
 
     
     public function __construct(){
+        parent::__construct();
         $classes = Classe::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $matieres =  Matiere::table()->select([ 'code' => 'id', 'libelle' => 'value'])->where('visibilite', 1)->get();
 

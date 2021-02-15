@@ -20,7 +20,10 @@ class AbonnementDetail extends Model implements FrequentlyReapeat
     const PERIODE = "periode";
     const REFERENCE = "reference";
 
-    public function __construct(){        $periodes = EnumModel::PERIODE;
+    public function __construct(){
+        parent::__construct();
+        
+        $periodes = EnumModel::PERIODE;
 
         $this->fillables =
             [

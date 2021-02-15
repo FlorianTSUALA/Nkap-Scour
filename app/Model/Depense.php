@@ -20,6 +20,7 @@ class Depense extends Model implements FrequentlyReapeat
     const DATE_ACHAT = "date_achat";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
         [
             new FormModel(false, 'personnel', 'Personnel'),

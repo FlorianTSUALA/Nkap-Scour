@@ -141,7 +141,7 @@
                         
 
                         <a href="#" id="btn_save" class="btn btn-green my-1"><i class="fa fa-floppy-o"></i> Enregistrer</a>
-                        <a href="http://127.0.0.1/nkap-scour/public/acceuil" id="btn_home" class="btn btn-blue my-1" style="display: none;"><i class="fa fa-home"></i> Liste des élèves</a>
+                        <a href="http://127.0.0.1/nkap-scour/public/accueil" id="btn_home" class="btn btn-blue my-1" style="display: none;"><i class="fa fa-home"></i> Liste des élèves</a>
                         
                         <a href="#" id="btn_back" class="btn btn-warning my-1"><i class="fa fa-arrow-left"></i> Retour</a>
                         <a href="http://127.0.0.1/nkap-scour/public/print/scolarite" target="_blank" id="btn_print" class="btn btn-danger my-1" style="display: none;"><i class="fa fa-print"></i> Imprimer</a>

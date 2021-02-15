@@ -15,6 +15,7 @@ interface Common
    const VISIBILITE = "visibilite";
 
 /*   public function __construct(){
+        parent::__construct();
         $this->fillables =
         [
             new FormModel(true,self::ID),

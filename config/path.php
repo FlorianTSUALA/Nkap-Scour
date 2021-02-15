@@ -7,7 +7,7 @@ use Config\Invariant\Path;
 return[
 
     Path::SAMPLE => [
-        "title" => "Acceuil",
+        "title" => "accueil",
         "icon" => "",
         "url" => "",
         "hasChildren" => false,

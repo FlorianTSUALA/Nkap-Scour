@@ -19,6 +19,7 @@ class AnneeScolaire extends Model implements FrequentlyReapeat
     const STATUT = "statut";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables = 
         [
             new FormModel(true, self::LIBELLE, self::LIBELLE, InputType::TEXT, [], '2019-2020' ),

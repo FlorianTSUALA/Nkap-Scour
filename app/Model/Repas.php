@@ -16,6 +16,7 @@ class Repas extends Model implements FrequentlyReapeat
     // const NUMERO = "numero";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 // new FormModel(false, 'point_marchand','Point marchand' ),

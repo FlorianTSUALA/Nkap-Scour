@@ -38,6 +38,7 @@ class DossierParental extends Model implements FrequentlyReapeat
     const SIGNATURE_MERE = "signature_mere";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
 

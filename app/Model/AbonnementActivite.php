@@ -21,6 +21,7 @@ class AbonnementActivite extends Model implements FrequentlyReapeat
     const PERIODE = "periode";
 
     public function __construct(){
+        parent::__construct();
         $inscription_eleves = InscriptionActivite::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $activites = Activite::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $periodes = ['JOUR', 'SEMAINE', 'MOIS', 'ANNEE'];

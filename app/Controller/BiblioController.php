@@ -7,33 +7,34 @@ use function Core\Helper\dd;
 use function Core\Helper\vd;
 use App\Helpers\TraitCRUDController;
 use App\Repository\BiblioRepository;
+use App\Repository\DocumentRepository;
 use App\Controller\Admin\AppController;
 
 class BiblioController extends AppController
 {
 
-    private $cantine_repository;
-    use TraitCRUDController;
+    private $biblio_repository;
+    // use TraitCRUDController;
     public function __construct()
     {
         parent::__construct();
-        $this->cantine_repository = new BiblioRepository;
+        $this->biblio_repository = new BiblioRepository;
 
         // @TODO
-        $this->vairant = DBTable::ABONNEMENT_CANTINE;
-        $this->folder_view_index = 'cantine.abonnement_cantine';
+        // $this->vairant = DBTable::ABONNEMENT_biblio;
+        $this->folder_view_index = 'biblio.abonnement_biblio';
 
-        $this->loadModel($this->vairant);
-        $this->base_route = 'abonnement_cantine';
-        $this->class_name = 'abonnement_cantine';
+        // $this->loadModel($this->vairant);
+        $this->base_route = 'abonnement_biblio';
+        $this->class_name = 'abonnement_biblio';
 
-        $this->title_page = 'Gestion du abonnement_cantine - Comelines';
-        $this->title_home = 'Gestion du abonnement_cantine';
-        $this->create_title = "Ajout d'un abonnement_cantine";
-        $this->view_title = "Information sur un abonnement_cantine";
+        $this->title_page = 'Gestion du abonnement_biblio - Comelines';
+        $this->title_home = 'Gestion du abonnement_biblio';
+        $this->create_title = "Ajout d'un abonnement_biblio";
+        $this->view_title = "Information sur un abonnement_biblio";
         $this->update_title = "Mise à jour des informations du perosnnel";
-        $this->delete_title = "Suppression du abonnement_cantine";
-        $this->msg_delete = "Voulez-vous vraiment supprimer ce abonnement_cantine ";
+        $this->delete_title = "Suppression du abonnement_biblio";
+        $this->msg_delete = "Voulez-vous vraiment supprimer ce abonnement_biblio ";
         
     }
     
@@ -70,7 +71,15 @@ class BiblioController extends AppController
         # code... 
     }
 
-    public function emprunt($code)
+    public function emprunt()
+    {
+        $domaines = (new DocumentRepository())->getDocumentGroupByDomaine();
+
+        $this->render('sections.biblio.emprunt_exemplaire', compact('domaines'));
+        # code... 
+    }
+
+    public function emprunt_exemplaire()
     {
         # code... 
     }

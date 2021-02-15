@@ -36,6 +36,13 @@ class BulletinController extends AppController
         
     }
 
+    public function accueil()
+    {
+        $welcome_msg = '';
+        
+        $exemple = [];
+        $this->render('sections.bulletin.accueil', compact('exemple'));
+    }
 
     public function index()
     {

@@ -19,6 +19,7 @@ class PersonnelActivite extends Model implements FrequentlyReapeat
     const MONTANT = "montant";
 
     public function __construct(){
+        parent::__construct();
         $personnels = Personnel::table()->select([ 'code' => 'id' , new Ex("concat(personnel.nom,' ',personnel.prenom) as libelle"),])->where('visibilite', 1)->get();
         $activites = Activite::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $this->fillables =

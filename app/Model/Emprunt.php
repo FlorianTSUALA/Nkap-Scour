@@ -17,6 +17,7 @@ class Emprunt extends Model implements FrequentlyReapeat
     const DATE_EXPIRATION = "date_expiration";
 
     public function __construct(){
+        parent::__construct();
         $this->fillables =
             [
                 new FormModel(false, 'eleve','Elève' ),
