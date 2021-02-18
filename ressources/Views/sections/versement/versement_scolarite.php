@@ -9,7 +9,6 @@
     echo '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/toggle/bootstrap-switch.min.js"></script>';
 	echo '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js"></script>';
 
-    
     require "script-event.php";
     require "script-component-init.php";
     require "script-update-etat.php";
@@ -22,12 +21,12 @@
     $include_res_header .=  '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/app-assets/css/plugins/loaders/loaders.min.css">';
 
     $readonly = '';
-    if(isset($_SESSION['DATA_TRANSPORT'])){
+    // if(isset($_SESSION['DATA_TRANSPORT'])){
         //  var_dump($_SESSION['DATA_TRANSPORT']);
         
-        $CODE_ELEVE = $_SESSION['DATA_TRANSPORT']['CODE_ELEVE'];
-        $CODE_CLASSE = $_SESSION['DATA_TRANSPORT']['CODE_CLASSE'];
-        $CODE_PARCOURS = $_SESSION['DATA_TRANSPORT']['CODE_PARCOURS'];
+        // $CODE_ELEVE = $_SESSION['DATA_TRANSPORT']['CODE_ELEVE'];
+        // $CODE_CLASSE = $_SESSION['DATA_TRANSPORT']['CODE_CLASSE'];
+        // $CODE_PARCOURS = $_SESSION['DATA_TRANSPORT']['CODE_PARCOURS'];
 
         // $MATRICULE = $_SESSION['DATA_TRANSPORT']['MATRICULE'];
         // $NOM = $_SESSION['DATA_TRANSPORT']['NOM'];
@@ -35,7 +34,7 @@
         // $SEXE = $_SESSION['DATA_TRANSPORT']['SEXE'];
         // $DATE_NAISSANCE = $_SESSION['DATA_TRANSPORT']['DATE_NAISSANCE'];
         // $LIEU_NAISSANCE = $_SESSION['DATA_TRANSPORT']['LIEU_NAISSANCE'];
-    }
+    // }
 
 ?>
 
@@ -79,7 +78,7 @@
                                                 <?php
                                                 foreach($annee_scolaires as $item) { 
                                                     ?>
-                                                    <option value="<?= $item['id']; ?>"><?= $item['libelle']; ?></option>
+                                                    <option value="<?= $item['id']; ?>" <?= (isset($data_inscriptpion) && ($data_inscriptpion['code_annee_scolaire'] == $item['id']))? 'selected' : ''; ?>><?= $item['libelle']; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -115,7 +114,7 @@
                                                                                 <div class="col-8">
                                                                                     <select id="eleve_nom_complet" class="select2 form-control" name="eleve_nom_complet" required>
                                                                                         <?php foreach($eleves as $item){?>
-                                                                                                <option data-matricule="<?= $item['matricule']; ?>" data-id="<?= $item['id']; ?>" title="<?= "Né ".$item['date_naissance']." à ".$item['lieu_naissance']; ?>" value="<?= $item['id']; ?>"><?= $item['libelle']; ?></option>
+                                                                                                <option data-matricule="<?= $item['matricule']; ?>" data-id="<?= $item['id']; ?>" title="<?= "Né ".$item['date_naissance']." à ".$item['lieu_naissance']; ?>" value="<?= $item['id']; ?>" <?= (isset($data_inscriptpion) && ($data_inscriptpion['code_eleve'] == $item['id']))? 'selected' : ''; ?>><?= $item['libelle']; ?></option>
                                                                                         <?php } ?>
                                                                                     </select>
                                                                                 </div>
@@ -137,7 +136,7 @@
                                                                                     <select id="classe" class="select2 form-control" name="classe" required>
                                                                                         <!-- <option value="-----------">---------------</option> -->
                                                                                         <?php foreach($classes as $item){?>
-                                                                                                <option data-id="<?= $item['id']; ?>" value="<?= $item['id']; ?>"><?= $item['libelle']; ?></option>
+                                                                                                <option data-id="<?= $item['id']; ?>" value="<?= $item['id']; ?>" <?= (isset($data_inscriptpion) && ($data_inscriptpion['code_classe'] == $item['id']))? 'selected' : ''; ?>><?= $item['libelle']; ?></option>
                                                                                         <?php } ?>
                                                                                     </select>
                                                                                 </div>
@@ -349,7 +348,7 @@
                                                                             <fieldset class="mb-1">
                                                                                 <h5>Autres</h5>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" value="Boisson" class="form-control " value=""  id="COL2-Autres"  name="COL2-Autres"  placeholder="" />   
+                                                                                    <input type="text" value="" class="form-control " value=""  id="COL2-Autres"  name="COL2-Autres"  placeholder="" />   
                                                                                 </div>
                                                                             </fieldset>
                                                                         </div>
@@ -358,7 +357,7 @@
                                                                             <fieldset class="mb-1">
                                                                                 <h5>Montant</h5>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" value="5000" class="form-control " value="0"  id="NUMBER-COL3-Autres"  name=""    placeholder="">
+                                                                                    <input type="number" value="" class="form-control " value="0"  id="NUMBER-COL3-Autres"  name=""    placeholder="">
                                                                                 </div>
                                                                             </fieldset>
                                                                         </div> 
@@ -368,7 +367,7 @@
                                                                             <fieldset class="mb-1">
                                                                                 <h5>Reduction</h5>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" value="500" class="form-control reduction"  id="COL5-Autres" value="0"  name="COL5-Autres"   placeholder="" />
+                                                                                    <input type="number" value="" class="form-control reduction"  id="COL5-Autres" value="0"  name="COL5-Autres"   placeholder="" />
                                                                                 </div>
                                                                             </fieldset>
                                                                         </div>

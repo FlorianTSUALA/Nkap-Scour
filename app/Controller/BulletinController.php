@@ -22,7 +22,7 @@ class BulletinController extends AppController
         $this->folder_view_index = 'bulletin.index';
 
 
-        $this->loadModel($this->vairant);
+        // $this->loadModel($this->vairant);
         $this->base_route = 'bulletin';
         $this->class_name = 'bulletin';
 

@@ -8,13 +8,17 @@ use App\Helpers\S;
 use App\Model\Pays;
 use App\Model\Eleve;
 use App\Model\Classe;
+use Core\Routing\URL;
 use App\Model\Parcours;
 use Core\Session\Request;
-use App\Model\DossierParental;
-use App\Model\StatutApprenant;
-use App\Controller\Admin\AppController;
+use App\Model\SalleClasse;
+use App\Model\AnneeScolaire;
 
 use function Core\Helper\dd;
+use App\Model\DossierParental;
+use App\Model\StatutApprenant;
+use App\Repository\EleveRepository;
+use App\Controller\Admin\AppController;
 
 class InscriptionController extends AppController
 {
@@ -27,6 +31,7 @@ class InscriptionController extends AppController
         $this->loadModel('pays');
         $this->loadModel('statut_apprenant');
         $this->loadModel('classe');
+        $this->loadModel('salle_classe');
         $this->loadModel('annee_scolaire');
 
         $this->loadModel('dossier_parental');
@@ -39,12 +44,12 @@ class InscriptionController extends AppController
     public function index()
     {
         $this->app->setTitle('Inscription d\'un(e) élève  - Comelines');
-        dd( $this->pays);
-        
         $pays = $this->pays->all();
         $classes = $this->classe->all();
+        $salle_classes = $this->salle_classe->all();
         $statut_apprenants = $this->statut_apprenant->all();
-        $this->render('sections.inscription.inscription', compact('pays', 'classes', 'statut_apprenants'));
+        $annee_scolaires =  $this->annee_scolaire->all();
+        $this->render('sections.inscription.inscription', compact('annee_scolaires', 'pays', 'classes', 'statut_apprenants', 'salle_classes'));
     }
 
     /**
@@ -117,7 +122,8 @@ class InscriptionController extends AppController
         //INFO ELEVE
         $code_eleve = $this->eleve->genCode();
 
-        $matricule =  $this->eleve->genMatricule();
+        
+        $matricule =  (new EleveRepository())->getMatricule() ;
 
         $photo_name = Request::saveImg($matricule);
         if ($photo_name === 1) {
@@ -127,7 +133,7 @@ class InscriptionController extends AppController
 
         $data_eleve = [
             'code' => $code_eleve,
-            'matricule' => $this->eleve->genMatricule(),
+            'matricule' => $matricule,
             'nom' => Request::getSecParam('nom_eleve', ''),
             'prenom' => Request::getSecParam('prenom_eleve', ''),
             'prenom_usage' => Request::getSecParam('prenom_usage', ''),
@@ -146,16 +152,21 @@ class InscriptionController extends AppController
         $result_eleve = $this->eleve->save($data_eleve);
         $id_eleve = $this->eleve->id($code_eleve);
 
+        $id_salle_classe = $this->salle_classe->id(Request::getSecParam('salle_classe_eleve', ''), SalleClasse::LIBELLE);
+        $id_salle_classe = ($id_salle_classe == false) ? null : $id_salle_classe;
 
+        $id_annee_scolaire = $this->annee_scolaire->id(Request::getSecParam('annee_scolaire', ''), AnneeScolaire::LIBELLE);
+        $code_annee_scolaire = $this->annee_scolaire->code(Request::getSecParam('annee_scolaire', ''), AnneeScolaire::LIBELLE);
         //PARCOURS ELEVE
         $code_parcours = $this->parcours->genCode();
         $data_parcours = [
             'code' => $code_parcours,
-            Parcours::ANNEE_SCOLAIRE_ID => $this->eleve->genAnneeScolaireID(),
+            Parcours::ANNEE_SCOLAIRE_ID => $id_annee_scolaire,
             'date_inscription' => (new DateTime('NOW'))->format('Y-m-d H:i:s'),
             Parcours::ELEVE_ID => $id_eleve,
             Parcours::STATUT_APPRENANT_ID => $this->statut_apprenant->id(Request::getSecParam('statut_apprenant_eleve', ''), StatutApprenant::LIBELLE),
             Parcours::CLASSE_ID => $this->classe->id(Request::getSecParam('classe_eleve', ''), Classe::LIBELLE),
+            Parcours::SALLE_CLASSE_ID => $id_salle_classe,
         ];
 
         $result_parcours = $this->parcours->save($data_parcours);
@@ -163,25 +174,36 @@ class InscriptionController extends AppController
 
 
         if ($result_antecedent_scolaire && $result_dossier_medical && $result_dossier_parental && $result_eleve && $result_parcours) {
+
+            $code_classe = $this->classe->code(Request::getSecParam('classe_eleve', ''), Classe::LIBELLE) ;
             //$this->setupSessionVerement();
+            // $_SESSION[S::DATA_TRANSPORT][S::VERS_CODE_ELEVE] = $code_eleve ;
+            // $_SESSION[S::DATA_TRANSPORT][S::VERS_CODE_CLASSE] = $code_classe;
+            // $_SESSION[S::DATA_TRANSPORT][S::VERS_CLASSE] = Request::getSecParam('classe_eleve', '');
+            // $_SESSION[S::DATA_TRANSPORT][S::VERS_CODE_PARCOURS] = $code_parcours;
+            // $_SESSION[S::DATA_TRANSPORT][S::VERS_MATRICULE] = $matricule ;
+            // $_SESSION[S::DATA_TRANSPORT][S::VERS_NOM] = Request::getSecParam('nom_eleve', '');
+            // $_SESSION[S::DATA_TRANSPORT][S::VERS_PRENOM] = Request::getSecParam('nom_eleve', '');
+            // $_SESSION[S::DATA_TRANSPORT][S::VERS_SEXE] = Request::getSecParam('nom_eleve', '');
+            // $_SESSION[S::DATA_TRANSPORT][S::VERS_DATE_NAISSANCE] = Request::getSecParam('date_naissance_eleve', '');
+            // $_SESSION[S::DATA_TRANSPORT][S::VERS_LIEU_NAISSANCE] = Request::getSecParam('lieu_naissance_eleve', '');
 
-            $_SESSION[S::DATA_TRANSPORT][S::VERS_CODE_ELEVE] = $code_eleve ;
-            $_SESSION[S::DATA_TRANSPORT][S::VERS_CODE_CLASSE] = $this->classe->code(Request::getSecParam('classe_eleve', ''), Classe::LIBELLE) ;
-            $_SESSION[S::DATA_TRANSPORT][S::VERS_CLASSE] = Request::getSecParam('classe_eleve', '');
-            $_SESSION[S::DATA_TRANSPORT][S::VERS_CODE_PARCOURS] = $code_parcours ;
-            $_SESSION[S::DATA_TRANSPORT][S::VERS_MATRICULE] = $matricule ;
-            $_SESSION[S::DATA_TRANSPORT][S::VERS_NOM] = Request::getSecParam('nom_eleve', '') ;
-            $_SESSION[S::DATA_TRANSPORT][S::VERS_PRENOM] = Request::getSecParam('nom_eleve', '') ;
-            $_SESSION[S::DATA_TRANSPORT][S::VERS_SEXE] = Request::getSecParam('nom_eleve', '') ;
-            $_SESSION[S::DATA_TRANSPORT][S::VERS_DATE_NAISSANCE] = Request::getSecParam('date_naissance_eleve', '') ;
-            $_SESSION[S::DATA_TRANSPORT][S::VERS_LIEU_NAISSANCE] = Request::getSecParam('lieu_naissance_eleve', '')   ;
+            // $this->session->flash("Inscription Enregistrée avec success");
 
-            $this->session->flash("Inscription Enregistrée avec success");
+            $msg_inscriptpion = 'Inscription Enregistrée avec success';
+            $data_inscriptpion = [];
+            $data_inscriptpion['msg_inscriptpion'] = 'Inscription Enregistrée';
+            $data_inscriptpion['code_classe'] = $code_classe;
+            $data_inscriptpion['code_eleve'] = $code_eleve;
+            $data_inscriptpion['nom_eleve'] = Request::getSecParam('nom_eleve', '');
+            $data_inscriptpion['prenom_eleve'] = Request::getSecParam('prenom_eleve', '');
+            $data_inscriptpion['code_parcours'] = $code_parcours;
+            $data_inscriptpion['annee_scolaire'] = Request::getSecParam('annee_scolaire', '');
+            $data_inscriptpion['code_annee_scolaire'] = $code_annee_scolaire;
+            $_SESSION[S::DATA_TRANSPORT] = $data_inscriptpion;
+            $location = URL::link('versement');
 
-            header("HTTP/1.1 200 OK");
-            $root = App::base_url()."versement";
-            header("Location: {$root}");
-            $this->render('sections.versement.versement_scolarite');
+            $this->renderAtLocation($location, 'sections.versement.versement_scolarite', compact('data_inscriptpion'));
         } else {
             $this->sendResponseAndExit($result_parcours, false, 400, 'DB Error');
         }

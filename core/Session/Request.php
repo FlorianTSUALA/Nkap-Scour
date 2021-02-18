@@ -125,12 +125,52 @@ class Request
 		return $data;
 	}
 
+
+	private function readPhoto(string $matricule){
+        // Check if the form was submitted
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            // Check if file was uploaded without errors
+            if(isset($_FILES["photo_eleve"]) && $_FILES["photo_eleve"]["error"] == 0){
+                $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+                $filename = $matricule . '_'.time(). '_' . $_FILES["photo_eleve"]["name"];
+                $filetype = $_FILES["photo_eleve"]["type"];
+                $filesize = $_FILES["photo_eleve"]["size"];
+            
+                // Verify file extension
+                $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                if(!array_key_exists($ext, $allowed)) die("Erreur: Bien vouloir selectionner le bon format d'image.");
+            
+                // Verify file size - 5MB maximum
+                $maxsize = 5 * 1024 * 1024;
+                if($filesize > $maxsize) die("Errer: Erreur la taile du fichier depasse la taille limite.");
+            
+                // Verify MYME type of the file
+                if(in_array($filetype, $allowed)){
+                    // Check whether file exists before uploading it
+                    if(file_exists("ressources/uploads/" . $filename)){
+                        echo $filename . " is already exists.";
+                    } else{
+                        move_uploaded_file($_FILES["photo_eleve"]["tmp_name"], "ressources/uploads/" . $filename);
+                        return 1;
+                        echo "Fichier importé avec succes.";
+                    } 
+                } else{
+                    return 0;
+                    echo "Error: There was a problem uploading your file. Please try again."; 
+                }
+            } else{
+                return -1;
+                echo "Error: " . $_FILES["photo_eleve"]["error"];
+            }
+        }
+    }
+
     public static function saveImg(string $name, string $photo = "photo_eleve", $local_folder="img/eleve/"){
         // Check if the form was submitted
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Check if file was uploaded without errors
             if(isset($_FILES[$photo]) && $_FILES[$photo]["error"] == 0){
-                $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+                $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png", "jfif" => "image/jfif");
                 $filename = $name . '_'.time(). '_' . $_FILES[$photo]["name"];
                 $filetype = $_FILES[$photo]["type"];
                 $filesize = $_FILES[$photo]["size"];
@@ -141,7 +181,7 @@ class Request
 
                 // Verify file size - 5MB maximum
                 $maxsize = 5 * 1024 * 1024;
-                if($filesize > $maxsize) die("Errer: Erreur la taile du fichier depasse la taille limite.");
+                if($filesize > $maxsize) die("Erreur: Erreur la taile du fichier depasse la taille limite.");
 
                 // Verify MYME t ype of the file
                 if(in_array($filetype, $allowed)){

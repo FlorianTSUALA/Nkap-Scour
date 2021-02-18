@@ -371,7 +371,7 @@ return[
                 "title" => "Enregistrement Personnel",
                 "icon" => "",
                 "url" => "",
-                "full_url" =>  URL::link("personnel"),
+                "full_url" =>  URL::link("ajout_personnel"),
                 "action" => "",
                 "alt" => "",
                 "class" => "",

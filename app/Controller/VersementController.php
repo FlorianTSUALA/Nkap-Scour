@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Exception;
 use App\Helpers\S;
 use Core\Model\Model;
 use App\Model\DBTable;
@@ -19,7 +18,7 @@ use App\Model\AbonnementActivite;
 use App\Repository\AnneeScolaireRepository;
 use ClanCats\Hydrahon\Query\Expression as Ex;
 
-class VersementController extends AppController
+class VersementController extends \App\Controller\Admin\AppController
 {
     
     public function __construct()
@@ -140,11 +139,16 @@ class VersementController extends AppController
         ->where('visibilite', '=', 1)
         // ->where('statut', '=', 1)
         ->get();
-
+        $data_inscriptpion = null;
+        if(isset($_SESSION[S::DATA_TRANSPORT])){
+            $data_inscriptpion = $_SESSION[S::DATA_TRANSPORT];
+            $_SESSION[S::DATA_TRANSPORT] = null;
+        }
         $this->render('sections.versement.versement_scolarite', compact(
             //'abonnement_cantine',
             //'class_name', 'base_route', 'title', 'create_title', 'view_title', 'update_title', 'delete_title', 'msg_delete',
             'activites',
+            'data_inscriptpion',
             'title',
             'classes',
             'statut_apprenants',

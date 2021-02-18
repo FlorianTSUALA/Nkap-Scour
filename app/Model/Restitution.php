@@ -20,9 +20,9 @@ class Restitution extends Model implements FrequentlyReapeat
         parent::__construct();
         $this->fillables =
             [
-                new FormModel(false, 'emprunt','Emprunt' ),
+                new FormModel(false, self::EMPRUNT_ID,'Emprunt' ),
                 new FormModel(true, self::DATE_RESTITUTION , 'Date de restitution', InputType::DATE),
-                new FormModel(true, self::COMMENTAIRE ),
+                new FormModel(true, self::COMMENTAIRE, 'Commentaire', InputType::TEXT, [], '', '', false),
 
             ];
 

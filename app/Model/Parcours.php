@@ -13,6 +13,7 @@ class Parcours extends Model implements FrequentlyReapeat
     protected $entity;   
     
     const CLASSE_ID = "classe_id";
+    const SALLE_CLASSE_ID = "salle_classe_id";
     const ELEVE_ID = "eleve_id";
     const STATUT_APPRENANT_ID = "statut_apprenant_id";
     const ANNEE_SCOLAIRE_ID = "annee_scolaire_id";

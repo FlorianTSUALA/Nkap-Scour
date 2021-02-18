@@ -8,7 +8,7 @@ use App\Repository\AnneeScolaireRepository;
 //LA GESTION DES ANNEE SCOLAIRE DOIT ETRE LOCALE
 //ON DOIT GERER CELA AVEC LES SESSIONS. POUR NE PAS BASCULER TOUS LES UTILISATEURS
 //VERS UNE ANNEE SCOLAIRE DONNEE
-$annee_scolaire_courante = ( new AnneeScolaireRepository() )->getActive('libelle');
+$annee_scolaire_courante = ( new AnneeScolaireRepository() )->getActive('libelle')??'non définie';
 $annee_scolaires = ( new AnneeScolaireRepository() )->getAll();
 
 ?>

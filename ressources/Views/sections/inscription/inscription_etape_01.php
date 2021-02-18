@@ -4,6 +4,8 @@ use App\Model\Pays;
 use App\Model\Classe;
 use Core\Routing\URL;
 use App\Helpers\Helpers;
+use App\Model\SalleClasse;
+use App\Model\AnneeScolaire;
 use App\Model\StatutApprenant;
 
 ?>
@@ -20,7 +22,7 @@ use App\Model\StatutApprenant;
     </div>
 
     <div class="row">
-        <input type="file" class="inputfile" style="display: none;" name="photo_eleve" id="photo_eleve" onchange="readURL(this, '.photo');" />
+        <input type="file" class="inputfile" style="display: none;" name="photo_eleve" id="photo_eleve" onchange="readURL(this, '.photo');"   accept="image/x-png,image/jpg,image/jpeg,image/gif,image/png,image/jfif" />
         <label for="photo_eleve" style="  display: block; margin-left: auto; margin-right: auto;">
             <figure>
                 <img width="200px" height="200px"  src="<?= URL::base() ?>assets/app-assets/images/portrait/small/no-photo.jpg" alt="" class="photo" class="center">
@@ -90,23 +92,6 @@ use App\Model\StatutApprenant;
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label for="classe_eleve" class="col-4 col-form-label">Salle de classe<?= Helpers::required_input(); ?>:</label>
-                <div class="col-8">
-                    <select id="classe_eleve" class="select2 form-control" name="classe_eleve" required>
-
-                        <option value="" >- Choissisez la salle de classe de l'élève -</option>
-                        <?php foreach($classes as $item){?>
-                                <option value="<?= $item->{Classe::LIBELLE}; ?>"><?= $item->{Classe::LIBELLE}; ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group row">
                 <label class="col-4">Sexe<?= Helpers::required_input(); ?>:</label>
                 <div class="col-8">
                     <div class="row">
@@ -125,6 +110,19 @@ use App\Model\StatutApprenant;
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label for="prenom_usage" class="col-4 col-form-label">Prénom d'usage:</label>
+                <div class="col-8">
+                    <input placeholder="Prénom d'usage" type="text" class="form-control" id="prenom_usage" name="prenom_usage" />
+                </div>
+            </div>
+        </div>
+        
+
 
         <div class="col-md-6">
             <div class="form-group row">
@@ -153,19 +151,6 @@ use App\Model\StatutApprenant;
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="form-group row">
-                <label for="prenom_usage" class="col-4 col-form-label">Prénom d'usage:</label>
-                <div class="col-8">
-                    <input placeholder="Prénom d'usage" type="text" class="form-control" id="prenom_usage" name="prenom_usage" />
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-
-    <div class="row">
 
         <div class="col-md-6">
             <div class="form-group row">
@@ -176,8 +161,63 @@ use App\Model\StatutApprenant;
             </div>
         </div>
 
+
+
     </div>
 
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label for="classe_eleve" class="col-4 col-form-label">Classe<?= Helpers::required_input(); ?>:</label>
+                <div class="col-8">
+                    <select id="classe_eleve" class="select2 form-control" name="classe_eleve" required>
+
+                        <option value="" >- Choissisez la Classe de l'élève -</option>
+                        <?php foreach($classes as $item){?>
+                                <option value="<?= $item->{Classe::LIBELLE}; ?>"><?= $item->{Classe::LIBELLE}; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label for="salle_classe_eleve" class="col-4 col-form-label"> Salle de Classe :</label>
+                <div class="col-8">
+                    <select id="salle_classe_eleve" class="select2 form-control" name="salle_classe_eleve" >
+
+                        <option value="" >- Choissisez la salle de classe de l'élève -</option>
+                        <?php foreach($salle_classes as $item){?>
+                                <option value="<?= $item->{SalleClasse::LIBELLE}; ?>"><?= $item->{SalleClasse::LIBELLE}; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label for="annee_scolaire" class="col-4 col-form-label">Année Scolaire<?= Helpers::required_input(); ?>:</label>
+                <div class="col-8">
+                    <select id="annee_scolaire" class="select2 form-control" name="annee_scolaire" required>
+
+                        <option value="" >- Choissisez l'année Scolaire -</option>
+                        <?php foreach($annee_scolaires as $item){?>
+                                <option value="<?= $item->{AnneeScolaire::LIBELLE}; ?>"><?= $item->{AnneeScolaire::LIBELLE}; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 
 </fieldset>

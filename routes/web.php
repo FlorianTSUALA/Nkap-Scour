@@ -181,6 +181,9 @@ $router->crudRoute('type_pension', TypePensionController::class);
 $router->crudRoute('personnel', PersonnelController::class);
 $router->addRoute('ajout_personnel', 'personnel/nouveau', [PersonnelController::class, 'ajout']);
 
+//AFFECTATION
+$router->addRoute('affection_salle_enseignant', 'affectation/enseignant_salle', [AffectionController::class, 'ajout']);
+
 
 //Cantine
 $router->crudRoute('cantine', CantineController::class);

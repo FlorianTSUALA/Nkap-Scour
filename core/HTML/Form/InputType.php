@@ -17,6 +17,7 @@ class InputType
 	const DATE_TIME_LOCAL = 'datetime-local';
 	const TIME = 'time';
 	const TEL = 'tel';
+	const COLOR = 'color';
 	const CHECKBOX = 'checkbox';
 	//@TODO FILE/ISBN format
 

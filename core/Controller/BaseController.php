@@ -65,6 +65,14 @@ abstract class BaseController
     }
  
 
+    protected function renderAtLocation(string $location, String $nameView, array $variables = [], string $template = 'default')
+    {
+        header("HTTP/1.1 200 OK");
+        header("Location: {$location}");
+        
+        $this->render($nameView, $variables, $template);
+    }
+
     protected function render(String $nameView, array $variables = [], string $template = 'default')
     {
         $tmp_template = $template?? $this->template;

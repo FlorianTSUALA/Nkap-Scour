@@ -13,6 +13,8 @@ use Core\Table\SQLTraits\Delete;
 use Core\Table\SQLTraits\Insert;
 use Core\Table\SQLTraits\Update;
 
+use function Core\Helper\dd;
+
 /**
 * Classe mère de tous les appels à la bd
 */

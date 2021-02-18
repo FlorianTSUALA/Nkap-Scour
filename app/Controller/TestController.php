@@ -21,11 +21,13 @@ use App\Model\AntecedentScolaire;
 use App\Repository\ClasseRepository;
 use App\Repository\CantineRepository;
 use App\Repository\DocumentRepository;
+use App\Model\AffectationClasseMatiere;
 use ClanCats\Hydrahon\Query\Expression;
 use App\Repository\AnneeScolaireRepository;
 use Core\HTML\MessageFlash\FlashMessagesStatic;
 use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Exception\ExceptionFormatter;
+use App\Repository\AffectationSalleClasseRepository;
 
 class TestController extends AppController
 {
@@ -61,8 +63,8 @@ class TestController extends AppController
 
     public function testSQL()
     {
-        $annee_scolaire_repository = new AnneeScolaireRepository();
-        $result = $annee_scolaire_repository->getActive();
+        $repository = new AffectationSalleClasseRepository();
+        $result = $repository->getEnseignantNonAffecte();
         dd($result);
     }
 

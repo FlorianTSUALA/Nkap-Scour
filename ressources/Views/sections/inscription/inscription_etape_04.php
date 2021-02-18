@@ -123,6 +123,30 @@ use Core\Routing\URL;
 
                             <br>
 
+                            <div class="row mt-1">
+                                <div class="col-5">
+                                    <div class="row">
+                                        <strong class="col-6">Salle de Classe :</strong>
+
+                                        <em  id="recap-salle_classe_eleve" class="col-6"><?= Helpers::repeatChar();?></em>
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+
+                                </div>
+
+                                <div class="col-5">
+                                    <div class="row">
+                                        <strong class="col-6">Année Scolaire :</strong>
+
+                                        <em  id="recap-annee_scolaire" class="col-6"><?= Helpers::repeatChar();?> </em>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+
                             <div class="row">
                                 <div class="col-5">
                                     <div class="row">
