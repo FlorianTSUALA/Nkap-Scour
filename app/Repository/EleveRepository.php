@@ -9,9 +9,26 @@ use App\Model\Parcours;
 use App\Helpers\Helpers;
 use App\Model\AnneeScolaire;
 use Core\Repository\BaseRepository;
+use ClanCats\Hydrahon\Query\Expression;
 
 class EleveRepository extends BaseRepository{
     
+
+    public function getInfoPerso()
+    {
+        return DBTable::getModel('eleve')
+        ->select(
+            [
+                new Expression("concat(eleve.nom,' ',eleve.prenom) as libelle"),
+                'eleve.code' => 'id',
+                'eleve.matricule' => 'matricule',
+                'eleve.date_naissance' => 'date_naissance',
+                'eleve.lieu_naissance' => 'lieu_naissance'
+            ]
+        )
+        ->where('visibilite', '=', 1)
+        ->get();
+    }
         
     public function info(string $search){
         $eleve = Eleve::table();
@@ -330,7 +347,7 @@ class EleveRepository extends BaseRepository{
         $matricule = substr($year, 2, 2).$character.$lastNumber;
 
         while($eleve->select()->where(Eleve::MATRICULE, '=', $matricule)->exists()){
-            $matricule = $this->genMatricule();
+            $matricule = $this->getMatricule();
         }
 
         return $matricule;

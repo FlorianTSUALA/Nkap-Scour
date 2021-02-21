@@ -30,9 +30,6 @@ class MatiereController extends AppController
     }
 
     
-    
-    
-    
     public function getall(){
         $model = Matiere::table();
         $results = $model->select('

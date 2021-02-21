@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\DBTable;
 use function Core\Helper\dd;
 use function Core\Helper\vd;
+use App\Repository\EleveRepository;
 use App\Helpers\TraitCRUDController;
 use App\Repository\BiblioRepository;
 use App\Repository\DocumentRepository;
@@ -73,10 +74,13 @@ class BiblioController extends AppController
 
     public function emprunt()
     {
+        $route = 'biblio_emprunt';
         $domaines = (new DocumentRepository())->getDocumentGroupByDomaine();
-
-        $this->render('sections.biblio.emprunt_exemplaire', compact('domaines'));
-        # code... 
+        $documents = (new DocumentRepository())->getDocument();
+        $exemplaires = (new DocumentRepository())->getExemplaire($disponible = true);
+        $etat_documents = (new DocumentRepository())->getEtatDocument();
+        $eleves = (new EleveRepository() )->getInfoPerso();
+        $this->render('sections.biblio.emprunt_exemplaire', compact('route', 'domaines', 'eleves', 'exemplaires', 'documents', 'etat_documents'));
     }
 
     public function emprunt_exemplaire()

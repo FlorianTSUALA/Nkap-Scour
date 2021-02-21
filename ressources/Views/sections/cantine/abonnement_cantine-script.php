@@ -67,18 +67,18 @@ data_facture['total_day']
 
     var prix_abonnements = <?php echo Helpers::toJSON($prix_abonnements) ; ?>;
     
-    //GESTION DE AJOUT DYNAMIQUE DE BLOCK
-    function updateItem(parent, editPirx=true){
-            let selected = parent.find(".periode").val()
-            if(prix_abonnements.length === 0) return
-            let tmp = prix_abonnements.filter((item)=>{
-                return String(item.periode) === String(selected)
-            })
-            let current = tmp[0]
-            if(editPirx)
-                parent.find(".prix_unitaire").val( parseFloat(current.montant) )
-            parent.find(".sous_total").val( parent.find(".prix_unitaire").val()* parent.find(".duree").val() )
-            init()
+        //GESTION DE AJOUT DYNAMIQUE DE BLOCK
+        function updateItem(parent, editPirx=true){
+                let selected = parent.find(".periode").val()
+                if(prix_abonnements.length === 0) return
+                let tmp = prix_abonnements.filter((item)=>{
+                    return String(item.periode) === String(selected)
+                })
+                let current = tmp[0]
+                if(editPirx)
+                    parent.find(".prix_unitaire").val( parseFloat(current.montant) )
+                parent.find(".sous_total").val( parent.find(".prix_unitaire").val()* parent.find(".duree").val() )
+                init()
         }
 
         function init(){
@@ -113,98 +113,99 @@ data_facture['total_day']
             $(target).find('.sous_total').val( $(target).find(".prix_unitaire").val()* $(target).find(".duree").val() )
             init()
         }
-    (function(window, document, $) {
-        //'use strict'
 
-        $('#section_versement').on('change', ".prix_unitaire", function(){
-            let parent = $(this).parent().parent().parent().parent()
-            updateItem(parent, false)
-        })
+        (function(window, document, $) {
+            //'use strict'
 
-        $('#section_versement').on('change', "select.periode, .duree", function(){
-            let parent = $(this).parent().parent().parent().parent()
-            updateItem(parent)
-        })
+            $('#section_versement').on('change', ".prix_unitaire", function(){
+                let parent = $(this).parent().parent().parent().parent()
+                updateItem(parent, false)
+            })
 
-        let target = $('.periode').parent().parent().parent().parent()
-        initItem(target)
+            $('#section_versement').on('change', "select.periode, .duree", function(){
+                let parent = $(this).parent().parent().parent().parent()
+                updateItem(parent)
+            })
 
-        //Gerer le cas ou le montant_total total peut etre negatif
-        
-        $('#section_versement').on('change', "#reduction", function(){
+            let target = $('.periode').parent().parent().parent().parent()
+            initItem(target)
+
+            //Gerer le cas ou le montant_total total peut etre negatif
+            
+            $('#section_versement').on('change', "#reduction", function(){
+                init()
+            })
+
+            // Default
+            $('.repeater').repeater({
+                // (Optional)
+                // start with an empty list of repeaters. Set your first (and only)
+                // "data-repeater-item" with style="display:none;" and pass the
+                // following configuration flag
+                initEmpty: false,
+                // (Optional)
+                // "defaultValues" sets the values of added items.  The keys of
+                // defaultValues refer to the value of the input's name attribute.
+                // If a default value is not specified for an input, then it will
+                // have its value cleared.
+                defaultValues: {
+                    'periode': 'JOUR',
+                    'sous_total': '0',
+                    //'text-input': 'foo',
+                },
+                // (Optional)
+                // "show" is called just after an item is added.  The item is hidden
+                // at this point.  If a show callback is not given the item will
+                // have $(this).show() called on it.
+                show: function () {
+                    $(this).slideDown()
+
+                    /**date_debut
+                    duree
+                    prix_unitaire
+                    sous_total */
+
+                    initItem(this)
+
+                    $('#section_versement').on('change', '.prix_unitaire', function(){
+                        let parent = $(this).parent().parent().parent().parent()
+                        updateItem(parent, false)
+                    })
+
+                    $('#section_versement').on('change', "select.periode, .duree", function(){
+                        let parent = $(this).parent().parent().parent().parent()
+                        updateItem(parent)
+                    })
+
+                },
+                // (Optional)
+                // "hide" is called when a user clicks on a data-repeater-delete
+                // element.  The item is still visible.  "hide" is passed a function
+                // as its first argument which will properly remove the item.
+                // "hide" allows for a confirmation step, to send a delete request
+                // to the server, etc.  If a hide callback is not given the item
+                // will be deleted.
+                hide: function (deleteElement) {
+
+                if(confirm('Voulez vous supprimer cet élément ?')) {
+                        $(this).slideUp(deleteElement)
+                    }
+                    setTimeout(function(){ init() }, 500)
+
+                },
+                // (Optional)
+                // You can use this if you need to manually re-index the list
+                // for example if you are using a drag and drop library to reorder
+                // list items.
+                /*ready: function (setIndexes) {
+                    $dragAndDrop.on('drop', setIndexes)
+                },*/
+                // (Optional)
+                // Removes the delete button from the first list item,
+                // defaults to false.
+                isFirstItemUndeletable: true
+            })
             init()
-        })
-
-        // Default
-        $('.repeater').repeater({
-            // (Optional)
-            // start with an empty list of repeaters. Set your first (and only)
-            // "data-repeater-item" with style="display:none;" and pass the
-            // following configuration flag
-            initEmpty: false,
-            // (Optional)
-            // "defaultValues" sets the values of added items.  The keys of
-            // defaultValues refer to the value of the input's name attribute.
-            // If a default value is not specified for an input, then it will
-            // have its value cleared.
-            defaultValues: {
-                'periode': 'JOUR',
-                'sous_total': '0',
-                //'text-input': 'foo',
-            },
-            // (Optional)
-            // "show" is called just after an item is added.  The item is hidden
-            // at this point.  If a show callback is not given the item will
-            // have $(this).show() called on it.
-            show: function () {
-                $(this).slideDown()
-
-                /**date_debut
-                duree
-                prix_unitaire
-                sous_total */
-
-                initItem(this)
-
-                $('#section_versement').on('change', '.prix_unitaire', function(){
-                    let parent = $(this).parent().parent().parent().parent()
-                    updateItem(parent, false)
-                })
-
-                $('#section_versement').on('change', "select.periode, .duree", function(){
-                    let parent = $(this).parent().parent().parent().parent()
-                    updateItem(parent)
-                })
-
-            },
-            // (Optional)
-            // "hide" is called when a user clicks on a data-repeater-delete
-            // element.  The item is still visible.  "hide" is passed a function
-            // as its first argument which will properly remove the item.
-            // "hide" allows for a confirmation step, to send a delete request
-            // to the server, etc.  If a hide callback is not given the item
-            // will be deleted.
-             hide: function (deleteElement) {
-
-               if(confirm('Voulez vous supprimer cet élément ?')) {
-                    $(this).slideUp(deleteElement)
-                }
-                setTimeout(function(){ init() }, 500)
-
-            },
-            // (Optional)
-            // You can use this if you need to manually re-index the list
-            // for example if you are using a drag and drop library to reorder
-            // list items.
-            /*ready: function (setIndexes) {
-                $dragAndDrop.on('drop', setIndexes)
-            },*/
-            // (Optional)
-            // Removes the delete button from the first list item,
-            // defaults to false.
-            isFirstItemUndeletable: true
-        })
-        init()
 
     })(window, document, jQuery)
 

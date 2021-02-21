@@ -2,10 +2,9 @@
 <?php
 
 use Core\Routing\URL;
-use App\Helpers\Helpers;
+use App\Helpers\Helpers;    
 
-$include_res_header = '';
-
+    $include_res_header = '';
     $include_res_header = '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">'. "\n";
     $include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/extensions/rowReorder.dataTables.min.css">'. "\n";
     $include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/extensions/responsive.dataTables.min.css">'. "\n";
@@ -15,10 +14,16 @@ $include_res_header = '';
     $include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/selects/select2.min.css">'. "\n";
     $include_res_header .= ''. "\n";
     $include_res_header .=  '<style>
-                        ul, li {list-style-type: none;}
+                        #menu ul, #menu li {list-style-type: none;}
 
-                        #menu div div li a{ 
-                            font-size: 1.3rem !important;
+                        #menu div div li a, #menu  div li a, #menu  li{ 
+                            font-size: 100% !important;
+                            line-height: 60% !important;
+                        }
+
+                        #menu div div li a, #menu div div li { 
+                            font-size: 100% !important;
+                            line-height: 50% !important;
                         }
 
                         #menu li a:hover { 
@@ -34,6 +39,12 @@ $include_res_header = '';
                             background-color: #3BAFDA;
                             color: #fff;
                         }
+
+                        li.select2-results__option strong.select2-results__group:hover {
+                            background-color: #ddd;
+                            cursor: pointer;
+                        }
+
                         </style>';
     
     $include_res_footer = ''. "\n";
@@ -41,7 +52,17 @@ $include_res_header = '';
     $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>'. "\n";
     $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>'. "\n";
     $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/datatable/dataTables.rowReorder.min.js"></script>'. "\n";
-    // $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/charts/echarts/echarts.js"></script>'. "\n";
+
+
+    $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/select/select2.full.min.js"></script>';
+    $include_res_footer .= '<script src="' . URL::base() . 'assets/app-assets/vendors/js/forms/repeater/jquery.input.js"></script>';
+    $include_res_footer .= '<script src="' . URL::base() . 'assets/app-assets/vendors/js/forms/repeater/lib.js"></script>';
+    $include_res_footer .= '<script src="' . URL::base() . 'assets/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>';
+
+
+    // $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>'. "\n";
+    // $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/select/select2.full.min.js"></script>'. "\n";
+    // $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/repeater/jquery.input.js"></script>'. "\n";
     // $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/icheck/icheck.min.js"></script>'. "\n";
     
     // <!-- BEGIN DATE PICKER VENDOR JS-->
@@ -53,6 +74,8 @@ $include_res_footer .= "";
 
 ob_start();
 include 'emprunt_exemplaire-script.php';
++
+include 'emprunt_modal-script.php';
 $include_footer_script = ob_get_clean();
 ?>
 <!--
@@ -82,9 +105,11 @@ $include_footer_script = ob_get_clean();
             </div>
             <div class="content-header-right col-md-6 col-12">
             <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-                <div class="btn-group" role="group"><a class="btn btn-outline-info" href="calendars-clndr.html"><i class="fa fa-calendar"></i></a><a class="btn btn-outline-info" href="timeline-center.html"><i class="fa fa-bar-chart"></i></a>
-                <button class="btn btn-outline-info dropdown-toggle dropdown-menu-right" id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-settings icon-left"></i> Settings</button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1"><a class="dropdown-item" href="card-bootstrap.html">Bootstrap Cards</a><a class="dropdown-item" href="component-buttons-extended.html">Buttons Extended</a></div>
+                <div class="btn-group" role="group">
+                    <a class="btn btn-outline-info" href='<?= URL::link('domaine') ?>'><i class="fa fa-folder-open"></i>&nbsp; Gerer les Domaines</a>
+                    <a class="btn btn-outline-info" href='<?= URL::link('document') ?>'><i class="fa fa-book"></i>&nbsp; Gerer les livres</a>
+                    <a class="btn btn-outline-info" href='<?= URL::link('accueil') ?>'><i class="fa fa-bookmark"></i>&nbsp; Gerer les exemplaires</a>
+                </div>
                 </div>
             </div>
             </div>
@@ -101,9 +126,9 @@ $include_footer_script = ob_get_clean();
 
                         <div class="card-header">
                             <div class="d-flex">
-                                <div class="p-0  col-md-3 mr-auto "><h4 class="card-title" id="heading-prev-next">Liste des livres empruntés</h4><small class="text-muted">Allows you to provide.</small></div>
+                                <div class="p-0  col-md-3 mr-auto "><h4 class="card-title" id="heading-prev-next">Liste des livres empruntés</h4><small class="text-muted">Emprunt, Consulatation, Restitution.</small></div>
                                 <div class="p-0 mr-1   ">
-                                    <button class="btn btn-primary "><i class="ft-plus white"></i> Emprunter un live</button>
+                                    <button class="btn btn-primary "  data-toggle="modal" data-target="#modal-emprunt"><i class="ft-plus white"></i> Emprunter un livre</button>
                                 </div>
                                 <div class="p-0 mr-1 ">
                                     <fieldset class="input-group">
@@ -134,7 +159,7 @@ $include_footer_script = ob_get_clean();
                                     <div class="alert bg-success alert-icon-left" role="alert">
                                         <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
                                         <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
-                                        <span id='resume_filtre' >Robust Admin Template default layout is 2 columns. If you do not define pageConfig block on padefault.</span>
+                                        <span id='resume_filtre' >Liste des documents empruntés.</span>
                                     </div>
                             </div>
                          
@@ -147,10 +172,10 @@ $include_footer_script = ob_get_clean();
                                     <table id="project-bugs-list" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Bug</th>
-                                                <th>Asignee</th>
-                                                <th>Status</th>
+                                                <th>N°</th>
+                                                <th>Nom</th>
+                                                <th>Classe</th>
+                                                <th>Livre</th>				                
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -208,7 +233,7 @@ $include_footer_script = ob_get_clean();
                 <div class="bug-list-sidebar-content">
                 
                     <!-- Predefined Views -->
-                    <div class="card">
+                    <div class="card m-0">
                         <div class="card-header">
                             <h4 class="card-title">Recherche par livre</h4>
                             <a class="heading-elements-toggle"><i class="ft-ellipsis-h font-medium-3"></i></a>
@@ -220,8 +245,8 @@ $include_footer_script = ob_get_clean();
                             </div>
                         </div>
                         <!-- bug-list search -->
-                        <div class="card-content">
-                            <div class="card-body border-top-blue-grey border-top-lighten-5">
+                        <div class="card-content ">
+                            <div class="card-body border-top-blue-grey border-top-lighten-5 m-0 pt-1 pb-0 ">
                                 <div class="bug-list-search">
                                     <div class="bug-list-search-content">
                                         <form action="#">
@@ -237,20 +262,20 @@ $include_footer_script = ob_get_clean();
                             </div>
                             <!-- /bug-list search -->
 
-                            <div class="card-body">
-                            <div id="menu">
-                                <div class="list-group">
-                                    <li><a href="#" class="list-group-item blockquote pl-1 border-left-primary border-left-3 text-bold-600 active" data-toggle="collapse" data-target="#sm" data-parent="#menu">Voir tout <span class="badge badge-pill badge-primary float-right"><?= count($domaines); ?></span></a> </li>
-                                    <?php foreach($domaines as $domaine){ ?>
-                                            <li><a href="#" class="list-group-item blockquote pl-1 border-left-primary border-left-3 text-bold-600 " data-toggle="collapse" data-target="#ID_<?= $domaine['domaine_id']?>" data-parent="#menu"><?= $domaine['domaine']; ?> <span class="badge  badge-pill bg-<?= Helpers::getRandromBootstrapColor() ?> float-right mr-2 badge-glow"><?= count($domaine['documents']); ?></span> </a> </li>
-                                            <div id="ID_<?= $domaine['domaine_id']?>" class="collapse ">
-                                                <?php foreach($domaine['documents'] as $document){ ?>
-                                                    <li><a id="ID_<?= $document['document_id']?>"  class="list-group-item text-bold-400 font-large-1"><i class="fa fa-chevron-circle-right"></i>  <?= $document['document']; ?> </a></li>
-                                                <?php } ?>
-                                            </div>
-                                    <?php } ?>
+                            <div class="card-body mt-1 pt-0">
+                                <div id="menu">
+                                    <div class="list-group">
+                                        <li><a href="#" class="list-group-item blockquote pl-1 border-left-primary border-left-3  active" data-toggle="collapse" data-target="#sm" data-parent="#menu">Voir tout <span class="badge badge-pill badge-primary float-right"><?= count($domaines); ?></span></a> </li>
+                                        <?php foreach($domaines as $domaine){ ?>
+                                                <li><a href="#" class="list-group-item blockquote pl-1 border-left-primary border-left-3  " data-toggle="collapse" data-target="#ID_<?= $domaine['domaine_id']?>" data-parent="#menu"><?= $domaine['domaine']; ?> <span class="badge  badge-pill bg-<?= Helpers::getRandromBootstrapColor() ?> float-right mr-2 badge-glow"><?= count($domaine['documents']); ?></span> </a> </li>
+                                                <div id="ID_<?= $domaine['domaine_id']?>" class="collapse ">
+                                                    <?php foreach($domaine['documents'] as $document){ ?>
+                                                        <li><a id="ID_<?= $document['document_id']?>"  class="list-group-item "><i class="fa fa-chevron-circle-right"></i>  <?= $document['document']; ?> </a></li>
+                                                    <?php } ?>
+                                                </div>
+                                        <?php } ?>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
 
                       
@@ -263,3 +288,7 @@ $include_footer_script = ob_get_clean();
         </div>
     </div>
 </div>
+
+
+
+<?php include 'emprunt_modal.php' ?>

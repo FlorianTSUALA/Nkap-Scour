@@ -17,7 +17,7 @@
 								foreach($menu_items as $menu_item){
 								//var_dump($menu_item);
 							?>
-									<li>
+									<li <?= ($menu_item['action'] == ($route??'none'))? 'class="active"':''; ?>>
 										<a class="menu-item" href="<?= $menu_item['full_url']; ?>" data-i18n="nav.starter_kit.<?= ++$i; ?>_columns"><?= $menu_item['title']; ?></a>
 									</li>
 								<?php } ?>

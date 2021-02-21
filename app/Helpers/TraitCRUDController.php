@@ -20,12 +20,13 @@ trait TraitCRUDController
         $fillables = $this->{$this->vairant}->fillables;
         $class_name = $this->class_name;
         $base_route = $this->base_route;
+        $route = $this->base_route;
         $create_title = $this->create_title;
         $view_title = $this->view_title;
         $update_title = $this->update_title;
         $delete_title = $this->delete_title;
         $msg_delete = $this->msg_delete;
-        $this->render('sections.'.$this->folder_view_index, compact('items', 'class_name', 'fillables', 'base_route', 'title', 'create_title', 'view_title', 'update_title', 'delete_title', 'msg_delete'));
+        $this->render('sections.'.$this->folder_view_index, compact('route', 'items', 'class_name', 'fillables', 'base_route', 'title', 'create_title', 'view_title', 'update_title', 'delete_title', 'msg_delete'));
     }
 
     

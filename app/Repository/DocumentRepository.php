@@ -3,13 +3,63 @@
 namespace App\Repository;
 
 use App\Model\DBTable;
+use App\Model\Exemplaire;
+use App\Model\EtatDocument;
+use Core\Repository\BaseRepository;
 
 use function Core\Helper\dd;
-use function Core\Helper\vd;
-use Core\Repository\BaseRepository;
 
 class DocumentRepository extends BaseRepository{
     
+        
+    public function getDocument(){
+        
+        $documents =  DBTable::getModel(DBTable::DOCUMENT)->select(
+        [   
+            'code' => 'document_id',
+            'titre' => 'document',
+        ])
+        ->where('visibilite', '=', 1)
+        ->get();
+        
+        return $documents;
+    }
+        
+    public function getExemplaire($disponible = false){
+        
+        $table = Exemplaire::table();
+        $request = $table->select('
+            document.titre as document, 
+            document.code as document_id, 
+            etat_document.code as etat_document_id, 
+            etat_document.libelle as etat_document, 
+            exemplaire.code as exemplaire_id, 
+            exemplaire.code_enregistrement as code_enregistrement, 
+            exemplaire.date_acquisition as date_acquisition
+            ')->where('exemplaire.visibilite','=', 1);
+
+        if($disponible)
+            $request = $request->where('exemplaire.statut','=', $disponible);
+
+        $results = $request
+            ->join('document', 'exemplaire.document_id', '=', 'document.id')
+            ->join('etat_document', 'exemplaire.etat_document_id', '=', 'etat_document.id')
+            ->get();
+        
+        dd($results);
+        return $results;
+    }
+        
+    public function getEtatDocument(){
+        $results = EtatDocument::table()->select('
+                etat_document.code as etat_document_id, 
+                etat_document.libelle as etat_document 
+                ')
+                ->where('etat_document.visibilite', 1)
+                ->get();
+    
+        return $results;
+    }
         
     public function getDocumentGroupByDomaine(){
         
@@ -46,21 +96,6 @@ class DocumentRepository extends BaseRepository{
         }
         
         return $documents;
-    }
-
-    public function draft()
-    {
-        $documents =  DBTable::getModel(DBTable::DOMAINE)->select(
-            [   
-                'document.code' => 'document_id', 
-                'document.libelle' => 'document', 
-                'domaine.code' => 'domaine_id', 
-                'domaine.libelle' => 'domaine'
-            ])
-            ->join(DBTable::DOCUMENT, 'document.domaine_id', '=', 'domaine.id')
-            ->where('domaine.visibilite', '=', 1)
-            ->get();
-            
     }
 
 
