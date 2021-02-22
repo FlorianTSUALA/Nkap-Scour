@@ -180,6 +180,8 @@ $router->crudRoute('type_pension', TypePensionController::class);
 //Personnel
 $router->crudRoute('personnel', PersonnelController::class);
 $router->addRoute('ajout_personnel', 'personnel/nouveau', [PersonnelController::class, 'ajout']);
+$router->addRoute('personnel_liste', 'personnel/detail', [PersonnelController::class, 'liste_abonnee']);
+$router->addRoute('personnel_api_getall', 'personnel/api/all', [PersonnelController::class, 'getApiPersonnels']);
 
 //AFFECTATION
 $router->addRoute('affection_salle_enseignant', 'affectation/enseignant_salle', [AffectionController::class, 'ajout']);

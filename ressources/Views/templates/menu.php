@@ -380,6 +380,19 @@ return[
                 "children" => [],
             ],
 
+            "LISTE_PERSONNEL" => [
+                "title" => "Liste Personnel",
+                "icon" => "",
+                "url" => "",
+                "full_url" =>  URL::link("personnel_liste"),
+                "action" => "",
+                "alt" => "",
+                "class" => "",
+                "isActive" => "",
+                "hasChildren" => false,
+                "children" => [],
+            ],
+
         ],
     ],
 

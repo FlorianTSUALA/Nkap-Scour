@@ -134,7 +134,7 @@ use Core\Routing\URL;
     <div class="row">
         <div class="col-md-6">
             <div class="form-group row">
-                <label for="login" class="col-4 col-form-label">Login<?= Helpers::required_input(); ?>  :</label>
+                <label for="login" class="col-4 col-form-label">Login :</label>
                 <div class="col-8">
                     <input type="text" placeholder="Pseudonyme de connexion" class="form-control " id="login" name="login"  />
                 </div>
@@ -166,7 +166,7 @@ use Core\Routing\URL;
     <div class="row">
         <div class="col-md-6">
             <div class="form-group row">
-                <label for="password" class="col-4 col-form-label">Mot de passe<?= Helpers::required_input(); ?>  :</label>
+                <label for="password" class="col-4 col-form-label">Mot de passe :</label>
                 <div class="col-8">
                     <input placeholder="Mot de passe du personnel" type="password" class="form-control required" id="password" name="password" required />
                 </div>
@@ -180,7 +180,7 @@ use Core\Routing\URL;
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label for="password_confirm" class="col-4 col-form-label">Confirmer mot de passe<?= Helpers::required_input(); ?>  :</label>
+                <label for="password_confirm" class="col-4 col-form-label">Confirmer mot de passe  :</label>
                 <div class="col-8">
                     <input placeholder="Confirmer le mot de passe du personnel" type="password" class="form-control required" id="password_confirm" name="password_confirm"  />
                 </div>

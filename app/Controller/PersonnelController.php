@@ -8,9 +8,15 @@ use App\Helpers\Helpers;
 use App\Model\Personnel;
 use Core\Session\Request;
 use App\Helpers\HTMLHelper;
+use function Core\Helper\dd;
 use Core\HTML\Form\FormModel;
 use App\Helpers\TraitCRUDController;
+use App\Repository\ClasseRepository;
 use App\Controller\Admin\AppController;
+use App\Repository\PersonnelRepository;
+
+use App\Repository\AnneeScolaireRepository;
+use ClanCats\Hydrahon\Query\Expression as Ex;
 
 class PersonnelController extends AppController
 {
@@ -172,5 +178,29 @@ class PersonnelController extends AppController
         }
     }
 
+   
+
+
+    public function liste_abonnee()
+    {
+        $personnels = (new PersonnelRepository())->getDocumentGroupByPersonnel();   
+        $classes = (new ClasseRepository())->getSalleClasseGroupByClasse();
+        
+        $annee_scolaire_id =  (new AnneeScolaireRepository())->getActive('id');
+
+        $data_info_personnels = (new PersonnelRepository())->getInfoPersonnels($annee_scolaire_id);
+
+        // dd($data_info_personnels);
+        $this->render('sections.personnel.personnel_liste', compact( 'classes','data_info_personnels', 'personnels'));
+    }
+
+    public function getApiPersonnels()  
+    {
+        $annee_scolaire_id =  (new AnneeScolaireRepository())->getActive('id');
+
+        $data_info_personnels = (new PersonnelRepository())->getInfoPersonnels($annee_scolaire_id);
+
+        echo Helpers::toJSON($data_info_personnels) ;
+    }
 
 }

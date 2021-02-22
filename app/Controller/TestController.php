@@ -22,6 +22,7 @@ use App\Repository\ClasseRepository;
 use App\Repository\CantineRepository;
 use App\Repository\DocumentRepository;
 use App\Model\AffectationClasseMatiere;
+use App\Repository\PersonnelRepository;
 use ClanCats\Hydrahon\Query\Expression;
 use App\Repository\AnneeScolaireRepository;
 use Core\HTML\MessageFlash\FlashMessagesStatic;
@@ -99,8 +100,8 @@ class TestController extends AppController
     public function testA()
     {
         
-        $repository = new DocumentRepository();
-        $items = $repository->getDocumentGroupByDomaine();
+        $repository = new PersonnelRepository();
+        $items = (new PersonnelRepository())->getDocumentGroupByPersonnel();
         dd($items);
     }
 
