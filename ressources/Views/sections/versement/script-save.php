@@ -38,8 +38,7 @@ use App\Helpers\Helpers;
 
 
         $.blockUI({
-            // message: '<div class="ft-refresh-cw icon-spin font-medium-2">Enregsitrement en cours</div>',
-            message: '<div class="semibold"><span class="ft-refresh-cw icon-spin text-left"></span>&nbsp; Chargement ...</div>',
+            message: '<div class="semibold"><span class="ft-refresh-cw icon-spin text-left"></span>&nbsp; Enregistrement en cours ...</div>',
             fadeIn: 1000,
             timeout: 10000, //unblock after 2 seconds
             overlayCSS: {

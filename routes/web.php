@@ -26,6 +26,7 @@ use App\Controller\VersementController;
 use App\Controller\Auth\LoginController;
 use App\Controller\DisciplineController;
 use App\Controller\EnseignantController;
+use App\Controller\ExemplaireController;
 use App\Controller\EmploiTempsController;
 use App\Controller\InscriptionController;
 use App\Controller\ParametrageController;
@@ -37,8 +38,8 @@ use App\Controller\EtatDocumentController;
 use App\Controller\TypeActiviteController;
 use App\Controller\TypePaiementController;
 use App\Controller\AnneeScolaireController;
-use App\Controller\PensionClasseController;
 
+use App\Controller\PensionClasseController;
 use App\Controller\TypePersonnelController;
 use App\Controller\PrixAbonnementController;
 use App\Controller\TrancheHoraireController;
@@ -131,6 +132,9 @@ $router->crudRoute('document', DocumentController::class);
 
 //etat_document
 $router->crudRoute('etat_document', EtatDocumentController::class);
+
+//exemplaire
+$router->crudRoute('exemplaire', ExemplaireController::class);
 
 //domaine
 $router->crudRoute('domaine', DomaineController::class);
