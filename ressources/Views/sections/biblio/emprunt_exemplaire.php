@@ -169,13 +169,18 @@ $include_footer_script = ob_get_clean();
                             <div class="card-body">
                                 <!-- Task List table -->
                                 <div class="table-responsive">
-                                    <table id="project-bugs-list" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
+                                    <table id="table-emprunt" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
                                         <thead>
                                             <tr>
+                                                <th>id</th>
                                                 <th>N°</th>
-                                                <th>Nom</th>
-                                                <th>Classe</th>
-                                                <th>Livre</th>				                
+                                                <th>Code</th>
+                                                <th>Livre</th>
+                                                <th>Elève</th>				                
+                                                <th>Date Emprunt</th>
+                                                <th>Date Retour</th>
+                                                <th>Classe</th>				                
+                                                <th>Etat</th>				                
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -210,10 +215,15 @@ $include_footer_script = ob_get_clean();
                                         </tbody>
                                         <tfoot>
                                             <tr>
+                                                <th>id</th>
                                                 <th>N°</th>
-                                                <th>Nom</th>
-                                                <th>Classe</th>
-                                                <th>Livre</th>				                
+                                                <th>Code</th>
+                                                <th>Livre</th>
+                                                <th>Elève</th>				                
+                                                <th>Date Emprunt</th>
+                                                <th>Date Retour</th>
+                                                <th>Classe</th>				                
+                                                <th>Etat</th>				                
                                                 <th>Actions</th>
                                             </tr>
                                         </tfoot>

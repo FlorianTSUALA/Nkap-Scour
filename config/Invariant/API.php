@@ -1,6 +1,7 @@
 <?php
 
-namespace Core\Invariant;
+namespace Config\Invariant;
+
 
 /*
  * DEFINITION DE LA CLASSE CONCERNANTS LES TAGS D'API

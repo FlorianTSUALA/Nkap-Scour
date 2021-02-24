@@ -4,12 +4,13 @@ namespace Core\Database;
 
 use PDO;
 use Exception;
+use Core\Config;
 use Core\BaseApp;
 use PDOException;
+use function Core\Helper\vd;
+
 use ClanCats\Hydrahon\Builder;
 use ClanCats\Hydrahon\Query\Sql\FetchableInterface;
-
-use function Core\Helper\vd;
 
 class HydrahonDatabase extends Database
 {
@@ -17,19 +18,37 @@ class HydrahonDatabase extends Database
 
     public function __construct($db_name='ktame', $db_user='root', $db_host = 'localhost', $db_pass = '', $db_charset='UTF-8')
     {
+        $config = Config::getInstance("config/config.php");
+        if($db_name == 'ktame'){
+            $db_name = $config->get('db_name');
+            $db_user = $config->get('db_user');
+            $db_host = $config->get('db_host');
+            $db_pass = $config->get('db_pass');
+        }
         parent::__construct($db_name, $db_charset, $db_user, $db_host, $db_pass);
     }
 
     protected function getPDO()
     {
+        $config = Config::getInstance("config/config.php");
+
+        $this->db_name = $config->get('db_name');
+        $this->db_user = $config->get('db_user');
+        $this->db_host = $config->get('db_host');
+        $this->db_pass = $config->get('db_pass');
+
+
         if ($this->pdo === null) {
             try {
                 // $pdo = new PDO("mysql:dbname=". $this->db_name .";host=". $this->db_host , $this->db_user, $this->db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'"));
                 //$pdo = new PDO("mysql:dbname=". $this->db_name .";host=". $this->db_host, $this->db_user, $this->db_pass, array('charset'=>'utf8mb4'));
-                $pdo = new PDO("mysql:host=". $this->db_host.";dbname=". $this->db_name .";charset=utf8mb4", $this->db_user, $this->db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'"));
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $this->pdo = $pdo;
+                $this->pdo = new PDO("mysql:host=". $this->db_host.";dbname=". $this->db_name .";charset=utf8mb4", $this->db_user, $this->db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'"));
+                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
             } catch (PDOException $ex) {
+                vd($ex);
+                die($this->db_host);
+
                 BaseApp::abort(502, "Erreur de connexion avec la base de données !!!");
             }
         }

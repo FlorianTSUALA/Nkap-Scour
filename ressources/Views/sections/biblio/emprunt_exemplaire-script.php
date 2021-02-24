@@ -44,7 +44,7 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
         
         function init_data_table() {
 
-            table = $('#table-cantine').DataTable({
+            table = $('#table-emprunt').DataTable({
                 //"serverSide": true,
                 //Server-side processing is useful when working with large data sets (typically >50'000 records) as it means a database engine can be used to perform the sorting etc calculations - operations that modern database engines are highly optimised for, allowing use of DataTables with massive data sets (millions of rows).
                 ajax:{
@@ -58,6 +58,27 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
                     type: 'POST'
                 },
                 "columns": [<?= Emprunt::getColumns() ?>],
+                "columnDefs": [
+                  {
+                    targets: 0,
+                    visible: false
+                  },
+                  {
+                  "targets": -1,
+                  "data": null,
+                  "defaultContent": "<span class=\"dropdown\">  <button id=\"btnSearchDrop2\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class=\"btn btn-info dropdown-toggle\"><i class=\"fa fa-cog\"></i></button> <span aria-labelledby=\"btnSearchDrop2\" class=\"dropdown-menu mt-1 dropdown-menu-right\">  <a href=\"#\" class=\"dropdown-item action-voir\"><i class=\"ft-eye\"></i> voir</a><a href=\"#\" class=\"dropdown-item action-modifier\"><i class=\"ft-edit-2\"></i> modifier</a><a href=\"#\" class=\"dropdown-item action-restituer\"><i class=\"ft-check\"></i> restituer</a><a href=\"#\" class=\"dropdown-item action-reemprunter\"><i class=\"ft-upload\"></i> re-emprunter</a><a href=\"#\" class=\"dropdown-item action-supprimer\"><i class=\"ft-trash\"></i> supprimer</a>  </span> </span>"
+              } ],
+              "createdRow": function(row, data, index) {
+                    // if (data[2] * 1 < 9000) 
+                    {
+                      // console.log(data.date_expiration)
+                      let date_emprunt = new Date(data.date_emprunt).toLocaleDateString(window.navigator.language, {year: 'numeric',month: 'long',day: 'numeric',});
+                      let date_expiration = new Date(data.date_expiration).toLocaleDateString(window.navigator.language, {year: 'numeric',month: 'long',day: 'numeric',});
+                        //  console.log(date_expiration);
+                        $('td', row).eq(4).text( date_emprunt );
+                        $('td', row).eq(5).text( date_expiration );
+                    }
+                },
                 "destroy" : true,
                 dom: 'Blfrtip',
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
