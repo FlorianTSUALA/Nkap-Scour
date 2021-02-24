@@ -430,9 +430,10 @@ return[
             "LISTE_PERSONNEL" => [
                 "title" => "Liste Personnel",
                 "icon" => "",
-                "url" => "",
+                "msg_page" => "",
+                "menu_explication" => "",
                 "full_url" =>  URL::link("personnel_liste"),
-                "action" => "",
+                "action" => "personnel_liste",
                 "alt" => "",
                 "class" => "",
                 "isActive" => "",

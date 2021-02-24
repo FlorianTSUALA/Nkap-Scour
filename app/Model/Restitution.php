@@ -13,6 +13,7 @@ class Restitution extends Model implements FrequentlyReapeat
     protected $entity;   
     
     const EMPRUNT_ID = "emprunt_id";
+    const EXEMPLAIRE_ID = "exemplaire_id";
     const DATE_RESTITUTION = "date_restitution";
     const COMMENTAIRE = "commentaire";
 

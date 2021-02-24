@@ -2,7 +2,13 @@
 
 namespace App\Controller;
 
+use Core\Model\Model;
 use App\Model\DBTable;
+use App\Model\Emprunt;
+use App\Helpers\Helpers;
+use App\Model\EnumModel;
+use App\Model\Exemplaire;
+use Core\Session\Request;
 use function Core\Helper\dd;
 use function Core\Helper\vd;
 use App\Repository\EleveRepository;
@@ -10,6 +16,7 @@ use App\Helpers\TraitCRUDController;
 use App\Repository\BiblioRepository;
 use App\Repository\DocumentRepository;
 use App\Controller\Admin\AppController;
+use App\Repository\ExemplaireRepository;
 
 class BiblioController extends AppController
 {
@@ -81,6 +88,66 @@ class BiblioController extends AppController
         $etat_documents = (new DocumentRepository())->getEtatDocument();
         $eleves = (new EleveRepository() )->getInfoPerso();
         $this->render('sections.biblio.emprunt_exemplaire', compact('route', 'domaines', 'eleves', 'exemplaires', 'documents', 'etat_documents'));
+    }
+
+    public function getListeEmprunt()
+    {
+        $results = (new ExemplaireRepository())->getAllEmprunt();
+        echo Helpers::toJSON($results) ;
+    }
+
+    public function enregistrerEmprunt()
+    {
+        
+        $data = $_POST;
+        
+        $eleve_code = Request::getSecParam('id_eleve');
+        $eleve_id = Model::getId(DBTable::ELEVE, str_replace('RF-', '', $eleve_code));
+
+        $date_emprunt = Request::getSecParam('date_emprunt');
+        $date_retour = Request::getSecParam('date_retour');
+        
+        $livres = $data['livres'];
+        $isFail = false;
+
+        foreach($livres as $key => $livre){
+
+            // vd($livre);
+            
+            $etat_document_code = $livre['etat_livre'];
+            $exemplaire_code = $livre['code_livre'];
+            
+            $etat_document_id = Model::getId(DBTable::ETAT_DOCUMENT, $etat_document_code);
+            $exemplaire_id = Model::getId(DBTable::EXEMPLAIRE, $exemplaire_code);
+
+            //MISE A JOUR
+            $exemplaire = Exemplaire::table();
+            $exemplaire->update([
+                                    'etat_document_id' => $etat_document_id, 
+                                    'statut' => EnumModel::STATUT_DOCUMENT_EMPRUNTE
+                                ])
+            ->where('id', $exemplaire_id)
+            ->execute();
+
+            //INSERTION EMPRUNT
+            $emprunt = Emprunt::table();
+            $data_emprunt = [
+                'code' => Emprunt::generateCode(),
+                'eleve_id' => $eleve_id,
+                'exemplaire_id' =>  $exemplaire_id,
+                'etat_document_id' =>  $etat_document_id,
+                'date_emprunt' =>  $date_emprunt,
+                'date_expiration' =>  $date_retour,
+            ];
+            $emprunt->insert($data_emprunt)->execute();
+            
+        }
+        
+        if (!$isFail) {
+            $this->sendResponseAndExit(Helpers::toJSON('Emprunt enregistrée avec success', TRUE));
+        } else {
+            $this->sendResponseAndExit(Helpers::toJSON('Erreur d\'enregistement à la base de données !!!', TRUE), false, 400, 'BD error : data '. $eleve_code);
+        }
     }
 
     public function emprunt_exemplaire()

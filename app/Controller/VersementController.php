@@ -211,7 +211,7 @@ class VersementController extends \App\Controller\Admin\AppController
 
                     $motif = $item['type_pension'];
                     $montant = $item['montant'];
-                    $reduction = $item['reduction'];
+                    $reduction = $item['reduction']??0;
                     $type_pension_code = $item['type_pension_code'];
                     $pension_classe_code = $item['pension_classe_code'];
                     $est_mensuel = $item['est_mensuel'];

@@ -8,21 +8,35 @@ use App\Helpers\Helpers;
 
 <script>
     //Restreindre l'emprunt d'un meme livre
+    var mustUpdateX = true
+    var mustUpdateY = false
+    var exemplaires = <?= Helpers::toJSON($exemplaires); ?>;
+   
 
-    // var etat_documents = <?php echo Helpers::toJSON($etat_documents) ; ?>;
-    // var documents = <?php echo Helpers::toJSON($documents) ; ?>;
-    var exemplaires = <?php echo Helpers::toJSON($exemplaires) ; ?>;
-    
-    <?php die("stop"); ?>
-    
     //Initialisation des composant de base
     (function(window, document, $) {
         //'use strict'
 
-        $('#modal-emprunt').on('change', 'select.code-livre, select.titre-livre, select.etat-livre', function(){
-            let parent = $(this).parent().parent()
-            updateItem(parent)
+        $('#modal-emprunt').on('select2:open', 'select.code-livre', function(){
+            mustUpdateY = true
+            mustUpdateX = false
         })
+
+        $('#modal-emprunt').on('select2:open', 'select.titre-livre', function(){
+            mustUpdateX = true
+            mustUpdateY = false
+        })
+
+        $('#modal-emprunt').on('change', 'select.code-livre', function(){
+            let parent = $(this).parent().parent()
+            updateItem(parent, true)
+        })
+
+        $('#modal-emprunt').on('change', 'select.titre-livre', function(){
+            let parent = $(this).parent().parent()
+            updateItem(parent, false)
+        })
+
 
         let target = $('.code-livre').parent().parent()
         initItem(target)
@@ -41,13 +55,20 @@ use App\Helpers\Helpers;
 
         $(document).on('click', '#modal-emprunt-save', function(e) {
                 e.preventDefault();
-            // alert(items.repeaterVal());
-                console.log(items.repeaterVal());
-                //return;
                 saveEmprunt();
         })
         
         // Custom Show / Hide Configurations
+        initRepeater()
+        resetRepeater()
+    })
+
+    function resetRepeater() {
+        $('[data-repeater-list]').empty()
+        $('[data-repeater-create]').click()
+    }
+
+    function initRepeater() {
         items = $('.item-repeater').repeater({
             
             show: function () {
@@ -61,13 +82,30 @@ use App\Helpers\Helpers;
                     // allowClear: true
                 });
 
-                // initItem(this)
+                initItem(this)
                 
-                $('#modal-emprunt').on('change', 'select.code-livre, select.titre-livre, select.etat-livre', function(){
-                    let parent = $(this).parent().parent()
-                    updateItem(parent)
+                $('#modal-emprunt').on('select2:open', 'select.code-livre', function(){
+                    mustUpdateY = true
+                    mustUpdateX = false
+                    
                 })
 
+                $('#modal-emprunt').on('select2:open', 'select.titre-livre', function(){
+                    mustUpdateX = true
+                    mustUpdateY = false
+                })
+               
+
+                $('#modal-emprunt').on('change', 'select.code-livre', function(){
+                    let parent = $(this).parent().parent()
+                    updateItem(parent, true)
+                })
+
+                $('#modal-emprunt').on('change', 'select.titre-livre', function(){
+                    let parent = $(this).parent().parent()
+                    updateItem(parent, false)
+                })
+                
             },
                 
             hide: function(remove) {
@@ -77,31 +115,40 @@ use App\Helpers\Helpers;
                 }
             }
         });
-    })
-
+    }
     function updateItem(parent, isCode=true){
         let css_class = (isCode)? 'code-livre' : 'titre-livre'
         let selected = parent.find("." + css_class).val()
+        console.log(selected)
+        if(selected == null) return //aucune valeur selectionnée
         if(exemplaires.length === 0) return
         let tmp = exemplaires.filter((item)=>{
             return String(item.exemplaire_id) === String(selected)
         })
         let current = tmp[0]
-        parent.find(".titre-livre").val( current.document_id )
-        parent.find(".code-livre").val( current.exemplaire_id )
+       
+        if(isCode){
+            if(mustUpdateY){
+                parent.find(".titre-livre").val( current.exemplaire_id )
+                parent.find(".titre-livre").trigger('change')
+            }
+        }else{
+            if(mustUpdateX){
+                parent.find(".code-livre").val( current.exemplaire_id )
+                parent.find(".code-livre").trigger('change')
+            }
+        }
+
+        mustUpdateX = false
+        mustUpdateY = false
+
         parent.find(".etat-livre").val( current.etat_document_id )
+        parent.find(".etat-livre").trigger('change')
     }
     
-    function initItem(target){
-        let selected = $(target).find('.code-livre').val()
-        if(exemplaires.length === 0) return
-        console.log("Code-livre "+selected)
-        let tmp = exemplaires.filter((item)=>{
-            return String(item.code_livre) === String(selected)
-        })
-    
-        let current = tmp[0]
-        $(target).find('.prix_unitaire').val( parseFloat(current.montant) )
+    function initItem(target, isCode = true){
+        let parent = $(target)
+        updateItem(parent, isCode)
     }
 
 
@@ -110,25 +157,25 @@ use App\Helpers\Helpers;
     }
 
     function saveEmprunt(){
-        let livres = []
-        // $('.item-repeater').repeaterVal().forEach( (item, index) =>{
-        //     // console.log(item)
-        //     livres += item.livre
+        let livres = {}
 
-        // })
         items = $('.item-repeater').repeaterVal()['data']
         for (index = 0; index < items.length; index++){
-            livres[index] = items[index].livre
+            let tmp = {}
+            tmp['code_livre'] = items[index].code_livre
+            tmp['etat_livre'] = items[index].etat_livre
+            livres[index] = tmp
         }
-        console.log(livres)
-        return
-
+       
         data = {
-                "nom":  $('#eleve option:selected').text(),
-                'id_eleve':  $('#eleve option:selected').val(),
-                'livres':  $('#reste').val(),
-                'date_paiement': $('#eleve_nom_complet option:selected').val()
-        };
+                "nom":  $('#emprunt option:selected').text(),
+                'id_eleve':  $('#emprunt option:selected').val(),
+                'livres':  livres,
+                'date_emprunt': $('#date_emprunt').val(),
+                'date_retour': $('#date_retour').val()
+        }
+
+        console.log(data)
 
         $.blockUI({
             message: '<div class="semibold"><span class="ft-refresh-cw icon-spin text-left"></span>&nbsp; Enregistrement en cours ...</div>',
@@ -149,22 +196,20 @@ use App\Helpers\Helpers;
             },
             onBlock: function() {
                 $.ajax({
-                    url: '<?= URL::link('biblio_api_emprunt');?>',
+                    url: '<?= URL::link('biblio_api_emprunt_save');?>',
                     type: 'post',
                     data: data,
                     dataType: 'json',
-                    // beforeSend:function(){
-                    //     $(loading).show();
-                    // },
+                  
                     success:function(data){
+                        
+                        $("#form-emprunt").trigger("reset")
+                        $('#form-emprunt')[0].reset()
+                        $('#modal-emprunt').modal('hide')
 
-                        $('#btn_home').show()
-                        $('#btn_print').show()
+                        resetRepeater()
 
-                        $(loading).hide()
-                        // message de notification
-
-                        flash_msg(data)
+                        flash_msg(data, 6)
 
                         console.log(data)
 

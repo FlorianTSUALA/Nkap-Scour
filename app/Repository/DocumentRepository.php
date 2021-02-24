@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Model\DBTable;
+use App\Model\EnumModel;
+use App\Model\EnumStatutDocument;
 use App\Model\Exemplaire;
 use App\Model\EtatDocument;
 use Core\Repository\BaseRepository;
@@ -39,14 +41,12 @@ class DocumentRepository extends BaseRepository{
             ')->where('exemplaire.visibilite','=', 1);
 
         if($disponible)
-            $request = $request->where('exemplaire.statut','=', $disponible);
+            $request = $request->where('exemplaire.statut','=', EnumModel::STATUT_DOCUMENT_DISPONIBLE );
 
         $results = $request
             ->join('document', 'exemplaire.document_id', '=', 'document.id')
             ->join('etat_document', 'exemplaire.etat_document_id', '=', 'etat_document.id')
             ->get();
-        
-        dd($results);
         return $results;
     }
         

@@ -207,7 +207,8 @@ $router->addRoute('biblio_activite', 'biblio/activite', [BiblioController::class
 $router->addRoute('biblio_historique', 'biblio/historique', [BiblioController::class, 'afficherHistorique']);
 $router->addRoute('biblio_dashboard', 'biblio/dashboard', [BiblioController::class, 'dashboard']);
 $router->addRoute('biblio_emprunt', 'biblio/emprunt', [BiblioController::class, 'emprunt']);
-$router->addRoute('biblio_api_emprunt', 'biblio/api/emprunt/{code}', [BiblioController::class, 'enregistrerEmprunt']);
+$router->addRoute('biblio_api_emprunt_save', 'biblio/api/emprunt/save', [BiblioController::class, 'enregistrerEmprunt']);
+$router->addRoute('biblio_api_emprunt_liste', 'biblio/api/emprunt/all', [BiblioController::class, 'getListeEmprunt']);
 $router->addRoute('biblio_api_restitution', 'biblio/api/restitution/{code}', [BiblioController::class, 'enregistrerRestitution']);
 $router->addRoute('biblio_api_alerte', 'biblio/api/alerte/{code}', [BiblioController::class, 'alerte']);
 

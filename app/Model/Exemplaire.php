@@ -37,7 +37,7 @@ class Exemplaire extends Model implements FrequentlyReapeat
 
         $this->fillables =
             [
-                new FormModel(false, self::DOCUMENT_ID, 'Document', InputType::SELECT2, $documents, '', 'Choisir un document', true, 'select2 form-control'),
+                new FormModel(false, self::DOCUMENT_ID, 'Document', InputType::SELECT2, $documents, '', 'Choisir un document', true, 'select2 form-control', '', '', '', 'titre'),
                 new FormModel(false, self::ETAT_DOCUMENT_ID,'Etat du document', InputType::SELECT2, $etat_documents, '', 'Choisir un état du document', true, 'select2 form-control'),
                 new FormModel(true, self::STATUT  ,'Statut du document', InputType::SELECT2, $status, '', 'Choisir un statut', true, 'select2 form-control' ),
                 new FormModel(true, self::CODE_ENREGISTRMENT ,'Numero d\'enregistrement', InputType::TEXT ),

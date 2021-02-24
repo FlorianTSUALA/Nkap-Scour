@@ -1,6 +1,8 @@
 <?php
 
 use Core\Routing\URL;
+use App\Model\Emprunt;
+use App\Helpers\Helpers;
 use Core\HTML\Form\InputType;
 
 include dirname(__DIR__)."/_common_lib/_select2_script.php";
@@ -46,7 +48,7 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
                 //"serverSide": true,
                 //Server-side processing is useful when working with large data sets (typically >50'000 records) as it means a database engine can be used to perform the sorting etc calculations - operations that modern database engines are highly optimised for, allowing use of DataTables with massive data sets (millions of rows).
                 ajax:{
-                    url: '<?= URL::link('cantine_abonnement_info') ?>',
+                    url: '<?= URL::link('biblio_api_emprunt_liste') ?>',
                     data: function(data){
                         data.code =  code,
                         data.filter_by = filter_by,
@@ -55,6 +57,12 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
                     } ,
                     type: 'POST'
                 },
+                "columns": [<?= Emprunt::getColumns() ?>],
+                "destroy" : true,
+                dom: 'Blfrtip',
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
+                stateSave: true,
+              <?= Helpers::dataTableCommunOptions() ?>
                
             })
 

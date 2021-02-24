@@ -16,14 +16,14 @@ use Core\Routing\URL;
             </div>
             <div class="card-body">
   
-  <form >
+  <form id="form-emprunt" >
 
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="discipline" > Emprunteur :</label>
             </div>
             <div class="form-group col-md-9">
-                <select id="emprunt" style="width:100%" class="select2 js-example-programmatic select-multiple-2 form-control" name="multi_select[]" id="multi_select" style="width:100%;">
+                <select id="emprunt" style="width:100%" class="select2 emprunt form-control" name="multi_select[]" id="multi_select" style="width:100%;">
                     <option data-matricule="" data-id="" disabled value="">----------------------</option>
                     <?php foreach($eleves as $item){?>
                     <option data-matricule="<?= $item['matricule']; ?>" data-id="<?= $item['id']; ?>" title="<?= "Né ".$item['date_naissance']." à ".$item['lieu_naissance']; ?>" value="RF-<?= $item['id']; ?>"><?= $item['libelle']; ?></option>
@@ -41,7 +41,7 @@ use Core\Routing\URL;
                         <label for="code-livre">Code d'enregistrement</label>
                         <select class="select2 code-livre form-control" style="width: 100%;" name="code_livre" id="code-livre">
                             <?php foreach($exemplaires as $item){?>
-                            <option  data-id="<?= $item['document_id']; ?>" title="<?= $item['document'] ?>" value="<?= $item['document_id']; ?>"><?= $item['code_enregistrement']; ?></option>
+                            <option  data-id="<?= $item['document_id']; ?>" title="<?= $item['document'] ?>" value="<?= $item['exemplaire_id']; ?>"><?= $item['code_enregistrement']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -51,7 +51,7 @@ use Core\Routing\URL;
                         <label for="titre-livre">Titre </label>
                         <select class="select2 titre-livre form-control" style="width: 100%;" name="titre_livre" id="titre-livre">
                             <?php foreach($exemplaires as $item){?>
-                            <option  data-id="<?= $item['document_id']; ?>" title="<?= $item['document'] ?>" value="<?= $item['document_id']; ?>"><?= $item['document']; ?></option>
+                            <option  data-id="<?= $item['document_id']; ?>" title="<?= $item['document'] ?>" value="<?= $item['exemplaire_id']; ?>"><?= $item['document']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -74,10 +74,35 @@ use Core\Routing\URL;
                     </div>
                 </div>
             </div>
+            <div class="row pb-0 pt-1 mb-0 mt-1">
 
-            <button type="button" id="btn-add" data-repeater-create class="btn btn-primary">
-                <i class="ft-plus"></i> Livre
-            </button>
+                <div class="col-md-2 my-0 py-0">
+                    <button type="button" id="btn-add" data-repeater-create class="btn btn-primary">
+                        <i class="ft-plus"></i> Livre
+                    </button>
+                </div>
+
+
+                <div class="col my-0 py-0">
+                    <div class="form-group row">
+                        <label for="date_emprunt" class="col-4 col-form-label">Date de l'emprunt&nbsp;:</label>
+                        <div class="col-8">
+                            <input type="date" class="form-control" value="<?= date('Y-m-d') ?>" id="date_emprunt" name="date_emprunt" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col my-0 py-0">
+                    <div class="form-group row">
+                        <label for="date_retour" class="col-4 col-form-label">Date de retour&nbsp;:</label>
+                        <div class="col-8">
+                            <input type="date" class="form-control" value="<?= date('Y-m-d') ?>" id="date_retour" name="date_retour" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             
       </div>
 

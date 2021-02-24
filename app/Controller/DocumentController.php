@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Model\DBTable;
+use App\Model\Document;
 use App\Helpers\TraitCRUDController;
+
+use function Core\Helper\dd;
 
 class DocumentController extends AppController
 {
@@ -27,6 +30,26 @@ class DocumentController extends AppController
         $this->update_title = "Mise à jour d'un document";
         $this->delete_title = "Suppression d'un document";
         $this->msg_delete = "Voulez-vous vraiment supprimer ce document ";
+    }
+
+    public function getall(){
+        $model = Document::table();
+        $results = $model->select('
+                domaine.libelle as domaine_id, 
+                domaine.code as external_target,
+                document.code as code, 
+                document.'.Document::TITRE.' as '.Document::TITRE.', 
+                document.'.Document::NUMERO_ISBN.' as '.Document::NUMERO_ISBN.', 
+                document.'.Document::AUTEUR.' as '.Document::AUTEUR.', 
+                document.'.Document::NOMBRE_PAGE.' as '.Document::NOMBRE_PAGE.',
+                document.'.Document::MAISON_EDITION.' as '.Document::MAISON_EDITION.',
+                document.'.Document::DATE_PUBLICATION.' as '.Document::DATE_PUBLICATION.'
+                ')
+                    ->where('document.visibilite','=', 1)
+                    ->join('domaine', 'document.domaine_id', '=', 'domaine.id')
+                    ->get();
+        // dd($results);
+        return $results;
     }
 
 }

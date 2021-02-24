@@ -57,7 +57,7 @@ class DBAuth
 		$user =  (object)($results);
 		
 		if ($user) {
-			if ($user->password === sha1($password)) {
+			if ( isset($user->password) && ($user->password === sha1($password)) ) {
 				$_SESSION['auth'] = $user->code;
 				$_SESSION[S::PERS_CODE] = $user->code;
 				$_SESSION[S::PERS_TYPE_PERSONNEL] = $user->type_personnel_id;

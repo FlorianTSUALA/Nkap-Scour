@@ -9,12 +9,12 @@ function text2pixel(str, margin = 5 /* margin is like offset */){
     return width + margin;
 }
 
-function flash_msg(msg, timeout = 5000){
+function flash_msg(msg, timeout = 5 /* en seconde */ ){
     $.blockUI({
         message: msg,
         fadeIn: 700,
         fadeOut: 700,
-        timeout: timeout,
+        timeout: timeout*1000,
         showOverlay: false,
         centerY: false,
         css: {

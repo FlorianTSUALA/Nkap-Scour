@@ -47,7 +47,6 @@ class PensionEleve extends Model implements FrequentlyReapeat
                 // new FormModel(true, self::RESTE ,'Reste',InputType::NUMBER ),
                 new FormModel(true, self::REDUCTION , 'Réduction', InputType::NUMBER),
                 // new FormModel(true, self::AUTRES ),
-
             ];
 
     }
