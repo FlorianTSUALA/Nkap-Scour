@@ -75,6 +75,7 @@ $include_res_footer .= "";
 ob_start();
 include 'emprunt_exemplaire-script.php';
 +
+include 'restitution_modal-script.php';
 include 'emprunt_modal-script.php';
 $include_footer_script = ob_get_clean();
 ?>
@@ -199,7 +200,7 @@ $include_footer_script = ob_get_clean();
                                                         <span aria-labelledby="btnSearchDrop2" class="dropdown-menu mt-1 dropdown-menu-right">
                                                             <a href="#" class="dropdown-item action-voir"><i class="ft-eye"></i> voir</a>
                                                             <a href="#" class="dropdown-item action-modifier"><i class="ft-edit-2"></i> modifier</a>
-                                                            <a href="#" class="dropdown-item action-restituer"><i class="ft-check"></i> restituer</a>
+                                                            <a href="#" class="dropdown-item action-restituer" data-toggle="modal" data-target="#modal-restitution"><i class="ft-check"></i> restituer</a>
                                                             <a href="#" class="dropdown-item action-reemprunter"><i class="ft-upload"></i> re-emprunter</a>
                                                             <a href="#" class="dropdown-item action-supprimer"><i class="ft-trash"></i> supprimer</a>
                                                         </span>
@@ -292,3 +293,4 @@ $include_footer_script = ob_get_clean();
 
 
 <?php include 'emprunt_modal.php' ?>
+<?php include 'restitution_modal.php' ?>
