@@ -4,6 +4,9 @@ namespace Core\Database;
 
 use PDO;
 
+use PDOException;
+use function Core\Helper\dd;
+
 trait QueryTrait
 {
     
@@ -36,7 +39,11 @@ trait QueryTrait
             $data = $res->fetch();
         } else
         {
+           try{
             $data = $res->fetchAll();
+           } catch (PDOException $ex) {
+                dd($ex);
+            }
         }
         $res->closeCursor();
         return $data;

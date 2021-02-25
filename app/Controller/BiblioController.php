@@ -5,6 +5,7 @@ namespace App\Controller;
 use Core\Model\Model;
 use App\Model\DBTable;
 use App\Model\Emprunt;
+use Config\Invariant\API;
 use App\Helpers\Helpers;
 use App\Model\EnumModel;
 use App\Model\Exemplaire;
@@ -92,7 +93,18 @@ class BiblioController extends AppController
 
     public function getListeEmprunt()
     {
-        $results = (new ExemplaireRepository())->getAllEmprunt();
+        $data = (new ExemplaireRepository())->getAllEmprunt();
+
+        $results[API::TAG_DATA] = $data;
+        $results[API::TAG_STATUS] = API::TAG_SUCCESS;
+        $results[API::TAG_DATATABLE_DR] = API::TAG_DATATABLE_VALUE_DR;
+        $results[API::TAG_DATATABLE_RT] = count($data);
+        $results[API::TAG_DATATABLE_RF] = count($data);
+        $results[API::TAG_DATA] = $data;
+
+        // echo json_encode(array(API::TAG_RESULT => $results), JSON_PRETTY_PRINT);
+        // echo json_encode(array(API::TAG_RESULT => $results), JSON_PRETTY_PRINT);
+        // echo Helpers::toJSON(array(API::TAG_RESULT => $results)) ;
         echo Helpers::toJSON($results) ;
     }
 

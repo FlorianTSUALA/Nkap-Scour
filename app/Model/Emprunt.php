@@ -37,14 +37,16 @@ class Emprunt extends Model implements FrequentlyReapeat
     public static function getColumns()        
     {
         $columns = '';
-        // $columns = '{ "data": "id" },';
-        // $columns = '{ "data": "index" },';
-        $columns .= '{ "data": "date_emprunt" },';
+        $columns .= '{ "data": "id" },';
+        $columns .= '{ "data": "num" },';
         $columns .= '{ "data": "code_enregistrement" },';
         $columns .= '{ "data": "titre" },';
         $columns .= '{ "data": "eleve" },';
+        $columns .= '{ "data": "date_emprunt" },';
+        $columns .= '{ "data": "date_expiration" },';
         $columns .= '{ "data": "classe" },';
         $columns .= '{ "data": "etat_document" },';
+        $columns .= '{ "data": null }';
         return $columns;
     }
 }

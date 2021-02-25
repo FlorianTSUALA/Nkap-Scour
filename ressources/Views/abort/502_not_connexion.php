@@ -1,4 +1,8 @@
-<?php use Core\Routing\URL; ?>
+<?php 
+    use Core\Routing\URL; 
+    use App\App;
+    use Core\BaseApp;
+?>
 
     <?php require_once "partials/head.php"; ?>
 
@@ -39,7 +43,7 @@
                         </div>
                         <div class="card-footer bg-transparent">
                             <div class="row">
-                                <p class="text-muted text-center col-12 py-1">© 2020 <a href="#">Les Comilines </a> Notre devise : <i class="ft-heart pink"> </i> by <a href="#" target="_blank"> <?= App::TEAM ?> </a></p>
+                                <p class="text-muted text-center col-12 py-1">© 2020 <a href="#">Les Comilines </a> Notre devise : <i class="ft-heart pink"> </i> by <a href="#" target="_blank"> <?= BaseApp::TEAM ?> </a></p>
                                 <div class="col-12 text-center">
                                     <a href="#" class="btn btn-social-icon mr-1 mb-1 btn-outline-facebook"><span class="fa fa-facebook"></span></a>
                                     <a href="#" class="btn btn-social-icon mr-1 mb-1 btn-outline-twitter"><span class="fa fa-twitter"></span></a>
@@ -56,3 +60,4 @@
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 <?php require_once "partials/footer.php"; ?>
+

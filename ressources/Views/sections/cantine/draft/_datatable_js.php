@@ -44,9 +44,11 @@
                 },
                 "columns": [<?php echo $columns ?>],
                 "createdRow": function(row, data, index) {
-                    if (data[2] * 1 < 9000) {
-                        console.log(data[2]);
-                        $('td', row).eq(2).addClass('highlight');
+                    // if (data[2] * 1 < 9000) 
+                    {
+                        // console.log(data[2]);
+                        $('td', row).eq(5).val( data[5] );
+                        $('td', row).eq(6).val( data[6] );
                     }
                 },
                 "destroy" : true,
@@ -123,10 +125,10 @@
                         }
                     }
                 ],
-                columnDefs: [{
-                    targets: 1,
-                    visible: false
-                }],
+                    columnDefs: [{
+                        targets: 1,
+                        visible: false
+                    }],
                 language: {
                     "scrollY": "1000px",
                     "scrollCollapse": true,

@@ -6,12 +6,13 @@ use App\Model\Eleve;
 use Core\Model\Model;
 use App\Model\DBTable;
 use App\Model\Parcours;
+use App\Helpers\Helpers;
 use Core\Helper\DBHelper;
 use Core\Session\Request;
 use App\Model\PensionEleve;
 use Core\HTML\FlashMessages;
-use function Core\Helper\dd;
 
+use function Core\Helper\dd;
 use function Core\Helper\vd;
 use Spipu\Html2Pdf\Html2Pdf;
 use App\Model\DossierMedical;
@@ -24,6 +25,7 @@ use App\Repository\DocumentRepository;
 use App\Model\AffectationClasseMatiere;
 use App\Repository\PersonnelRepository;
 use ClanCats\Hydrahon\Query\Expression;
+use App\Repository\ExemplaireRepository;
 use App\Repository\AnneeScolaireRepository;
 use Core\HTML\MessageFlash\FlashMessagesStatic;
 use Spipu\Html2Pdf\Exception\Html2PdfException;
@@ -99,9 +101,13 @@ class TestController extends AppController
 
     public function testA()
     {
-        
-        $repository = new classeRepository();
-        $items = (new classeRepository())->getSalleClasseGroupByClasse();
+
+        $results = (new ExemplaireRepository())->getAllEmprunt();
+        echo Helpers::toJSON($results) ;
+        dd("ok");
+        $repository = new PersonnelRepository();
+        $items = (new PersonnelRepository())->getDocumentGroupByPersonnel();
+
         dd($items);
     }
 
