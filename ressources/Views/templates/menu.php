@@ -441,7 +441,22 @@ return[
                 "children" => [],
             ],
 
-        ],
+            "PERSONNEL_SALLE_CLASSE" => [
+                "title" => "Personnel salle classe",
+                "icon" => "",
+                "msg_page" => "",
+                "menu_explication" => "",
+                "full_url" =>  URL::link("personnel_salle_classe"),
+                "action" => "personnel_salle_classe",
+                "alt" => "",
+                "class" => "",
+                "isActive" => "",
+                "hasChildren" => false,
+                "children" => [],
+            ],
+
+            ],
+
     ],
 
     "ENSEIGNEMENT" => [

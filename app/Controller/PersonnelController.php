@@ -186,6 +186,8 @@ class PersonnelController extends AppController
         $personnels = (new PersonnelRepository())->getDocumentGroupByPersonnel();   
         $classes = (new ClasseRepository())->getSalleClasseGroupByClasse();
         
+
+        
         $annee_scolaire_id =  (new AnneeScolaireRepository())->getActive('id');
 
         $data_info_personnels = (new PersonnelRepository())->getInfoPersonnels($annee_scolaire_id);
@@ -193,6 +195,22 @@ class PersonnelController extends AppController
         // dd($data_info_personnels);
         $this->render('sections.personnel.personnel_liste', compact( 'classes','data_info_personnels', 'personnels'));
     }
+
+    public function liste_classe()
+    {
+
+        $personnels = (new PersonnelRepository())->getDocumentGroupByPersonnel();   
+        $classes = (new ClasseRepository())->getSalleClasseGroupByClasse();
+        
+        $annee_scolaire_id =  (new AnneeScolaireRepository())->getActive('id');
+
+        $data_info_personnels = (new PersonnelRepository())->getInfoPersonnels($annee_scolaire_id);
+
+        // dd($data_info_personnels);
+        $this->render('sections.personnel.personnel_salle_classe', compact( 'classes','data_info_personnels', 'personnels'));
+    }
+
+
 
     public function getApiPersonnels()  
     {

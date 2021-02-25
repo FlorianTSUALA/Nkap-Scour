@@ -100,8 +100,8 @@ class TestController extends AppController
     public function testA()
     {
         
-        $repository = new PersonnelRepository();
-        $items = (new PersonnelRepository())->getDocumentGroupByPersonnel();
+        $repository = new classeRepository();
+        $items = (new classeRepository())->getSalleClasseGroupByClasse();
         dd($items);
     }
 

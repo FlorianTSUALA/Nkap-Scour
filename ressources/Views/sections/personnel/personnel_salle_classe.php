@@ -33,7 +33,8 @@ ob_start();
 
 
 // include 'script-component-init.php';
-include 'personnel_liste-script.php';
+include 'personnel_salle_classe-script.php';
+include 'personnel_classe_modal-script.php';
 $include_footer_script = ob_get_clean();
 ?>
 <!--
@@ -49,13 +50,13 @@ $include_footer_script = ob_get_clean();
 
         <div class="content-header row">
           <div class="content-header-left col-md-8 col-12 mb-2 breadcrumb-new">
-            <h3 class="content-header-title mb-0 d-inline-block">Gestion du personnel</h3>
+            <h3 class="content-header-title mb-0 d-inline-block">Personnel salle de classe</h3>
             <div class="row breadcrumbs-top d-inline-block">
               <div class="breadcrumb-wrapper col-12">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="index.html">Personnel</a>
                   </li>
-                  <li class="breadcrumb-item"><a href="#">Enregistré</a>
+                  <li class="breadcrumb-item"><a href="#">salle de classe</a>
                   </li>
                   
                 </ol>
@@ -77,56 +78,40 @@ $include_footer_script = ob_get_clean();
               <section class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header">
-                <div class="d-flex">
-                    <div class="p-0  col-md-3 mr-auto "><h4 class="card-title" id="heading-prev-next">Enregistrement personnel</h4><small class="text-muted">Allows you to provide.</small></div>
-                    
-                    <div class="p-0 mr-1 ">
-                        <fieldset class="input-group">
-                            <!-- <div class="input-group-prepend">
-                            <span class="input-group-text">L &nbsp; <span class="fa fa-calendar"></span></span>
-                            </div> -->
-                            <input id="localization" type='text' class="form-control form-control-sm localeRange" />
-                            <div class="input-group-append">
-                            <span class="input-group-text">Date &nbsp; <span class="fa fa-calendar"></span></span>
+        <div class="card-header">
+                            <div class="d-flex">
+                                <div class="p-0  col-md-3 mr-auto "><h4 class="card-title" id="heading-prev-next">Enseignant et leur salle de classe</h4></div>
+                                <div class="p-0 mr-1   ">
+                                    <button class="btn btn-primary "  data-toggle="modal" data-target="#modal-personnel-classe"><i class="ft-plus white"></i> Affectation</button>
+                                </div>
+                                <div class="p-0 mr-1 ">
+                                    <fieldset class="input-group">
+                                        <!-- <div class="input-group-prepend">
+                                        <span class="input-group-text">L &nbsp; <span class="fa fa-calendar"></span></span>
+                                        </div> -->
+                                        <input id="localization" type='text' class="form-control form-control-sm localeRange" />
+                                        <div class="input-group-append">
+                                        <span class="input-group-text">Date &nbsp; <span class="fa fa-calendar"></span></span>
+                                        </div>
+                                        <!-- <small class="text-muted">Allows you to provide.</small> -->
+                                    </fieldset>
+                                </div>
+
+                                
+                                <div class="p-0   ">
+                                    <span class="dropdown">
+                                        <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-settings mr-1"></i>Rapport</button>
+                                        <span class="dropdown-menu arrow  dropdown-menu-left">
+                                            <a href="#" class="dropdown-item"><i class="fa fa-file-excel-o"></i> Excel </a>                       
+                                            <a href="#" class="dropdown-item"><i class="fa fa-file-word-o"></i> Word</a>
+                                            <a href="#" class="dropdown-item"><i class="fa fa-file-pdf-o"></i> PDF </a>
+                                        </span>
+                                    </span>
+                                </div>
                             </div>
-                            <!-- <small class="text-muted">Allows you to provide.</small> -->
-                        </fieldset>
-                    </div>
-
-                    <div class="p-0   ">
-                        <span class="dropdown">
-                            <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-settings mr-1"></i>Rapport</button>
-                            <span class="dropdown-menu arrow  dropdown-menu-left">
-                                <a href="#" class="dropdown-item"><i class="fa fa-file-excel-o"></i> Excel </a>                       
-                                <a href="#" class="dropdown-item"><i class="fa fa-file-word-o"></i> Word</a>
-                                <a href="#" class="dropdown-item"><i class="fa fa-file-pdf-o"></i> PDF </a>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-                <div class="d-flex  mt-1">
-                        <div class="alert bg-success alert-icon-left" role="alert">
-                            <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
-                            <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
-                            <span id='resume_filtre' >Robust Admin Template default layout is 2 columns. If you do not define pageConfig block on padefault.</span>
+                           
+                         
                         </div>
-                </div>
-            	<!-- <h4 class="card-title">Abonnements</h4> -->
-            	<!-- <a class="heading-elements-toggle"><i class="ft-ellipsis-h font-medium-3"></i></a>
-        		<div class="heading-elements">
-                    <div class="input-group input-group-sm">
-
-                        <div class="d-inline-block custom-control  mr-1">
-                            <input  id="datepicker" type='text' class="form-control localeRange" />
-                        </div>
-
-                        
-
-                    </div>
-
-                </div> -->
-            </div>
 
             <div class="card-content">
                 <div class="card-body">
@@ -137,11 +122,7 @@ $include_footer_script = ob_get_clean();
 					            <tr>
                                 <th style="width: 7%;">N°</th>
 					                <th>Nom des enseignants</th>
-                                    <th>Fonction</th>
-                                    <th>Téléphone</th>
-					                <!-- <th>date_debut</th>
-					                <th>date_fin</th>
-					                <th>montant_total</th> -->
+                                    <th>Salle de classe</th>
 					                <th>Action</th>
 					            </tr>
 					        </thead>
@@ -157,16 +138,13 @@ $include_footer_script = ob_get_clean();
                                     <tr>
                                         <td style="width: 30px;" class="text-bold-600"><?= ++$i;?></></td>
                                         <td style="width: 30px;" class="text-bold-600"><?= $abonnement['nom_personnel'] ;?></></td>
-                                        <td style="width: 30px;" class="text-bold-600"><?= $abonnement['fonction'] ;?></></td>
-                                        <td style="width: 30px;" class="text-bold-600"><?= $abonnement['telephone'] ;?></></td>
+                                        <td style="width: 30px;" class="text-bold-600"><?= $abonnement['classe'] ;?></></td>
                                         <td>
                                         <span class="dropdown">
                                                 <button id="btnSearchDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-info dropdown-toggle"><i class="fa fa-cog"></i></button>
                                                 <span aria-labelledby="btnSearchDrop2" class="dropdown-menu mt-1 dropdown-menu-right">
                                                     <a href="#" class="dropdown-item"  data-toggle="modal" data-target="#modal-voir"><i class="ft-eye"></i> Voir +</a>
                                                     <a href="#" class="dropdown-item"  data-toggle="modal" data-target="#modal-modifier"><i class="ft-edit-2"></i> Modifier</a>
-                                                    <a href="#" class="dropdown-item"  data-toggle="modal" data-target="#modal-abonnement-cantine"><i class="ft-check"></i> Abonement Cantine</a>
-                                                    <a href="#" class="dropdown-item"  data-toggle="modal" data-target="#modal-abonnement-club"><i class="ft-upload"></i> Abonement Club</a>
                                                     <a href="#" class="dropdown-item"  data-toggle="modal" data-target="#modal-supprimer"><i class="ft-trash"></i> Supprimer</a>
                                                 </span>
                                             </span>
@@ -192,12 +170,8 @@ $include_footer_script = ob_get_clean();
 					        <tfoot>
 					            <tr>
                                 <th style="width: 7%;">N°</th>
-					                <th>nom_enseignant</th>
-                                    <th>Fonction</th>
-                                    <th>Téléphone</th>
-					                <!-- <th>date_debut</th>
-					                <th>date_fin</th>
-					                <th>montant_total</th> -->
+                                   <th>Nom des enseignants</th>
+                                    <th>Salle de classe</th>
 					                <th>Action</th>
 					            </tr>
 					        </tfoot>
@@ -216,7 +190,7 @@ $include_footer_script = ob_get_clean();
     <!-- Predefined Views -->
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Liste de fonctions</h4>
+            <h4 class="card-title">Liste des classes</h4>
             <!-- <a class="heading-elements-toggle"><i class="ft-ellipsis-h font-medium-3"></i></a> -->
             <div class="heading-elements">
                 <ul class="list-inline mb-0">
@@ -235,8 +209,8 @@ $include_footer_script = ob_get_clean();
               <div id="menu" class="navigation navigation-main">
                 <div class="list-group">
                 <a href="<?= "#" ;?>" class="list-group-item active"> Voir tout</a>
-                   <?php foreach($personnels as $item){ ?>
-                        <a href="#" id="ID_<?= $item['type_personnel_id']?>" class="list-group-item" data-toggle="collapse" data-target="#ID_<?= $item['type_personnel_id']?>" data-parent="#menu"><?= $item['type_personnel']; ?> <span class="badge  badge-pill bg-<?= Helpers::getRandromBootstrapColor() ?> float-right mr-2 badge-glow"><?= count($item['personnels']) ?></span></a>
+                   <?php foreach($classes as $classe){ ?>
+                        <a href="#" id="ID_<?= $classe['classe']?>" class="list-group-item" data-toggle="collapse" data-target="#ID_<?= $classe['classe_id']?>" data-parent="#menu"><?= $classe['classe_id']; ?> <span class="badge  badge-pill bg-<?= Helpers::getRandromBootstrapColor() ?> float-right mr-2 badge-glow"></span></a>
                    <?php } ?>
 
                 </div>
@@ -375,3 +349,4 @@ $include_footer_script = ob_get_clean();
       </div>
     </div>
     </div>
+    <?php include 'personnel_classe_modal.php' ?>

@@ -49,7 +49,12 @@ class ClasseRepository extends BaseRepository{
         return $salle_classes;
     }
 
-    public function draft()
+
+   
+
+  
+  
+     public function draft()
     {
         $salle_classes =  DBTable::getModel(DBTable::CLASSE)->select(
             [   
