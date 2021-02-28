@@ -3,15 +3,16 @@
 namespace App\Controller;
 
 use App\Helpers\S;
+use App\Model\Classe;
 use App\Model\DBTable;
 use App\Helpers\Helpers;
 use App\Model\Personnel;
 use Config\Invariant\API;
 use Core\Session\Request;
+
 use App\Model\SalleClasse;
 
 use App\Model\AnneeScolaire;
-
 use function Core\Helper\dd;
 use function Core\Helper\vd;
 use App\Helpers\TraitCRUDController;
@@ -134,13 +135,20 @@ class AffectationController extends AppController
             $this->_genererAffectationSalleEnseignant($annee_scolaire_id);
             
         $salle_classes = Helpers::toJSON(SalleClasse::table()->select(['id'=>'id', 'libelle' => 'value'])->where('visibilite', '=', 1)->get());
+        $classes = Helpers::toJSON(Classe::table()->select(['id'=>'id', 'libelle' => 'value'])->where('visibilite', '=', 1)->get());
         $personnels = Helpers::toJSON(Personnel::table()->select([ 'id' => 'id' , new Expression("concat(nom,' ',prenom) as value")])->where('visibilite', 1)->get());
-        $affection_personnel_salle_classes = Helpers::toJSON(AffectationPersonnelSalleClasse::table()
-            ->select(['salle_classe_id'=>'salle_classe', 'personnel_id' => 'personnel'])
-            ->where('visibilite', '=', 1)
+        $affectation_personnel_salle_classes = Helpers::toJSON(AffectationPersonnelSalleClasse::table()
+            ->select(
+                [
+                    'salle_classe_id' => 'salle_classe', 
+                    'affectation_personnel_salle_classe.personnel_id' => 'personnel', 
+                    'salle_classe.classe_id' => 'classe'
+                ])
+            ->join('salle_classe', 'salle_classe.id', '=', 'affectation_personnel_salle_classe.salle_classe_id')
+            ->where('affectation_personnel_salle_classe.visibilite', '=', 1)
             ->where('annee_scolaire_id', $annee_scolaire_id)
             ->get());
-        $this->render('sections.affectation.salle_enseignant.affectation', compact('salle_classes', 'personnels', 'affection_personnel_salle_classes'));
+        $this->render('sections.affectation.salle_enseignant.affectation', compact('classes', 'salle_classes', 'personnels', 'affectation_personnel_salle_classes'));
     }
         
     public function enregistrerAffectationSalleEnseignant($code)

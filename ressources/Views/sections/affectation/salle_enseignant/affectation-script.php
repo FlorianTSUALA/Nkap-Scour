@@ -1,11 +1,16 @@
 <?php
 
 use Core\Routing\URL;
+use App\Helpers\Helpers;
 
 ?>
 
 
 <script>
+
+<?php Helpers::jsResponsibleSelect2JsGrid() ?>
+
+// http://js-grid.com/docs/#controller
 
 $(document).ready(function() {
     var lastPrevItem
@@ -14,9 +19,12 @@ $(document).ready(function() {
     var db = {
 
         loadData: function(filter) {
+            console.log(filter)
             return $.grep(this.personnels_salle_classes, function(item) {
-                return ( (!filter.SalleClasse || item.SalleClasse === filter.SalleClasse)
-                    && (!filter.Personnel || item.Personnel === filter.Personnel))
+                return ( 
+                    (!filter.classe || item.classe === filter.classe  || filter.classe === "Toutes les classes"))
+                    // && (!filter.salle_classe || item.salle_classe === filter.salle_classe)
+                    // && (!filter.personnel || item.personnel === filter.personnel)
             });
 
         },
@@ -118,14 +126,21 @@ $(document).ready(function() {
 
     console.log(db.personnels)
     
+    db.classes = <?= $classes ?>;
+        
+    db.classes.unshift(    {
+        id: null,
+        value: 'Toutes les classes'
+    })
+
     db.salle_classes = <?= $salle_classes ?>;
 
-    db.personnels_salle_classes = <?= $affection_personnel_salle_classes ?>;
+    db.personnels_salle_classes = <?= $affectation_personnel_salle_classes ?>;
 
     
     $("#table_affectation_personnel_salle_classe").jsGrid({
         width: "100%",
-        filtering: false,
+        filtering: true,
         editing: true,
         inserting: false,
         sorting: true,
@@ -134,18 +149,37 @@ $(document).ready(function() {
         pageSize: 15,
         pageButtonCount: 5,
         controller: db,
+        noDataContent: "Aucune correspondance trouvée",
         fields: [
-            { name: "salle_classe", title: "Salle de classe", type: "select", items: db.salle_classes, valueField: "id", textField: "value" , editing: false},
-            { name: "personnel", title: "personnel", type: "select", items: db.personnels, valueField: "id", textField: "value" },
-            { type: "control", deleteButton: false }
+            { name: "classe", title: "Classe", type: "select2", items: db.classes, valueField: "id", textField: "value" , editing: false, filtering: true,},
+            { name: "salle_classe", title: "Salle de classe", type: "select2", items: db.salle_classes, valueField: "id", textField: "value" , editing: false, filtering: false,},
+            { name: "personnel", title: "personnel", type: "select2", items: db.personnels, valueField: "id", textField: "value", filtering: false, filtercss: "width: 100%;", },
+            { 
+                type: "control", 
+                deleteButton: false,
+                searchModeButtonTooltip: "Switch to searching", // tooltip of switching filtering/inserting button in inserting mode
+                insertModeButtonTooltip: "Switch to inserting", // tooltip of switching filtering/inserting button in filtering mode
+                editButtonTooltip: "Modifier",                      // tooltip of edit item button
+                deleteButtonTooltip: "Supprimer",                  // tooltip of delete item button
+                searchButtonTooltip: "Rechercher",                  // tooltip of search button
+                clearFilterButtonTooltip: "reenitialiser le filtre de recherche",       // tooltip of clear filter button
+                insertButtonTooltip: "Insertion",                  // tooltip of insert button
+                updateButtonTooltip: "Mise à jour",                  // tooltip of update item button
+                cancelEditButtonTooltip: "Annuler la modification",         // tooltip of cancel editing button
+            }
         ],
         onItemUpdating: function(args) {
             lastPrevItem = args.previousItem;
             lastCurItem = args.item;
         },
-    
-        
+        onInit: function(args) {
+        }, 
+
     })
+
+    $("#table_affectation_personnel_salle_classe").jsGrid("render").done(function() {
+        console.log("rendering completed and data loaded");
+    });
 
 
 }())
