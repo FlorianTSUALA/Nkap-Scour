@@ -63,6 +63,7 @@ $include_footer_script = ob_get_clean();
                                     <div class="p-0">
                                         <h4 class="card-title" id="heading-prev-next">Tableau d'affectation des enseignants aux salles de classe.</h4>
                                         <small class="text-muted">Cette grille vous permet d'affecter un personnel à une salle de classe.</small>
+                                       <br> <small class="text-muted">Cliquer sur les champs d'en-tete de la grille pour trier la colonne ciblée.</small>
                                     </div>
       
                                     <div class="p-0">

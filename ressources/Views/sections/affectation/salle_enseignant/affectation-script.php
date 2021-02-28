@@ -15,18 +15,24 @@ use App\Helpers\Helpers;
 $(document).ready(function() {
     var lastPrevItem
     var lastCurItem
+    var grid
 
     var db = {
 
-        loadData: function(filter) {
-            console.log(filter)
-            return $.grep(this.personnels_salle_classes, function(item) {
-                return ( 
-                    (!filter.classe || item.classe === filter.classe  || filter.classe === "Toutes les classes"))
-                    // && (!filter.salle_classe || item.salle_classe === filter.salle_classe)
-                    // && (!filter.personnel || item.personnel === filter.personnel)
-            });
-
+        loadData: function(filter) { 
+            let data = filter
+            data.classe = (!filter.classe || (filter.classe === "Toutes les classes"))? null : filter.classe
+            return $.ajax({
+                        type: "POST",
+                        url: "<?= URL::link('affectation_salle_enseignant_all');?>",
+                        data: data
+                    });
+            // return $.grep(db.personnels_salle_classes, function(item) {
+            //     return ( 
+            //         (!filter.classe || item.classe === filter.classe  || filter.classe === "Toutes les classes"))
+            //         // && (!filter.salle_classe || item.salle_classe === filter.salle_classe)
+            //         // && (!filter.personnel || item.personnel === filter.personnel)
+            // })
         },
 
         insertItem: function(insertingAffectation) {
@@ -36,10 +42,7 @@ $(document).ready(function() {
         updateItem: function(updatingAffectation) { 
             var result = $.Deferred();
                 
-            // your ajax call instead of rejected
-            // var ajaxDeferred = $.Deferred()//.reject();
             let data = {}
-            // let result = false
             data['salle_classe_id'] = lastCurItem.salle_classe
             data['personnel_id'] = lastCurItem.personnel
             if(lastCurItem.personnel == "Non affecté")
@@ -79,11 +82,12 @@ $(document).ready(function() {
                                 result.resolve(lastPrevItem)
 
                                 // args.cancel = true;
-                                alert(data.data)
+                                // _robust\_Robust\Robust\Robust\html\ltr\vertical-multi-level-menu-template\ex-component-sweet-alerts.html
+                                alert('Oupss.... ', data.data, 'error')
                             }
                             
 
-                            console.log(data)
+                            // console.log(data)
 
                         },
                         error: function (textStatus, errorThrown) {
@@ -96,14 +100,6 @@ $(document).ready(function() {
                 }
             });
 
-            // ajaxDeferred.done(function(updatedItem) {
-            //     console.log("yo")
-            //     result.resolve(updatedItem)
-            // }).fail(function() {
-            //     console.log("hey")
-            //     result.resolve(lastPrevItem)
-            // });
-            
             return result.promise();
         },
         
@@ -124,7 +120,7 @@ $(document).ready(function() {
         value: 'Non affecté'
     })
 
-    console.log(db.personnels)
+    // console.log(db.personnels)
     
     db.classes = <?= $classes ?>;
         
@@ -174,12 +170,46 @@ $(document).ready(function() {
         },
         onInit: function(args) {
         }, 
+        
+        rowClick: function(args) {
+            grid = this;
+
+            if(( $(args.event.target.parentNode).find('input.jsgrid-edit-button').length == 1)) {
+                console.log('yes')
+                df = $.Deferred();
+                
+                $.ajax({
+                    type: "GET",
+                    url: '<?= URL::link('api_personenel_list');?>'
+                }).done(function(data) {
+                    
+                    db.personnels = [ {
+                        id: null,
+                        value: 'Non affecté'
+                    }]
+
+                    db.personnels.push(...data)
+                    
+                    $("#jsGrid").jsGrid("fieldOption", "personnel", 'items', db.personnels)
+                    
+                    df.resolve()
+                })
+                
+                df.then(function (){
+                    grid.editItem(args.item);                    
+                })
+                return df.promise() 
+            }
+        }
 
     })
 
-    $("#table_affectation_personnel_salle_classe").jsGrid("render").done(function() {
-        console.log("rendering completed and data loaded");
-    });
+ 
+
+    //MISE A JOUR CHAQUE 10 SECONDES
+    setInterval(function(){
+        $("#table_affectation_personnel_salle_classe").jsGrid("loadData")
+    }, 10000);
 
 
 }())

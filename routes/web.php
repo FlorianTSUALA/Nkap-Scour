@@ -186,6 +186,7 @@ $router->addRoute('ajout_personnel', 'personnel/nouveau', [PersonnelController::
 $router->addRoute('personnel_liste', 'personnel/detail', [PersonnelController::class, 'liste_abonnee']);
 $router->addRoute('personnel_salle_classe', 'personnel/salleclasse', [PersonnelController::class, 'liste_classe']);
 $router->addRoute('personnel_api_getall', 'personnel/api/all', [PersonnelController::class, 'getApiPersonnels']);
+$router->addRoute('api_personenel_list', 'personnel/api/list', [PersonnelController::class, 'getApiAllEssentiel']);
 
 
 //Cantine

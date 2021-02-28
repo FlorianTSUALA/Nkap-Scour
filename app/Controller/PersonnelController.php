@@ -15,6 +15,7 @@ use App\Repository\ClasseRepository;
 use App\Controller\Admin\AppController;
 use App\Repository\PersonnelRepository;
 
+use ClanCats\Hydrahon\Query\Expression;
 use App\Repository\AnneeScolaireRepository;
 use ClanCats\Hydrahon\Query\Expression as Ex;
 
@@ -220,5 +221,14 @@ class PersonnelController extends AppController
 
         echo Helpers::toJSON($data_info_personnels) ;
     }
+
+
+
+    public function getApiAllEssentiel()  
+    {
+        $personnels = Helpers::toJSON(Personnel::table()->select([ 'id' => 'id' , new Expression("concat(nom,' ',prenom) as value")])->where('visibilite', 1)->get());
+        $this->sendResponseAndExit(Helpers::toJSON($personnels, TRUE));
+    }
+
 
 }

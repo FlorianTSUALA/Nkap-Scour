@@ -20,7 +20,7 @@ use ClanCats\Hydrahon\Query\Expression;
 use App\Repository\AnneeScolaireRepository;
 use App\Model\AffectationPersonnelSalleClasse;
 
-class AffectationController extends AppController
+class AffectationController extends \App\Controller\Admin\AppController
 {
     
     use TraitCRUDController;
@@ -184,7 +184,26 @@ class AffectationController extends AppController
         
     public function listeAffectationSalleEnseignant()
     {
-        # code...
+        $classe_id = Request::getSecParam('classe', NULL);
+
+        $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
+
+        $model = AffectationPersonnelSalleClasse::table()
+            ->select(
+                [
+                    'salle_classe_id' => 'salle_classe', 
+                    'affectation_personnel_salle_classe.personnel_id' => 'personnel', 
+                    'salle_classe.classe_id' => 'classe'
+                ])
+            ->join('salle_classe', 'salle_classe.id', '=', 'affectation_personnel_salle_classe.salle_classe_id')
+            ->where('affectation_personnel_salle_classe.visibilite', '=', 1);
+        if(!is_null($classe_id))       
+            $model = $model->where('annee_scolaire_id', $classe_id);
+
+        $data = $model->where('annee_scolaire_id', $annee_scolaire_id)->get();
+            
+        $this->sendResponseAndExit(Helpers::toJSON($data), true);
+
     }
         
     public function affecterSalleEleve()

@@ -9,6 +9,7 @@ function text2pixel(str, margin = 5 /* margin is like offset */){
     return width + margin;
 }
 
+
 function flash_msg(msg, timeout = 5 /* en seconde */ ){
     $.blockUI({
         message: msg,
@@ -31,6 +32,14 @@ function flash_msg(msg, timeout = 5 /* en seconde */ ){
             color: '#fff'
         }
     });
+}
+
+function notify(msg, timeout = 5 /* en seconde */ ){
+    flash_msg(msg, timeout)
+}
+
+function alert(title, msg, type ){
+    swal(title, msg, type);
 }
 
 function block_notification(msg, timeout = 5000){

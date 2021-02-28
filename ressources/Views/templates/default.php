@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="<?= URL::base() ?>assets/app-assets/css/core/menu/menu-types/vertical-menu.css">
 
 
+    <link rel="stylesheet" type="text/css" href="<?= URL::base() ?>assets/app-assets/vendors/css/extensions/sweetalert.css">
     <link rel="stylesheet" type="text/css" href="<?= URL::base() ?>assets/app-assets/vendors/css/extensions/toastr.css">
 
 	<!--<link rel="stylesheet" type="text/css" href="<?= URL::base() ?>assets/css/style.css"> -->
@@ -60,13 +61,13 @@
 	<?php require "layouts/footer.php" ?>
 
 	<script src="<?= URL::base() ?>assets/app-assets/vendors/js/vendors.min.js"></script>
+	<script src="<?= URL::base() ?>assets/app-assets/vendors/js/extensions/sweetalert.min.js"></script>
     <script src="<?= URL::base() ?>assets/app-assets/vendors/js/menu/jquery.mmenu.all.min.js"></script>
 	<?php require "common/javascript_function.php" ?>
 	
 	<?= $include_res_footer??""; ?>
 	<script src="<?= URL::base() ?>assets/app-assets/js/core/app-menu.js"></script>
 	<script src="<?= URL::base() ?>assets/app-assets/js/core/app.js"></script>
-	<script src="<?= URL::base() ?>assets/app-assets/vendors/js/extensions/toastr.min.js"></script>
 	<script src="<?= URL::base() ?>assets/app-assets/vendors/js/extensions/toastr.min.js"></script>
 	<script src="<?= URL::base() ?>assets/app-assets/vendors/js/extensions/moment.min.js"></script>
 	
