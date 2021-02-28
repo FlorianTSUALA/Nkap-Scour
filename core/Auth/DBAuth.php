@@ -8,6 +8,8 @@ use App\Model\Personnel;
 use Core\Database\Database;
 use App\Model\DBTable;
 
+use function Core\Helper\dd;
+use function Core\Helper\vd;
 
 /**
 * Gère l'authentification par extraction des Users de la DB
@@ -77,14 +79,17 @@ class DBAuth
 				// $_SESSION[S::PERS_IP] = $user->ip;
 
 
-				$annee_scolaires = DBTable::getModel('annee_scolaire')
-				->select(['code'=>'id', 'libelle' => 'libelle', 'debut_annee' => 'debut_annee', 'fin_annee' => 'fin_annee'])
+				$annee_scolaire = DBTable::getModel('annee_scolaire')
+				->select(['id'=>'id', 'libelle' => 'libelle', 'debut_annee' => 'debut_annee', 'fin_annee' => 'fin_annee'])
 				->where('visibilite', '=', 1)
 				->where('statut', '=', 1)
 				->orderBy('date_creation', 'desc')
 				->one();
+				// vd(S::ANNEE_SCOLAIRE);
+				// dd(S::ANNEE_SCOLA_ID);
+				// $_SESSION[S::ANNEE_SCOLA_ID] = $annee_scolaire['id'];
 
-				$_SESSION[S::ANNEE_SCOLAIRE] = $annee_scolaires;
+				$_SESSION[S::ANNEE_SCOLAIRE] = $annee_scolaire['id'];
 					
 				return true;
 			}

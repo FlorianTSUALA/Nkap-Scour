@@ -42,7 +42,7 @@
                                     </fieldset>
                                     <div class="row py-2">
                                         <div class="col-12">
-                                            <a href="index.html" class="btn button1 btn-block btn-lg"><i class="fa fa-home"></i> Retour </a>
+                                            <a href="<?= URL::link('accueil') ?>" class="btn button1 btn-block btn-lg"><i class="fa fa-home"></i> Retour </a>
                                         </div>
                                     </div>
                                 </div>

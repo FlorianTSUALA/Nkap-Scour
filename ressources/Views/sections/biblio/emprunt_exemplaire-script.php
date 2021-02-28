@@ -3,6 +3,7 @@
 use Core\Routing\URL;
 use App\Model\Emprunt;
 use App\Helpers\Helpers;
+use Config\Invariant\API;
 use Core\HTML\Form\InputType;
 
 include dirname(__DIR__)."/_common_lib/_select2_script.php";
@@ -43,6 +44,7 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
         }
         
         function init_data_table() {
+          // $('#table-emprunt').append('<caption style="caption-side: top-right">Table caption</caption>');
 
             table = $('#table-emprunt').DataTable({
                 //"serverSide": true,
@@ -62,12 +64,42 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
                   {
                     targets: 0,
                     visible: false
+                  },         
+                  {
+                    targets: 1,
+                    visible: false
+                  },         
+                  {
+                    targets: -2,
+                    visible: false
+                  },         
+                  {
+                    targets: -3,
+                    visible: false
                   },
                   {
                   "targets": -1,
                   "data": null,
-                  "defaultContent": "<span class=\"dropdown\">  <button id=\"btnSearchDrop2\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class=\"btn btn-info dropdown-toggle\"><i class=\"fa fa-cog\"></i></button> <span aria-labelledby=\"btnSearchDrop2\" class=\"dropdown-menu mt-1 dropdown-menu-right\">  <a href=\"#\" class=\"dropdown-item action-voir\"><i class=\"ft-eye\"></i> voir</a><a href=\"#\" class=\"dropdown-item action-modifier\"><i class=\"ft-edit-2\"></i> modifier</a><a href=\"#\" class=\"dropdown-item action-restituer\"><i class=\"ft-check\"></i> restituer</a><a href=\"#\" class=\"dropdown-item action-reemprunter\"><i class=\"ft-upload\"></i> re-emprunter</a><a href=\"#\" class=\"dropdown-item action-supprimer\"><i class=\"ft-trash\"></i> supprimer</a>  </span> </span>"
-              } ],
+                  "render": function(data, type, full, meta){ 
+                      console.log(data);
+                        return '<span class="dropdown">  '+
+                                    '<button id="btnSearchDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-info dropdown-toggle"><i class="fa fa-cog"></i></button> <span aria-labelledby="btnSearchDrop2" class="dropdown-menu mt-1 dropdown-menu-right">  ' +
+                                    '<a href="#" class="dropdown-item action action-voir" data-action="action-voir"  data-id="'+data.id+'"  ><i class="ft-eye"></i> voir</a>' +
+                                    '<a href="#" class="dropdown-item action action-modifier" data-action="action-modifier"  data-id="'+data.id+'"  ><i class="ft-edit-2"></i> modifier</a>' +
+                                    '<a href="#" class="dropdown-item action action-restituer" data-action="action-restituer"  data-id="'+data.id+'"  ><i class="ft-check"></i> restituer</a>' +
+                                    '<a href="#" class="dropdown-item action action-reemprunter" data-action="action-reemprunter"  data-id="'+data.id+'"  ><i class="ft-upload"></i> re-emprunter</a>' +
+                                    '<a href="#" class="dropdown-item action action-supprimer" data-action="action-supprimer"  data-id="'+data.id+'"  ><i class="ft-trash"></i> supprimer</a>  </span> </span>' 
+                    }
+                  // "defaultContent": "
+                  // '<span class="dropdown">  '+
+                  // '<button id="btnSearchDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-info dropdown-toggle"><i class="fa fa-cog"></i></button> <span aria-labelledby="btnSearchDrop2" class="dropdown-menu mt-1 dropdown-menu-right">  ' +
+                  // '<a href="#" class="dropdown-item action action-voir" data-action="action-voir"  data-id="action-voir"  ><i class="ft-eye"></i> voir</a>' +
+                  // '<a href="#" class="dropdown-item action action-modifier" data-action="action-modifier"  data-id="action-modifier"  ><i class="ft-edit-2"></i> modifier</a>' +
+                  // '<a href="#" class="dropdown-item action action-restituer" data-action="action-restituer"  data-id="action-restituer"  ><i class="ft-check"></i> restituer</a>' +
+                  // '<a href="#" class="dropdown-item action action-reemprunter" data-action="action-reemprunter"  data-id="action-reemprunter"  ><i class="ft-upload"></i> re-emprunter</a>' +
+                  // '<a href="#" class="dropdown-item action action-supprimer" data-action="action-supprimer"  data-id="action-supprimer"  ><i class="ft-trash"></i> supprimer</a>  </span> </span>"' 
+                }
+              ],
               "createdRow": function(row, data, index) {
                     // if (data[2] * 1 < 9000) 
                     {
@@ -75,9 +107,12 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
                       let date_emprunt = new Date(data.date_emprunt).toLocaleDateString(window.navigator.language, {year: 'numeric',month: 'long',day: 'numeric',});
                       let date_expiration = new Date(data.date_expiration).toLocaleDateString(window.navigator.language, {year: 'numeric',month: 'long',day: 'numeric',});
                         //  console.log(date_expiration);
-                        $('td', row).eq(4).text( date_emprunt );
-                        $('td', row).eq(5).text( date_expiration );
+                        $('td', row).eq(3).text( date_emprunt );
+                        $('td', row).eq(4).text( date_expiration );
                     }
+                },
+                "fnDrawCallback": function( oSettings ) {
+                    // $('#table-emprunt').append('<caption style="caption-side: top-right">Table caption</caption>');
                 },
                 "destroy" : true,
                 dom: 'Blfrtip',
@@ -86,6 +121,46 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
               <?= Helpers::dataTableCommunOptions() ?>
                
             })
+
+
+            $('#table-emprunt tbody').on( 'click', 'a.action', function () {
+                var id = $(this).data('id');
+                var action = $(this).data('action');
+                console.log(id)
+                console.log(action)
+                var data = table.row( $(this).parents('tr') ).data()
+                console.log(data)
+                // let id = data.id
+                let num = data.num
+                let code_enregistrement = data.code_enregistrement
+                let titre = data.titre
+                let eleve = data.eleve
+                let date_emprunt = data.date_emprunt
+                let date_expiration = data.date_expiration
+                let classe = data.classe
+                let etat_document = data.etat_document
+
+                switch(action){
+                  case 'action-voir':
+                      $('#modal-restitution').modal('show')
+                    break;
+                  case 'action-modifier':
+                    $('#modal-restitution').modal('show')
+                    break;
+                  case 'action-restituer':
+                    $('#modal-restitution').modal('show')
+                    break;
+                  case 'action-reemprunter':
+                    $('#modal-restitution').modal('show')
+                    break;
+                  case 'action-supprimer':
+                    $('#modal-restitution').modal('show')
+                    break;
+                }
+
+                // alert( id, num, code_enregistrement, titre, eleve, date_emprunt, date_expiration, classe, etat_document )
+            } )
+
 
             //Reload table data every 30 seconds (paging retained):
             setInterval( function () {
@@ -218,8 +293,31 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
         })
     }
     
+    
+    window.setInterval(function (){
+      table.ajax.reload()
+        }, <?= API::REALTIME_TIME_RECENT_TRANSACTION ?>);
 </script>
 
+
+<script>
+   // Edit record
+   $('#example').on('click', 'a.editor_edit', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        editor.edit( $(this).closest('tr'), {
+            title: 'Edit record',
+            buttons: 'Update'
+        } );
+        $('#modal-restitution').modal('show')
+    } );
+ 
+    $('#example tbody').on( 'click', 'button', function () {
+        var data = table.row( $(this).parents('tr') ).data();
+        alert( data[0] +"'s salary is: "+ data[ 5 ] );
+    } );
+
+</script>
 
 
 <script>

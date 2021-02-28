@@ -4,7 +4,7 @@ use App\Model\DBTable;
 use Core\Routing\URL; ?>
 <!-- http://jsfiddle.net/cLqv5bo8/1/ -->
 
-<!-- <a href="index.html">
+<!-- <a href="<?= URL::link('accueil') ?>">
     <i class="icon-home"></i>
     <span class="menu-title" data-i18n="nav.dash.main">Dashboard</span>
     <span class="badge badge badge-info badge-pill float-right mr-2">5</span>

@@ -129,7 +129,7 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main bg-warningcreated" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" nav-item">
-                <a href="index.html">
+                <a href="<?= URL::link('accueil') ?>">
                     <i class="icon-home"></i>
                     <span class="menu-title" data-i18n="">Accueil</span>
                 </a>

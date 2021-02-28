@@ -18,7 +18,7 @@
 
             <div class="card-content">
                 <div class="card-body">
-                    <form class="form-horizontal form-simple" action="index.html" novalidate>
+                    <form class="form-horizontal form-simple" action="<?= URL::link('accueil') ?>" novalidate>
                         <fieldset class="form-group position-relative has-icon-left mb-0">
                             <input type="text" class="form-control form-control-lg input-lg" id="user-name" placeholder="Utilisateur">
                             <div class="form-control-position">
@@ -33,7 +33,7 @@
                             </div>
                         </fieldset>
 
-                        <a href="index.html" class="btn btn-warning btn-lg btn-block"><i class="ft-unlock"></i> Se connecter</a>
+                        <a href="<?= URL::link('accueil') ?>" class="btn btn-warning btn-lg btn-block"><i class="ft-unlock"></i> Se connecter</a>
                     </form>
                 </div>
             </div>

@@ -10,7 +10,7 @@ use App\Helpers\Helpers;
     //Restreindre l'emprunt d'un meme livre
     var mustUpdateX = true
     var mustUpdateY = false
-    var exemplaires = <?= Helpers::toJSON($exemplaires); ?>;
+    var exemplaire_disponibles = <?= Helpers::toJSON($exemplaire_disponibles); ?>;
    
 
     //Initialisation des composant de base
@@ -121,8 +121,8 @@ use App\Helpers\Helpers;
         let selected = parent.find("." + css_class).val()
         console.log(selected)
         if(selected == null) return //aucune valeur selectionnée
-        if(exemplaires.length === 0) return
-        let tmp = exemplaires.filter((item)=>{
+        if(exemplaire_disponibles.length === 0) return
+        let tmp = exemplaire_disponibles.filter((item)=>{
             return String(item.exemplaire_id) === String(selected)
         })
         let current = tmp[0]

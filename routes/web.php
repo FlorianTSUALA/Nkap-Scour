@@ -27,6 +27,7 @@ use App\Controller\Auth\LoginController;
 use App\Controller\DisciplineController;
 use App\Controller\EnseignantController;
 use App\Controller\ExemplaireController;
+use App\Controller\AffectationController;
 use App\Controller\EmploiTempsController;
 use App\Controller\InscriptionController;
 use App\Controller\ParametrageController;
@@ -37,8 +38,8 @@ use App\Controller\EmploieTempsController;
 use App\Controller\EtatDocumentController;
 use App\Controller\TypeActiviteController;
 use App\Controller\TypePaiementController;
-use App\Controller\AnneeScolaireController;
 
+use App\Controller\AnneeScolaireController;
 use App\Controller\PensionClasseController;
 use App\Controller\TypePersonnelController;
 use App\Controller\PrixAbonnementController;
@@ -166,8 +167,6 @@ $router->crudRoute('annee_scolaire', AnneeScolaireController::class);
 //type_paiement
 $router->crudRoute('type_paiement', TypePaiementController::class);
 
-//affectation_classe_matiere
-$router->crudRoute("affectation_classe_matiere", AffectationClasseMatiereController::class);
 
 //tranche_scolaire
 $router->crudRoute('tranche_scolaire', TrancheScolaireController::class);
@@ -187,9 +186,6 @@ $router->addRoute('ajout_personnel', 'personnel/nouveau', [PersonnelController::
 $router->addRoute('personnel_liste', 'personnel/detail', [PersonnelController::class, 'liste_abonnee']);
 $router->addRoute('personnel_salle_classe', 'personnel/salleclasse', [PersonnelController::class, 'liste_classe']);
 $router->addRoute('personnel_api_getall', 'personnel/api/all', [PersonnelController::class, 'getApiPersonnels']);
-
-//AFFECTATION
-$router->addRoute('affection_salle_enseignant', 'affectation/enseignant_salle', [AffectionController::class, 'ajout']);
 
 
 //Cantine
@@ -214,8 +210,42 @@ $router->addRoute('biblio_api_restitution', 'biblio/api/restitution/{code}', [Bi
 $router->addRoute('biblio_api_alerte', 'biblio/api/alerte/{code}', [BiblioController::class, 'alerte']);
 
 
+
+//AFFECTATION
+
+//  SALLE *-* ENSEIGNANT
+
+$router->addRoute('affectation_salle_enseignant', 'affectation/enseignant_salle', [AffectationController::class, 'affecterSalleEnseignant']);
+$router->addRoute('affectation_salle_enseignant_save', 'api/affectation/enseignant_salle/save/{code}', [AffectationController::class, 'enregistrerAffectationSalleEnseignant']);
+$router->addRoute('affectation_salle_enseignant_update', 'api/affectation/enseignant_salle/update/', [AffectationController::class, 'modifierAffectationSalleEnseignant']);
+$router->addRoute('affectation_salle_enseignant_all', 'api/affectation/enseignant_salle/all', [AffectationController::class, 'listeAffectationSalleEnseignant']);
+
+// $router->addRoute('affectation_salle_enseignant_gen_affectation_if_not_exist', 'api/affectation/enseignant_salle/gen_affectation_if_not_exist/{annee_scolaire_code}', [AffectationController::class, 'genererAffectationSalleEnseignant']);
+// $router->addRoute('affectation_salle_enseignant_check_affectation_exist', 'api/affectation/enseignant_salle/check_affectation_exist/{annee_scolaire_code}', [AffectationController::class, 'verifierExistenceAffectationSalleEnseignant']);
+
+//  SALLE *-* ELEVE
+$router->addRoute('affectation_salle_eleve', 'affectation/eleve_salle', [AffectationController::class, 'affecterSalleEleve']);
+$router->addRoute('affectation_salle_eleve_save', 'api/affectation/eleve_salle/save/{code}', [AffectationController::class, 'enregistrerAffectationSalleEleve']);
+$router->addRoute('affectation_salle_eleve_update', 'api/affectation/eleve_salle/update/{code}', [AffectationController::class, 'modifierAffectationSalleEleve']);
+$router->addRoute('affectation_salle_eleve_all', 'api/affectation/eleve_salle/all', [AffectationController::class, 'listeAffectationSalleEleve']);
+
+//  CLASSE *-* MATIERE
+$router->addRoute('affectation_classe_matiere', 'affectation/classe_matiere', [AffectationController::class, 'affecterClasseMatiere']);
+$router->addRoute('affectation_classe_matiere_save', 'api/affectation/classe_matiere/save/{code}', [AffectationController::class, 'enregistrerAffectationClasseMatiere']);
+$router->addRoute('affectation_classe_matiere_update', 'api/affectation/classe_matiere/update/{code}', [AffectationController::class, 'modifierAffectationClasseMatiere']);
+$router->addRoute('affectation_classe_matiere_all', 'api/affectation/classe_matiere/all', [AffectationController::class, 'listeAffectationClasseMatiere']);
+
+//affectation_classe_matiere
+// $router->crudRoute("affectation_classe_matiere", AffectationClasseMatiereController::class);
+
+//NOTE: Remplissage des notes scolaire
+$router->addRoute('note---', 'affectation/classe_matiere', [AffectationController::class, 'affecterClasseMatiere']);
+$router->addRoute('init', 'affectation/init', [AffectationController::class, 'initSalleEnseignant']);
+
 //Cours - Affectation des matieres aux enseignants dans des classes
 $router->crudRoute('cours', CoursController::class);
+
+
 
 //Discipline
 $router->crudRoute('discipline', DisciplineController::class);

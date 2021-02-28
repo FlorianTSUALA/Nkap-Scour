@@ -44,17 +44,16 @@
                 },
                 "columns": [<?php echo $columns ?>],
                 "createdRow": function(row, data, index) {
-                    // if (data[2] * 1 < 9000) 
-                    {
-                        // console.log(data[2]);
-                        $('td', row).eq(5).val( data[5] );
-                        $('td', row).eq(6).val( data[6] );
+                    if (data[2] * 1 < 9000) {
+                        console.log(data[2]);
+                        $('td', row).eq(2).addClass('highlight');
                     }
                 },
                 "destroy" : true,
                 dom: 'Blfrtip',
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
                 stateSave: true,
+         
                 buttons: [
                     //'columnsToggle',
                     {
@@ -125,10 +124,10 @@
                         }
                     }
                 ],
-                    columnDefs: [{
-                        targets: 1,
-                        visible: false
-                    }],
+                columnDefs: [{
+                    targets: 1,
+                    visible: false
+                }],
                 language: {
                     "scrollY": "1000px",
                     "scrollCollapse": true,

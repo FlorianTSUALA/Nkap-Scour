@@ -27,7 +27,7 @@ $include_footer_script = ob_get_clean();
                 <div class="row breadcrumbs-top d-inline-block">
                     <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        <li class="breadcrumb-item"><a href="<?= URL::link('accueil') ?>">Home</a>
                         </li>
                         <li class="breadcrumb-item active"><?= $title; ?>
                         </li>

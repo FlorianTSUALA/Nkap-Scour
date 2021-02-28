@@ -45,7 +45,28 @@ use App\Helpers\Helpers;
                             cursor: pointer;
                         }
 
-                        </style>';
+                        </style>
+                        
+                        <style>
+                            .dataTables_filter {
+                                width: 50%;
+                                float: right;
+                                text-align: right;
+                            }
+
+                            @media (max-width: 768px) { /* use the max to specify at each container level */
+                            .specifictd {    
+                                width:360px;  /* adjust to desired wrapping */
+                                display:table;
+                                white-space: pre-wrap; /* css-3 */
+                                white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+                                white-space: -pre-wrap; /* Opera 4-6 */
+                                white-space: -o-pre-wrap; /* Opera 7 */
+                                word-wrap: break-word; /* Internet Explorer 5.5+ */
+                                }
+                            }
+                        </style>
+                    ';
     
     $include_res_footer = ''. "\n";
     $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/tables/jquery.dataTables.min.js"></script>'. "\n";
@@ -125,9 +146,12 @@ $include_footer_script = ob_get_clean();
                 <div class="col-12">
                     <div class="card">
 
-                        <div class="card-header">
+                        <div class="card-header my-0 pb-0">
                             <div class="d-flex">
-                                <div class="p-0  col-md-3 mr-auto "><h4 class="card-title" id="heading-prev-next">Liste des livres empruntés</h4><small class="text-muted">Emprunt, Consulatation, Restitution.</small></div>
+                                <div class="p-0  col-md-3 mr-auto ">
+                                    <h4 class="card-title" id="heading-prev-next">Liste des livres empruntés</h4>
+                                    <small class="text-muted">Emprunt, Consulatation, Restitution.</small>
+                                </div>
                                 <div class="p-0 mr-1   ">
                                     <button class="btn btn-primary "  data-toggle="modal" data-target="#modal-emprunt"><i class="ft-plus white"></i> Emprunter un livre</button>
                                 </div>
@@ -147,7 +171,7 @@ $include_footer_script = ob_get_clean();
                                 
                                 <div class="p-0   ">
                                     <span class="dropdown">
-                                        <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-settings mr-1"></i>Rapport</button>
+                                        <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled><i class="icon-settings mr-1"></i>Rapport</button>
                                         <span class="dropdown-menu arrow  dropdown-menu-left">
                                             <a href="#" class="dropdown-item"><i class="fa fa-file-excel-o"></i> Excel </a>                       
                                             <a href="#" class="dropdown-item"><i class="fa fa-file-word-o"></i> Word</a>
@@ -156,9 +180,10 @@ $include_footer_script = ob_get_clean();
                                     </span>
                                 </div>
                             </div>
-                            <div class="d-flex  mt-1">
+                            <div class="d-flex  mt-1 ">
                                     <div class="alert bg-success alert-icon-left" role="alert">
                                         <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
+           
                                         <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
                                         <span id='resume_filtre' >Liste des documents empruntés.</span>
                                     </div>
@@ -166,11 +191,10 @@ $include_footer_script = ob_get_clean();
                          
                         </div>
                         
-                        <div class="card-content">
+                        <div class="card-content my-0 py-0">
                             <div class="card-body">
-                                <!-- Task List table -->
-                                <div class="table-responsive">
-                                    <table id="table-emprunt" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
+                                <div class="table-responsive-sm">
+                                    <table id="table-emprunt" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle  table-sm">
                                         <thead>
                                             <tr>
                                                 <th>id</th>
@@ -186,33 +210,7 @@ $include_footer_script = ob_get_clean();
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><a href="#" class="text-bold-600">#101</a></td>
-                                                <td>
-                                                    <a href="#" class="text-bold-600">Vertical menu issue on iPad</a>
-                                                    <p class="text-muted font-small-2">Phasellus vel elit volutpat, egestas urna a.</p>
-                                                </td>
-                                                <td class="text-center">
-                                                    <span class="avatar avatar-busy">
-                                                        <img src="../../../app-assets/images/portrait/small/avatar-s-3.png" alt="avatar" data-toggle="tooltip" data-placement="right" title="John Doe"><i class=""></i>
-                                                    </span>
-                                                </td>
-                                                <td><span class="badge badge-info">In Progress</span></td>
-                                                
-                                                <td>
-                                                    <span class="dropdown">
-                                                        <button id="btnSearchDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-info dropdown-toggle"><i class="fa fa-cog"></i></button>
-                                                        <span aria-labelledby="btnSearchDrop2" class="dropdown-menu mt-1 dropdown-menu-right">
-                                                            <a href="#" class="dropdown-item action-voir"><i class="ft-eye"></i> voir</a>
-                                                            <a href="#" class="dropdown-item action-modifier"><i class="ft-edit-2"></i> modifier</a>
-                                                            <a href="#" class="dropdown-item action-restituer" data-toggle="modal" data-target="#modal-restitution"><i class="ft-check"></i> restituer</a>
-                                                            <a href="#" class="dropdown-item action-reemprunter"><i class="ft-upload"></i> re-emprunter</a>
-                                                            <a href="#" class="dropdown-item action-supprimer"><i class="ft-trash"></i> supprimer</a>
-                                                        </span>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            
+                                           
                                         </tbody>
                                         <tfoot>
                                             <tr>

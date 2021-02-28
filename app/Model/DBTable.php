@@ -3,15 +3,19 @@
 namespace App\Model;
 
 use App\Model\Cours;
+use App\Model\Activite;
 use App\Model\Composer;
 use App\Model\SalleClasse;
 use App\Model\VueBulletin;
 use App\Model\PensionEleve;
+use App\Model\TypeActivite;
 use App\Model\PrixAbonnement;
+
 use App\Model\AbonnementDetail;
 use App\Model\AbonnementCantine;
-
-use Core\Model\HydrahonModel;
+use App\Model\InscriptionActivite;
+use App\Model\AffectationClasseMatiere;
+use App\Model\AffectationPersonnelSalleClasse;
 
 class DBTable
 {
@@ -71,6 +75,7 @@ class DBTable
     const PRIX_ABONNEMENT = 'prix_abonnement';
 
     const AFFECTATION_CLASSE_MATIERE = 'affectation_classe_matiere';
+    const AFFECTATION_PERSONNEL_SALLE_CLASSE = 'affectation_personnel_salle_classe';
 
 
 
@@ -90,6 +95,9 @@ class DBTable
             break;
             case DBTable::AFFECTATION_CLASSE_MATIERE:
                 return AffectationClasseMatiere::table();
+            break;
+            case DBTable::AFFECTATION_PERSONNEL_SALLE_CLASSE:
+                return AffectationPersonnelSalleClasse::table();
             break;
             case DBTable::PERSONNEL_ACTIVITE:
                 return PersonnelActivite::table();

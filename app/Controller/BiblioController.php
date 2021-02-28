@@ -85,10 +85,11 @@ class BiblioController extends AppController
         $route = 'biblio_emprunt';
         $domaines = (new DocumentRepository())->getDocumentGroupByDomaine();
         $documents = (new DocumentRepository())->getDocument();
-        $exemplaires = (new DocumentRepository())->getExemplaire($disponible = true);
+        $exemplaire_disponibles = (new DocumentRepository())->getExemplaire($disponible = true);
+        $exemplaires = (new DocumentRepository())->getExemplaire();
         $etat_documents = (new DocumentRepository())->getEtatDocument();
         $eleves = (new EleveRepository() )->getInfoPerso();
-        $this->render('sections.biblio.emprunt_exemplaire', compact('route', 'domaines', 'eleves', 'exemplaires', 'documents', 'etat_documents'));
+        $this->render('sections.biblio.emprunt_exemplaire', compact('route', 'domaines', 'eleves', 'exemplaires', 'exemplaire_disponibles', 'documents', 'etat_documents'));
     }
 
     public function getListeEmprunt()
@@ -101,10 +102,6 @@ class BiblioController extends AppController
         $results[API::TAG_DATATABLE_RT] = count($data);
         $results[API::TAG_DATATABLE_RF] = count($data);
         $results[API::TAG_DATA] = $data;
-
-        // echo json_encode(array(API::TAG_RESULT => $results), JSON_PRETTY_PRINT);
-        // echo json_encode(array(API::TAG_RESULT => $results), JSON_PRETTY_PRINT);
-        // echo Helpers::toJSON(array(API::TAG_RESULT => $results)) ;
         echo Helpers::toJSON($results) ;
     }
 

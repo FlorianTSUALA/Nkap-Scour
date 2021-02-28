@@ -40,7 +40,7 @@ use Core\Routing\URL;
                     <div class="form-group col-3">
                         <label for="code-livre">Code d'enregistrement</label>
                         <select class="select2 code-livre form-control" style="width: 100%;" name="code_livre" id="code-livre">
-                            <?php foreach($exemplaires as $item){?>
+                            <?php foreach($exemplaire_disponibles as $item){?>
                             <option  data-id="<?= $item['document_id']; ?>" title="<?= $item['document'] ?>" value="<?= $item['exemplaire_id']; ?>"><?= $item['code_enregistrement']; ?></option>
                             <?php } ?>
                         </select>
@@ -50,7 +50,7 @@ use Core\Routing\URL;
                     <div class="form-group col-5">
                         <label for="titre-livre">Titre </label>
                         <select class="select2 titre-livre form-control" style="width: 100%;" name="titre_livre" id="titre-livre">
-                            <?php foreach($exemplaires as $item){?>
+                            <?php foreach($exemplaire_disponibles as $item){?>
                             <option  data-id="<?= $item['document_id']; ?>" title="<?= $item['document'] ?>" value="<?= $item['exemplaire_id']; ?>"><?= $item['document']; ?></option>
                             <?php } ?>
                         </select>

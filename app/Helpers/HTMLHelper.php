@@ -182,8 +182,8 @@ trait HTMLHelper
                             'next': 'Suiv.',
                             'previous': 'Préc.'
                         },
-                        'search': 'Zone de recherche :',
-                        searchPlaceholder: 'entrer un mot clé',
+                        'search': 'Zone de recherche : &nbsp; &nbsp; &nbsp;',
+                        'searchPlaceholder': 'entrer un mot clé',
                         buttons: {
                             colvis: '<i class=\"fa fa-eye\" aria-hidden=\"true\"></i>Visibilité',
                             copy: '<span class=\"i-Stamp-1\">Copiez</span>',

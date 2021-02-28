@@ -42,13 +42,13 @@ use Core\Routing\URL;
                                         <div class="input-group col-12">
                                             <input type="text" class="form-control border-grey border-lighten-1 " placeholder="Search..." aria-describedby="button-addon2">
                                             <span class="input-group-append" id="button-addon2">
-					   <button class="btn btn-lg btn-secondary border-grey border-lighten-1" type="button"><i class="fa fa-search"></i></button>
-				    </span>
+                                                <button class="btn btn-lg btn-secondary border-grey border-lighten-1" type="button"><i class="fa fa-search"></i></button>
+                                            </span>
                                         </div>
                                     </fieldset>
                                     <div class="row py-2">
                                         <div class="col-12">
-                                            <a href="<?= URL::link('accueil') ;?>" class="btn button1 btn-block btn-lg"><i class="fa fa-home"></i> accueil </a>
+                                            <a href="<?= URL::link('accueil') ?>" class="btn button1 btn-block btn-lg"><i class="fa fa-home"></i> accueil </a>
                                         </div>
                                     </div>
                                 </div>
