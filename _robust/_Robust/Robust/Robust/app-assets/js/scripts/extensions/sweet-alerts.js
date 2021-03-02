@@ -194,21 +194,21 @@ $(document).ready(function(){
                     value: null,
                     visible: true,
                     className: "btn-warning",
-                    closeModal: false,
+                    closeModal: true,
                 },
                 confirm: {
                     text: "Yes, delete it!",
                     value: true,
                     visible: true,
                     className: "",
-                    closeModal: false
+                    closeModal: true
                 }
 		    }
 		}).then(isConfirm => {
 		    if (isConfirm) {
-		        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+		        // swal("Deleted!", "Your imaginary file has been deleted.", "success");
 		    } else {
-		        swal("Cancelled", "Your imaginary file is safe :)", "error");
+		        // swal("Cancelled", "Your imaginary file is safe :)", "error");
 		    }
 		});
 	});

@@ -22,7 +22,7 @@ use Core\Routing\URL;
         <input type="file" class="inputfile" style="display: none;"  accept="image/*" name="photo" id="photo" onchange="readURL(this, '.photo');" />
         <label for="photo" style="  display: block; margin-left: auto; margin-right: auto;">
             <figure>
-                <img width="200px" height="200px"  src="<?= URL::base() ?>assets/app-assets/images/portrait/small/no-photo.jpg" alt="" class="photo" class="center">
+                <img title="cliquer pour ajouter une photo" width="200px" height="200px"  src="<?= URL::base() ?>assets/app-assets/images/portrait/small/no-photo.jpg" alt="" class="photo" class="center">
             </figure>
         </label>
     </div>
@@ -101,7 +101,7 @@ use Core\Routing\URL;
                     <select id="pays" class="select2 js-example-programmatic form-control" name="pays" >
                         <option value="" disabled>- Choissisez une nationalité -</option>
                         <?php foreach($pays as $item){?>
-                                <option value="<?= $item->{Pays::LIBELLE}; ?>"><?= $item->{Pays::LIBELLE}; ?></option>
+                                <option value="<?= $item['id']; ?>"><?= $item['value']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -118,7 +118,7 @@ use Core\Routing\URL;
 
                         <option value="" disabled>- Choissisez le type de personnel -</option>
                         <?php foreach($type_personnels as $item){?>
-                                <option value="<?= $item->{TypePersonnel::LIBELLE}; ?>"><?= $item->{TypePersonnel::LIBELLE}; ?></option>
+                                <option value="<?= $item['id']; ?>"><?= $item['value']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -214,7 +214,7 @@ use Core\Routing\URL;
         <input type="file" class="inputfile"  accept="image/*" style="display: none;" name="photo_autres" id="photo_autres" onchange="readURL(this, '.photo_autres');" />
         <label for="photo_autres" style="  display: block; margin-left: auto; margin-right: auto;">
             <figure>
-                <img width="200px" height="200px"  src="<?= URL::base() ?>assets/app-assets/images/portrait/small/no-photo.jpg" alt="" class="photo_autres " >
+                <img title="cliquer pour ajouter une piece jointe" width="200px" height="200px"  src="<?= URL::base() ?>assets/app-assets/images/portrait/small/attachement.jpg" alt="" class="photo_autres " >
             </figure>
         </label>
     </div>

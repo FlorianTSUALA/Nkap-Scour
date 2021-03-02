@@ -12,6 +12,13 @@ $include_res_header .= '<style>
                         </style>';
 
 $include_res_footer = '';
+$include_res_footer .= '
+                        <style>
+                            img:hover {
+                                cursor: pointer;
+                            }
+                        </style>
+';
 $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/extensions/jquery.steps.min.js"></script>';
 $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>';
 $include_res_footer .= '<script src="'.URL::base().'assets/app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>';

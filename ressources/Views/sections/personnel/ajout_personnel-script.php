@@ -1,5 +1,7 @@
 <?php 
 
+use Core\Routing\URL;
+
     use App\Helpers\Helpers;
 ?>
 
@@ -111,10 +113,10 @@
                 $('#recap-nom').text($('#nom').val()? $('#nom').val():'<?= Helpers::repeatChar();?>');
                 $('#recap-prenom').text($('#prenom').val()? $('#prenom').val():'<?= Helpers::repeatChar();?>');
                 $('#recap-telephone').text($('#telephone').val()? $('#telephone').val():'<?= Helpers::repeatChar();?>');
-                $('#recap-pays').text($('#pays :selected').val()? $('#pays :selected').val() : '<?= Helpers::repeatChar();?>');
+                $('#recap-pays').text($('#pays :selected').val()? $('#pays :selected').text() : '<?= Helpers::repeatChar();?>');
                 $('#recap-email').text($('#email').val()? $('#email').val():'<?= Helpers::repeatChar();?>');
                 $('#recap-date_prise_service').text($('#date_prise_service').val()? $('#date_prise_service').val():'<?= Helpers::repeatChar();?>');
-                $('#recap-type_personnel').text($('#type_personnel :selected').val()? $('#type_personnel :selected').val() : '<?= Helpers::repeatChar();?>');
+                $('#recap-type_personnel').text($('#type_personnel :selected').val()? $('#type_personnel :selected').text() : '<?= Helpers::repeatChar();?>');
                 $('#recap-adresse').text($('#adresse').val()? $('#adresse').val():'<?= Helpers::repeatChar();?>');
                 $('#recap-fonction').text($('#fonction').val()? $('#fonction').val():'<?= Helpers::repeatChar();?>');
                 $('#recap-assurance').text($('#assurance').val()? $('#assurance').val():'<?= Helpers::repeatChar();?>');
@@ -134,11 +136,92 @@
                 return form.valid();
             },
             onFinished: function(event, currentIndex) {
-                form.submit();
+                sauvegarderPersonnel();
+                // form.submit();
             }
         });
     
+
+        function sauvegarderPersonnel(){
+
+            $.blockUI({
+                message: '<div class="semibold"><span class="ft-refresh-cw icon-spin text-left"></span>&nbsp; Enregistrement en cours ...</div>',
+                fadeIn: 1000,
+                timeout: 10000, //unblock after 2 seconds
+                overlayCSS: {
+                    backgroundColor: '#FFF',
+                    opacity: 0.8,
+                    cursor: 'wait'
+                },
+                css: {
+                    border: 0,
+                    padding: '10px 15px',
+                    color: '#fff',
+                    width: 'auto',
+                    left: '45%',
+                    backgroundColor: '#333'
+                },
+                onBlock: function() {
+                    $.ajax({
+                        url: '<?= URL::link('personnel-create');?>',
+                        type: 'post',
+                        data: form.serialize(),
+                        dataType: 'json',
+                        beforeSend:function(){
+                        },
+                        success:function(data){
+
+                            // message de notification
+                            swal({
+                                title: "Enregistrement Réussi",
+                                text: "Opération réalisée avec success !!!",
+                                icon: "success",
+                                showCancelButton: true,
+                                buttons: {
+                                    cancel: {
+                                        text: "Liste du personnel",
+                                        value: null,
+                                        visible: true,
+                                        className: "btn-warning",
+                                        closeModal: true,
+                                    },
+                                    confirm: {
+                                        text: " + nouveau personnel !",
+                                        value: true,
+                                        visible: true,
+                                        className: "",
+                                        closeModal: true
+                                    }
+                                }
+                            }).then(isConfirm => {
+                                if (isConfirm) {
+                                    // form.reset()
+                                    window.location.replace("<?= URL::link('ajout_personnel');?>");
+                                } else {
+                                    // form.reset()
+                                    window.location.replace("<?= URL::link('personnel_liste');?>");
+                                }
+                            });
+
+                            console.log(data)
+
+                        },
+                        error: function (textStatus, errorThrown) {
+                            Success = false;
+		                    swal("Erreur", "Erreur survenue durant l'enregistrement :)", "error");
+                            console.log(textStatus, errorThrown);
+                        }
+                    });               
+                }
+            });
+
+        }
+        
     });
+
+
+
+ 
 
 </script>
 

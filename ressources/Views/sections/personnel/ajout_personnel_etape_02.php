@@ -1,6 +1,7 @@
 <?php
 
 
+use Core\Routing\URL;
 use App\Helpers\Helpers;
 
 ?>
@@ -22,11 +23,21 @@ use App\Helpers\Helpers;
                 <div class="card collapse-icon panel mb-0 box-shadow-0 border-0">
                     <!-- ETAPE 02 -->
                     <div id="heading-etape-01" role="tab" class="card-header border-bottom-blue border-bottom-warning">
-                        <a data-toggle="collapse" data-parent="#accordionWrap1" href="#accordion-etape-01" aria-expanded="false" aria-controls="accordion-etape-01" class="text-uppercase blue collapsed"><strong>Infomations personnes sur l'élève</strong></a>
+                        <a data-toggle="collapse" data-parent="#accordionWrap1" href="#accordion-etape-01" aria-expanded="true" aria-controls="accordion-etape-01" class="text-uppercase blue collapsed"><strong>Infomations générales</strong></a>
                     </div>
 
                     <div id="accordion-etape-01" role="tabpanel" aria-labelledby="heading-etape-01" class="collapse" aria-expanded="true" style="">
                         <div class="card-body">
+
+                            <div class="row">
+                                <input type="file" class="inputfile" style="display: none;"  accept="image/*" name="photo" id="photo" onchange="readURL(this, '.photo');" />
+                                <label for="photo" style="  display: block; margin-left: auto; margin-right: auto;">
+                                    <figure>
+                                        <img title="cliquer pour ajouter une photo" width="200px" height="200px"  src="<?= URL::base() ?>assets/app-assets/images/portrait/small/no-photo.jpg" alt="" class="photo" class="center">
+                                    </figure>
+                                </label>
+                            </div>
+
                             <div class="row">
                                 <div class="col-5">
                                     <div class="row">
@@ -52,21 +63,87 @@ use App\Helpers\Helpers;
                             <div class="row mt-1">
                                 <div class="col-5">
                                     <div class="row">
+                                        <strong class="col-6">Téléphone :</strong>
+
+                                        <em class="col-6" id="recap-telephone">Masculin</em>
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+
+                                </div>
+
+                                <div class="col-5">
+                                    <div class="row">
+                                        <strong class="col-6">Email  :</strong>
+
+                                        <em class="col-6" id="recap-email">23 Septembre 2013</em>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-1">
+                                <div class="col-5">
+                                    <div class="row">
+                                        <strong class="col-6">Date de prise de service :</strong>
+
+                                        <em class="col-6" id="recap-date_prise_service" >Tchibanga</em>
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+
+                                </div>
+
+                                <div class="col-5">
+                                    <div class="row">
+                                        <strong class="col-6">Adresse :</strong>
+
+                                        <em class="col-6" id="recap-adresse" >6 ans</em>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-1">
+                                <div class="col-5">
+                                    <div class="row">
+                                        <strong class="col-6">Pays :</strong>
+
+                                        <em class="col-6"  id="recap-pays" >Tchibanga</em>
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+
+                                </div>
+
+                                <div class="col-5">
+                                    <div class="row">
+                                        <strong class="col-6">Type de personnel :</strong>
+
+                                        <em class="col-6"  id="recap-type_personnel" >6 ans</em>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-1">
+                                <div class="col-5">
+                                    <div class="row">
+                                        <strong class="col-6">Login :</strong>
+
+                                        <em class="col-6"  id="recap-login" >Tchibanga</em>
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+
+                                </div>
+
+                                <div class="col-5">
+                                    <div class="row">
                                         <strong class="col-6">Sexe :</strong>
 
-                                        <em class="col-6">Masculin</em>
-                                    </div>
-                                </div>
-
-                                <div class="col-2">
-
-                                </div>
-
-                                <div class="col-5">
-                                    <div class="row">
-                                        <strong class="col-6">Date de naissance :</strong>
-
-                                        <em class="col-6">23 Septembre 2013</em>
+                                        <em class="col-6"  id="recap-sexe" >6 ans</em>
                                     </div>
                                 </div>
                             </div>
@@ -74,9 +151,9 @@ use App\Helpers\Helpers;
                             <div class="row mt-1">
                                 <div class="col-5">
                                     <div class="row">
-                                        <strong class="col-6">Lieu de naissance :</strong>
+                                        <strong class="col-6">Assurance :</strong>
 
-                                        <em class="col-6">Tchibanga</em>
+                                        <em class="col-6"  id="recap-assurance" >Tchibanga</em>
                                     </div>
                                 </div>
 
@@ -86,113 +163,30 @@ use App\Helpers\Helpers;
 
                                 <div class="col-5">
                                     <div class="row">
-                                        <strong class="col-6">Anciennete :</strong>
+                                        <strong class="col-6">Autres :</strong>
 
-                                        <em class="col-6">6 ans</em>
+                                        <em class="col-6"  id="recap-autres" >6 ans</em>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- ETAPE 02 -->
-                    <div id="heading-etape-02" role="tab" class="card-header border-bottom-blue border-bottom-warning">
-                        <a data-toggle="collapse" data-parent="#accordionWrap1" href="#accordion-etape-02" aria-expanded="false" aria-controls="accordion-etape-02" class="text-uppercase blue collapsed"><strong>Dossier parental (Paternel)</strong></a>
-                    </div>
-
-                    <div id="accordion-etape-02" role="tabpanel" aria-labelledby="heading-etape-02" class="collapse" aria-expanded="true" style="">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="row">
-                                        <strong class="col-6">Nom du père :</strong>
-
-                                        <em id="recap-nom" class="col-6">MAVOUGOU MBA OBIANG</em>
-                                    </div>
-                                </div>
-
-                                <div class="col-2">
-
-                                </div>
-
-                                <div class="col-5">
-                                    <div class="row">
-                                        <strong class="col-6">Prénom du père :</strong>
-
-                                        <em id="recap-prenom" class="col-6">Gustave Flaubert</em>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mt-1">
-                                <div class="col-5">
-                                    <div class="row">
-                                        <strong class="col-6">Profession :</strong>
-
-                                        <em class="col-6">Ingénieur Génie-Civil</em>
-                                    </div>
-                                </div>
-
-                                <div class="col-2">
-
-                                </div>
-
-                                <div class="col-5">
-                                    <div class="row">
-                                        <strong class="col-6">Employeur du père :</strong>
-
-                                        <em class="col-6 danger"><?= Helpers::repeatChar();?></em>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mt-1">
-                                <div class="col-5">
-                                    <div class="row">
-                                        <strong class="col-6">Lieu de travail du père :</strong>
-
-                                        <em class="col-6">Olam</em>
-                                    </div>
-                                </div>
-
-                                <div class="col-2">
-
-                                </div>
-
-                                <div class="col-5">
-                                    <div class="row">
-                                        <strong class="col-6">Téléphone du père :</strong>
-
-                                        <em class="col-6">(+241) 66 39 63 33</em>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mt-1">
-                                <div class="col-5">
-                                    <div class="row">
-                                        <strong class="col-6">Ville de résidence du père :</strong>
-
-                                        <em class="col-6">Libreville</em>
-                                    </div>
-                                </div>
-
-                                <div class="col-2">
-
-                                </div>
-
-                                <div class="col-5">
-                                    <div class="row">
-                                        <strong class="col-6">Adresse email du père :</strong>
-
-                                        <em class="col-6">obiang_gustave@gmail.com</em>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="row">
+                            <input type="file" class="inputfile"  accept="image/*" style="display: none;" name="photo_autres" id="photo_autres" onchange="readURL(this, '.photo_autres');" />
+                            <label for="photo_autres" style="  display: block; margin-left: auto; margin-right: auto;">
+                                <figure>
+                                    <img title="cliquer pour ajouter une piece jointe" width="200px" height="200px"  src="<?= URL::base() ?>assets/app-assets/images/portrait/small/attachement.jpg" alt="" class="photo_autres " >
+                                </figure>
+                            </label>
                         </div>
+
                     </div>
 
-                    <!-- ETAPE 03 -->
+                    
+                  
+                    
+
+                    <!-- ETAPE 03
                     <div id="heading-etape-03" role="tab" class="card-header border-bottom-blue border-bottom-warning">
                         <a data-toggle="collapse" data-parent="#accordionWrap1" href="#accordion-etape-03" aria-expanded="false" aria-controls="accordion-etape-03" class="text-uppercase blue collapsed"><strong>Dossier parental (Maternelle)</strong></a>
                     </div>
@@ -287,7 +281,7 @@ use App\Helpers\Helpers;
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

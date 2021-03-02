@@ -8,13 +8,16 @@ use App\Helpers\Helpers;
 use App\Model\Personnel;
 use Core\Session\Request;
 use App\Helpers\HTMLHelper;
+use App\Model\TypePersonnel;
 use function Core\Helper\dd;
+
+use function Core\Helper\vd;
 use Core\HTML\Form\FormModel;
 use App\Helpers\TraitCRUDController;
 use App\Repository\ClasseRepository;
 use App\Controller\Admin\AppController;
-use App\Repository\PersonnelRepository;
 
+use App\Repository\PersonnelRepository;
 use ClanCats\Hydrahon\Query\Expression;
 use App\Repository\AnneeScolaireRepository;
 use ClanCats\Hydrahon\Query\Expression as Ex;
@@ -79,9 +82,10 @@ class PersonnelController extends AppController
     public function ajout()
     {
         $this->app->setTitle('Ajout d\'un personnel  - Comelines');
-        $type_personnels = $this->type_personnel->all(); //TypePersonnel::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
-        $pays = $this->pays->all();
-        //$pays = Helpers::toJSON(Pays::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get()) ;
+        // $type_personnels = $this->type_personnel->all(); 
+        $type_personnels = TypePersonnel::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
+        // $pays = $this->pays->all();
+        $pays = Pays::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get() ;
 
         $this->render('sections.personnel.ajout_personnel', compact('pays',  'type_personnels'));
 
@@ -90,25 +94,25 @@ class PersonnelController extends AppController
     public function save()
     {
         //INFO PERSONNEL
-        $code_personnel = $this->personnel->genCode();
+        $code_personnel = Personnel::generateCode();
 
-        $matricule =  $this->personnel->genMatricule();
+        $matricule = $code_personnel;
 
-        $photo_name = Request::saveImg($matricule);
+        $photo_name = Request::saveImg($matricule . '_photo_profile', 'photo', 'img/personnel');
         if ($photo_name === 1) {
             $photo_name = 'no-photo.jpg';
         }
 
         $piece_jointes ='photo_autres';
-        $photo_peices_jointes = Request::saveImg($piece_jointes);
+        $photo_peices_jointes = Request::saveImg($matricule . '_photo_peices_jointes', 'photo_autres', 'img/personnel');
         if ($photo_peices_jointes === 1) {
             $photo_peices_jointes = 'no-photo.jpg';
         }
       
 
         $data_personnel = [
-            'type_personnel_id' => Request::getSecParam('type_personnel_id', '') ,
-            'pays_id' => Request::getSecParam('pays_id', '') ,
+            'type_personnel_id' =>  Personnel::getId(DBTable::TYPE_PERSONNEL, Request::getSecParam('type_personnel', ''), TypePersonnel::CODE),
+            'pays_id' =>  Pays::getId(DBTable::PAYS, Request::getSecParam('pays', ''), Pays::CODE),
             'nom' => Request::getSecParam('nom', '') ,
             'prenom' => Request::getSecParam('prenom', '') ,
             'sexe' => Request::getSecParam('sexe', '') ,
@@ -127,12 +131,11 @@ class PersonnelController extends AppController
             'photo' => $photo_name
         ];
 
-        $result_personnel = $this->personnel->save($data_personnel);
-
+        $result_personnel = Personnel::table()->insert($data_personnel);
+        $result_personnel = true;
+        
         if ($result_personnel) {
-
-            $this->session->flash("Inscription Enregistrée avec success");
-            $this->render('sections.personnel.index');
+            $this->sendResponseAndExit(Helpers::toJSON($result_personnel, TRUE));
         } else {
             $this->sendResponseAndExit($result_personnel, false, 400, 'DB Error');
         }
@@ -180,8 +183,6 @@ class PersonnelController extends AppController
     }
 
    
-
-
     public function liste_abonnee()
     {
         $personnels = (new PersonnelRepository())->getDocumentGroupByPersonnel();   
