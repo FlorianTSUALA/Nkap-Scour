@@ -53,7 +53,46 @@ class PersonnelRepository extends BaseRepository{
 
     public function getInfoPersonnels($annee_scolaire_id)
     {
-        return DBTable::getModel(DBTable::PERSONNEL)
+        $data = DBTable::getModel(DBTable::PERSONNEL)
+        ->select(
+            [
+                'personnel.code'=> 'id', 
+                'personnel.telephone'=> 'telephone',
+                // 'salle_classe.libelle'=> 'classe', 
+                'type_personnel.libelle'=> 'fonction', 
+                // 'salle_classe.code'=> 'salle_classe_id', 
+                new Expression("concat(personnel.nom,' ',personnel.prenom) as nom_complet"),
+                // 'type_personnel.code' => 'type_personnel_id',
+                // 'type_personnel.libelle' => 'type_personnel',
+                // 'pays.id' => 'pays_id', 
+                // 'pays.libelle' => 'pays', 
+                // 'personnel.sexe' => 'sexe', 
+                // 'personnel.email' => 'email', 
+                // 'personnel.adresse' => 'adresse', 
+                // 'personnel.login' => 'login', 
+                // 'personnel.date_prise_service' => 'date_prise_service', 
+                // 'personnel.date_fin_carriere' => 'date_fin_carriere', 
+                // 'personnel.bibliographie' => 'bibliographie', 
+                // 'personnel.assurance' => 'assurance', 
+                // 'personnel.fonction' => 'fonction', 
+                // 'personnel.pieces_jointes' => 'pieces_jointes', 
+                // 'personnel.photo' => 'photo' 
+            ]
+        )
+        ->join('type_personnel', 'type_personnel.id', '=', 'personnel.type_personnel_id')
+        ->join('salle_classe', 'salle_classe.id', '=', 'personnel.salle_classe_id')
+        ->join('parcours', 'parcours.salle_classe_id', '=', 'salle_classe.id')
+        ->join('pays', 'pays.id', '=', 'personnel.pays_id')
+        // ->where('parcours.visibilite', '=', 1)
+        // ->where('parcours.annee_scolaire_id', '=', $annee_scolaire_id)
+        ->get();
+        // dd($data);
+        return $data;
+    }
+
+    public function getInfoPersonnels_old($annee_scolaire_id)
+    {
+        $data = DBTable::getModel(DBTable::PERSONNEL)
         ->select(
             [
                 'personnel.code'=> 'id', 
@@ -61,16 +100,75 @@ class PersonnelRepository extends BaseRepository{
                 'salle_classe.libelle'=> 'classe', 
                 'type_personnel.libelle'=> 'fonction', 
                 'salle_classe.code'=> 'salle_classe_id', 
-                new Expression("concat(personnel.nom,' ',personnel.prenom) as nom_personnel"),
-                'type_personnel.code' => 'type_personnel_id'
+                new Expression("concat(personnel.nom,' ',personnel.prenom) as nom_complet"),
+                'type_personnel.code' => 'type_personnel_id',
+                'type_personnel.libelle' => 'type_personnel',
+                'pays.id' => 'pays_id', 
+                'pays.libelle' => 'pays', 
+                'personnel.sexe' => 'sexe', 
+                'personnel.email' => 'email', 
+                'personnel.adresse' => 'adresse', 
+                'personnel.login' => 'login', 
+                'personnel.date_prise_service' => 'date_prise_service', 
+                'personnel.date_fin_carriere' => 'date_fin_carriere', 
+                'personnel.bibliographie' => 'bibliographie', 
+                'personnel.assurance' => 'assurance', 
+                'personnel.fonction' => 'fonction', 
+                'personnel.pieces_jointes' => 'pieces_jointes', 
+                'personnel.photo' => 'photo' 
             ]
         )
         ->join('type_personnel', 'type_personnel.id', '=', 'personnel.type_personnel_id')
         ->join('salle_classe', 'salle_classe.id', '=', 'personnel.salle_classe_id')
         ->join('parcours', 'parcours.salle_classe_id', '=', 'salle_classe.id')
+        ->join('pays', 'pays.id', '=', 'personnel.pays_id')
         // ->where('parcours.visibilite', '=', 1)
         ->where('parcours.annee_scolaire_id', '=', $annee_scolaire_id)
         ->get();
+        dd($data);
+        return $data;
+    }
+
+    public function getInfoPersonnel($annee_scolaire_id, $code)
+    {
+        $data =DBTable::getModel(DBTable::PERSONNEL)
+        ->select(
+            [
+                'personnel.code'=> 'id', 
+                'personnel.telephone'=> 'telephone',
+                'salle_classe.libelle'=> 'classe', 
+                'type_personnel.libelle'=> 'fonction', 
+                'salle_classe.code'=> 'salle_classe_id', 
+                new Expression("concat(personnel.nom,' ',personnel.prenom) as nom_complet"),
+                'type_personnel.code' => 'type_personnel_id',
+                'type_personnel.libelle' => 'type_personnel',
+                'pays.id' => 'pays_id', 
+                'pays.libelle' => 'pays', 
+                'personnel.sexe' => 'sexe', 
+                'personnel.email' => 'email', 
+                'personnel.adresse' => 'adresse', 
+                'personnel.login' => 'login', 
+                'personnel.date_prise_service' => 'date_prise_service', 
+                'personnel.date_fin_carriere' => 'date_fin_carriere', 
+                'personnel.bibliographie' => 'bibliographie', 
+                'personnel.assurance' => 'assurance', 
+                'personnel.fonction' => 'fonction', 
+                'personnel.pieces_jointes' => 'pieces_jointes', 
+                'personnel.photo' => 'photo' 
+            ]
+        )
+        ->join('type_personnel', 'type_personnel.id', '=', 'personnel.type_personnel_id')
+        ->join('salle_classe', 'salle_classe.id', '=', 'personnel.salle_classe_id')
+        ->join('parcours', 'parcours.salle_classe_id', '=', 'salle_classe.id')
+        ->join('pays', 'pays.id', '=', 'personnel.pays_id')
+        // ->where('parcours.visibilite', '=', 1)
+        ->where('parcours.annee_scolaire_id', '=', $annee_scolaire_id)
+        ->where('personnel.code', '=', $code)
+        ->get();
+        
+        dd($data);
+        
+        return $data;
             
     }
 

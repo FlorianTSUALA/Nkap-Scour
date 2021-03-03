@@ -180,7 +180,7 @@ $(document).ready(function() {
                 
                 $.ajax({
                     type: "GET",
-                    url: '<?= URL::link('api_personenel_list');?>'
+                    url: '<?= URL::link('api_personnel_list');?>'
                 }).done(function(data) {
                     
                     db.personnels = [ {

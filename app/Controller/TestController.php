@@ -41,27 +41,45 @@ class TestController extends AppController
         $this->loadModel('cycle');
     }
 
-    public function test()
+    public function test( $classe_id = 5)
     {
         
-        $classes = DBTable::getModel(DBTable::ELEVE)
-                    ->select(['code' => 'id', 'libelle' => 'value'])
-                    ->join(DBTable::DOSSIER_PARENTAL, DossierParental::ID, '=', Eleve::DOSSIER_PARENTAL_ID)
-                    ->join(DBTable::DOSSIER_MEDICAL, DossierMedical::ID, '=', Eleve::DOSSIER_MEDICAL_ID)
-                    ->join(DBTable::ANTECEDENT_SCOLAIRE , AntecedentScolaire::ID, '=', Eleve::ANTECEDENT_SCOLAIRE_ID)
-                    ->join(DBTable::PARCOURS, Parcours::ID, '=', Eleve::PARCOURS_ID)
-                    ->join(DBTable::PENSION_ELEVE , StatutApprenant::ID, '=', Eleve::Stat)
-                    ->join(DBTable::PENSION_ELEVE , PensionEleve::ID, '=', Eleve::PENSION_Eleve_ID)
-                    ->join(DBTable::PENSION_ELEVE , PensionEleve::ID, '=', Eleve::PENSION_Eleve_ID)
-                    ->join(DBTable::PENSION_ELEVE , PensionEleve::ID, '=', Eleve::PENSION_Eleve_ID)
-                    ->join(DBTable::PENSION_ELEVE , PensionEleve::ID, '=', Eleve::PENSION_Eleve_ID)
-                    ->join(DBTable::PENSION_ELEVE , PensionEleve::ID, '=', Eleve::PENSION_Eleve_ID)
-                    ->join(DBTable::PENSION_ELEVE , PensionEleve::ID, '=', Eleve::PENSION_Eleve_ID)
-                    // ->join(DBTable::ANNEE_SCOLAIRE , '', '', '')
-                    ->where('visibilite', '=', 1)->get();
- 
-        // die("Hello");
-        $this->render("test");  
+            $discipline_matiere = [];
+    
+            $disciplines =  DBTable::getModel(DBTable::DISCIPLINE)->select(
+            [   
+                'id',
+                'code',
+                'libelle'
+            ])
+            ->where('visibilite', '=', 1)
+            ->get();
+    
+            foreach($disciplines as $discipline){
+                $data_matiere_classe = [
+                    'discipline_id' => $discipline['code'],
+                    'discipline' => $discipline['libelle'],
+                ];
+    
+                $matiere =  DBTable::getModel(DBTable::MATIERE)->select(
+                [   
+                    'matiere.code' => 'matiere_id',
+                    'matiere.libelle' => 'matiere'
+                ])
+                 ->join('cours', 'cours.matiere_id', '=', 'matiere.id')
+                 ->join('salle_classe', 'salle_classe.id', '=', 'cours.salle_classe_id')
+                 ->join('classe', 'salle_classe.classe_id', '=', 'classe.id')
+                ->where('classe.code', '=', $classe_id)
+                ->where('matiere.visibilite', '=', 1)
+                ->where('discipline_id', '=', $discipline['id'])
+                ->get(); 
+    
+                $data_matiere_classe['matiere'] = $matiere;   
+               
+                array_push($discipline_matiere, $data_matiere_classe);
+                
+            }
+            dd($discipline_matiere) ;
     }
 
     public function testSQL()

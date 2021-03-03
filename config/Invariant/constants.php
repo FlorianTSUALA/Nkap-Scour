@@ -150,6 +150,14 @@
     define("REALTIME_TOTAL_CHART_TRANSACTION", 5);
     define("REALTIME_CHART_TRANSACTION", 5000);
 
+
+    /**
+     * TIME TO REFRESH 
+     */
+    define("REFRESH_TIME", 55500);
+    define("REFRESH_TIME_DATATABLE", 60000);
+    define("REFRESH_TIME_", 55500);
+
     /**
      * KIND OF JOIN
     */

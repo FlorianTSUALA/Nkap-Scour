@@ -12,7 +12,7 @@ use App\Helpers\Helpers;
     $include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/app-assets/vendors/css/pickers/daterange/daterangepicker.css">'. "\n";
     $include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/ui/jquery-ui.min.css">'. "\n";
     $include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/selects/select2.min.css">'. "\n";
-    $include_res_header .= ''. "\n";
+    $include_res_header .= Helpers::dataTableResponsibleSearchBar() . "\n";
     $include_res_header .=  '<style>
                         #menu ul, #menu li {list-style-type: none;}
 
@@ -47,25 +47,7 @@ use App\Helpers\Helpers;
 
                         </style>
                         
-                        <style>
-                            .dataTables_filter {
-                                width: 50%;
-                                float: right;
-                                text-align: right;
-                            }
-
-                            @media (max-width: 768px) { /* use the max to specify at each container level */
-                            .specifictd {    
-                                width:360px;  /* adjust to desired wrapping */
-                                display:table;
-                                white-space: pre-wrap; /* css-3 */
-                                white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-                                white-space: -pre-wrap; /* Opera 4-6 */
-                                white-space: -o-pre-wrap; /* Opera 7 */
-                                word-wrap: break-word; /* Internet Explorer 5.5+ */
-                                }
-                            }
-                        </style>
+                        
                     ';
     
     $include_res_footer = ''. "\n";

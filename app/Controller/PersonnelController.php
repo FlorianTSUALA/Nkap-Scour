@@ -6,17 +6,18 @@ use App\Model\Pays;
 use App\Model\DBTable;
 use App\Helpers\Helpers;
 use App\Model\Personnel;
+use Config\Invariant\API;
 use Core\Session\Request;
 use App\Helpers\HTMLHelper;
 use App\Model\TypePersonnel;
-use function Core\Helper\dd;
 
+use function Core\Helper\dd;
 use function Core\Helper\vd;
 use Core\HTML\Form\FormModel;
 use App\Helpers\TraitCRUDController;
 use App\Repository\ClasseRepository;
-use App\Controller\Admin\AppController;
 
+use App\Controller\Admin\AppController;
 use App\Repository\PersonnelRepository;
 use ClanCats\Hydrahon\Query\Expression;
 use App\Repository\AnneeScolaireRepository;
@@ -48,6 +49,21 @@ class PersonnelController extends AppController
         $this->msg_delete = "Voulez-vous vraiment supprimer ce personnel ";
     }
 
+    public function liste()
+    {
+        $route = 'personnel_liste';
+        $personnels = (new PersonnelRepository())->getDocumentGroupByPersonnel();   
+        $classes = (new ClasseRepository())->getSalleClasseGroupByClasse();
+        
+
+        
+        $annee_scolaire_id =  (new AnneeScolaireRepository())->getActive('id');
+
+        $data_info_personnels = (new PersonnelRepository())->getInfoPersonnels($annee_scolaire_id);
+
+        // dd($data_info_personnels);
+        $this->render('sections.personnel.liste.personnel_liste', compact( 'route', 'classes','data_info_personnels', 'personnels'));
+    }
 
     public function getall()
     {
@@ -81,13 +97,60 @@ class PersonnelController extends AppController
 
     public function ajout()
     {
+        $route = 'ajout_personnel';
+
         $this->app->setTitle('Ajout d\'un personnel  - Comelines');
         // $type_personnels = $this->type_personnel->all(); 
         $type_personnels = TypePersonnel::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         // $pays = $this->pays->all();
         $pays = Pays::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get() ;
 
-        $this->render('sections.personnel.ajout_personnel', compact('pays',  'type_personnels'));
+        $this->render('sections.personnel.ajout.ajout_personnel', compact('route', 'pays',  'type_personnels'));
+
+    }
+
+    /**
+     * Affiche la page de mise à jour d'un personnel à partir de son code
+     *
+     * @param string $code
+     * @return page
+     */
+    public function modifier($code = null)
+    {
+        if(is_null($code))
+            return $this->liste();
+
+        $route = 'modifier_personnel';
+
+        $personnel = Personnel::table()
+            ->select(
+                [ 
+                    'type_personnel_id' => 'type_personnel_id', 
+                    'pays_id' => 'pays_id', 
+                    'nom' => 'nom', 
+                    'prenom' => 'prenom', 
+                    'sexe' => 'sexe', 
+                    'telephone' => 'telephone', 
+                    'email' => 'email', 
+                    'adresse' => 'adresse', 
+                    'login' => 'login', 
+                    // 'password' => 'password', 
+                    'date_prise_service' => 'date_prise_service', 
+                    'date_fin_carriere' => 'date_fin_carriere', 
+                    'bibliographie' => 'bibliographie', 
+                    'assurance' => 'assurance', 
+                    'fonction' => 'fonction', 
+                    'pieces_jointes' => 'pieces_jointes', 
+                    'id' => 'code', 
+                    'photo' => 'photo' 
+                    
+                ])->where('code', $code)->get();
+
+        $this->app->setTitle('Mise à jour d\'un personnel  - Comelines');
+        $type_personnels = TypePersonnel::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
+        $pays = Pays::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get() ;
+
+        $this->render('sections.personnel.modification.modifier_personnel', compact('route', 'pays',  'type_personnels', 'personnel'));
 
     }
 
@@ -97,6 +160,66 @@ class PersonnelController extends AppController
         $code_personnel = Personnel::generateCode();
 
         $matricule = $code_personnel;
+
+        $photo_name = Request::saveImg($matricule . '_photo_profile', 'photo', 'img/personnel/');
+        if ($photo_name === 1) {
+            $photo_name = 'no-photo.jpg';
+        }
+
+        $piece_jointes ='photo_autres';
+        $photo_peices_jointes = Request::saveImg($matricule . '_photo_peices_jointes', 'photo_autres', 'img/personnel/');
+        if ($photo_peices_jointes === 1) {
+            $photo_peices_jointes = 'no-photo.jpg';
+        }
+      
+
+        $data_personnel = [
+            'type_personnel_id' =>  Personnel::getId(DBTable::TYPE_PERSONNEL, Request::getSecParam('type_personnel', ''), TypePersonnel::CODE),
+            'pays_id' =>  Pays::getId(DBTable::PAYS, Request::getSecParam('pays', ''), Pays::CODE),
+            'nom' => Request::getSecParam('nom', '') ,
+            'prenom' => Request::getSecParam('prenom', '') ,
+            'sexe' => Request::getSecParam('sexe', '') ,
+            'photo' => Request::getSecParam('photo', '') ,
+            'telephone' => Request::getSecParam('telephone', '') ,
+            'email' => Request::getSecParam('email', '') ,
+            'adresse' => Request::getSecParam('adresse', '') ,
+            'login' => Request::getSecParam('login', '') ,
+            'password' => Request::getSecParam('password', '') ,
+            'date_prise_service' => Request::getSecParam('date_prise_service', '') ,
+            'date_fin_carriere' => Request::getSecParam('date_fin_carriere', '') ,
+            'bibliographie' => Request::getSecParam('bibliographie', '') ,
+            'assurance' => Request::getSecParam('nom_personnel', '') ,
+            'fonction' => Request::getSecParam('fonction', '') ,
+            'pieces_jointes' =>  $photo_peices_jointes ,
+            'code' => $code_personnel,
+            'photo' => $photo_name
+        ];
+
+        $result_personnel = Personnel::table()->insert($data_personnel);
+        $result_personnel = true;
+
+        if ($result_personnel) {
+            $this->sendResponseAndExit(Helpers::toJSON($result_personnel, TRUE));
+        } else {
+            $this->sendResponseAndExit($result_personnel, false, 400, 'DB Error');
+        }
+    }
+
+    /**
+     * update : permet de mettre à jour un personnel en base de données grace 
+     * aux données envoyées en post par le formulaire grace à son code
+     *
+     * @param string $code
+     * @return void
+     */
+    public function update($code)
+    {
+        //INFO PERSONNEL
+        $code_personnel = $code;
+
+        $matricule = $code_personnel;
+        vd($_FILES);
+        dd($_POST);
 
         $photo_name = Request::saveImg($matricule . '_photo_profile', 'photo', 'img/personnel');
         if ($photo_name === 1) {
@@ -126,23 +249,32 @@ class PersonnelController extends AppController
             'date_fin_carriere' => Request::getSecParam('date_fin_carriere', '') ,
             'bibliographie' => Request::getSecParam('bibliographie', '') ,
             'assurance' => Request::getSecParam('nom_personnel', '') ,
-            'piece_jointes' =>  $photo_peices_jointes ,
+            'fonction' => Request::getSecParam('fonction', '') ,
+            'pieces_jointes' =>  $photo_peices_jointes ,
             'code' => $code_personnel,
             'photo' => $photo_name
         ];
 
-        $result_personnel = Personnel::table()->insert($data_personnel);
+        $result_personnel = Personnel::table()  ->update($data_personnel)
+                                                ->where('code', $code_personnel)
+                                                ->execute();
         $result_personnel = true;
-        
+
         if ($result_personnel) {
-            $this->sendResponseAndExit(Helpers::toJSON($result_personnel, TRUE));
+            $this->sendResponseAndExit(Helpers::toJSON('Mise à jour réalisée avec sucess !!!', TRUE));
         } else {
             $this->sendResponseAndExit($result_personnel, false, 400, 'DB Error');
         }
     }
 
 
-    public function update($code)
+    /**
+     * aux données envoyées en post par le formulaire grace à son code
+     *
+     * @param string $code
+     * @return void
+     */
+    public function index_update($code)
     {
         $data = Request::getSecPostParam($this->{$this->vairant}->fillables);
         $data = $this->resolveCode2IdInput($data, $this->fillExternal($this->{$this->vairant}->fillables));
@@ -160,9 +292,6 @@ class PersonnelController extends AppController
             $this->sendResponseAndExit($data, FALSE, 400, 'DB Error');
         }
     }
-
-
-
 
     public function save1()
     {
@@ -182,22 +311,6 @@ class PersonnelController extends AppController
         }
     }
 
-   
-    public function liste_abonnee()
-    {
-        $personnels = (new PersonnelRepository())->getDocumentGroupByPersonnel();   
-        $classes = (new ClasseRepository())->getSalleClasseGroupByClasse();
-        
-
-        
-        $annee_scolaire_id =  (new AnneeScolaireRepository())->getActive('id');
-
-        $data_info_personnels = (new PersonnelRepository())->getInfoPersonnels($annee_scolaire_id);
-
-        // dd($data_info_personnels);
-        $this->render('sections.personnel.personnel_liste', compact( 'classes','data_info_personnels', 'personnels'));
-    }
-
     public function liste_classe()
     {
 
@@ -213,6 +326,21 @@ class PersonnelController extends AppController
     }
 
 
+    /**
+     * @todo not implemented
+     *
+     * @param code personnel $id
+     * @return Personnel 
+     */
+    public function getApiPersonnel($code)  
+    {
+        $annee_scolaire_id =  (new AnneeScolaireRepository())->getActive('id');
+
+        $data_info_personnels = (new PersonnelRepository())->getInfoPersonnel($annee_scolaire_id, $code);
+
+        echo Helpers::toJSON($data_info_personnels) ;
+    }
+
 
     public function getApiPersonnels()  
     {
@@ -220,10 +348,14 @@ class PersonnelController extends AppController
 
         $data_info_personnels = (new PersonnelRepository())->getInfoPersonnels($annee_scolaire_id);
 
-        echo Helpers::toJSON($data_info_personnels) ;
+        
+        $results[API::TAG_STATUS] = API::TAG_SUCCESS;
+        $results[API::TAG_DATATABLE_DR] = API::TAG_DATATABLE_VALUE_DR;
+        $results[API::TAG_DATATABLE_RT] = count($data_info_personnels);
+        $results[API::TAG_DATATABLE_RF] = count($data_info_personnels);
+        $results[API::TAG_DATA] = $data_info_personnels;
+        echo Helpers::toJSON($results) ;
     }
-
-
 
     public function getApiAllEssentiel()  
     {

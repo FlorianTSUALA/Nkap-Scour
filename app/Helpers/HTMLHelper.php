@@ -161,6 +161,31 @@ trait HTMLHelper
         return ($old < 0) ? false : $old;
     }
 
+    public static function dataTableResponsibleSearchBar(){
+        $style = " 
+                    <style>
+                    .dataTables_filter {
+                        width: 50%;
+                        float: right;
+                        text-align: right;
+                    }
+
+                    @media (max-width: 768px) { /* use the max to specify at each container level */
+                    .specifictd {    
+                        width:360px;  /* adjust to desired wrapping */
+                        display:table;
+                        white-space: pre-wrap; /* css-3 */
+                        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+                        white-space: -pre-wrap; /* Opera 4-6 */
+                        white-space: -o-pre-wrap; /* Opera 7 */
+                        word-wrap: break-word; /* Internet Explorer 5.5+ */
+                        }
+                    }
+                </style>
+         ";
+         return $style;
+    }
+
     public static function dataTableCommunOptions(){
         $options = " dom: 'flitp',
                     language: {

@@ -19,8 +19,7 @@ use App\Helpers\Helpers;
 
     <div class="row mb-4">
         <div class="col-12">
-            <div id="accordionWrap1" role="tablist" aria-multiselectable="true">
-                <div class="card collapse-icon panel mb-0 box-shadow-0 border-0">
+            <div class="card  collapse-icon accordion-icon-rotate panel mb-0 box-shadow-0 border-0">
                     <!-- ETAPE 02 -->
                     <div id="heading-etape-01" role="tab" class="card-header border-bottom-blue border-bottom-warning">
                         <a data-toggle="collapse" data-parent="#accordionWrap1" href="#accordion-etape-01" aria-expanded="true" aria-controls="accordion-etape-01" class="text-uppercase blue collapsed"><strong>Infomations générales</strong></a>
@@ -170,6 +169,28 @@ use App\Helpers\Helpers;
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row mt-1">
+                                <div class="col-5">
+                                    <div class="row">
+                                        <strong class="col-6">Fonction du personnel :</strong>
+
+                                        <em class="col-6"  id="recap-fonciton" >Tchibanga</em>
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+
+                                </div>
+
+                                <!-- <div class="col-5">
+                                    <div class="row">
+                                        <strong class="col-6">Autres :</strong>
+
+                                        <em class="col-6"  id="recap-autres" >6 ans</em>
+                                    </div>
+                                </div> -->
+                            </div>
 
                         <div class="row">
                             <input type="file" class="inputfile"  accept="image/*" style="display: none;" name="photo_autres" id="photo_autres" onchange="readURL(this, '.photo_autres');" />

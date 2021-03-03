@@ -183,10 +183,12 @@ $router->crudRoute('type_pension', TypePensionController::class);
 //Personnel
 $router->crudRoute('personnel', PersonnelController::class);
 $router->addRoute('ajout_personnel', 'personnel/nouveau', [PersonnelController::class, 'ajout']);
-$router->addRoute('personnel_liste', 'personnel/detail', [PersonnelController::class, 'liste_abonnee']);
+$router->addRoute('modifier_personnel', 'personnel/modifier', [PersonnelController::class, 'modifier']);
+$router->addRoute('personnel_liste', 'personnel/detail', [PersonnelController::class, 'liste']);
 $router->addRoute('personnel_salle_classe', 'personnel/salleclasse', [PersonnelController::class, 'liste_classe']);
-$router->addRoute('personnel_api_getall', 'personnel/api/all', [PersonnelController::class, 'getApiPersonnels']);
-$router->addRoute('api_personenel_list', 'personnel/api/list', [PersonnelController::class, 'getApiAllEssentiel']);
+$router->addRoute('personnel_api_get_all', 'personnel/api/all', [PersonnelController::class, 'getApiPersonnels']);
+$router->addRoute('personnel_api_info', 'personnel/api/info/{code}', [PersonnelController::class, 'getApiPersonnel']);
+$router->addRoute('api_personnel_list', 'personnel/api/list', [PersonnelController::class, 'getApiAllEssentiel']);
 
 
 //Cantine

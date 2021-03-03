@@ -57,4 +57,19 @@ class Personnel extends Model implements FrequentlyReapeat
             ];
 
     }
+
+    
+    public static function getColumns()        
+    {
+        $columns = '';
+        $columns .= '{ "data": "id" },';
+        // $columns .= '{ "data": "num" },';
+        $columns .= '{ "data": "nom_complet" },';
+        $columns .= '{ "data": "fonction" },';
+        $columns .= '{ "data": "telephone" },';
+        // $columns .= '{ "data": "sexe" },';
+        // $columns .= '{ "data": "email" },';
+        $columns .= '{ "data": null }';
+        return $columns;
+    }
 }
