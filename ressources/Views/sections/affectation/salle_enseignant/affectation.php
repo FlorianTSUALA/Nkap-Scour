@@ -43,10 +43,10 @@ $include_footer_script = ob_get_clean();
             </div>
             <div class="content-header-right col-md-6 col-12">
                 <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-                    <div class="btn-group" role="group"><a class="btn btn-outline-info" href="calendars-clndr.html"><i class="fa fa-calendar"></i></a><a class="btn btn-outline-info" href="timeline-center.html"><i class="fa fa-bar-chart"></i></a>
-                        <button class="btn btn-outline-info dropdown-toggle dropdown-menu-right" id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-settings icon-left"></i> Settings</button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1"><a class="dropdown-item" href="card-bootstrap.html">Bootstrap Cards</a><a class="dropdown-item" href="component-buttons-extended.html">Buttons Extended</a></div>
+                    <div class="btn-group" role="group">
                     </div>
+                        <a class="btn btn-outline-info" href="<?= URL::link('classe') ?>" title="gestion des salles de classes"><i class="fa fa-window-maximize"></i>&nbsp;&nbsp; Gesiton classes</a>
+                    <a class="btn btn-outline-info" href="<?= URL::link('salle_classe') ?>" title="gestion des classes"><i class="fa fa-window-restore"></i>&nbsp; &nbsp; Gestion salles de classes</a>
                 </div>
             </div>
             <div class="content-header-lead col-12 mt-2">
@@ -70,9 +70,9 @@ $include_footer_script = ob_get_clean();
                                         <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                         <div class="heading-elements">
                                             <ul class="list-inline mb-0">
-                                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                                <!-- <li><a data-action="collapse"><i class="ft-minus"></i></a></li> -->
                                                 <!-- <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li> -->
-                                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                                <!-- <li><a data-action="expand"><i class="ft-maximize"></i></a></li> -->
                                                 <!-- <li><a data-action="close"><i class="ft-x"></i></a></li> -->
                                             </ul>
                                         </div>

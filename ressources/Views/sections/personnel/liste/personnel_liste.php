@@ -10,28 +10,31 @@ $include_res_header .= '<link rel="stylesheet" type="text/css" href="' . URL::ba
 $include_res_header .= '<link rel="stylesheet" type="text/css" href="' . URL::base() . 'assets/app-assets/vendors/css/pickers/daterange/daterangepicker.css">' . "\n";
 $include_res_header .= '<link rel="stylesheet" type="text/css" href="' . URL::base() . 'assets/vendors/css/ui/jquery-ui.min.css">' . "\n";
 $include_res_header .= '<link rel="stylesheet" type="text/css" href="' . URL::base() . 'assets/vendors/css/forms/selects/select2.min.css">' . "\n";
-$include_res_header .= Helpers::dataTableResponsibleSearchBar() . "\n";
+// $include_res_header .= Helpers::dataTableResponsibleSearchBar() . "\n";
 $include_res_header .= '' . "\n";
 
 $include_res_footer = '' . "\n";
 $include_res_footer .= '<script src="' . URL::base() . 'assets/app-assets/vendors/js/tables/jquery.dataTables.min.js"></script>' . "\n";
 $include_res_footer .= '<script src="' . URL::base() . 'assets/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>' . "\n";
-$include_res_footer .= '<script src="' . URL::base() . 'assets/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>' . "\n";
-$include_res_footer .= '<script src="' . URL::base() . 'assets/app-assets/vendors/js/tables/datatable/dataTables.rowReorder.min.js"></script>' . "\n";
+$include_res_footer .= '<script src="' . URL::base() . 'assets/app-assets/vendors/js/filesaver/FileSaver.min.js"></script>' . "\n";
+// $include_res_footer .= '<script src="' . URL::base() . 'assets/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>' . "\n";
+// $include_res_footer .= '<script src="' . URL::base() . 'assets/app-assets/vendors/js/tables/datatable/dataTables.rowReorder.min.js"></script>' . "\n";
 $include_res_footer .= "";
 
 ob_start();
     include 'personnel_liste-script.php';
+    include 'personnel_info_modal-script.php';
+    include 'personnel_info_modal.php';
 $include_footer_script = ob_get_clean();
 
 
 $table_header = "
                     <tr>
-                        <th style=\"width: 7%;\">N°</th>
-                        <th>Nom des enseignants</th>
+                        <th style=\"width: 5px;\">N°</th>
+                        <th class=\"word-wrap;\">Nom des enseignants</th>
                         <th>Fonction</th>
                         <th>Téléphone</th>
-                        <th>Action</th>
+                        <th style=\"width: 5px;\">Action</th>
                     </tr>
 ";
 ?>
@@ -42,7 +45,7 @@ $table_header = "
 
 -->
 
-<div class="app-content content bg-warningcreated22">
+<div class="app-content content">
     <div class="content-wrapper">
 
         <div class="content-header row">
@@ -80,7 +83,7 @@ $table_header = "
                             <div class="card-header">
                                 <div class="d-flex">
                                     <div class="p-0  col-md-3 mr-auto ">
-                                        <h4 class="card-title" id="heading-prev-next">Enregistrement personnel</h4><small class="text-muted">Allows you to provide.</small>
+                                        <h4 class="card-title" id="heading-prev-next">Enregistrement personnel</h4><small class="text-muted">Consultation, modification et suppression du personnel.</small>
                                     </div>
 
                                     <div class="p-0 mr-1 ">
@@ -113,11 +116,11 @@ $table_header = "
                                 </div>
                             </div>
 
-                            <div class="card-content">
+                            <div class="card-content collapse show" >
                                 <div class="card-body">
                                     <!-- Task List table -->
-                                    <div class="table-responsive-sm">
-                                    <table id="table-personnel" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle  table-sm">
+                                    <div class="table-responsive-sm" >
+                                        <table id="table-personnel"  class="table table-white-space table-bordered  table-sm" style="width: 100%;">
 
                                         <!-- <table id="table-personnel" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle"> -->
                                             <thead> <?= $table_header ?> </thead>

@@ -164,22 +164,28 @@ trait HTMLHelper
     public static function dataTableResponsibleSearchBar(){
         $style = " 
                     <style>
-                    .dataTables_filter {
-                        width: 50%;
-                        float: right;
-                        text-align: right;
-                    }
+                    // .dataTables_filter {
+                    //     width: 50%;
+                    //     float: right;
+                    //     text-align: right;
+                    // }
 
-                    @media (max-width: 768px) { /* use the max to specify at each container level */
-                    .specifictd {    
-                        width:360px;  /* adjust to desired wrapping */
-                        display:table;
-                        white-space: pre-wrap; /* css-3 */
-                        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-                        white-space: -pre-wrap; /* Opera 4-6 */
-                        white-space: -o-pre-wrap; /* Opera 7 */
-                        word-wrap: break-word; /* Internet Explorer 5.5+ */
-                        }
+                    // @media (max-width: 768px) { /* use the max to specify at each container level */
+                    // .specifictd {    
+                    //     width:360px;  /* adjust to desired wrapping */
+                    //     display:table;
+                    //     white-space: pre-wrap; /* css-3 */
+                    //     white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+                    //     white-space: -pre-wrap; /* Opera 4-6 */
+                    //     white-space: -o-pre-wrap; /* Opera 7 */
+                    //     word-wrap: break-word; /* Internet Explorer 5.5+ */
+                    //     }
+                    // }
+
+                    .word-wrap {
+                        word-break: break-all;
+                    // word-wrap: break-word;
+                    // overflow-wrap: break-word;
                     }
                 </style>
          ";
@@ -187,7 +193,10 @@ trait HTMLHelper
     }
 
     public static function dataTableCommunOptions(){
-        $options = " dom: 'flitp',
+        $options = " dom:
+                        \"<'d-flex justify-content-between'<'p-2'l><'p-2'f>>\" +
+                        \"<'row'<'col-sm-12'tr>>\" +
+                        \"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>\",
                     language: {
                         'scrollY': '1000px',
                         'scrollCollapse': true,

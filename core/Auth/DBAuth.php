@@ -8,9 +8,6 @@ use App\Model\Personnel;
 use Core\Database\Database;
 use App\Model\DBTable;
 
-use function Core\Helper\dd;
-use function Core\Helper\vd;
-
 /**
 * Gère l'authentification par extraction des Users de la DB
 **/
@@ -59,7 +56,7 @@ class DBAuth
 		$user =  (object)($results);
 		
 		if ($user) {
-			if ( isset($user->password) && ($user->password === sha1($password)) ) {
+			if ( isset($user->password) && ($user->password === Helpers::passwordEncrypt($password)) ) {
 				$_SESSION['auth'] = $user->code;
 				$_SESSION[S::PERS_CODE] = $user->code;
 				$_SESSION[S::PERS_TYPE_PERSONNEL] = $user->type_personnel_id;

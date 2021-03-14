@@ -37,8 +37,8 @@ use Core\HTML\Form\FormModel;
 
 						<div class="card-content collapse show">
 							<div class="card-body">
-								<div class="table-responsive">
-									<table  id="datatable" class="table table-bordered table-striped table-hover">
+								<div class="table-responsive-sm">
+									<table  id="datatable" class="table table-bordered table-striped table-hover table-sm">
 										<thead>
 											<?= HTMLHelper::genHeaderTable( $this->fill(FormModel::LABEL, $fillables) ); ?>
 										</thead>

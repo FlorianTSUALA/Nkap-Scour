@@ -165,12 +165,17 @@ use Core\Routing\URL;
                     $.ajax({
                         url: '<?= URL::link('personnel-create');?>',
                         type: 'post',
-                        data: form.serialize(),
+                        data: new FormData($("#form-ajout_personnel")[0]),//form[0],
+                        enctype: 'multipart/form-data',
                         dataType: 'json',
+                        processData: false,  // Important!
+                        contentType: false,
+                        cache: false,
+                        // timeout: 600000,
                         beforeSend:function(){
                         },
                         success:function(data){
-
+                            return
                             // message de notification
                             swal({
                                 title: "Enregistrement Réussi",

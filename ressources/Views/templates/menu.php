@@ -494,8 +494,8 @@ return[
                 "icon" => "",
                 "msg_page" => "",
                 "menu_explication" => "",
-                "full_url" =>  URL::link("personnel_salle_classe"),
-                "action" => "personnel_salle_classe",
+                "full_url" =>  URL::link("affectation_salle_enseignant"),
+                "action" => "affectation_salle_enseignant",
                 "alt" => "",
                 "class" => "",
                 "isActive" => "",
@@ -504,7 +504,7 @@ return[
                 "children" => [],
             ],
 
-            ],
+        ],
 
     ],
 

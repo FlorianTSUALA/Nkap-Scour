@@ -1,7 +1,5 @@
 <?php
 
-use App\Model\Pays;
-use App\Model\TypePersonnel;
 use App\Helpers\Helpers;
 use Core\Routing\URL;
 
@@ -153,7 +151,7 @@ use Core\Routing\URL;
                         </div>
 
                         <div class="col-5">
-                            <input name="sexe" id="sexe-02" type="radio" class="cke_button__radio_icon" value="M">
+                            <input name="sexe" id="sexe-02" type="radio" class="cke_button__radio_icon" value="H">
                             <label for="sexe-02" class="">Monsieur</label>
                         </div>
                     </div>

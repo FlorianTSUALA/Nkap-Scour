@@ -176,7 +176,7 @@ $include_footer_script = ob_get_clean();
                         <div class="card-content my-0 py-0">
                             <div class="card-body">
                                 <div class="table-responsive-sm">
-                                    <table id="table-emprunt" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle  table-sm">
+                                    <table id="table-emprunt" class="table table-white-space table-bordered  table-sm" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>id</th>

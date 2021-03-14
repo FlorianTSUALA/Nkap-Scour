@@ -10,6 +10,9 @@ use DateInterval;
 trait DateHelpers
 {
 
+    public static function format( $date , $format = "Y-m-d"){
+        return date($format, strtotime($date));
+    }
 
     public static function addDays($date, $days){
         return date('Y-m-d', strtotime($date. " + {$days} days"));

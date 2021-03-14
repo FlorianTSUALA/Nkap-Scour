@@ -3,7 +3,6 @@
 use Core\Routing\URL;
 use App\Helpers\Helpers;
 use App\Model\Personnel;
-use Core\HTML\Form\InputType;
 
 include dirname(dirname(__DIR__))."/_common_lib/_select2_script.php";
 
@@ -16,10 +15,60 @@ include dirname(dirname(__DIR__))."/_common_lib/_select2_script.php";
 -->
 
 
+
 <script> 
 
   let msg  = 'Bienvenue à la gestion du Personnel'
   block_notification(msg)
+
+    function redirectTo(id = false){
+        // console.log(id)
+        id = (id == false) ? $('#recap-id').text(): id;
+        // console.log(id)
+        location.href = '<?= URL::link('modifier_personnel') ?>'+id
+    }
+
+    function initDataModal(id){
+        $.ajax({
+            url: '<?= URL::link('personnel_api_info');?>'+id,
+            type: 'post',
+            dataType: 'json',
+            beforeSend:function(){
+            },
+            success:function(data){
+                console.log(data)
+
+                personnel = data
+                $("#recap-id").text(personnel.id)
+                $("#recap-nom").text(personnel.nom)
+                $("#recap-prenom").text(personnel.prenom)
+                $("#recap-telephone").text(personnel.telephone)
+                $("#recap-email").text(personnel.email)
+                $("#recap-date_prise_service").text(personnel.date_prise_service)
+                $("#recap-adresse").text(personnel.adresse)
+                $("#recap-pays").text(personnel.pays)
+                $("#recap-type_personnel").text(personnel.type_personnel)
+                $("#recap-login").text(personnel.login)
+                $("#recap-sexe").text( (personnel.sexe == 'H')? 'Masculin' : 'Féminin' )
+                $("#recap-assurance").text(personnel.assurance)
+                $("#recap-autres").text(personnel.autres)
+                $("#recap-fonciton").text(personnel.fonction)
+                $("#recap-photo").attr('src', "<?= URL::upload() ?>ressources/uploads/img/personnel/"+personnel.photo)
+
+                $('#recap-pieces_jointes').on('click', function(e) {
+                    download("<?= URL::upload() ?>ressources/uploads/img/personnel/"+personnel.pieces_jointes)
+                })
+
+                $('#personnel_modal_info').modal('show')
+
+            },
+            error: function (textStatus, errorThrown) {
+                Success = false
+                swal("Erreur", "Erreur de communication avec le serveur :)", "error")
+                console.log(textStatus, errorThrown)
+            }
+        })    
+    }
 
   function init_data_table() {
         // $('#table-personnel').append('<caption style="caption-side: top-right">Table caption</caption>');
@@ -38,25 +87,34 @@ include dirname(dirname(__DIR__))."/_common_lib/_select2_script.php";
              
              
               order: [[ 1, 'asc' ]],
+              scrollY:        "300px",
+              scrollX:        true,
+              scrollCollapse: true,
+              // paging:         false,
               fixedColumns: true,
               "columnDefs": [
                 {
+                  "targets": 0,
+                  width: '5%',
                   "searchable": false,
                   // "orderable": false,
                   "class": "index",
-                  "targets": 0
+                   
                 },      
                 
                 {
                   "targets": -1,
+                  width: '7%', 
                   "data": null,
                   "render": function(data, type, full, meta){ 
-                      console.log(data);
-                        return '<span class="dropdown">  '+
-                                    '<button id="btnSearchDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-info dropdown-toggle"><i class="fa fa-cog"></i></button> <span aria-labelledby="btnSearchDrop2" class="dropdown-menu mt-1 dropdown-menu-right">  ' +
-                                    '<a class="dropdown-item action action-voir" data-action="action-voir" onclick="initDataModal('+data.id+')"  ><i class="ft-eye"></i> voir</a>' +
-                                    '<a class="dropdown-item action action-modifier" data-action="action-modifier" onclick="redirectTo('+data.id+')"  ><i class="ft-edit-2"></i> modifier</a>' +
-                                    '<a class="dropdown-item action action-supprimer" data-action="action-supprimer"  ><i class="ft-trash"></i> supprimer</a>  </span> </span>' 
+                      // console.log(data);
+                        return  ' '+
+                                ' <div class="btn-group" role="group" aria-label="Basic example"> '+
+                                '      <button type="button" data-action="action-voir" class="action btn btn-sm btn-icon btn-primary mr-0" title="voir"><i class="ft-eye"></i></button> '+
+                                '      <button type="button" data-action="action-modifier" class="action btn btn-sm btn-icon btn-success mr-0" title="modifier"><i class="ft-edit-2"></i></button> '+
+                                '      <button type="button" data-action="action-supprimer" class="action btn btn-sm btn-icon btn-warning mr-0" title="supprimer"><i class="ft-trash"></i></button> '+
+                                '  </div>'
+
                     }
                 }
             ],
@@ -66,11 +124,16 @@ include dirname(dirname(__DIR__))."/_common_lib/_select2_script.php";
               "fnDrawCallback": function( oSettings ) {
                   // $('#table-emprunt').append('<caption style="caption-side: top-right">Table caption</caption>');
               },
-              "destroy" : true,
-              dom: 'Blfrtip',
-              "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
-              stateSave: true,
             <?= Helpers::dataTableCommunOptions() ?>
+            dom:
+              "<'d-flex justify-content-between'<'p-2'l><'p-2'f>>" +
+              "<'row'<'col-sm-12'tr>>" +
+              "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            renderer: 'bootstrap',
+              // "destroy" : true,
+              // dom: 'Blfrtip',
+              // "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
+              stateSave: true,
               
           })
 
@@ -80,15 +143,18 @@ include dirname(dirname(__DIR__))."/_common_lib/_select2_script.php";
               } );
           } ).draw();
 
-          $('#table-personnel tbody').on( 'click', 'a.action', function () {
-              var id = $(this).data('id');
+          $('#table-personnel tbody').on( 'click', 'button.action', function () {
+              // var id = $(this).data('id');
               var action = $(this).data('action');
-              alert('hello')
-              console.log(id)
+              //alert('hello')
               console.log(action)
               var data = table.row( $(this).parents('tr') ).data()
               console.log(data)
-              // let id = data.id
+              let id = data.id
+              console.log(data)
+              console.log(id)
+              // return
+
               // let num = data.num
               // let code_enregistrement = data.code_enregistrement
               // let titre = data.titre
@@ -100,8 +166,12 @@ include dirname(dirname(__DIR__))."/_common_lib/_select2_script.php";
 
               switch(action){
                 case 'action-voir':
+                  initDataModal(id)
+                  // onclick="redirectTo(\''+data.id+'\')"
                   break;
                 case 'action-modifier':
+                  location.href = '<?= URL::link('modifier_personnel') ?>'+id
+                  // redirectTo(id)
                   break;
                 case 'action-supprimer':
                   
@@ -129,9 +199,9 @@ include dirname(dirname(__DIR__))."/_common_lib/_select2_script.php";
                         }
                     }).then(isConfirm => {
                         if (isConfirm) {
-                            
+                            deleteItem(id)
                         } else {
-                            
+                          console.log('annuler')  
                         }
                     });
 

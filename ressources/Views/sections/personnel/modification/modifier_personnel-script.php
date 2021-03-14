@@ -3,6 +3,7 @@
 use Core\Routing\URL;
 
     use App\Helpers\Helpers;
+
 ?>
 
 <script>
@@ -84,7 +85,7 @@ use Core\Routing\URL;
             transitionEffect: "fade",
             titleTemplate: '<span class="step">#index#</span> #title#',
             labels: {
-                finish: 'Submit'
+                finish: 'Mettre à jour'
             },
             onStepChanging: function(event, currentIndex, newIndex) {
                 // Allways allow previous action even if the current form is not valid!
@@ -163,10 +164,15 @@ use Core\Routing\URL;
                 },
                 onBlock: function() {
                     $.ajax({
-                        url: '<?= URL::link('personnel-create');?>',
+                        url: '<?= URL::link('personnel-update') . $personnel['id'] ?>',
                         type: 'post',
-                        data: form.serialize(),
+                        data: new FormData($("#form-modifier_personnel")[0]),//form[0],
+                        enctype: 'multipart/form-data',
                         dataType: 'json',
+                        processData: false,  // Important!
+                        contentType: false,
+                        cache: false,
+                        // timeout: 600000,
                         beforeSend:function(){
                         },
                         success:function(data){
@@ -186,7 +192,7 @@ use Core\Routing\URL;
                                         closeModal: true,
                                     },
                                     confirm: {
-                                        text: " + nouveau personnel !",
+                                        text: " Accueil !",
                                         value: true,
                                         visible: true,
                                         className: "",
@@ -196,7 +202,7 @@ use Core\Routing\URL;
                             }).then(isConfirm => {
                                 if (isConfirm) {
                                     // form.reset()
-                                    window.location.replace("<?= URL::link('modifier_personnel');?>");
+                                    window.location.replace("<?= URL::link('accueil');?>");
                                 } else {
                                     // form.reset()
                                     window.location.replace("<?= URL::link('personnel_liste');?>");

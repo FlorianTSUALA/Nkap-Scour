@@ -1,9 +1,8 @@
 <?php
 
-use App\Model\Pays;
-use App\Model\TypePersonnel;
 use App\Helpers\Helpers;
 use Core\Routing\URL;
+
 
 ?>
 
@@ -22,7 +21,7 @@ use Core\Routing\URL;
         <input type="file" class="inputfile" style="display: none;"  accept="image/*" name="photo" id="photo" onchange="readURL(this, '.photo');" />
         <label for="photo" style="  display: block; margin-left: auto; margin-right: auto;">
             <figure>
-                <img title="cliquer pour modifier une photo" width="200px" height="200px"  src="<?= URL::base() ?>assets/app-assets/images/portrait/small/no-photo.jpg" alt="" class="photo" class="center">
+                <img title="cliquer pour modifier une photo" width="200px" height="200px"  src="<?= URL::upload() ?>ressources/uploads/img/personnel/<?= $personnel['photo']??"no-photo.jpg" ?>" alt="" class="photo" class="center">
             </figure>
         </label>
     </div>
@@ -32,7 +31,7 @@ use Core\Routing\URL;
             <div class="form-group row">
                 <label for="nom" class="col-4 col-form-label">Nom<?= Helpers::required_input();?>:</label>
                 <div class="col-8">
-                    <input placeholder="Nom du personnel" value="<?= $personnel['nom']??"" ?>" type="text" class="form-control required" id="nom" name="nom" autofocus
+                    <input placeholder="Nom du personnel" value="<?= $personnel['nom'] ?>" type="text" class="form-control required" id="nom" name="nom" autofocus
                            required="required" />
                 </div>
             </div>
@@ -78,7 +77,7 @@ use Core\Routing\URL;
             <div class="form-group row">
                 <label for="date_prise_service" class="col-4 col-form-label">Date de prise de service :</label>
                 <div class="col-8">
-                    <input type="date" value="<?= date("Y-m-D");?>" class="form-control"  value="<?= $personnel['date_prise_service']??"" ?>" id="date_prise_service" name="date_prise_service" />
+                    <input type="date" class="form-control"  value="<?= Helpers::format($personnel['date_prise_service'])??date("Y-m-D") ?>" id="date_prise_service" name="date_prise_service" />
                 </div>
             </div>
         </div>
@@ -148,12 +147,12 @@ use Core\Routing\URL;
                 <div class="col-8">
                     <div class="row">
                         <div class="col-5">
-                            <input name="sexe" id="sexe-01" type="radio" class="cke_button__radio_icon"  <?= (($personnel['sexe']??"") == $item['sexe'])?"checked":"" ?> value="F">
+                            <input name="sexe" id="sexe-01" type="radio" class="cke_button__radio_icon"  value="F" <?= (($personnel['sexe']??"") == 'F')?"checked":"" ?>>
                             <label for="sexe-01" class="">Madame</label>
                         </div>
 
                         <div class="col-5">
-                            <input name="sexe" id="sexe-02" type="radio" class="cke_button__radio_icon" value="M"  <?= (($personnel['sexe']??"") == $item['sexe'])?"checked":"" ?>>
+                            <input name="sexe" id="sexe-02" type="radio" class="cke_button__radio_icon" value="H"  <?= (($personnel['sexe']??"") == 'H' )?"checked":"" ?>>
                             <label for="sexe-02" class="">Monsieur</label>
                         </div>
                     </div>
@@ -168,7 +167,7 @@ use Core\Routing\URL;
             <div class="form-group row">
                 <label for="password" class="col-4 col-form-label">Mot de passe :</label>
                 <div class="col-8">
-                    <input placeholder="Mot de passe du personnel" type="password" class="form-control required" id="password" name="password" required />
+                    <input placeholder="Mot de passe du personnel" type="password" value="aucun" class="form-control required" id="password" name="password" required />
                 </div>
             </div>
 
@@ -182,7 +181,7 @@ use Core\Routing\URL;
             <div class="form-group row">
                 <label for="password_confirm" class="col-4 col-form-label">Confirmer mot de passe  :</label>
                 <div class="col-8">
-                    <input placeholder="Confirmer le mot de passe du personnel" type="password" class="form-control required" id="password_confirm" name="password_confirm"  />
+                    <input placeholder="Confirmer le mot de passe du personnel" value="aucun" type="password" class="form-control required" id="password_confirm" name="password_confirm"  />
                 </div>
             </div>
 
@@ -194,7 +193,7 @@ use Core\Routing\URL;
             <div class="form-group row">
                 <label for="fonction" class="col-4 col-form-label">Fonction<?= Helpers::required_input(); ?> :</label>
                 <div class="col-8">
-                    <input placeholder="fonction du personnel" type="text" class="form-control required"  value="<?= $personnel['fonction']??"" ?>" id="fonction" name="fonction"  />
+                    <input placeholder="fonction du personnel" type="text" class="form-control required"  value="<?= $personnel['fonction']??" " ?>" id="fonction" name="fonction"  />
                 </div>
             </div>
 
@@ -214,7 +213,7 @@ use Core\Routing\URL;
         <input type="file" class="inputfile"  accept="image/*" style="display: none;" name="photo_autres" id="photo_autres" onchange="readURL(this, '.photo_autres');" />
         <label for="photo_autres" style="  display: block; margin-left: auto; margin-right: auto;">
             <figure>
-                <img title="cliquer pour modifier une piece jointe" width="200px" height="200px"  src="<?= URL::base() ?>assets/app-assets/images/portrait/small/attachement.jpg" alt="" class="photo_autres " >
+                <img title="cliquer pour modifier une piece jointe" width="200px" height="200px"  src="<?= URL::upload() ?>ressources/uploads/img/personnel/<?= $personnel['pieces_jointes']??"attachement.jpg" ?>" alt="" class="photo_autres " >
             </figure>
         </label>
     </div>

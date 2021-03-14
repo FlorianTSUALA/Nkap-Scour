@@ -34,6 +34,11 @@ class  URL{
         return  App::base_url();
     }
 
+    public static function upload(): string
+    {
+        return str_replace('public', '', App::base_url());
+    }
+
     public static function res(): string
     {
         return  str_replace('public/', '', App::base_url()) ;

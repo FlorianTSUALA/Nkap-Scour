@@ -165,7 +165,7 @@ class Request
         }
     }
 
-    public static function saveImg(string $name, string $photo = "photo_eleve", $local_folder="img/eleve/"){
+    public static function saveImg(string $name, string $photo = "photo_eleve", $local_folder="img/eleve"){
         // Check if the form was submitted
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Check if file was uploaded without errors
@@ -186,11 +186,11 @@ class Request
                 // Verify MYME t ype of the file
                 if(in_array($filetype, $allowed)){
                     // Check whether file exists before uploading it
-                    if(file_exists("../ressources/uploads/".$local_folder . $filename)){
+                    if(file_exists("../ressources/uploads/".$local_folder ."/". $filename)){
                         //echo $filename . " is already exists.";
                         return $filename;
                     } else{
-                        move_uploaded_file($_FILES[$photo]["tmp_name"], "../ressources/uploads/".$local_folder . $filename);
+                        move_uploaded_file($_FILES[$photo]["tmp_name"], "../ressources/uploads/".$local_folder ."/". $filename);
                         //echo "Fichier importé avec succes.";
                         return $filename;
                     }

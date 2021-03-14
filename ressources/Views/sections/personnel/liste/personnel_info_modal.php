@@ -21,178 +21,148 @@ use Core\Routing\URL;
                 <div class="card-body">
 
                     <div class="row">
-                        <input type="file" class="inputfile" style="display: none;"  accept="image/*" name="photo" id="photo" onchange="readURL(this, '.photo');" />
                         <label for="photo" style="  display: block; margin-left: auto; margin-right: auto;">
                             <figure>
-                                <img title="cliquer pour modifier une photo" width="200px" height="200px"  src="<?= URL::base() ?>ressources/uploads/img/personnel/no-photo.jpg" alt="" class="photo" class="center">
+                                <img title="photo du personnel" id="recap-photo" width="200px" height="200px"  src="<?= URL::upload() ?>ressources/uploads/img/personnel/no-photo.jpg" alt="" class="photo" class="center">
                             </figure>
                         </label>
                     </div>
 
-                    <span id="recap-id" ></span>
+                    <span id="recap-id"  style="display: none;"></span>
 
                     <div class="row">
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Nom :</strong>
+                                <strong class="col-lg-6 col-sm-12">Nom :</strong>
 
-                                <em id="recap-nom" class="col-6"><?= $personnel['nom']??"" ?></em>
+                                <em id="recap-nom" class="col-lg-6 col-sm-12"><?= $personnel['nom']??"" ?></em>
                             </div>
                         </div>
 
-                        <div class="col-2">
 
-                        </div>
-
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Prénom :</strong>
+                                <strong class="col-lg-6 col-sm-12">Prénom :</strong>
 
-                                <em id="recap-prenom" class="col-6"><?= $personnel['prenom']??"" ?></em>
+                                <em id="recap-prenom" class="col-lg-6 col-sm-12"><?= $personnel['prenom']??"" ?></em>
                             </div>
                         </div>
                     </div>
 
                     <div class="row mt-1">
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Téléphone :</strong>
+                                <strong class="col-lg-6 col-sm-12">Téléphone :</strong>
 
-                                <em class="col-6" id="recap-telephone"><?= $personnel['telephone']??"" ?></em>
+                                <em class="col-lg-6 col-sm-12" id="recap-telephone"><?= $personnel['telephone']??"" ?></em>
                             </div>
                         </div>
 
-                        <div class="col-2">
-
-                        </div>
-
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Email  :</strong>
+                                <strong class="col-lg-6 col-sm-12">Email  :</strong>
 
-                                <em class="col-6" id="recap-email"><?= $personnel['email']??"" ?></em>
+                                <em class="col-lg-6 col-sm-12" id="recap-email"><?= $personnel['email']??"" ?></em>
                             </div>
                         </div>
                     </div>
 
                     <div class="row mt-1">
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Date de prise de service :</strong>
+                                <strong class="col-lg-6 col-sm-12">Date de prise de service :</strong>
 
-                                <em class="col-6" id="recap-date_prise_service" ><?= $personnel['date_prise_service']??"" ?></em>
+                                <em class="col-lg-6 col-sm-12" id="recap-date_prise_service" ><?= $personnel['date_prise_service']??"" ?></em>
                             </div>
                         </div>
 
-                        <div class="col-2">
-
-                        </div>
-
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Adresse :</strong>
+                                <strong class="col-lg-6 col-sm-12">Adresse :</strong>
 
-                                <em class="col-6" id="recap-adresse" ><?= $personnel['adresse']??"" ?></em>
+                                <em class="col-lg-6 col-sm-12" id="recap-adresse" ><?= $personnel['adresse']??"" ?></em>
                             </div>
                         </div>
                     </div>
 
                     <div class="row mt-1">
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Pays :</strong>
+                                <strong class="col-lg-6 col-sm-12">Pays :</strong>
 
-                                <em class="col-6"  id="recap-pays" ><?= $personnel['pays']??"" ?></em>
+                                <em class="col-lg-6 col-sm-12"  id="recap-pays" ><?= $personnel['pays']??"" ?></em>
                             </div>
                         </div>
 
-                        <div class="col-2">
-
-                        </div>
-
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Type de personnel :</strong>
+                                <strong class="col-lg-6 col-sm-12">Type de personnel :</strong>
 
-                                <em class="col-6"  id="recap-type_personnel" ><?= $personnel['type_personnel']??"" ?></em>
+                                <em class="col-lg-6 col-sm-12"  id="recap-type_personnel" ><?= $personnel['type_personnel']??"" ?></em>
                             </div>
                         </div>
                     </div>
 
                     <div class="row mt-1">
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Login :</strong>
+                                <strong class="col-lg-6 col-sm-12">Login :</strong>
 
-                                <em class="col-6"  id="recap-login" ><?= $personnel['login']??"" ?></em>
+                                <em class="col-lg-6 col-sm-12"  id="recap-login" ><?= $personnel['login']??"" ?></em>
                             </div>
                         </div>
 
-                        <div class="col-2">
-
-                        </div>
-
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Sexe :</strong>
+                                <strong class="col-lg-6 col-sm-12">Sexe :</strong>
 
-                                <em class="col-6"  id="recap-sexe" ><?= $personnel['sexe']??"" ?></em>
+                                <em class="col-lg-6 col-sm-12"  id="recap-sexe" ><?= ($personnel['sexe']??"" == 'H')? 'Masculin' : 'Féminin' ?></em>
                             </div>
                         </div>
                     </div>
 
                     <div class="row mt-1">
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Assurance :</strong>
+                                <strong class="col-lg-6 col-sm-12">Assurance :</strong>
 
-                                <em class="col-6"  id="recap-assurance" ><?= $personnel['assurance']??"" ?></em>
+                                <em class="col-lg-6 col-sm-12"  id="recap-assurance" ><?= $personnel['assurance']??"" ?></em>
                             </div>
                         </div>
 
-                        <div class="col-2">
-
-                        </div>
-
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Autres :</strong>
+                                <strong class="col-lg-6 col-sm-12">Autres :</strong>
 
-                                <em class="col-6"  id="recap-autres" ><?= $personnel['autres']??"" ?></em>
+                                <em class="col-lg-6 col-sm-12"  id="recap-autres" ><?= $personnel['autres']??"" ?></em>
                             </div>
                         </div>
                     </div>
 
                     <div class="row mt-1">
-                        <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Fonction du personnel :</strong>
+                                <strong class="col-lg-6 col-sm-12">Fonction :</strong>
 
-                                <em class="col-6"  id="recap-fonciton" ><?= $personnel['fonction']??"" ?></em>
+                                <em class="col-lg-6 col-sm-12"  id="recap-fonciton" ><?= $personnel['fonction']??"" ?></em>
                             </div>
                         </div>
 
-                        <div class="col-2">
-
-                        </div>
-
-                        <!-- <div class="col-5">
+                        <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <strong class="col-6">Autres :</strong>
-
-                                <em class="col-6"  id="recap-autres" >6 ans</em>
+                                <a href="#" id="recap-pieces_jointes" class="btn btn-social btn-min-width mb-1 mr-1"><span class="fa fa-download font-medium-4"></span> Télécharger piece jointe</a>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <input type="file" class="inputfile"  accept="image/*" style="display: none;" name="photo_autres" id="photo_autres" onchange="readURL(this, '.photo_autres');" />
                         <label for="photo_autres" style="  display: block; margin-left: auto; margin-right: auto;">
                             <figure>
                                 <img title="cliquer pour modifier une piece jointe" width="200px" height="200px" src="<?= URL::base() ?>ressources/uploads/img/personnel/<?= $personnel['photo']??"" ?>" alt="" class="photo_autres " >
                             </figure>
                         </label>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -203,3 +173,7 @@ use Core\Routing\URL;
         </div>
     </div>
 </div>
+
+<script>
+
+</script>

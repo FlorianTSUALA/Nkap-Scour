@@ -128,6 +128,7 @@ class AffectationController extends \App\Controller\Admin\AppController
 
     public function affecterSalleEnseignant()
     {
+        $route = 'affectation_salle_enseignant';
         $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
         
         $affectationExist = $this->_verifierExistenceAffectationSalleEnseignant($annee_scolaire_id);
@@ -148,7 +149,7 @@ class AffectationController extends \App\Controller\Admin\AppController
             ->where('affectation_personnel_salle_classe.visibilite', '=', 1)
             ->where('annee_scolaire_id', $annee_scolaire_id)
             ->get());
-        $this->render('sections.affectation.salle_enseignant.affectation', compact('classes', 'salle_classes', 'personnels', 'affectation_personnel_salle_classes'));
+        $this->render('sections.affectation.salle_enseignant.affectation', compact('route', 'classes', 'salle_classes', 'personnels', 'affectation_personnel_salle_classes'));
     }
         
     public function enregistrerAffectationSalleEnseignant($code)

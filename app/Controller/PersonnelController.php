@@ -141,16 +141,16 @@ class PersonnelController extends AppController
                     'assurance' => 'assurance', 
                     'fonction' => 'fonction', 
                     'pieces_jointes' => 'pieces_jointes', 
-                    'id' => 'code', 
+                    'code' => 'id', 
                     'photo' => 'photo' 
                     
-                ])->where('code', $code)->get();
-
+                ])->where('code', $code)->one();
+        // dd($personnel);
         $this->app->setTitle('Mise à jour d\'un personnel  - Comelines');
         $type_personnels = TypePersonnel::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $pays = Pays::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get() ;
 
-        $this->render('sections.personnel.modification.modifier_personnel', compact('route', 'pays',  'type_personnels', 'personnel'));
+        $this->render('sections.personnel.modification.modifier_personnel', compact('route', 'pays',  'type_personnels', 'personnel', 'code'));
 
     }
 
@@ -158,18 +158,18 @@ class PersonnelController extends AppController
     {
         //INFO PERSONNEL
         $code_personnel = Personnel::generateCode();
-
+        
         $matricule = $code_personnel;
 
-        $photo_name = Request::saveImg($matricule . '_photo_profile', 'photo', 'img/personnel/');
+        $photo_name = Request::saveImg($matricule . '_photo_profile', 'photo', 'img/personnel');
         if ($photo_name === 1) {
             $photo_name = 'no-photo.jpg';
         }
 
         $piece_jointes ='photo_autres';
-        $photo_peices_jointes = Request::saveImg($matricule . '_photo_peices_jointes', 'photo_autres', 'img/personnel/');
+        $photo_peices_jointes = Request::saveImg($matricule . '_photo_peices_jointes', 'photo_autres', 'img/personnel');
         if ($photo_peices_jointes === 1) {
-            $photo_peices_jointes = 'no-photo.jpg';
+            $photo_peices_jointes = 'attachement.jpg';
         }
       
 
@@ -186,17 +186,18 @@ class PersonnelController extends AppController
             'login' => Request::getSecParam('login', '') ,
             'password' => Request::getSecParam('password', '') ,
             'date_prise_service' => Request::getSecParam('date_prise_service', '') ,
-            'date_fin_carriere' => Request::getSecParam('date_fin_carriere', '') ,
+            // 'date_fin_carriere' => Request::getSecParam('date_fin_carriere', '') ,
             'bibliographie' => Request::getSecParam('bibliographie', '') ,
-            'assurance' => Request::getSecParam('nom_personnel', '') ,
+            'assurance' => Request::getSecParam('assurance', '') ,
             'fonction' => Request::getSecParam('fonction', '') ,
             'pieces_jointes' =>  $photo_peices_jointes ,
             'code' => $code_personnel,
             'photo' => $photo_name
         ];
 
-        $result_personnel = Personnel::table()->insert($data_personnel);
+        $result_personnel = Personnel::table()->insert($data_personnel)->execute();
         $result_personnel = true;
+        
 
         if ($result_personnel) {
             $this->sendResponseAndExit(Helpers::toJSON($result_personnel, TRUE));
@@ -218,18 +219,20 @@ class PersonnelController extends AppController
         $code_personnel = $code;
 
         $matricule = $code_personnel;
-        vd($_FILES);
-        dd($_POST);
 
-        $photo_name = Request::saveImg($matricule . '_photo_profile', 'photo', 'img/personnel');
-        if ($photo_name === 1) {
-            $photo_name = 'no-photo.jpg';
+        if(isset($_FILES['photo']))
+        {
+            $photo_name = Request::saveImg($matricule . '_photo_profile', 'photo', 'img/personnel');
+            if ($photo_name === 1) {
+                $photo_name = 'no-photo.jpg';
+            }
         }
-
         $piece_jointes ='photo_autres';
-        $photo_peices_jointes = Request::saveImg($matricule . '_photo_peices_jointes', 'photo_autres', 'img/personnel');
-        if ($photo_peices_jointes === 1) {
-            $photo_peices_jointes = 'no-photo.jpg';
+        if(isset($_FILES[$piece_jointes])){
+            $photo_peices_jointes = Request::saveImg($matricule . '_photo_peices_jointes', $piece_jointes, 'img/personnel');
+            if ($photo_peices_jointes === 1) {
+                $photo_peices_jointes = 'attachement.jpg';
+            }
         }
       
 
@@ -244,16 +247,26 @@ class PersonnelController extends AppController
             'email' => Request::getSecParam('email', '') ,
             'adresse' => Request::getSecParam('adresse', '') ,
             'login' => Request::getSecParam('login', '') ,
-            'password' => Request::getSecParam('password', '') ,
             'date_prise_service' => Request::getSecParam('date_prise_service', '') ,
-            'date_fin_carriere' => Request::getSecParam('date_fin_carriere', '') ,
+            // 'date_fin_carriere' => Request::getSecParam('date_fin_carriere', '') ,
             'bibliographie' => Request::getSecParam('bibliographie', '') ,
             'assurance' => Request::getSecParam('nom_personnel', '') ,
             'fonction' => Request::getSecParam('fonction', '') ,
-            'pieces_jointes' =>  $photo_peices_jointes ,
             'code' => $code_personnel,
-            'photo' => $photo_name
         ];
+
+        $password = Request::getSecParam('password', '');
+        if($password != '' && $password != 'aucun'){
+            $data_info_personnels['password'] = Helpers::passwordEncrypt($password);
+        }
+
+        if($photo_peices_jointes != 'attachement.jpg' ){
+            $data_personnel['pieces_jointes'] =  $photo_peices_jointes;
+        }
+
+        if($photo_name != 'no-photo.jpg'){
+            $data_personnel['photo'] =  $photo_name;
+        }
 
         $result_personnel = Personnel::table()  ->update($data_personnel)
                                                 ->where('code', $code_personnel)
@@ -267,6 +280,20 @@ class PersonnelController extends AppController
         }
     }
 
+    public function apiDeletePersonnel($code){
+         $data_personnel['visibilite'] = 0;
+
+         $result_personnel = Personnel::table()  ->update($data_personnel)
+                                                 ->where('code', $code)
+                                                 ->execute();
+         $result_personnel = true;
+ 
+         if ($result_personnel) {
+             $this->sendResponseAndExit(Helpers::toJSON('Suppression réalisée avec sucess !!!', TRUE));
+         } else {
+             $this->sendResponseAndExit($result_personnel, false, 400, 'DB Error');
+         }
+    }
 
     /**
      * aux données envoyées en post par le formulaire grace à son code
@@ -338,7 +365,8 @@ class PersonnelController extends AppController
 
         $data_info_personnels = (new PersonnelRepository())->getInfoPersonnel($annee_scolaire_id, $code);
 
-        echo Helpers::toJSON($data_info_personnels) ;
+        // vd( Helpers::toJSON($data_info_personnels));
+        echo Helpers::toJSON($data_info_personnels);
     }
 
 

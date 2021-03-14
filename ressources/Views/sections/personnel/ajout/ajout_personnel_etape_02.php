@@ -25,11 +25,11 @@ use App\Helpers\Helpers;
                         <a data-toggle="collapse" data-parent="#accordionWrap1" href="#accordion-etape-01" aria-expanded="true" aria-controls="accordion-etape-01" class="text-uppercase blue collapsed"><strong>Infomations générales</strong></a>
                     </div>
 
-                    <div id="accordion-etape-01" role="tabpanel" aria-labelledby="heading-etape-01" class="collapse" aria-expanded="true" style="">
+                    <div id="accordion-etape-01" role="tabpanel" aria-labelledby="heading-etape-01" class="collapse show" aria-expanded="true" >
                         <div class="card-body">
 
                             <div class="row">
-                                <input type="file" class="inputfile" style="display: none;"  accept="image/*" name="photo" id="photo" onchange="readURL(this, '.photo');" />
+                                <!-- <input type="file" class="inputfile" style="display: none;"  accept="image/*" name="photo" id="photo" onchange="readURL(this, '.photo');" /> -->
                                 <label for="photo" style="  display: block; margin-left: auto; margin-right: auto;">
                                     <figure>
                                         <img title="cliquer pour ajouter une photo" width="200px" height="200px"  src="<?= URL::base() ?>assets/app-assets/images/portrait/small/no-photo.jpg" alt="" class="photo" class="center">
@@ -86,7 +86,7 @@ use App\Helpers\Helpers;
                                     <div class="row">
                                         <strong class="col-6">Date de prise de service :</strong>
 
-                                        <em class="col-6" id="recap-date_prise_service" >Tchibanga</em>
+                                        <em class="col-6" id="recap-date_prise_service" ></em>
                                     </div>
                                 </div>
 
@@ -98,7 +98,7 @@ use App\Helpers\Helpers;
                                     <div class="row">
                                         <strong class="col-6">Adresse :</strong>
 
-                                        <em class="col-6" id="recap-adresse" >6 ans</em>
+                                        <em class="col-6" id="recap-adresse" ></em>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@ use App\Helpers\Helpers;
                                     <div class="row">
                                         <strong class="col-6">Pays :</strong>
 
-                                        <em class="col-6"  id="recap-pays" >Tchibanga</em>
+                                        <em class="col-6"  id="recap-pays" ></em>
                                     </div>
                                 </div>
 
@@ -120,7 +120,7 @@ use App\Helpers\Helpers;
                                     <div class="row">
                                         <strong class="col-6">Type de personnel :</strong>
 
-                                        <em class="col-6"  id="recap-type_personnel" >6 ans</em>
+                                        <em class="col-6"  id="recap-type_personnel" ></em>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@ use App\Helpers\Helpers;
                                     <div class="row">
                                         <strong class="col-6">Login :</strong>
 
-                                        <em class="col-6"  id="recap-login" >Tchibanga</em>
+                                        <em class="col-6"  id="recap-login" ></em>
                                     </div>
                                 </div>
 
@@ -142,7 +142,7 @@ use App\Helpers\Helpers;
                                     <div class="row">
                                         <strong class="col-6">Sexe :</strong>
 
-                                        <em class="col-6"  id="recap-sexe" >6 ans</em>
+                                        <em class="col-6"  id="recap-sexe" ></em>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@ use App\Helpers\Helpers;
                                     <div class="row">
                                         <strong class="col-6">Assurance :</strong>
 
-                                        <em class="col-6"  id="recap-assurance" >Tchibanga</em>
+                                        <em class="col-6"  id="recap-assurance" ></em>
                                     </div>
                                 </div>
 
@@ -164,7 +164,7 @@ use App\Helpers\Helpers;
                                     <div class="row">
                                         <strong class="col-6">Autres :</strong>
 
-                                        <em class="col-6"  id="recap-autres" >6 ans</em>
+                                        <em class="col-6"  id="recap-autres" ></em>
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@ use App\Helpers\Helpers;
                                     <div class="row">
                                         <strong class="col-6">Fonction du personnel :</strong>
 
-                                        <em class="col-6"  id="recap-fonciton" >Tchibanga</em>
+                                        <em class="col-6"  id="recap-fonction" ></em>
                                     </div>
                                 </div>
 
@@ -187,13 +187,13 @@ use App\Helpers\Helpers;
                                     <div class="row">
                                         <strong class="col-6">Autres :</strong>
 
-                                        <em class="col-6"  id="recap-autres" >6 ans</em>
+                                        <em class="col-6"  id="recap-autres" ></em>
                                     </div>
                                 </div> -->
                             </div>
 
                         <div class="row">
-                            <input type="file" class="inputfile"  accept="image/*" style="display: none;" name="photo_autres" id="photo_autres" onchange="readURL(this, '.photo_autres');" />
+                            <!-- <input type="file" class="inputfile"  accept="image/*" style="display: none;" name="photo_autres" id="photo_autres" onchange="readURL(this, '.photo_autres');" /> -->
                             <label for="photo_autres" style="  display: block; margin-left: auto; margin-right: auto;">
                                 <figure>
                                     <img title="cliquer pour ajouter une piece jointe" width="200px" height="200px"  src="<?= URL::base() ?>assets/app-assets/images/portrait/small/attachement.jpg" alt="" class="photo_autres " >

@@ -4,6 +4,11 @@ namespace Core\Helper;
 
 trait SecurityHelpers
 {
+
+    public static function passwordEncrypt($password){
+        return sha1($password);
+    }
+
     public static function crypted($string)
     {
         return md5(
