@@ -3,6 +3,7 @@
 use Core\Routing\URL;
 use App\Helpers\Helpers;
 
+use function Core\Helper\dd;
 
 $include_res_header = '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">';
 $include_res_header .= '
@@ -37,7 +38,7 @@ $include_res_footer .= "
 ";
 
 ob_start();
-include "index-script.php";
+// include "index-script.php";
 $include_footer_script = ob_get_clean();
 ?>
 <!--
@@ -116,7 +117,7 @@ $include_footer_script = ob_get_clean();
 					        <tbody>
 
                                 <?php $i = 0;
-                                foreach($eleves as $eleve){
+                                foreach($eleves??[] as $eleve){
                                     ?>
                                     <tr>
                                         <td style="width: 30px;"><a href="#" class="text-bold-600"><?= ++$i;?></a></td>
