@@ -80,7 +80,7 @@ $table_header = "
                 <section class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header pb-0" >
                                 <div class="d-flex">
                                     <div class="p-0  col-md-3 mr-auto ">
                                         <h4 class="card-title" id="heading-prev-next">Enregistrement personnel</h4><small class="text-muted">Consultation, modification et suppression du personnel.</small>
@@ -88,13 +88,17 @@ $table_header = "
 
                                     <div class="p-0 mr-1 ">
                                         <fieldset class="input-group">
-                                            <!-- <div class="input-group-prepend">
-                            <span class="input-group-text">L &nbsp; <span class="fa fa-calendar"></span></span>
-                            </div> -->
-
-                                            <!-- <small class="text-muted">Allows you to provide.</small> -->
+                                        <div class="alert bg-success alert-icon-left" role="alert">
+                                        <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
+                                        <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
+                                        <span id='resume_filtre'> listes des enseignants.</span>
+                                    </div>
                                         </fieldset>
                                     </div>
+
+                                    <div class="d-flex  mt-1">
+                                   
+                                </div>
 
                                     <div class="p-0   ">
                                         <span class="dropdown">
@@ -107,16 +111,10 @@ $table_header = "
                                         </span>
                                     </div>
                                 </div>
-                                <div class="d-flex  mt-1">
-                                    <div class="alert bg-success alert-icon-left" role="alert">
-                                        <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
-                                        <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
-                                        <span id='resume_filtre'> listes des enseignants.</span>
-                                    </div>
-                                </div>
+                                
                             </div>
 
-                            <div class="card-content collapse show" >
+                            <div class="card-content collapse show pt-0" >
                                 <div class="card-body">
                                     <!-- Task List table -->
                                     <div class="table-responsive-sm" >
