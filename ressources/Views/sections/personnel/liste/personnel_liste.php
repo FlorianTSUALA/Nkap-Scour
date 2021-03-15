@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 use Core\Routing\URL;
 use App\Helpers\Helpers;
@@ -11,6 +11,16 @@ $include_res_header .= '<link rel="stylesheet" type="text/css" href="' . URL::ba
 $include_res_header .= '<link rel="stylesheet" type="text/css" href="' . URL::base() . 'assets/vendors/css/ui/jquery-ui.min.css">' . "\n";
 $include_res_header .= '<link rel="stylesheet" type="text/css" href="' . URL::base() . 'assets/vendors/css/forms/selects/select2.min.css">' . "\n";
 // $include_res_header .= Helpers::dataTableResponsibleSearchBar() . "\n";
+
+$include_res_header .= '
+                        <style>
+                            #menu .list-group a.list-group-item:hover{
+                                background-color: #3bafda;
+                                color: white;
+                            }
+                        </style>
+
+' . "\n";
 $include_res_header .= '' . "\n";
 
 $include_res_footer = '' . "\n";
@@ -135,10 +145,10 @@ $table_header = "
                     <!-- Predefined Views -->
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Liste de fonctions</h4>
+                            <h4 class="card-title">TYPE DE PERSONNEL</h4>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
-                                    <li><a data-action="collapse"><i class="ft-plus"></i></a></li>
+                                    <!-- <li><a data-action="collapse"><i class="ft-plus"></i></a></li> -->
                                 </ul>
                             </div>
                         </div>

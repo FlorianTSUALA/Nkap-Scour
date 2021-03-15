@@ -23,7 +23,7 @@ Raccourci clavier de visual studio code
 19 - Ctrl + :           =   commenter ou décommenter une ligne ou un block
 20 - Alt + Z            =   Ramener le texte long à la ligne
 20 - Ctrl + B            =   Ouvrir et fermer la sidebar
-
+21 - Ctrl + Schift + x  =   Open extention panel
 
 Top extension for Dev Web
 1 - php extension pack

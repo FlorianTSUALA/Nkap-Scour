@@ -38,7 +38,7 @@ function notify(msg, timeout = 5 /* en seconde */ ){
     flash_msg(msg, timeout)
 }
 
-function alert(title, msg, type="error"){
+function alert(msg, title='Oupss.... ', type="error"){
     swal(title, msg, type);
 }
 

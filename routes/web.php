@@ -220,7 +220,7 @@ $router->addRoute('biblio_api_alerte', 'biblio/api/alerte/{code}', [BiblioContro
 //  SALLE *-* ENSEIGNANT
 
 $router->addRoute('affectation_salle_enseignant', 'affectation/enseignant_salle', [AffectationController::class, 'affecterSalleEnseignant']);
-$router->addRoute('affectation_salle_enseignant_save', 'api/affectation/enseignant_salle/save/{code}', [AffectationController::class, 'enregistrerAffectationSalleEnseignant']);
+// $router->addRoute('affectation_salle_enseignant_save', 'api/affectation/enseignant_salle/save/{code}', [AffectationController::class, 'enregistrerAffectationSalleEnseignant']);
 $router->addRoute('affectation_salle_enseignant_update', 'api/affectation/enseignant_salle/update/', [AffectationController::class, 'modifierAffectationSalleEnseignant']);
 $router->addRoute('affectation_salle_enseignant_all', 'api/affectation/enseignant_salle/all', [AffectationController::class, 'listeAffectationSalleEnseignant']);
 
@@ -235,9 +235,12 @@ $router->addRoute('affectation_salle_eleve_all', 'api/affectation/eleve_salle/al
 
 //  CLASSE *-* MATIERE
 $router->addRoute('affectation_classe_matiere', 'affectation/classe_matiere', [AffectationController::class, 'affecterClasseMatiere']);
-$router->addRoute('affectation_classe_matiere_save', 'api/affectation/classe_matiere/save/{code}', [AffectationController::class, 'enregistrerAffectationClasseMatiere']);
-$router->addRoute('affectation_classe_matiere_update', 'api/affectation/classe_matiere/update/{code}', [AffectationController::class, 'modifierAffectationClasseMatiere']);
+$router->addRoute('affectation_classe_matiere_save', 'api/affectation/classe_matiere/save', [AffectationController::class, 'enregistrerAffectationClasseMatiere']);
+$router->addRoute('affectation_classe_matiere_delete', 'api/affectation/classe_matiere/delete', [AffectationController::class, 'supprimerAffectationClasseMatiere']);
+$router->addRoute('affectation_classe_matiere_update', 'api/affectation/classe_matiere/update', [AffectationController::class, 'modifierAffectationClasseMatiere']);
 $router->addRoute('affectation_classe_matiere_all', 'api/affectation/classe_matiere/all', [AffectationController::class, 'listeAffectationClasseMatiere']);
+$router->addRoute('api_matiere_list', 'matiere/api/list', [MatiereController::class, 'getApiAllEssentiel']);
+// $router->addRoute('api_matiere_list', 'matiere/api/list', [MatiereController::class, 'all']);
 
 //affectation_classe_matiere
 // $router->crudRoute("affectation_classe_matiere", AffectationClasseMatiereController::class);
