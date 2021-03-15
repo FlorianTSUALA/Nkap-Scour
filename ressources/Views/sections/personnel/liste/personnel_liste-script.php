@@ -17,6 +17,8 @@ include dirname(dirname(__DIR__))."/_common_lib/_select2_script.php";
 
 
 <script> 
+  var code = ''
+  var filter_by = 'ALL'
 
   let msg  = 'Bienvenue à la gestion du Personnel'
   block_notification(msg)
@@ -53,6 +55,7 @@ include dirname(dirname(__DIR__))."/_common_lib/_select2_script.php";
                 $("#recap-assurance").text(personnel.assurance)
                 $("#recap-autres").text(personnel.autres)
                 $("#recap-fonciton").text(personnel.fonction)
+                $("#recap-salle_classe").text(personnel.salle_classe)
                 $("#recap-photo").attr('src', "<?= URL::upload() ?>ressources/uploads/img/personnel/"+personnel.photo)
 
                 $('#recap-pieces_jointes').on('click', function(e) {
@@ -79,7 +82,8 @@ include dirname(dirname(__DIR__))."/_common_lib/_select2_script.php";
               ajax:{
                   url: '<?= URL::link('personnel_api_get_all') ?>',
                   data: function(data){
-                      // data.code =  code,
+                      data.code =  code,
+                      data.filter_by =  filter_by
                   } ,
                   type: 'POST'
               },
@@ -227,32 +231,23 @@ include dirname(dirname(__DIR__))."/_common_lib/_select2_script.php";
 
 
 <script>
-// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_active_element
-// Add active class to the current menu item (highlight it)
-var menu = document.getElementById("menu");
-var links = menu.getElementsByClassName("list-group-item");
 
+$('#menu .list-group a.list-group-item').click(function(e) {
+  $('#menu .list-group a.list-group-item.active').removeClass('active');
+  var $current = $(this)
+  $current.addClass('active');
+  e.preventDefault();
+  if(this.id.includes('ID_')){
+    let current_id = this.id.replace('ID_', '')
+    code  =  current_id
+    filter_by = 'type_personnel'
+  }else{
+    filter_by = 'ALL'
+    code = ''
+  }
+  console.log(code)
 
-for (var i = 0; i < links.length; i++) {
-  links[i].addEventListener('click', function() {
-      var current = document.getElementsByClassName('active')
-      if (current.length > 0) { 
-        current[0].className = current[0].className.replace(' active', '')
-      }
-      this.className += ' active'
-      if(this.id.includes('ID_')){
-        let current_id = this.id.replace('ID_', '')
-        if(current_id.includes('SALL'))
-          filter_by ='SALLE_CLASSE'
-        else
-          filter_by = 'CLASSE'
-        code  =  current_id
-      }else{
-        filter_by = 'ALL'
-        code = ''
-      }
+  table.ajax.reload()
+});
 
-      table.ajax.reload()
-  })
-}
 </script>

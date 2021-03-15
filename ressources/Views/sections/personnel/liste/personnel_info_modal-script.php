@@ -14,11 +14,10 @@
             beforeSend:function(){
             },
             success:function(data){
-                console.log(data)
-                init_data_table()
-
+                
+                table.ajax.reload( null, false ); // user paging is not reset on reload
                 swal("Bingo !!!", "Suppression réalisée avec sucess !!!", 'success')
-                console.log(data)
+
             },
             error: function (textStatus, errorThrown) {
                 Success = false;

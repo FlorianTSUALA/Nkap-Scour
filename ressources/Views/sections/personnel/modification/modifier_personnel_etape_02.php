@@ -143,7 +143,7 @@ use App\Helpers\Helpers;
                                     <div class="row">
                                         <strong class="col-6">Sexe :</strong>
 
-                                        <em class="col-6"  id="recap-sexe" >6 ans</em>
+                                        <em class="col-6"  id="recap-sexe" ></em>
                                     </div>
                                 </div>
                             </div>

@@ -3,20 +3,21 @@
 namespace App\Controller;
 
 use App\Model\Pays;
+use Core\Model\Model;
 use App\Model\DBTable;
 use App\Helpers\Helpers;
 use App\Model\Personnel;
 use Config\Invariant\API;
 use Core\Session\Request;
 use App\Helpers\HTMLHelper;
-use App\Model\TypePersonnel;
 
+use App\Model\TypePersonnel;
 use function Core\Helper\dd;
 use function Core\Helper\vd;
 use Core\HTML\Form\FormModel;
 use App\Helpers\TraitCRUDController;
-use App\Repository\ClasseRepository;
 
+use App\Repository\ClasseRepository;
 use App\Controller\Admin\AppController;
 use App\Repository\PersonnelRepository;
 use ClanCats\Hydrahon\Query\Expression;
@@ -52,9 +53,8 @@ class PersonnelController extends AppController
     public function liste()
     {
         $route = 'personnel_liste';
-        $personnels = (new PersonnelRepository())->getDocumentGroupByPersonnel();   
-        $classes = (new ClasseRepository())->getSalleClasseGroupByClasse();
-        
+
+        $type_personnels = (new PersonnelRepository())->getPersonnelGroupByTypePersonnel();   
 
         
         $annee_scolaire_id =  (new AnneeScolaireRepository())->getActive('id');
@@ -62,7 +62,7 @@ class PersonnelController extends AppController
         $data_info_personnels = (new PersonnelRepository())->getInfoPersonnels($annee_scolaire_id);
 
         // dd($data_info_personnels);
-        $this->render('sections.personnel.liste.personnel_liste', compact( 'route', 'classes','data_info_personnels', 'personnels'));
+        $this->render('sections.personnel.liste.personnel_liste', compact( 'route', 'data_info_personnels', 'type_personnels'));
     }
 
     public function getall()
@@ -140,6 +140,7 @@ class PersonnelController extends AppController
                     'bibliographie' => 'bibliographie', 
                     'assurance' => 'assurance', 
                     'fonction' => 'fonction', 
+                    'autres' => 'autres', 
                     'pieces_jointes' => 'pieces_jointes', 
                     'code' => 'id', 
                     'photo' => 'photo' 
@@ -179,7 +180,7 @@ class PersonnelController extends AppController
             'nom' => Request::getSecParam('nom', '') ,
             'prenom' => Request::getSecParam('prenom', '') ,
             'sexe' => Request::getSecParam('sexe', '') ,
-            'photo' => Request::getSecParam('photo', '') ,
+            'autres' => Request::getSecParam('autres', '') ,
             'telephone' => Request::getSecParam('telephone', '') ,
             'email' => Request::getSecParam('email', '') ,
             'adresse' => Request::getSecParam('adresse', '') ,
@@ -242,7 +243,7 @@ class PersonnelController extends AppController
             'nom' => Request::getSecParam('nom', '') ,
             'prenom' => Request::getSecParam('prenom', '') ,
             'sexe' => Request::getSecParam('sexe', '') ,
-            'photo' => Request::getSecParam('photo', '') ,
+            'autres' => Request::getSecParam('autres', '') ,
             'telephone' => Request::getSecParam('telephone', '') ,
             'email' => Request::getSecParam('email', '') ,
             'adresse' => Request::getSecParam('adresse', '') ,
@@ -260,11 +261,11 @@ class PersonnelController extends AppController
             $data_info_personnels['password'] = Helpers::passwordEncrypt($password);
         }
 
-        if($photo_peices_jointes != 'attachement.jpg' ){
+        if($photo_peices_jointes != 'attachement.jpg' &&  $photo_peices_jointes != '' ){
             $data_personnel['pieces_jointes'] =  $photo_peices_jointes;
         }
 
-        if($photo_name != 'no-photo.jpg'){
+        if($photo_name != 'no-photo.jpg' && $photo_name != ''){
             $data_personnel['photo'] =  $photo_name;
         }
 
@@ -372,10 +373,17 @@ class PersonnelController extends AppController
 
     public function getApiPersonnels()  
     {
+        $code = Request::getSecParam('code', NULL);
+        $filter_by = Request::getSecParam('filter_by', 'ALL');
+
         $annee_scolaire_id =  (new AnneeScolaireRepository())->getActive('id');
 
-        $data_info_personnels = (new PersonnelRepository())->getInfoPersonnels($annee_scolaire_id);
-
+        if($filter_by === 'ALL'){
+            $data_info_personnels = (new PersonnelRepository())->getInfoPersonnels($annee_scolaire_id);
+        }else{
+            $type_personnel_id = Model::getId(DBTable::TYPE_PERSONNEL, $code);
+            $data_info_personnels = (new PersonnelRepository())->getInfoPersonnels($annee_scolaire_id, $type_personnel_id);
+        }
         
         $results[API::TAG_STATUS] = API::TAG_SUCCESS;
         $results[API::TAG_DATATABLE_DR] = API::TAG_DATATABLE_VALUE_DR;

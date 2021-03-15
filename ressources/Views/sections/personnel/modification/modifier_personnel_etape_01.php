@@ -3,6 +3,9 @@
 use App\Helpers\Helpers;
 use Core\Routing\URL;
 
+use function Core\Helper\dd;
+
+// dd($personnel)
 
 ?>
 
@@ -203,7 +206,7 @@ use Core\Routing\URL;
             <div class="form-group row">
                 <label for="assurance" class="col-4 col-form-label">Assurance :</label>
                 <div class="col-8">
-                    <input placeholder="Assurance du personnel" type="text" class="form-control" id="assurance" name="assurance" />
+                    <input placeholder="Assurance du personnel"  value="<?= $personnel['assurance']??" " ?>"  type="text" class="form-control" id="assurance" name="assurance" />
                 </div>
             </div>
         </div>
@@ -224,7 +227,7 @@ use Core\Routing\URL;
             <div class="form-group row">
                 <label for="autres" class="col-2 col-form-label">Autres :</label>
                 <div class="col-10">
-                    <textarea placeholder="Autres informations du personnel" type="text" style="min-width: 100%;" class="form-control" id="autres" name="autres" ></textarea>
+                    <textarea placeholder="Autres informations du personnel"  type="text" style="min-width: 100%;" class="form-control" id="autres" name="autres" ><?= $personnel['autres']??" " ?></textarea>
                 </div>
             </div>
 

@@ -122,7 +122,7 @@ use Core\Routing\URL;
                 $('#recap-fonction').text($('#fonction').val()? $('#fonction').val():'<?= Helpers::repeatChar();?>');
                 $('#recap-assurance').text($('#assurance').val()? $('#assurance').val():'<?= Helpers::repeatChar();?>');
                 $('#recap-autres').text($('#autres').val()? $('#autres').val():'<?= Helpers::repeatChar();?>');
-                $('#recap-sexe').val($('input[type=radio][name=sexe]:checked').val()? $('input[type=radio][name=sexe]:checked').val() : '<?= Helpers::repeatChar();?>');
+                $('#recap-sexe').text($('input[type=radio][name=sexe]:checked').val()? (($('input[type=radio][name=sexe]:checked').val()== 'F')? 'Féminin' : 'Masculin') : '<?= Helpers::repeatChar();?>');
                
                 if (currentIndex < newIndex) {
                     // To remove error styles

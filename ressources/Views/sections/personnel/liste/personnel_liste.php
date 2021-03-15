@@ -47,32 +47,33 @@ $table_header = "
 
 <div class="app-content content">
     <div class="content-wrapper">
-
         <div class="content-header row">
-            <div class="content-header-left col-md-8 col-12 mb-2 breadcrumb-new">
-                <h3 class="content-header-title mb-0 d-inline-block">Gestion du personnel</h3>
-                <div class="row breadcrumbs-top d-inline-block">
-                    <div class="breadcrumb-wrapper col-12">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="<?= URL::link('accueil') ?>">Accueil</a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="<?= URL::link('personnel_accueil') ?>">Personnel</a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="#">En service</a>
-                            </li>
+          <div class="content-header-left col-md-6 col-12">
+            <h3 class="content-header-title">Gestion du personnel	</h3>
+            <div class="row breadcrumbs-top">
+              <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"> <a href="<?= URL::link('accueil') ?>">Accueil</a></li>
+                  <li class="breadcrumb-item"> <a href="<?= URL::link('personnel_accueil') ?>">Personnel</a></li>
+                  <li class="breadcrumb-item active"><a href="#">En service</a> </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-header-right col-md-6 col-12">
+            <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                <div class="btn-group" role="group"><a class="btn btn-outline-info" href="<?= URL::link('type_personnel') ?>"> 
+                    <i class="fa fa-users"> Gestion Type Personnel</i></a> 
+                </div>
+                <!-- <div class="btn-group" role="group"><a class="btn btn-outline-info" href="<?= URL::link('accueil') ?>"> 
+                    <i class="fa fa-home"> Accueil</i></a> 
+                </div> -->
+            </div>
+          </div>
 
-                        </ol>
-                    </div>
-                </div>
-            </div>
-            <div class="content-header-right col-md-4 col-12">
-                <div class="btn-group float-md-right">
-                    <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-settings mr-1"></i>Action</button>
-                    <div class="dropdown-menu arrow"><a class="dropdown-item" href="#"><i class="fa fa-calendar mr-1"></i> Calender</a><a class="dropdown-item" href="#"><i class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item" href="#"><i class="fa fa-life-ring mr-1"></i> Support</a>
-                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fa fa-cog mr-1"></i> Settings</a>
-                    </div>
-                </div>
-            </div>
+          <div class="content-header-lead col-12 mt-2">
+            <p class="lead"></p>
+          </div>
         </div>
 
         <div class="content-detached content-right">
@@ -80,22 +81,14 @@ $table_header = "
                 <section class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header pb-0 mb-0">
                                 <div class="d-flex">
-                                    <div class="p-0  col-md-3 mr-auto ">
+                                    <div class="p-0  col-md-6 mr-auto ">
                                         <h4 class="card-title" id="heading-prev-next">Enregistrement personnel</h4><small class="text-muted">Consultation, modification et suppression du personnel.</small>
                                     </div>
-
-                                    <div class="p-0 mr-1 ">
-                                        <fieldset class="input-group">
-                                            <!-- <div class="input-group-prepend">
-                            <span class="input-group-text">L &nbsp; <span class="fa fa-calendar"></span></span>
-                            </div> -->
-
-                                            <!-- <small class="text-muted">Allows you to provide.</small> -->
-                                        </fieldset>
+                                    <div class="p-0 mr-1   ">
+                                        <a class="btn btn-primary"  href="<?= URL::link('ajout_personnel') ?>"><i class="ft-plus white"></i> Nouveau Personnel</a>
                                     </div>
-
                                     <div class="p-0   ">
                                         <span class="dropdown">
                                             <button disabled class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-settings mr-1"></i>Rapport</button>
@@ -107,13 +100,13 @@ $table_header = "
                                         </span>
                                     </div>
                                 </div>
-                                <div class="d-flex  mt-1">
+                                <!-- <div class="d-flex  mt-1">
                                     <div class="alert bg-success alert-icon-left" role="alert">
                                         <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
                                         <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
                                         <span id='resume_filtre'> listes des enseignants.</span>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="card-content collapse show" >
@@ -154,9 +147,16 @@ $table_header = "
                                 <div id="menu" class="navigation navigation-main">
                                     <div class="list-group">
                                         <a href="<?= "#"; ?>" class="list-group-item active"> Voir tout</a>
-                                        <?php foreach ($personnels as $item) { ?>
-                                            <a href="#" id="ID_<?= $item['type_personnel_id'] ?>" class="list-group-item" data-toggle="collapse" data-target="#ID_<?= $item['type_personnel_id'] ?>" data-parent="#menu"><?= $item['type_personnel']; ?> <span class="badge  badge-pill bg-<?= Helpers::getRandromBootstrapColor() ?> float-right mr-2 badge-glow"><?= count($item['personnels']) ?></span></a>
-                                        <?php } ?>
+                                        <?php foreach ($type_personnels as $item) { ?>
+                                            <a href="#" id="ID_<?= $item['type_personnel_id'] ?>" 
+                                                class="list-group-item" data-toggle="collapse" 
+                                                data-parent="#menu">
+                                                <?= $item['type_personnel']; ?> 
+                                                <span class="badge  badge-pill bg-<?= Helpers::getRandromBootstrapColor() ?> float-right mr-2 badge-glow">
+                                                    <?= count($item['personnels']) ?>
+                                                </span>
+                                            </a>
+                                      <?php } ?>
                                     </div>
                                 </div>
                             </div>

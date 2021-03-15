@@ -12,7 +12,7 @@ use Core\Repository\BaseRepository;
 class PersonnelRepository extends BaseRepository{
     
         
-    public function getDocumentGroupByPersonnel(){
+    public function getPersonnelGroupByTypePersonnel(){
         
         $type_personnels =  DBTable::getModel(DBTable::TYPE_PERSONNEL)->select(
         [   
@@ -51,9 +51,11 @@ class PersonnelRepository extends BaseRepository{
         return $results;
     }
 
-    public function getInfoPersonnels($annee_scolaire_id)
+    public function getInfoPersonnels($annee_scolaire_id, $type_personnel_id = false)
     {
-        $data = DBTable::getModel(DBTable::PERSONNEL)
+
+
+        $model = DBTable::getModel(DBTable::PERSONNEL)
         ->select(
             [
                 'personnel.code'=> 'id', 
@@ -83,10 +85,14 @@ class PersonnelRepository extends BaseRepository{
         ->join('salle_classe', 'salle_classe.id', '=', 'personnel.salle_classe_id')
         ->join('parcours', 'parcours.salle_classe_id', '=', 'salle_classe.id')
         ->join('pays', 'pays.id', '=', 'personnel.pays_id')
-        ->where('personnel.visibilite', 1)
+        ->where('personnel.visibilite', 1);
+        
+        if($type_personnel_id != false){
+            $model = $model->where('personnel.type_personnel_id',  $type_personnel_id);
+        }
         // ->where('parcours.visibilite', '=', 1)
         // ->where('parcours.annee_scolaire_id', '=', $annee_scolaire_id)
-        ->get();
+        $data = $model->get();
         // dd($data);
         return $data;
     }
