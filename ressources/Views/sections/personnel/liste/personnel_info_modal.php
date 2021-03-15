@@ -150,19 +150,34 @@ use Core\Routing\URL;
 
                         <div class="col-lg-6 col-sm-12">
                             <div class="row">
-                                <a href="#" id="recap-pieces_jointes" class="btn btn-social btn-min-width mb-1 mr-1"><span class="fa fa-download font-medium-4"></span> Télécharger piece jointe</a>
+                                <strong class="col-lg-6 col-sm-12">Salle de Classe :</strong>
+
+                                <em class="col-lg-6 col-sm-12"  id="recap-salle_classe" ><?= $personnel['salle_classe']??"" ?></em>
                             </div>
                         </div>
                     </div>
 
-                    <!-- <div class="row">
-                        <input type="file" class="inputfile"  accept="image/*" style="display: none;" name="photo_autres" id="photo_autres" onchange="readURL(this, '.photo_autres');" />
+                    <div class="row">
+                        <!-- <div class="col-lg-6 col-sm-12"> -->
+                            <!-- <div class="row">
+                                <strong class="col-lg-6 col-sm-12">Fonction :</strong>
+
+                                <em class="col-lg-6 col-sm-12"  id="recap-fonciton" ><?= $personnel['fonction']??"" ?></em>
+                            </div>
+                        </div> -->
+
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="row">
+                                <a href="#" id="recap-pieces_jointes" class="btn btn-social btn-min-width mb-1 mr-1"><span class="fa fa-download font-medium-4"></span> Télécharger piece jointe</a>
+                            </div>
+                        </div>
+                        <!-- <input type="file" class="inputfile"  accept="image/*" style="display: none;" name="photo_autres" id="photo_autres" onchange="readURL(this, '.photo_autres');" />
                         <label for="photo_autres" style="  display: block; margin-left: auto; margin-right: auto;">
                             <figure>
                                 <img title="cliquer pour modifier une piece jointe" width="200px" height="200px" src="<?= URL::base() ?>ressources/uploads/img/personnel/<?= $personnel['photo']??"" ?>" alt="" class="photo_autres " >
                             </figure>
-                        </label>
-                    </div> -->
+                        </label> -->
+                    </div>
 
                 </div>
             </div>

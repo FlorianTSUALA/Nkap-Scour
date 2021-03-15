@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Helpers\TraitCRUDController;
 use App\Model\Matiere;
+use App\Helpers\Helpers;
+use App\Helpers\TraitCRUDController;
 
 class MatiereController extends AppController
 {
@@ -47,4 +48,9 @@ class MatiereController extends AppController
         return $results;
     }
 
+    public function getApiAllEssentiel()  
+    {
+        $Matieres = Helpers::toJSON(Matiere::table()->select([ 'id' => 'id' , 'libelle' => 'value' ])->where('visibilite', 1)->get());
+        $this->sendResponseAndExit(Helpers::toJSON($Matieres, TRUE));
+    }
 }

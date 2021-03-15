@@ -83,7 +83,7 @@ $(document).ready(function() {
 
                                 // args.cancel = true;
                                 // _robust\_Robust\Robust\Robust\html\ltr\vertical-multi-level-menu-template\ex-component-sweet-alerts.html
-                                alert('Oupss.... ', data.data, 'error')
+                                alert(data.data, 'Oupss.... ', 'error')
                             }
                             
 
@@ -158,7 +158,7 @@ $(document).ready(function() {
                 editButtonTooltip: "Modifier",                      // tooltip of edit item button
                 deleteButtonTooltip: "Supprimer",                  // tooltip of delete item button
                 searchButtonTooltip: "Rechercher",                  // tooltip of search button
-                clearFilterButtonTooltip: "reenitialiser le filtre de recherche",       // tooltip of clear filter button
+                clearFilterButtonTooltip: "réinitialiser le filtre de recherche",       // tooltip of clear filter button
                 insertButtonTooltip: "Insertion",                  // tooltip of insert button
                 updateButtonTooltip: "Mise à jour",                  // tooltip of update item button
                 cancelEditButtonTooltip: "Annuler la modification",         // tooltip of cancel editing button
