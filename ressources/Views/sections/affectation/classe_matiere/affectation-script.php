@@ -414,8 +414,6 @@ $(document).ready(function() {
 </script>
 
 
-
-
 <script>
 $('#menu .list-group a.list-group-item').first().addClass('active')
 $('#menu .list-group a.list-group-item').click(function(e) {

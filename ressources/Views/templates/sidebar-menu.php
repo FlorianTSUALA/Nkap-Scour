@@ -19,7 +19,7 @@
 									if($menu_item['alwaysVisible'] || (!$menu_item['alwaysVisible'] && $menu_item['action'] == ($route??'none')) ){
 									?>
 									<li <?= ($menu_item['action'] == ($route??'none'))? 'class="active"':''; ?>>
-										<a class="menu-item" href="<?= $menu_item['full_url']; ?>" data-i18n="nav.starter_kit.<?= ++$i; ?>_columns"><?= $menu_item['title']; ?></a>
+										<a class="menu-item" href="<?= $menu_item['full_url']; ?>" title="<?= $menu_item['title']; ?>" data-i18n="nav.starter_kit.<?= ++$i; ?>_columns"><?= $menu_item['title']; ?></a>
 									</li>
 								<?php 	}
 									}

@@ -521,7 +521,7 @@ return[
         "hasChildren" => true,
         "children" => [
             "AFFECTATION_CLASSE_MATIERE" => [
-                "title" => "Affectation_Classe_Matière",
+                "title" => "Affectation - Classe / Matière",
                 "icon" => "",
                 "msg_page" => "",
                 "menu_explication" => "",
@@ -535,12 +535,12 @@ return[
                 "children" => [],
             ],
             "ENSEIGNANT_MATIERE_CLASSE" => [
-                "title" => "Enseignant-Matière-Classe",
+                "title" => "Affectation - Elève / Salle de  classe",
                 "icon" => "",
                 "msg_page" => "",
                 "menu_explication" => "",
-                "full_url" =>  URL::link("cours"),
-                "action" => "cours",
+                "full_url" =>  URL::link("affectation_salle_eleve"),
+                "action" => "affectation_salle_eleve",
                 "alt" => "",
                 "class" => "",
                 "isActive" => "",

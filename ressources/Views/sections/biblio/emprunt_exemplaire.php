@@ -258,7 +258,7 @@ $include_footer_script = ob_get_clean();
                                     <div class="list-group">
                                         <li><a href="#" class="list-group-item blockquote pl-1 border-left-primary border-left-3  active" data-toggle="collapse" data-target="#sm" data-parent="#menu">Voir tout <span class="badge badge-pill badge-primary float-right"><?= count($domaines); ?></span></a> </li>
                                         <?php foreach($domaines as $domaine){ ?>
-                                                <li><a href="#" class="list-group-item blockquote pl-1 border-left-primary border-left-3  " data-toggle="collapse" data-target="#ID_<?= $domaine['domaine_id']?>" data-parent="#menu"><?= $domaine['domaine']; ?> <span class="badge  badge-pill bg-<?= Helpers::getRandromBootstrapColor() ?> float-right mr-2 badge-glow"><?= count($domaine['documents']); ?></span> </a> </li>
+                                                <li><a href="#" class="list-group-item blockquote pl-1 border-left-primary border-left-3  " data-toggle="collapse" data-target="#ID_<?= $domaine['domaine_id']?>" data-parent="#menu"><?= $domaine['domaine']; ?> <span class="badge  badge-pill bg-<?= Helpers::getRandomBootstrapColor() ?> float-right mr-2 badge-glow"><?= count($domaine['documents']); ?></span> </a> </li>
                                                 <div id="ID_<?= $domaine['domaine_id']?>" class="collapse ">
                                                     <?php foreach($domaine['documents'] as $document){ ?>
                                                         <li><a id="ID_<?= $document['document_id']?>"  class="list-group-item "><i class="fa fa-chevron-circle-right"></i>  <?= $document['document']; ?> </a></li>

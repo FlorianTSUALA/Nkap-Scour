@@ -2,7 +2,7 @@
 
 namespace Core\Helper;
 
-class DBHelper{
+trait DBHelpers{
 
     /**
      * https://stackoverflow.com/questions/7574857/group-array-by-subarray-values 
@@ -16,7 +16,7 @@ class DBHelper{
      */
     public static function groupBy(&$arr, $criteria): array
     {
-        return array_reduce($arr, function($accumulator, $item) use ($criteria) {
+        $temp = array_reduce($arr, function($accumulator, $item) use ($criteria) {
             $key = (is_callable($criteria)) ? $criteria($item) : $item[$criteria];
             if (!array_key_exists($key, $accumulator)) {
                 $accumulator[$key] = [];
@@ -25,6 +25,8 @@ class DBHelper{
             array_push($accumulator[$key], $item);
             return $accumulator;
         }, []);
-    }
     
+        $arr = $temp;
+        return $temp;
+    }
 }

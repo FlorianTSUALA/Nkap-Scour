@@ -1106,8 +1106,8 @@ if (!function_exists("getTransactionSummary")) {
     }
 }
 
-if (!function_exists("getRandromBootstrapColor")) {
-    function getRandromBootstrapColor(){
+if (!function_exists("getRandomBootstrapColor")) {
+    function getRandomBootstrapColor(){
         $arrX = array("warning", "info","success", "danger", "primary", "light", "dark");
         // get random index from array $arrX
         $randIndex = array_rand($arrX);

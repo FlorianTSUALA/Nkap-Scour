@@ -41,61 +41,48 @@ class TestController extends AppController
         $this->loadModel('cycle');
     }
 
-    public function test( $classe_id = 5)
+    public function test( )
     {
-        $annee_scolaire_id = 3;
-        $code = 'PERS_1598894111';
-        
-        $data =DBTable::getModel(DBTable::PERSONNEL)
-        ->select(
-            [
-                'personnel.id'=> 'id', 
-                'personnel.telephone'=> 'telephone',
-                'type_personnel.libelle'=> 'fonction', 
-                new Expression("concat(personnel.nom,' ',personnel.prenom) as nom_complet"),
-                'type_personnel.code' => 'type_personnel_id',
-                'type_personnel.libelle' => 'type_personnel',
-                'pays.id' => 'pays_id', 
-                'pays.libelle' => 'pays', 
-                'personnel.sexe' => 'sexe', 
-                'personnel.email' => 'email', 
-                'personnel.adresse' => 'adresse', 
-                'personnel.login' => 'login', 
-                'personnel.date_prise_service' => 'date_prise_service', 
-                'personnel.date_fin_carriere' => 'date_fin_carriere', 
-                'personnel.bibliographie' => 'bibliographie', 
-                'personnel.assurance' => 'assurance', 
-                'personnel.fonction' => 'fonction', 
-                'personnel.pieces_jointes' => 'pieces_jointes', 
-                'personnel.photo' => 'photo',
-            ]
-        )
-        ->join('type_personnel', 'type_personnel.id', '=', 'personnel.type_personnel_id')
-        ->join('pays', 'pays.id', '=', 'personnel.pays_id')
-        ->where('personnel.visibilite', '=', 1)
-        ->where('personnel.code', '=', $code)
-        ->one()??[];
-        // 
-        $personnel_id = $data['id'];
-        $data  += DBTable::getModel(DBTable::AFFECTATION_PERSONNEL_SALLE_CLASSE)
-        ->select(
-            [
-                'affectation_personnel_salle_classe.annee_scolaire_id'=> 'annee_scolaire_id', 
-                'affectation_personnel_salle_classe.libelle'=> 'annee_scolaire', 
-                'salle_classe.libelle'=> 'classe', 
-                'salle_classe.code'=> 'salle_classe_id', 
-                'affectation_personnel_salle_classe.salle_classe_id' => 'salle_classe_id',
-                'affectation_personnel_salle_classe.annee_scolaire_id' => 'annee_scolaire_id'
-            ]
-        )
-        ->join('salle_classe', 'salle_classe.id', '=', 'affectation_personnel_salle_classe.salle_classe_id')
-        ->join('annee_scolaire', 'annee_scolaire.id', '=', 'affectation_personnel_salle_classe.annee_scolaire_id')
-        ->where('affectation_personnel_salle_classe.annee_scolaire_id', '=', $annee_scolaire_id)
-        ->where('affectation_personnel_salle_classe.personnel_id', '=', $personnel_id)
-        ->get()[0]??[];
-        // 
-        vd($personnel_id);
-        dd($data);
+        $affectation_salle_eleve = (Parcours::table()
+            ->select(
+                [
+                    'salle_classe.id' => 'salle_classe_id', 
+                    'salle_classe.code' => 'salle_classe_code', 
+                    'salle_classe.libelle' => 'salle_classe',
+
+                    'classe.id' => 'classe_id',
+                    'classe.code' => 'classe_code',
+                    'classe.libelle' => 'classe',
+                    
+                    'statut_apprenant.id' => 'statut_apprenant_id',
+                    'statut_apprenant.code' => 'statut_apprenant_code',
+                    'statut_apprenant.libelle' => 'statut_apprenant',
+                    
+                    'eleve.id' => 'eleve_id',
+                    'eleve.code' => 'eleve_code',
+                    'eleve.nom' => 'eleve_nom',
+                    'eleve.prenom' => 'eleve_prenom'
+                ])
+            ->join('eleve', 'eleve.id', '=', 'parcours.eleve_id')
+            ->join('classe', 'classe.id', '=', 'parcours.classe_id')
+            ->join('salle_classe', 'salle_classe.id', '=', 'parcours.salle_classe_id')
+            ->join('statut_apprenant', 'statut_apprenant.id', '=', 'parcours.statut_apprenant_id')
+            ->where('parcours.visibilite', 1)
+            // ->where('annee_scolaire_id', $annee_scolaire_id)
+            // ->where('classe_id', $classe_id)
+            // ->groupBy('salle_classe.id','classe.id')
+            // ->orderBy('eleve.nom')
+            ->get());
+        // vd($personnel_id);
+        // foreach ($affectation_salle_eleve as $key => $item) {
+        //     $data[$item['classe_code']][$key] = $item;
+        //     // $data[$item['id']][$key] = $item;
+        //  }
+         
+        //  ksort($data, SORT_NUMERIC);
+       ( Helpers::groupBy($affectation_salle_eleve, 'classe'));
+        dd($affectation_salle_eleve);
+        // dd($data);
     }
 
     public function test_( $classe_id = 5)
