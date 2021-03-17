@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\DBTable;
 use App\Model\PensionClasse;
 use App\Helpers\TraitCRUDController;
+use App\Controller\Admin\AppController;
 
 class PensionClasseController extends AppController
 {

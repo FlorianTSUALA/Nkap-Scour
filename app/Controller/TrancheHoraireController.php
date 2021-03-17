@@ -3,6 +3,7 @@
 namespace App\Controller;
     
 use App\Model\DBTable;
+use App\Controller\Admin\AppController;
 
 class TrancheHoraireController extends AppController
 {

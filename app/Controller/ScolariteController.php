@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App\Controller\Admin\AppController;
 
 class ScolariteController extends AppController
 {

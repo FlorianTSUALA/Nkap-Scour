@@ -14,6 +14,7 @@ use Core\Session\Request;
 use App\Helpers\HTMLHelper;
 use App\Helpers\Helpers;
 use Core\HTML\Form\FormModel;
+use App\Controller\Admin\AppController;
 
 class PrixAbonnementController extends AppController
 {

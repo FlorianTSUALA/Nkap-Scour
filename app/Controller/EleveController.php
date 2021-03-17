@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\DBTable;
 use App\Repository\EleveRepository;
+use App\Controller\Admin\AppController;
 
 class EleveController extends AppController
 {

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\DBTable;
 use App\Helpers\TraitCRUDController;
 use App\Model\TrancheScolaire;
+use App\Controller\Admin\AppController;
 
 class TrancheScolaireController extends AppController
 {

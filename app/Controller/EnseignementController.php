@@ -11,6 +11,7 @@ use App\Helpers\Helpers;
 use Core\Session\Request;
 use App\Model\DossierParental;
 use App\Model\StatutApprenant;
+use App\Controller\Admin\AppController;
 
 class EnseignementController extends AppController
 {

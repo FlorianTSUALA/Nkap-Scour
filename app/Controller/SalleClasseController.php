@@ -6,8 +6,9 @@ use App\Model\Classe;
 use App\Model\DBTable;
 use App\Model\SalleClasse;
 use App\Helpers\TraitCRUDController;
+use App\Controller\Admin\AppController;
 
-class SalleClasseController extends \Admin
+class SalleClasseController extends AppController
 {
     use TraitCRUDController;
     

@@ -21,9 +21,9 @@ use App\Model\AbonnementCantine;
 use App\Helpers\TraitCRUDController;
 use App\Repository\ClasseRepository;
 use App\Repository\CantineRepository;
-use App\Controller\Admin\AppController;
 use App\Repository\AnneeScolaireRepository;
 use ClanCats\Hydrahon\Query\Expression as Ex;
+use App\Controller\Admin\AppController;
 
 class CantineController extends AppController
 {

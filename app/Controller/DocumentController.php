@@ -7,6 +7,7 @@ use App\Model\Document;
 use App\Helpers\TraitCRUDController;
 
 use function Core\Helper\dd;
+use App\Controller\Admin\AppController;
 
 class DocumentController extends AppController
 {

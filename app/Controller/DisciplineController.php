@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Helpers\TraitCRUDController;
+use App\Controller\Admin\AppController;
 
 class DisciplineController extends AppController
 {

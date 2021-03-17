@@ -9,6 +9,7 @@ use Core\Session\Request;
 use App\Model\DossierParental;
 use App\Model\Parcours;
 use App\Model\StatutApprenant;
+use App\Controller\Admin\AppController;
 
 class EmploieTempsController extends AppController
 {

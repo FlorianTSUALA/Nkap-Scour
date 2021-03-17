@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\Activite;
 use App\Model\DBTable;
 use App\Helpers\TraitCRUDController;
+use App\Controller\Admin\AppController;
 
 class ActiviteController extends AppController
 {

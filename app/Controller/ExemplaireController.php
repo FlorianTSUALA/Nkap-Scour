@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\DBTable;
 use App\Helpers\TraitCRUDController;
 use App\Repository\ExemplaireRepository;
+use App\Controller\Admin\AppController;
 
 class ExemplaireController extends AppController
 {

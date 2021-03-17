@@ -8,6 +8,7 @@ use Core\Session\Request;
 use App\Helpers\HTMLHelper;
 use Core\HTML\Form\FormModel;
 use App\Helpers\TraitCRUDController;
+use App\Controller\Admin\AppController;
 
 class BulletinController extends AppController
 {

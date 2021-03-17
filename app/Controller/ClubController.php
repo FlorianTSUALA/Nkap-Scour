@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Controller\Admin\AppController;
 
 class ClubController extends AppController
 {

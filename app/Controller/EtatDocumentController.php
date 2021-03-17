@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Helpers\TraitCRUDController;
 use App\Model\DBTable;
+use App\Controller\Admin\AppController;
 
 class EtatDocumentController extends AppController
 {

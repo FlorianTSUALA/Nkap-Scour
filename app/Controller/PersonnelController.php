@@ -18,11 +18,11 @@ use Core\HTML\Form\FormModel;
 use App\Helpers\TraitCRUDController;
 
 use App\Repository\ClasseRepository;
-use App\Controller\Admin\AppController;
 use App\Repository\PersonnelRepository;
 use ClanCats\Hydrahon\Query\Expression;
 use App\Repository\AnneeScolaireRepository;
 use ClanCats\Hydrahon\Query\Expression as Ex;
+use App\Controller\Admin\AppController;
 
 class PersonnelController extends AppController
 {

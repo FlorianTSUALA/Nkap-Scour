@@ -18,6 +18,7 @@ use App\Model\AbonnementActivite;
 use App\Repository\EleveRepository;
 use App\Repository\AnneeScolaireRepository;
 use ClanCats\Hydrahon\Query\Expression as Ex;
+use App\Controller\Admin\AppController;
 
 class VersementController extends \App\Controller\Admin\AppController
 {

@@ -7,6 +7,7 @@ use App\Model\DBTable;
 use App\Helpers\TraitCRUDController;
 use App\Model\InscriptionActivite;
 use ClanCats\Hydrahon\Query\Expression as Ex;
+use App\Controller\Admin\AppController;
 
 class InscriptionActiviteController extends AppController
 {

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\Matiere;
 use App\Helpers\Helpers;
 use App\Helpers\TraitCRUDController;
+use App\Controller\Admin\AppController;
 
 class MatiereController extends AppController
 {

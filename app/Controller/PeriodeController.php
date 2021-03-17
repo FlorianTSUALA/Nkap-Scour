@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\Periode;
 use App\Helpers\TraitCRUDController;
+use App\Controller\Admin\AppController;
 
 class PeriodeController extends AppController
 {

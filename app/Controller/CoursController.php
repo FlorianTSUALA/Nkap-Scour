@@ -8,6 +8,7 @@ use App\Helpers\Helpers;
 use Core\Session\Request;
 use App\Helpers\TraitCRUDController;
 use ClanCats\Hydrahon\Query\Expression as Ex;
+use App\Controller\Admin\AppController;
 
 class CoursController extends AppController
 {

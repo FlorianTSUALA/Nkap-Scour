@@ -4,6 +4,7 @@ namespace App\Controller;
     
 use App\Model\DBTable;
 use Core\Session\Request;
+use App\Controller\Admin\AppController;
 
 class StatutApprenantController extends AppController
 {

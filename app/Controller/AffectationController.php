@@ -5,8 +5,9 @@ namespace App\Controller;
 use App\Helpers\TraitCRUDController;
 use App\Controller\AffectationControllerTraitClasseMatiere;
 use App\Controller\AffectationControllerTraitSalleEnseignant;
+use App\Controller\Admin\AppController;
 
-class AffectationController extends \App\Controller\Admin\AppController
+class AffectationController extends AppController
 {
     
     use TraitCRUDController, AffectationControllerTraitSalleEnseignant, AffectationControllerTraitClasseMatiere, AffectationControllerTraitSalleEleve;

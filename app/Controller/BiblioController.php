@@ -16,8 +16,8 @@ use App\Repository\EleveRepository;
 use App\Helpers\TraitCRUDController;
 use App\Repository\BiblioRepository;
 use App\Repository\DocumentRepository;
-use App\Controller\Admin\AppController;
 use App\Repository\ExemplaireRepository;
+use App\Controller\Admin\AppController;
 
 class BiblioController extends AppController
 {
