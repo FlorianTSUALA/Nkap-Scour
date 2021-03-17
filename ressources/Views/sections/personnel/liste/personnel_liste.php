@@ -91,6 +91,7 @@ $table_header = "
                 <section class="row">
                     <div class="col-12">
                         <div class="card">
+    
                             <div class="card-header pb-0 mb-0">
                                 <div class="d-flex">
                                     <div class="p-0  col-md-6 mr-auto ">
@@ -119,7 +120,7 @@ $table_header = "
                                 </div> -->
                             </div>
 
-                            <div class="card-content collapse show" >
+                            <div class="card-content collapse show pt-0" >
                                 <div class="card-body">
                                     <!-- Task List table -->
                                     <div class="table-responsive-sm" >

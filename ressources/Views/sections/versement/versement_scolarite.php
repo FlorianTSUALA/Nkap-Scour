@@ -57,16 +57,17 @@
                         <div class="card-content collapse show">
                             <div class="card-body">
                             <!-- Année scolaire -->
-                            <div class="row">
+                            <div class="row" >
                                 <div class="col-md-7">
                                     <div class="card-text">
-                                        <p class="text-warning font-medium-3"><strong>Renseigner toutes les informations concernant le versement.</strong></p>
-                                        <p class="font-medium-2"><strong class="red">NB !!!</strong> Preciser l'année scolaire en cours ou, <a href="<?= URL::link('annee_scolaire');?>" class="alert-link">Creer une?</a></p>.
+                    
+                                        <p class=" font-medium-2"><h2P style="color:black;font-family:Niagara Engraved; font-size: 28px;">Renseigner toutes les informations concernant le versement.</h2P></p>
+                                      <!--   <p class="font-medium-2"><strong class="red">NB !!!</strong> Preciser l'année scolaire en cours ou, <a href="<?= URL::link('annee_scolaire');?>" class="alert-link">Créer une?</a></p>.-->
                                     </div>
 
                                 </div>  
                                     
-                                <div class="col-md-5">
+                                <div class="col-md-5 ">
                                     <div class="alert alert-warning alert-dismissible row" role="alert">
                                         <!-- <span class="alert-icon"><i class="fa fa-warning"></i></span> -->
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -80,6 +81,7 @@
                                                     ?>
                                                     <option value="<?= $item['id']; ?>" <?= (isset($data_inscriptpion) && ($data_inscriptpion['code_annee_scolaire'] == $item['id']))? 'selected' : ''; ?>><?= $item['libelle']; ?></option>
                                                 <?php } ?>
+
                                             </select>
                                         </div>
                                         <!-- <p><strong>NB!</strong>Preciser l'année scolaire en cours ou, <a href="#" class="alert-link">Creer une?</a></p>. -->
@@ -163,7 +165,10 @@
 
                                                                         <div class="col-md-6">
                                                                             <div class="form-group row">
-                                                                                <div class="col-4">
+                                                                            <div class="col-1">
+                                                                                   
+                                                                                </div>
+                                                                                <div class="col-3">
                                                                                     <button type="button" id="btn-open-modal-familyship" class="btn btn-warning btn-darken" data-toggle="modal" data-target="#modal-familyship">Ajouter</button>
                                                                                 </div>
                                                                                 <div class="col-8">
