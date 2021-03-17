@@ -31,9 +31,9 @@ $include_res_footer .= "";
 $include_res_footer .= '' . "\n";
 
 ob_start();
-include 'listener.php';
-include 'buiderHtml.php';
-include 'affectation-script.php';
+// include 'listener.php';
+// include 'buiderHtml.php';
+include 'index-script.php';
 
 $include_footer_script = ob_get_clean();
 

@@ -33,7 +33,7 @@ ob_start();
 
 
 // include 'script-component-init.php';
-include 'abonnement_liste-script.php';
+// include 'abonnement_liste-script.php';
 $include_footer_script = ob_get_clean();
 ?>
 <!--

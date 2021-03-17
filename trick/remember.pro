@@ -57,3 +57,6 @@ $annee_scolaire_id = Model::getId(DBTable::ANNEE_SCOLAIRE, Request::getSecParam(
     // alert(values) 
 
 </script>
+
+
+<?= URL::link('accueil') ?>
