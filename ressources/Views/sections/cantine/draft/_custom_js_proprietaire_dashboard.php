@@ -17,7 +17,7 @@
         return i;
     }
 
-    function getRandromBootstrapColor(){
+    function getRandomBootstrapColor(){
         const arrX = ["warning", "info","success", "danger", "primary", "light", "dark"];
         return arrX[Math.floor(Math.random() * arrX.length)];
     }
@@ -175,7 +175,7 @@
                                         '<div class="ul-widget-s7">'+
                                             '<div class="ul-widget-s7__items"><span class="ul-widget-s7__item-time">' + time  +' <br> '+  date + '</span>'+
                                                 '<div class="ul-widget-s7__item-circle">'+
-                                                    '<p class="badge-dot-'+ getRandromBootstrapColor() + ' ul-widget7__big-dot"></p>'+
+                                                    '<p class="badge-dot-'+ getRandomBootstrapColor() + ' ul-widget7__big-dot"></p>'+
                                                 '</div>'+
                                                 '<div class="ul-widget-s6__item-text">'+
                                                     getTransactionSummary(motif, montant, ref) +

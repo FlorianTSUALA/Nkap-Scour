@@ -1,53 +1,54 @@
 <?php
 
-use App\Controller\ClubController;
+//Start
+    use App\Controller\ClubController;
+    use App\Controller\HomeController;
+    use App\Controller\PaysController;
+    use App\Controller\TestController;
+    use App\Controller\CoursController;
+    use App\Controller\CycleController;
+    use App\Controller\EleveController;
+    use App\Controller\RepasController;
+    use App\Controller\BiblioController;
+    use App\Controller\ClasseController;
+    use App\Controller\CantineController;
+    use App\Controller\DomaineController;
+    use App\Controller\MatiereController;
+    use App\Controller\PeriodeController;
+    use App\Controller\PrinterController;
+    use App\Controller\SessionController;
+    use App\Controller\ActiviteController;
+    use App\Controller\BulletinController;
+    use App\Controller\DocumentController;
+    use App\Controller\PersonnelController;
+    use App\Controller\ScolariteController;
+    use App\Controller\VersementController;
+    use App\Controller\Auth\LoginController;
+    use App\Controller\DisciplineController;
+    use App\Controller\EnseignementController;
+    use App\Controller\ExemplaireController;
+    use App\Controller\AffectationController;
+    use App\Controller\EmploiTempsController;
+    use App\Controller\InscriptionController;
+    use App\Controller\ParametrageController;
+    use App\Controller\SalleClasseController;
+    use App\Controller\TypePensionController;
+    use App\Controller\ComptabiliteController;
+    use App\Controller\EmploieTempsController;
+    use App\Controller\EtatDocumentController;
+    use App\Controller\TypeActiviteController;
+    use App\Controller\TypePaiementController;
 
-use App\Controller\HomeController;
-use App\Controller\PaysController;
-use App\Controller\TestController;
-use App\Controller\CoursController;
-use App\Controller\CycleController;
-use App\Controller\EleveController;
-use App\Controller\RepasController;
-use App\Controller\BiblioController;
-use App\Controller\ClasseController;
-use App\Controller\CantineController;
-use App\Controller\DomaineController;
-use App\Controller\MatiereController;
-use App\Controller\PeriodeController;
-use App\Controller\PrinterController;
-use App\Controller\SessionController;
-use App\Controller\ActiviteController;
-use App\Controller\BulletinController;
-use App\Controller\DocumentController;
-use App\Controller\PersonnelController;
-use App\Controller\ScolariteController;
-use App\Controller\VersementController;
-use App\Controller\Auth\LoginController;
-use App\Controller\DisciplineController;
-use App\Controller\EnseignantController;
-use App\Controller\ExemplaireController;
-use App\Controller\AffectationController;
-use App\Controller\EmploiTempsController;
-use App\Controller\InscriptionController;
-use App\Controller\ParametrageController;
-use App\Controller\SalleClasseController;
-use App\Controller\TypePensionController;
-use App\Controller\ComptabiliteController;
-use App\Controller\EmploieTempsController;
-use App\Controller\EtatDocumentController;
-use App\Controller\TypeActiviteController;
-use App\Controller\TypePaiementController;
-
-use App\Controller\AnneeScolaireController;
-use App\Controller\PensionClasseController;
-use App\Controller\TypePersonnelController;
-use App\Controller\PrixAbonnementController;
-use App\Controller\TrancheHoraireController;
-use App\Controller\StatutApprenantController;
-use App\Controller\TrancheScolaireController;
-use App\Controller\AbonnementActiviteController;
-use App\Controller\InscriptionActiviteController;
+    use App\Controller\AnneeScolaireController;
+    use App\Controller\PensionClasseController;
+    use App\Controller\TypePersonnelController;
+    use App\Controller\PrixAbonnementController;
+    use App\Controller\TrancheHoraireController;
+    use App\Controller\StatutApprenantController;
+    use App\Controller\TrancheScolaireController;
+    use App\Controller\AbonnementActiviteController;
+    use App\Controller\InscriptionActiviteController;
+//End
 
 //use App\Controller\CantineListeController;
 
@@ -58,7 +59,7 @@ $router->addRoute('biblio_accueil', 'biblio/accueil', [BiblioController::class, 
 $router->addRoute('cantine_accueil', 'cantine/accueil', [CantineController::class, 'accueil']);
 $router->addRoute('club_accueil', 'club/accueil', [ClubController::class, 'accueil']);
 $router->addRoute('personnel_accueil', 'personnel/accueil', [PersonnelController::class, 'accueil']);
-$router->addRoute('enseignant_accueil', 'enseignant/accueil', [EnseignantController::class, 'accueil']);
+$router->addRoute('enseignement_accueil', 'enseignant/accueil', [EnseignementController::class, 'accueil']);
 $router->addRoute('bulletin_accueil', 'bulletin/accueil', [BulletinController::class, 'accueil']);
 $router->addRoute('emploi_temps_accueil', 'emploi_temps/accueil', [EmploiTempsController::class, 'accueil']);
 $router->addRoute('parametrage_accueil', 'parametrage/accueil', [ParametrageController::class, 'accueil']);
@@ -229,9 +230,12 @@ $router->addRoute('affectation_salle_enseignant_all', 'api/affectation/enseignan
 
 //  SALLE *-* ELEVE
 $router->addRoute('affectation_salle_eleve', 'affectation/eleve_salle', [AffectationController::class, 'affecterSalleEleve']);
-$router->addRoute('affectation_salle_eleve_save', 'api/affectation/eleve_salle/save/{code}', [AffectationController::class, 'enregistrerAffectationSalleEleve']);
-$router->addRoute('affectation_salle_eleve_update', 'api/affectation/eleve_salle/update/{code}', [AffectationController::class, 'modifierAffectationSalleEleve']);
-$router->addRoute('affectation_salle_eleve_all', 'api/affectation/eleve_salle/all', [AffectationController::class, 'listeAffectationSalleEleve']);
+$router->addRoute('affectation_salle_eleve_save', 'api/affectation/eleve_salle/save/', [AffectationController::class, 'enregistrerAffectationSalleEleve']);
+$router->addRoute('affectation_salle_eleve_update', 'api/affectation/eleve_salle/update/', [AffectationController::class, 'modifierAffectationSalleEleve']);
+
+$router->addRoute('api_info_affectation_eleve_salle_classe', 'api/info/affectation/eleve/salle/classe', [AffectationController::class, 'apiInfoAffectationEleveBySalleClasse']);
+$router->addRoute('api_save_affectation_eleve_salle_classe', 'api/save/affectation/eleve/salle/classe', [AffectationController::class, 'apiSaveAffectationEleveBySalleClasse']);
+$router->addRoute('api_info_affectation_eleve', 'api/info/affectation/eleve/', [AffectationController::class, 'apiInfoAffectationEleve']);
 
 //  CLASSE *-* MATIERE
 $router->addRoute('affectation_classe_matiere', 'affectation/classe_matiere', [AffectationController::class, 'affecterClasseMatiere']);
@@ -240,18 +244,15 @@ $router->addRoute('affectation_classe_matiere_delete', 'api/affectation/classe_m
 $router->addRoute('affectation_classe_matiere_update', 'api/affectation/classe_matiere/update', [AffectationController::class, 'modifierAffectationClasseMatiere']);
 $router->addRoute('affectation_classe_matiere_all', 'api/affectation/classe_matiere/all', [AffectationController::class, 'listeAffectationClasseMatiere']);
 $router->addRoute('api_matiere_list', 'matiere/api/list', [MatiereController::class, 'getApiAllEssentiel']);
-// $router->addRoute('api_matiere_list', 'matiere/api/list', [MatiereController::class, 'all']);
 
 //affectation_classe_matiere
 // $router->crudRoute("affectation_classe_matiere", AffectationClasseMatiereController::class);
 
 //NOTE: Remplissage des notes scolaire
-$router->addRoute('note---', 'affectation/classe_matiere', [AffectationController::class, 'affecterClasseMatiere']);
-$router->addRoute('init', 'affectation/init', [AffectationController::class, 'initSalleEnseignant']);
+$router->addRoute('note', 'enseignement/note', [EnseignementController::class, 'note']);
 
 //Cours - Affectation des matieres aux enseignants dans des classes
 $router->crudRoute('cours', CoursController::class);
-
 
 
 //Discipline

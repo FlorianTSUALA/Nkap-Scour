@@ -7,7 +7,7 @@ use stdClass;
 class BaseHelpers
 {
 
-use DateHelpers, HelpersBusinessLogic, HTMLHelper, RequestHelpers, SecurityHelpers, SessionHelpers, StrHelpers, DebugHelpers ;
+use DateHelpers, HelpersBusinessLogic, HTMLHelper, RequestHelpers, SecurityHelpers, SessionHelpers, StrHelpers, DebugHelpers, DBHelpers ;
 
     public static function generateReference(){
         return strtoupper(substr(md5(microtime()), 0, 10)); 

@@ -210,7 +210,7 @@ $include_footer_script = ob_get_clean();
                 <div class="list-group">
                 <a href="<?= "#" ;?>" class="list-group-item active"> Voir tout</a>
                    <?php foreach($classes as $classe){ ?>
-                        <a href="#" id="ID_<?= $classe['classe']?>" class="list-group-item" data-toggle="collapse" data-target="#ID_<?= $classe['classe_id']?>" data-parent="#menu"><?= $classe['classe_id']; ?> <span class="badge  badge-pill bg-<?= Helpers::getRandromBootstrapColor() ?> float-right mr-2 badge-glow"></span></a>
+                        <a href="#" id="ID_<?= $classe['classe']?>" class="list-group-item" data-toggle="collapse" data-target="#ID_<?= $classe['classe_id']?>" data-parent="#menu"><?= $classe['classe_id']; ?> <span class="badge  badge-pill bg-<?= Helpers::getRandomBootstrapColor() ?> float-right mr-2 badge-glow"></span></a>
                    <?php } ?>
 
                 </div>

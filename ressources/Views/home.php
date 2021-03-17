@@ -164,7 +164,7 @@
                         </div>
 
                         <div class="col-4">
-                            <a href="<?= URL::link('enseignant_accueil') ?>" style="cursor:pointer; text-decoration: none;">
+                            <a href="<?= URL::link('enseignement_accueil') ?>" style="cursor:pointer; text-decoration: none;">
                                 <div id="mydiv" class="card border-0 shadow  ">
                                     <div class="card-body kgs-bg-yellow">
                                         <div class="row align-items-end h3 kgs-green">

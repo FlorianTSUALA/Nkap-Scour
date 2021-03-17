@@ -23,7 +23,7 @@ trait HTMLHelper
     ];
 
 
-    public static function getRandromBootstrapColor($with_light_color = false){
+    public static function getRandomBootstrapColor($with_light_color = false){
         $arrX = array("warning", "info","success", "danger", "primary", "dark");
         if($with_light_color)
             $arrX += array('light');
@@ -33,6 +33,17 @@ trait HTMLHelper
         // output the value for the random index
         return $arrX[$randIndex];
     }
+
+    public static function getRandomAnimation($with_light_color = false){
+        $arrX = array("slideInDown", "zoomIn", "fadeInDown", "slideInUp", "zoomInLeft", "fadeInLeft");
+        
+        // get random index from array $arrX
+        $randIndex = array_rand($arrX);
+        // output the value for the random index
+        return $arrX[$randIndex];
+    }
+
+
    public static function repeatChar($char = "*", $nbre = 10)
     {
         return str_repeat($char, $nbre);

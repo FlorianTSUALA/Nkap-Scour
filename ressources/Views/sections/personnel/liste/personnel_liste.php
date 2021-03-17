@@ -163,7 +163,7 @@ $table_header = "
                                                 class="list-group-item" data-toggle="collapse" 
                                                 data-parent="#menu">
                                                 <?= $item['type_personnel']; ?> 
-                                                <span class="badge  badge-pill bg-<?= Helpers::getRandromBootstrapColor() ?> float-right mr-2 badge-glow">
+                                                <span class="badge  badge-pill bg-<?= Helpers::getRandomBootstrapColor() ?> float-right mr-2 badge-glow">
                                                     <?= count($item['personnels']) ?>
                                                 </span>
                                             </a>

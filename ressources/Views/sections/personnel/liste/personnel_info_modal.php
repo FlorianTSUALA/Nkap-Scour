@@ -4,8 +4,6 @@ use Core\Routing\URL;
 
 ?>
 
-
-
 <!-- Modal -->
 <div class="modal  animated zoomIn  text-left" id="personnel_modal_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -188,7 +186,3 @@ use Core\Routing\URL;
         </div>
     </div>
 </div>
-
-<script>
-
-</script>
