@@ -77,7 +77,6 @@ $include_res_footer .= "";
 
 ob_start();
 include 'emprunt_exemplaire-script.php';
-+
 include 'restitution_modal-script.php';
 include 'emprunt_modal-script.php';
 $include_footer_script = ob_get_clean();
@@ -93,129 +92,126 @@ $include_footer_script = ob_get_clean();
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12">
-            <h3 class="content-header-title">Bibliothèque	</h3>
-            <div class="row breadcrumbs-top">
-                <div class="breadcrumb-wrapper col-12">
-                <ol class="breadcrumb">
-                    </li>
-                    <li class="breadcrumb-item"><a href="<?= URL::link('accueil') ?>">Accueil</a>
-                    <li class="breadcrumb-item"><a href="<?= URL::link('biblio_accueil') ?>">Bibliothèque</a> </a>
-                    </li>
-                    <li class="breadcrumb-item active">Emprunt de documents
-                    </li>
-                </ol>
+                <h3 class="content-header-title">Bibliothèque	</h3>
+                <div class="row breadcrumbs-top">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="<?= URL::link('accueil') ?>">Accueil</a> </li>
+                            <li class="breadcrumb-item"><a href="<?= URL::link('biblio_accueil') ?>">Bibliothèque</a> </a> </li>
+                            <li class="breadcrumb-item active">Emprunt de documents </li>
+                        </ol>
+                    </div>
                 </div>
-            </div>
             </div>
             <div class="content-header-right col-md-6 col-12">
-            <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-                <div class="btn-group" role="group">
-                    <a class="btn btn-outline-info" href='<?= URL::link('domaine') ?>'><i class="fa fa-folder-open"></i>&nbsp; Gerer les Domaines</a>
-                    <a class="btn btn-outline-info" href='<?= URL::link('document') ?>'><i class="fa fa-book"></i>&nbsp; Gerer les livres</a>
-                    <a class="btn btn-outline-info" href='<?= URL::link('accueil') ?>'><i class="fa fa-bookmark"></i>&nbsp; Gerer les exemplaires</a>
-                </div>
+                <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-outline-info" href='<?= URL::link('domaine') ?>'><i class="fa fa-folder-open"></i>&nbsp; Gerer les Domaines</a>
+                        <a class="btn btn-outline-info" href='<?= URL::link('document') ?>'><i class="fa fa-book"></i>&nbsp; Gerer les livres</a>
+                        <a class="btn btn-outline-info" href='<?= URL::link('accueil') ?>'><i class="fa fa-bookmark"></i>&nbsp; Gerer les exemplaires</a>
+                    </div>
                 </div>
             </div>
-            </div>
+        </div>
             <div class="content-header-lead col-12 mt-2">
-            <p class="lead"></p>
+                <p class="lead"></p>
             </div>
         </div>
 
         <div class="content-detached content-right">
             <div class="content-body">
                 <section class="row">
-                <div class="col-12">
-                    <div class="card">
+                    <div class="col-12">
+                        <div class="card">
 
-                        <div class="card-header my-0 pb-0">
-                            <div class="d-flex">
-                                <div class="p-0  col-md-3 mr-auto ">
-                                    <h4 class="card-title" id="heading-prev-next">Liste des livres empruntés</h4>
-                                    <small class="text-muted">Emprunt, Consulatation, Restitution.</small>
-                                </div>
-                                <div class="p-0 mr-1   ">
-                                    <button class="btn btn-primary "  data-toggle="modal" data-target="#modal-emprunt"><i class="ft-plus white"></i> Emprunter un livre</button>
-                                </div>
-                                <div class="p-0 mr-1 ">
-                                    <fieldset class="input-group">
-                                        <!-- <div class="input-group-prepend">
-                                        <span class="input-group-text">L &nbsp; <span class="fa fa-calendar"></span></span>
-                                        </div> -->
-                                        <input id="localization" type='text' class="form-control form-control-sm localeRange" />
-                                        <div class="input-group-append">
-                                        <span class="input-group-text">Date &nbsp; <span class="fa fa-calendar"></span></span>
-                                        </div>
-                                        <!-- <small class="text-muted">Allows you to provide.</small> -->
-                                    </fieldset>
-                                </div>
-
-                                
-                                <div class="p-0   ">
-                                    <span class="dropdown">
-                                        <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled><i class="icon-settings mr-1"></i>Rapport</button>
-                                        <span class="dropdown-menu arrow  dropdown-menu-left">
-                                            <a href="#" class="dropdown-item"><i class="fa fa-file-excel-o"></i> Excel </a>                       
-                                            <a href="#" class="dropdown-item"><i class="fa fa-file-word-o"></i> Word</a>
-                                            <a href="#" class="dropdown-item"><i class="fa fa-file-pdf-o"></i> PDF </a>
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="d-flex  mt-1 ">
-                                    <div class="alert bg-success alert-icon-left" role="alert">
-                                        <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
-           
-                                        <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
-                                        <span id='resume_filtre' >Liste des documents empruntés.</span>
+                            <div class="card-header my-0 pb-0">
+                                <div class="d-flex">
+                                    <div class="p-0  col-md-3 mr-auto ">
+                                        <h4 class="card-title" id="heading-prev-next">Liste des livres empruntés</h4>
+                                        <small class="text-muted">Emprunt, Consulatation, Restitution.</small>
                                     </div>
+                                    <div class="p-0 mr-1   ">
+                                        <button class="btn btn-primary "  data-toggle="modal" data-target="#modal-emprunt"><i class="ft-plus white"></i> Emprunter un livre</button>
+                                    </div>
+                                    <div class="p-0 mr-1 ">
+                                        <fieldset class="input-group">
+                                            <!-- <div class="input-group-prepend">
+                                            <span class="input-group-text">L &nbsp; <span class="fa fa-calendar"></span></span>
+                                            </div> -->
+                                            <input id="localization" type='text' class="form-control form-control-sm localeRange" />
+                                            <div class="input-group-append">
+                                            <span class="input-group-text">Date &nbsp; <span class="fa fa-calendar"></span></span>
+                                            </div>
+                                            <!-- <small class="text-muted">Allows you to provide.</small> -->
+                                        </fieldset>
+                                    </div>
+
+                                    
+                                    <div class="p-0   ">
+                                        <span class="dropdown">
+                                            <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled><i class="icon-settings mr-1"></i>Rapport</button>
+                                            <span class="dropdown-menu arrow  dropdown-menu-left">
+                                                <a href="#" class="dropdown-item"><i class="fa fa-file-excel-o"></i> Excel </a>                       
+                                                <a href="#" class="dropdown-item"><i class="fa fa-file-word-o"></i> Word</a>
+                                                <a href="#" class="dropdown-item"><i class="fa fa-file-pdf-o"></i> PDF </a>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="d-flex  mt-1 ">
+                                        <div class="alert bg-success alert-icon-left" role="alert">
+                                            <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
+            
+                                            <span class="alert-icon"><i class="fa fa-pencil-square"></i></span>
+                                            <span id='resume_filtre' >Liste des documents empruntés.</span>
+                                        </div>
+                                </div>
+                            
                             </div>
-                         
-                        </div>
-                        
-                        <div class="card-content my-0 py-0">
-                            <div class="card-body">
-                                <div class="table-responsive-sm">
-                                    <table id="table-emprunt" class="table table-white-space table-bordered  table-sm" style="width: 100%;">
-                                        <thead>
-                                            <tr>
-                                                <th>id</th>
-                                                <th>N°</th>
-                                                <th>Code</th>
-                                                <th>Livre</th>
-                                                <th>Elève</th>				                
-                                                <th>Date Emprunt</th>
-                                                <th>Date Retour</th>
-                                                <th>Classe</th>				                
-                                                <th>Etat</th>				                
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>id</th>
-                                                <th>N°</th>
-                                                <th>Code</th>
-                                                <th>Livre</th>
-                                                <th>Elève</th>				                
-                                                <th>Date Emprunt</th>
-                                                <th>Date Retour</th>
-                                                <th>Classe</th>				                
-                                                <th>Etat</th>				                
-                                                <th>Actions</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                            
+                            <div class="card-content my-0 py-0">
+                                <div class="card-body">
+                                    <div class="table-responsive-sm">
+                                        <table id="table-emprunt" class="table table-white-space table-bordered  table-sm" style="width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>id</th>
+                                                    <th>N°</th>
+                                                    <th>Code</th>
+                                                    <th>Livre</th>
+                                                    <th>Elève</th>				                
+                                                    <th>Date Emprunt</th>
+                                                    <th>Date Retour</th>
+                                                    <th>Classe</th>				                
+                                                    <th>Etat</th>				                
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>id</th>
+                                                    <th>N°</th>
+                                                    <th>Code</th>
+                                                    <th>Livre</th>
+                                                    <th>Elève</th>				                
+                                                    <th>Date Emprunt</th>
+                                                    <th>Date Retour</th>
+                                                    <th>Classe</th>				                
+                                                    <th>Etat</th>				                
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
             </div>
         </div>
 
@@ -227,13 +223,13 @@ $include_footer_script = ob_get_clean();
                     <div class="card m-0">
                         <div class="card-header">
                             <h4 class="card-title">Recherche par livre</h4>
-                            <a class="heading-elements-toggle"><i class="ft-ellipsis-h font-medium-3"></i></a>
+                            <!-- <a class="heading-elements-toggle"><i class="ft-ellipsis-h font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
                                     <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                     <li><a data-action="close"><i class="ft-x"></i></a></li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- bug-list search -->
                         <div class="card-content ">

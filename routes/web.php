@@ -238,8 +238,6 @@ $router->addRoute('api_matiere_list', 'matiere/api/list', [MatiereController::cl
 
 //NOTE: REMPLISSAGE DES NOTES SCOLAIRE
 $router->addRoute('note', 'enseignement/note', [EnseignementController::class, 'note']);
-$router->addRoute('affectation_salle_eleve_save', 'api/affectation/eleve_salle/save/', [AffectationController::class, 'enregistrerAffectationSalleEleve']);
-$router->addRoute('affectation_salle_eleve_update', 'api/affectation/eleve_salle/update/', [AffectationController::class, 'modifierAffectationSalleEleve']);
 
 $router->addRoute('api_liste_classe_matiere', 'api/liste/classe/matiere', [EnseignementController::class, 'apiListeClasseMatiere']);
 $router->addRoute('api_liste_classe_eleve', 'api/liste/classe/eleve', [EnseignementController::class, 'apiListeClasseEleve']);

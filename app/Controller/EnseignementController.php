@@ -3,15 +3,15 @@
 namespace App\Controller;
 
 use App\Helpers\S;
-use App\Model\Pays;
-use App\Model\Eleve;
 use App\Model\Classe;
+use Core\Model\Model;
+use App\Model\DBTable;
 use App\Model\Parcours;
 use App\Helpers\Helpers;
 use Core\Session\Request;
-use App\Model\DossierParental;
-use App\Model\StatutApprenant;
+use App\Repository\ParcoursRepository;
 use App\Controller\Admin\AppController;
+use App\Model\AffectationClasseMatiere;
 
 class EnseignementController extends AppController
 {
@@ -47,6 +47,7 @@ class EnseignementController extends AppController
         $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
 
         // $classe_id = Request::getSecParam('classe');
+        $salle_classes  = [];
         
         $classes = Helpers::toJSON(Classe::table()->select(['id'=>'id', 'libelle' => 'value'])->where('visibilite', 1)->get());
         $affectation_salle_eleve = (
@@ -83,6 +84,96 @@ class EnseignementController extends AppController
             
         Helpers::groupBy($affectation_salle_eleve, 'classe');
         $this->render('sections.note.index', compact('route', 'classes', 'salle_classes', 'affectation_salle_eleve'));
+
+    }
+        
+    public function apiInfoNoteSalle()
+    {
+        # DRAFT
+
+    }
+ 
+    
+    public function apiInitNoteSalle()
+    {
+        # DRAFT
+
+    }
+      
+
+    public function apiListeSalleMatiere()
+    {
+        # DRAFT
+        
+    }
+
+    public function apiListeClasseMatiere()
+    {
+        //DRAFT
+        $classe_id = Request::getSecParam('classe', NULL);
+
+        $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
+
+        $model = AffectationClasseMatiere::table()
+            ->select(
+                [
+                    'affectation_classe_matiere.classe_id' => 'classe', 
+                    'affectation_classe_matiere.matiere_id' => 'matiere', 
+                    'affectation_classe_matiere.coefficient' => 'coefficient' 
+                ])
+            ->where('affectation_classe_matiere.visibilite', 1)
+            ->where('affectation_classe_matiere.annee_scolaire_id', $annee_scolaire_id);
+        
+        if(!is_null($classe_id))
+            $model->where('affectation_classe_matiere.classe_id', $classe_id);
+        
+        $data = $model->get();
+        $this->sendResponseAndExit(Helpers::toJSON($data), true);
+    }
+    
+    public function apiListeClasseEleve()
+    {
+        # DRAFT
+        $salle_classe_code = Request::getSecParam('salle_classe_id', NULL);
+        $salle_classe_id = Model::getId(DBTable::SALLE_CLASSE, $salle_classe_code);
+        
+        
+        $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
+
+        $data = (new ParcoursRepository() )->getAffectationEleveBySalleClasse($salle_classe_id, $annee_scolaire_id);
+
+        $this->sendResponseAndExit(Helpers::toJSON($data), true);  
+    }
+    
+
+    
+    public function apiUpdateNoteEleveMatiere()
+    {
+        # DRAFT
+
+    }
+    
+    public function apiUpdateNoteEleve()
+    {
+        # DRAFT
+
+    }
+    
+    public function apiInfoNoteClasse()
+    {
+        # DRAFT
+
+    }
+ 
+    public function apiInitNoteClasse()
+    {
+        # DRAFT
+
+    }
+
+    public function apiInitNote()
+    {
+        # DRAFT
 
     }
 
