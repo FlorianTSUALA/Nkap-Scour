@@ -6,6 +6,7 @@ use App\Helpers\TraitCRUDController;
 use App\Model\DBTable;
 use App\Controller\Admin\AppController;
 
+//TO DEL
 class AffectationClasseMatiereController extends AppController
 {
     
@@ -31,9 +32,6 @@ class AffectationClasseMatiereController extends AppController
         $this->msg_delete = "Voulez-vous vraiment supprimer ce champs? ";
         
     }
-
-
-
         
 }
     

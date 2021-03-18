@@ -1,6 +1,6 @@
 <?php
 
-//Start
+//START
     use App\Controller\ClubController;
     use App\Controller\HomeController;
     use App\Controller\PaysController;
@@ -48,9 +48,8 @@
     use App\Controller\TrancheScolaireController;
     use App\Controller\AbonnementActiviteController;
     use App\Controller\InscriptionActiviteController;
-//End
+//END
 
-//use App\Controller\CantineListeController;
 
 //ACCUEIL
 $router->addRoute('accueil', 'accueil', [HomeController::class, 'home']);
@@ -67,22 +66,22 @@ $router->addRoute('comptabilite_accueil', 'comptabilite/accueil', [ComptabiliteC
 $router->addRoute('scolarite_accueil', 'scolarite/accueil', [ScolariteController::class, 'accueil']);
 
 
-//Login
+//LOGIN
 $router->addRoute('login', '', [LoginController::class, 'index']);
 $router->addRoute('postlogin', 'login', [LoginController::class, 'login']);
 $router->addRoute('logout', 'logout', [LoginController::class, 'logout']);
 
-//Inscription
+//INSCRIPTION
 $router->addRoute('inscrire', 'inscription', [InscriptionController::class, 'index']);
 $router->addRoute('inscrire-create', 'inscription/create/', [InscriptionController::class, 'inscrire']);
 
-//Eleve live search
+//ELEVE LIVE SEARCH
 $router->addRoute('eleve-list-class', 'eleve/list/class/{code}', [EleveController::class, 'eleve_classe']);
 $router->addRoute('eleve-list-all', 'eleve/list/class', [EleveController::class, 'eleve_classe']);
 $router->addRoute('eleve_search_info', 'eleve_info/search/{search}', [EleveController::class, 'eleve_info']);
 $router->addRoute('eleve_search_detail', 'eleve_detail/search/{code}', [EleveController::class, 'eleve_detail']);
 
-//versement
+//VERSEMENT
 $router->addRoute('versement_accueil', 'versement/accueil', [VersementController::class, 'accueil']);
 $router->addRoute('versement', 'versement', [VersementController::class, 'index']);
 $router->addRoute('versement-create', 'versement/create/{code}', [VersementController::class, 'save']);
@@ -92,96 +91,91 @@ $router->addRoute('versement-preview', 'versement/preview/{code}', [VersementCon
 $router->addRoute('versement_liste', 'versement/detail', [VersementController::class, 'liste_abonnee']);
 $router->addRoute('versement_info', 'versement/info/', [VersementController::class, 'info']);
 
-//Printer Report
+//PRINTER REPORT
 $router->addRoute('print', 'print/{model}', [PrinterController::class, 'index']);
 
-//Eleve
+//ELEVE
 $router->crudRoute('activite', ActiviteController::class);
 
-//Eleve
+//ELEVE
 $router->crudRoute('type_activite', TypeActiviteController::class);
 
-//Eleve
+//ELEVE
 $router->crudRoute('inscription_activite', InscriptionActiviteController::class);
 
-//cantine_liste
-//$router->crudRoute('cantine_liste', CantineListeController::class);
-
-//prix_abonnement
+//PRIX_ABONNEMENT
 $router->crudRoute('prix_abonnement', PrixAbonnementController::class);
 
-//Eleve
+//ELEVE
 $router->crudRoute('abonnement_activite', AbonnementActiviteController::class);
 
-//Eleve
+//ELEVE
 $router->crudRoute('personnel_activite', AbonnementActiviteController::class);
 
-//Eleve
+//ELEVE
 $router->crudRoute('eleve', EleveController::class);
 
 
-//class
+//CLASS
 $router->crudRoute('classe', ClasseController::class);
 
-//salle de classe
+//SALLE DE CLASSE
 $router->crudRoute('salle_classe', SalleClasseController::class);
 
-//pension classe
+//PENSION CLASSE
 $router->crudRoute('pension_classe', PensionClasseController::class);
 
-//document
+//DOCUMENT
 $router->crudRoute('document', DocumentController::class);
 
-//etat_document
+//ETAT_DOCUMENT
 $router->crudRoute('etat_document', EtatDocumentController::class);
 
-//exemplaire
+//EXEMPLAIRE
 $router->crudRoute('exemplaire', ExemplaireController::class);
 
-//domaine
+//DOMAINE
 $router->crudRoute('domaine', DomaineController::class);
 
-//cycle
+//CYCLE
 $router->crudRoute('cycle', CycleController::class);
 
-//Periode
+//PERIODE
 $router->crudRoute('periode', PeriodeController::class);
 
-//session
+//SESSION
 $router->crudRoute('session', SessionController::class);
 
-//repas
+//REPAS
 $router->crudRoute('repas', RepasController::class);
 
-//statut_apprenant
+//STATUT_APPRENANT
 $router->crudRoute('statut_apprenant', StatutApprenantController::class);
 
-//pays
+//PAYS
 $router->crudRoute('pays', PaysController::class);
 
-//bulletin
-$router->crudRoute("bulletin", BulletinController::class);
 
-//annee_scolaire
+//ANNEE_SCOLAIRE
 $router->crudRoute('annee_scolaire', AnneeScolaireController::class);
 
-//type_paiement
+//TYPE_PAIEMENT
 $router->crudRoute('type_paiement', TypePaiementController::class);
 
 
-//tranche_scolaire
+//TRANCHE_SCOLAIRE
 $router->crudRoute('tranche_scolaire', TrancheScolaireController::class);
 
-//tranche_horaire
+//TRANCHE_HORAIRE
 $router->crudRoute('tranche_horaire', TrancheHoraireController::class);
 
-//type_personnel
+//TYPE_PERSONNEL
 $router->crudRoute('type_personnel', TypePersonnelController::class);
 
-//type_pension
+//TYPE_PENSION
 $router->crudRoute('type_pension', TypePensionController::class);
 
-//Personnel
+//PERSONNEL
 $router->crudRoute('personnel', PersonnelController::class);
 $router->addRoute('ajout_personnel', 'personnel/nouveau', [PersonnelController::class, 'ajout']);
 $router->addRoute('modifier_personnel', 'personnel/modifier/{code}', [PersonnelController::class, 'modifier']);
@@ -193,7 +187,7 @@ $router->addRoute('personnel_api_delete_personnel', 'personnel/api/delete/person
 $router->addRoute('api_personnel_list', 'personnel/api/list', [PersonnelController::class, 'getApiAllEssentiel']);
 
 
-//Cantine
+//CANTINE
 $router->crudRoute('cantine', CantineController::class);
 $router->addRoute('abonnement_cantine', 'cantine/abonnement', [CantineController::class, 'abonnement_cantine']);
 $router->addRoute('enregistrement_cantine', 'cantine/create/{code}', [CantineController::class, 'save']);
@@ -219,14 +213,10 @@ $router->addRoute('biblio_api_alerte', 'biblio/api/alerte/{code}', [BiblioContro
 //AFFECTATION
 
 //  SALLE *-* ENSEIGNANT
-
 $router->addRoute('affectation_salle_enseignant', 'affectation/enseignant_salle', [AffectationController::class, 'affecterSalleEnseignant']);
-// $router->addRoute('affectation_salle_enseignant_save', 'api/affectation/enseignant_salle/save/{code}', [AffectationController::class, 'enregistrerAffectationSalleEnseignant']);
 $router->addRoute('affectation_salle_enseignant_update', 'api/affectation/enseignant_salle/update/', [AffectationController::class, 'modifierAffectationSalleEnseignant']);
 $router->addRoute('affectation_salle_enseignant_all', 'api/affectation/enseignant_salle/all', [AffectationController::class, 'listeAffectationSalleEnseignant']);
 
-// $router->addRoute('affectation_salle_enseignant_gen_affectation_if_not_exist', 'api/affectation/enseignant_salle/gen_affectation_if_not_exist/{annee_scolaire_code}', [AffectationController::class, 'genererAffectationSalleEnseignant']);
-// $router->addRoute('affectation_salle_enseignant_check_affectation_exist', 'api/affectation/enseignant_salle/check_affectation_exist/{annee_scolaire_code}', [AffectationController::class, 'verifierExistenceAffectationSalleEnseignant']);
 
 //  SALLE *-* ELEVE
 $router->addRoute('affectation_salle_eleve', 'affectation/eleve_salle', [AffectationController::class, 'affecterSalleEleve']);
@@ -245,24 +235,49 @@ $router->addRoute('affectation_classe_matiere_update', 'api/affectation/classe_m
 $router->addRoute('affectation_classe_matiere_all', 'api/affectation/classe_matiere/all', [AffectationController::class, 'listeAffectationClasseMatiere']);
 $router->addRoute('api_matiere_list', 'matiere/api/list', [MatiereController::class, 'getApiAllEssentiel']);
 
-//affectation_classe_matiere
-// $router->crudRoute("affectation_classe_matiere", AffectationClasseMatiereController::class);
 
-//NOTE: Remplissage des notes scolaire
+//NOTE: REMPLISSAGE DES NOTES SCOLAIRE
 $router->addRoute('note', 'enseignement/note', [EnseignementController::class, 'note']);
+$router->addRoute('affectation_salle_eleve_save', 'api/affectation/eleve_salle/save/', [AffectationController::class, 'enregistrerAffectationSalleEleve']);
+$router->addRoute('affectation_salle_eleve_update', 'api/affectation/eleve_salle/update/', [AffectationController::class, 'modifierAffectationSalleEleve']);
 
-//Cours - Affectation des matieres aux enseignants dans des classes
+$router->addRoute('api_liste_classe_matiere', 'api/liste/classe/matiere', [EnseignementController::class, 'apiListeClasseMatiere']);
+$router->addRoute('api_liste_classe_eleve', 'api/liste/classe/eleve', [EnseignementController::class, 'apiListeClasseEleve']);
+$router->addRoute('api_liste_salle_matiere', 'api/liste/salle/matiere', [EnseignementController::class, 'apiListeSalleMatiere']);
+$router->addRoute('api_update_note_eleve_matiere', 'api/update/note/eleve/matiere', [EnseignementController::class, 'apiUpdateNoteEleveMatiere']);
+$router->addRoute('api_update_note_eleve', 'api/update/note/eleve', [EnseignementController::class, 'apiUpdateNoteEleve']);
+$router->addRoute('api_info_note_classe', 'api/info/note/classe', [EnseignementController::class, 'apiInfoNoteClasse']);
+$router->addRoute('api_info_note_salle', 'api/info/note/salle', [EnseignementController::class, 'apiInfoNoteSalle']);
+$router->addRoute('api_init_note', 'api/init/note', [EnseignementController::class, 'apiInitNote']);
+$router->addRoute('api_init_note_classe', 'api/init/note/classe', [EnseignementController::class, 'apiInitNoteClasse']);
+$router->addRoute('api_init_note_salle', 'api/init/note/salle', [EnseignementController::class, 'apiInitNoteSalle']);
+
+//BULLETIN
+$router->crudRoute("bulletin", BulletinController::class);
+$router->addRoute('bullettin_preview_salle', 'bullettin/preview/salle', [BulletinController::class, 'bullettinPreviewSalle']);
+$router->addRoute('bullettin_preview_note_eleve', 'bullettin/preview/note/eleve', [BulletinController::class, 'bullettinPreviewNoteEleve']);
+$router->addRoute('bullettin_generate_note_eleve', 'bullettin/generate/note/eleve', [BulletinController::class, 'bullettinGenerateNoteEleve']);
+$router->addRoute('bulletin_info_classement', 'bulletin/info/classement', [BulletinController::class, 'bulletinInfoClassement']);
+$router->addRoute('bulletin_info_classement_classe', 'bulletin/info/classement/classe', [BulletinController::class, 'bulletinInfoClassementClasse']);
+$router->addRoute('bulletin_info_classement_salle', 'bulletin/info/classement/salle', [BulletinController::class, 'bulletinInfoClassementSalle']);
+$router->addRoute('bulletin_info_classement_annee', 'bulletin/info/classement/annee', [BulletinController::class, 'bulletinInfoClassementAnnee']);
+$router->addRoute('bulletin_info_classement_annee_classe', 'bulletin/info/classement/annee/classe', [BulletinController::class, 'bulletinInfoClassementAnneeClasse']);
+$router->addRoute('bulletin_info_classement_annee_salle', 'bulletin/info/classement/annee/salle', [BulletinController::class, 'bulletinInfoClassementAnneeSalle']);
+$router->addRoute('bulletin_info_classement_annee_periode', 'bulletin/info/classement/annee/periode', [BulletinController::class, 'bulletinInfoClassementAnneePeriode']);
+$router->addRoute('bulletin_info_classement_annee_periode_classe', 'bulletin/info/classement/annee/periode/classe', [BulletinController::class, 'bulletinInfoClassementAnneePeriodeClasse']);
+$router->addRoute('bulletin_info_classement_annee_periode_salle', 'bulletin/info/classement/annee/periode/salle', [BulletinController::class, 'bulletinInfoClassementAnneePeriodeSalle']);
+
+//COURS - AFFECTATION DES MATIERES AUX ENSEIGNANTS DANS DES CLASSES
 $router->crudRoute('cours', CoursController::class);
 
-
-//Discipline
+//DISCIPLINE
 $router->crudRoute('discipline', DisciplineController::class);
 
-//Matiere
+//MATIERE
 $router->crudRoute('matiere', MatiereController::class);
 
 
-//emploie de temps
+//EMPLOIE DE TEMPS
 $router->crudRoute('emploie_temps', EmploieTempsController::class);
 
 // FOR DEVELOPEMENT TEST FUNCTION

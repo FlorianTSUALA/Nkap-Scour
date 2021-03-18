@@ -82,8 +82,7 @@ class EnseignementController extends AppController
             ->get());
             
         Helpers::groupBy($affectation_salle_eleve, 'classe');
-        $this->render('sections.affectation.salle_eleve.affectation', compact('route', 'classes', 'salle_classes', 'affectation_salle_eleve'));
-        $this->render('sections.note.index', compact('route'));
+        $this->render('sections.note.index', compact('route', 'classes', 'salle_classes', 'affectation_salle_eleve'));
 
     }
 
