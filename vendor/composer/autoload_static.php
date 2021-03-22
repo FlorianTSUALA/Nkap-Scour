@@ -58,6 +58,16 @@ class ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PHPExcel' => 
+            array (
+                0 => __DIR__ . '/../..' . '/lib/Excell',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Datamatrix' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
@@ -81,6 +91,7 @@ class ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e::$classMap;
 
         }, null, ClassLoader::class);

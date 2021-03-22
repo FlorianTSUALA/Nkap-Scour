@@ -11,7 +11,11 @@ use function Core\Helper\dd;
 
 trait TraitCRUDController
 {
-
+    //TODO TAKE CARE OF ANNEE SCOLAIRE AND VISIBILITE IN ALL REQUEST
+        // $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
+        // ->where('table.annee_scolaire_id', $annee_scolaire_id)
+        // ->where('table.visibilite', 1)
+        
     public function index()
     {
         $this->app->setTitle($this->title_page);

@@ -30,4 +30,8 @@ class AnneeScolaireController extends AppController
         $this->msg_delete = "Voulez-vous vraiment supprimer l'année scolaire ";
     }
 
+    //TODO GESTION DES ERREURS LORS DE LA SUPPRESSION D UNE ANNEE SCOLAIRE
+    // MISE A JOUR DE LA VISIBILITE
+
+    //TODO MASQUAGE DE CERTAINS BOUTTONS SUR CERTAINES PAGES DE CRUD
 }

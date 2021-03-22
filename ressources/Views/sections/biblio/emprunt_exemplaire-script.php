@@ -321,7 +321,9 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
 
 
 <script>
-function searchMenu(list) {
+      // FOR SEARCH MENU
+
+      function searchMenu(list) {
       
         // https://jsfiddle.net/sofoklis_stouraitis/zLzfpb1u/8/
         // https://stackoverflow.com/questions/2487747/selecting-element-by-data-attribute-with-jquery
@@ -402,7 +404,6 @@ function searchMenu(list) {
         });
     
       }
-      searchMenu('#menu');
-
+      searchMenu('#menu')
 
 </script>

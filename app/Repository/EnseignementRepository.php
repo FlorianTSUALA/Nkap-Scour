@@ -17,7 +17,7 @@ use ClanCats\Hydrahon\Query\Expression;
 class EnseignementRepository extends BaseRepository{
     
         
-    public function getEleveOfSalleOfClasseAndMatiereOfClasse(){
+    public function getEleveOfSalleOfClasseAndMatiereOfClasse($annee_scolaire_id){
         
         $data_classes = [];
 
@@ -48,7 +48,7 @@ class EnseignementRepository extends BaseRepository{
                     'salle_classe_id' => $salle_classe['salle_classe_id'],
                     'salle_classe_code' => $salle_classe['salle_classe_code'],
                     'salle_classe' => $salle_classe['salle_classe'],
-                    'eleves' => $this->getEleveOfSalle($salle_classe['salle_classe_id'])
+                    'eleves' => $this->getEleveOfSalle($salle_classe['salle_classe_id'], $annee_scolaire_id)
                 ];
                 $data_salles_classes[$salle_classe['salle_classe_code']] = $tmp_salle_classe;
             }
@@ -58,7 +58,7 @@ class EnseignementRepository extends BaseRepository{
                 'classe_code' => $classe['code'],
                 'classe' => $classe['libelle'],
                 'salle_classes' => $data_salles_classes,
-                'matieres' => $this->getMatiereOfClasse($classe['id'])
+                'matieres' => $this->getMatiereOfClasse($classe['id'], $annee_scolaire_id)
             ];
 
             $data_classes[$classe['code']] = $data_classe;
@@ -68,18 +68,15 @@ class EnseignementRepository extends BaseRepository{
         return $data_classes;
     }
 
-
-    public function getMatiereOfClasse($classe_id = null)
+    public function getMatiereOfClasse($classe_id = null, $annee_scolaire_id)
     {
         $classe_id = Request::getSecParam('classe', NULL);
-
-        $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
 
         $model = AffectationClasseMatiere::table()
             ->select(
                 [
                     'matiere.libelle' => 'matiere', 
-                    'matiere.matiere_id' => 'matiere_id', 
+                    'affectation_classe_matiere.matiere_id' => 'matiere_id', 
                     'affectation_classe_matiere.coefficient' => 'coefficient' 
                 ])
             ->join('matiere', 'matiere_id', '=', 'matiere.id')
@@ -97,31 +94,13 @@ class EnseignementRepository extends BaseRepository{
    
     public function getEleveOfSalle($salle_classe_id, $annee_scolaire_id)
     {
-        $salle_classe =  DBTable::getModel(DBTable::SALLE_CLASSE)->select(
-            [   
-                'id' => 'salle_classe_id',
-                'code' => 'salle_classe_code',
-                'libelle' => 'salle_classe',
-                'classe_id'
-            ])
-        ->where('visibilite', 1)
+
+        $classe_id =  DBTable::getModel(DBTable::SALLE_CLASSE)
+        ->select('classe_id')
+        ->where('salle_classe.visibilite', 1)
         ->where('id', $salle_classe_id)
         ->one();
-
-        $classe =  DBTable::getModel(DBTable::CLASSE)->select(
-            [   
-                'id',
-                'code',
-                'libelle'
-            ])
-        ->where('visibilite', 1)
-        ->where('id', $salle_classe['classe_id'])
-        ->one();
-        
-        $classe_id = $classe['id'];
       
-
-
         $eleve_affecte = Parcours::table()
             ->select(
             [
@@ -159,26 +138,16 @@ class EnseignementRepository extends BaseRepository{
             $tmp['eleve_id'] = $eleve['eleve_id'];
             $tmp['eleve_code'] = $eleve['eleve_code'];
             $tmp['nom_complet'] = $eleve['nom_complet'];
-            if(isset($arr_index[$eleve['salle_classe_id']]))
-                array_push($affectation_salle_eleve[$arr_index[$eleve['salle_classe_id']]]['eleves'] , $tmp);
-            else{
-                // previos explained situation
-                // EN CLAIRE VERIFIER POUR CHAQUE ELEVE 
-                //LA CORRESPONDANCE ENTRE LA CLASSE ET LA SALLE DE CLASSE
-                //IMPLEMENTER UN MECANISME DE LA BD QUI REALISE CE CONTROLE
-                //TRIGGER VERIFIER CORRESPONDANCE SALLE_CLASSE--CLASSE 
-            }
+            $affectation_salle_eleve[$eleve['eleve_code']] = $tmp;
         }
-        $affectation_classe_eleve = [];
-        $affectation_classe_eleve['classe_id'] = $classe['id'];
-        $affectation_classe_eleve['classe_code'] = $classe['code'];
-        $affectation_classe_eleve['classe'] = $classe['libelle'];
+
+        // $affectation_salle_classe_eleve = [];
+        // $affectation_salle_classe_eleve['salle_classe_id'] = $salle_classe['salle_classe_id'];
+        // $affectation_salle_classe_eleve['salle_classe_code'] = $salle_classe['salle_classe_code'];
+        // $affectation_salle_classe_eleve['salle_classe'] = $salle_classe['salle_classe'];
+        // $affectation_salle_classe_eleve['eleves'] = $affectation_salle_eleve;
         
-        $affectation_classe_eleve['eleve_non_affecte'] = $eleve_non_affecte;
-        $affectation_classe_eleve['data_classes'] = $data_classes;
-        $affectation_classe_eleve['eleve_affecte'] = $affectation_salle_eleve;
-        
-        return [$affectation_classe_eleve];
+        return $affectation_salle_eleve;
     }
 
 

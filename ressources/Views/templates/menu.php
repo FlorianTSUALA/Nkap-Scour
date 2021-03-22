@@ -865,7 +865,7 @@ return[
             "SESSION" => [
                 "title" => "Session",
                 "icon" => "",
-                "msg_page" => "",
+                "msg_page" => "Correspond à une ensemble ou un regroupement de période; Ca correspond à une trimestre ou une séquence donnée.",
                 "menu_explication" => "",
                 "full_url" => URL::link("session"),
                 "action" => "session",
@@ -894,7 +894,7 @@ return[
                 "title" => "Periode",
                 "icon" => "",
                 "msg_page" => "",
-                "menu_explication" => "",
+                "menu_explication" => "reppresente le nom qu'on donne à une ensemble d'examen effectuée au cours d'une période donnée : Date debut et date de fin. Ex : Séquence",
                 "full_url" => URL::link("periode"),
                 "action" => "periode",
                 "alt" => "",

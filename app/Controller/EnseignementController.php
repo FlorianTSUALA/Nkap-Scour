@@ -6,12 +6,17 @@ use App\Helpers\S;
 use App\Model\Classe;
 use Core\Model\Model;
 use App\Model\DBTable;
+use App\Model\Periode;
 use App\Model\Parcours;
 use App\Helpers\Helpers;
 use Core\Session\Request;
+use function Core\Helper\dd;
+use App\Repository\PeriodeRepository;
 use App\Repository\ParcoursRepository;
+
 use App\Controller\Admin\AppController;
 use App\Model\AffectationClasseMatiere;
+use App\Repository\EnseignementRepository;
 
 class EnseignementController extends AppController
 {
@@ -43,47 +48,31 @@ class EnseignementController extends AppController
 
     public function note(){
         $route = 'note';
-
         $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
-
-        // $classe_id = Request::getSecParam('classe');
-        $salle_classes  = [];
         
-        $classes = Helpers::toJSON(Classe::table()->select(['id'=>'id', 'libelle' => 'value'])->where('visibilite', 1)->get());
-        $affectation_salle_eleve = (
-            Parcours::table()
-            ->select(
-                [
-                    'salle_classe.id' => 'salle_classe_id', 
-                    'salle_classe.code' => 'salle_classe_code', 
-                    'salle_classe.libelle' => 'salle_classe',
+        $periodeOfSession  = (new PeriodeRepository())->getPeriodeOfSession($annee_scolaire_id);
+        // dd(array_values($periodeOfSession));
+        // dd(array_values(array_map(function ($data){
+        //     return empty($data['periodes'])? null : $data['periodes'];
+        // }, $periodeOfSession)));
+        $data_classes = (new EnseignementRepository())->getEleveOfSalleOfClasseAndMatiereOfClasse($annee_scolaire_id);
 
-                    'classe.id' => 'classe_id',
-                    'classe.code' => 'classe_code',
-                    'classe.libelle' => 'classe',
-                    
-                    'statut_apprenant.id' => 'statut_apprenant_id',
-                    'statut_apprenant.code' => 'statut_apprenant_code',
-                    'statut_apprenant.libelle' => 'statut_apprenant',
-                    
-                    'eleve.id' => 'eleve_id',
-                    'eleve.code' => 'eleve_code',
-                    'eleve.nom' => 'eleve_nom',
-                    'eleve.prenom' => 'eleve_prenom'
-                ])
-            ->join('eleve', 'eleve.id', '=', 'parcours.eleve_id')
-            ->join('classe', 'classe.id', '=', 'parcours.classe_id')
-            ->join('salle_classe', 'salle_classe.id', '=', 'parcours.salle_classe_id')
-            ->join('statut_apprenant', 'statut_apprenant.id', '=', 'parcours.statut_apprenant_id')
-            ->where('parcours.visibilite', 1)
-            ->where('parcours.annee_scolaire_id', $annee_scolaire_id)
-            ->whereNotNull('parcours.classe_id')
-            // ->where('classe_id', $classe_id)
-            ->orderBy('eleve.nom')
-            ->get());
-            
-        Helpers::groupBy($affectation_salle_eleve, 'classe');
-        $this->render('sections.note.index', compact('route', 'classes', 'salle_classes', 'affectation_salle_eleve'));
+        // dd(Helpers::toJSON(array_values($data_classes)));
+        // dd(Helpers::toJSON(array_values($data_classes['SIL']['salle_classes']['SALL_1615974224']['eleves'])));
+        $periodes = Periode::table()
+        ->select([
+            'periode.id'=> 'periode_id', 
+            'periode.code'=> 'periode_code', 
+            'periode.libelle' => 'periode'
+            ])
+        ->join('session', 'periode.session_id', '=', 'session.id')
+        ->where('session.annee_scolaire_id', $annee_scolaire_id)
+        ->where('periode.visibilite', 1)
+        ->get();
+        // dd($periodes);
+        // $classes = Helpers::toJSON(Classe::table()->select(['id'=>'id', 'libelle' => 'value'])->where('visibilite', 1)->get());
+        // Helpers::groupBy($periodeOfSession, 'classe');
+        $this->render('sections.note.index', compact('route', 'data_classes', 'periodeOfSession', 'periodes'));
 
     }
         

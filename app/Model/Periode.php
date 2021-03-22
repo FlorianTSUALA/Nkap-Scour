@@ -19,13 +19,17 @@ class Periode extends Model implements FrequentlyReapeat
 
     public function __construct(){
         parent::__construct();
+
+        $sessions = Session::table(DBTable::SESSION) ->select([ SESSION::CODE => 'id', Session::LIBELLE => 'value']) ->where('visibilite', 1)->get();
+
         $this->fillables =
             [
-                new FormModel(false, self::SESSION_ID, 'Session', InputType::SELECT2),
+                new FormModel(false, self::SESSION_ID, 'Session', InputType::SELECT2, $sessions, '', 
+                'Veuillez selectionnez une session', true, 'select2', '', '', '', Session::LIBELLE),
+                new FormModel(true, self::LIBELLE, 'Libellé', null, null, null, null, false ),
                 new FormModel(true, self::DATE_DEBUT,'Date de début',InputType::DATE ),
                 new FormModel(true,self::DATE_FIN,'Date de fin',InputType::DATE ),
-                new FormModel(true, self::LIBELLE, 'Libellé', null, null, null, null, false ),
-                new FormModel(true, self::DESCRIPTION, 'Description', null, null, null, null, false ),
+                // new FormModel(true, self::DESCRIPTION, 'Description', null, null, null, null, false ),
             ];
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Controller\ExcelController;
+
 //START
     use App\Controller\ClubController;
     use App\Controller\HomeController;
@@ -74,6 +76,9 @@ $router->addRoute('logout', 'logout', [LoginController::class, 'logout']);
 //INSCRIPTION
 $router->addRoute('inscrire', 'inscription', [InscriptionController::class, 'index']);
 $router->addRoute('inscrire-create', 'inscription/create/', [InscriptionController::class, 'inscrire']);
+
+// TEST SAVING WITH EXCEL
+$router->addRoute('excell', 'excell', [ExcelController::class, 'excell']);
 
 //ELEVE LIVE SEARCH
 $router->addRoute('eleve-list-class', 'eleve/list/class/{code}', [EleveController::class, 'eleve_classe']);

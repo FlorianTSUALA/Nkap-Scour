@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Helpers\S;
+use App\Model\Session;
 use App\Helpers\TraitCRUDController;
 use App\Controller\Admin\AppController;
 
@@ -27,6 +29,24 @@ class SessionController extends AppController
         $this->update_title = "Mise à jour d'une session";
         $this->delete_title = "Suppression d'une session";
         $this->msg_delete = "Voulez-vous vraiment supprimer cette session ";
+    }
+
+            
+    public function getall(){
+        //PROBLEMATIQUE : DOIT ON FILTRER LES SESSIONS
+        //TODO : GENERATION AUTOMATIQUE DE SESSIONS EN SE BASANT SUR CELLE DE L ANNEE ANTERIEURE
+        
+        $model = Session::table();
+        
+        $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
+
+        $results = $model->select(' annee_scolaire.libelle as annee_scolaire_id, session.code as code, session.libelle as libelle, session.date_debut as date_debut, session.date_fin as date_fin')
+                    ->where('session.visibilite', 1)
+                    ->join('annee_scolaire', 'annee_scolaire.id', '=', 'session.annee_scolaire_id')
+                    // ->where('session.annee_scolaire_id', $annee_scolaire_id)
+                    ->get();
+
+        return $results;
     }
 
 }

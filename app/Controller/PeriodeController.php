@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Helpers\S;
 use App\Model\Periode;
 use App\Helpers\TraitCRUDController;
 use App\Controller\Admin\AppController;
@@ -32,14 +33,16 @@ class PeriodeController extends AppController
         
     public function getall(){
         $model = Periode::table();
-        $results = $model->select('
-                session.libelle as session_id, 
-                periode.description as description, 
-                periode.libelle as libelle, 
-                periode.date_debut as date_debut, 
-                periode.date_fin as date_fin')
+        
+        $results = $model->select([
+                'session.libelle' => 'session_id', 
+                'periode.code' => 'code', 
+                'periode.libelle' => 'libelle', 
+                'periode.date_debut' => 'date_debut', 
+                'periode.date_fin as date_fin'
+                ])  ->join('session', 'periode.session_id', '=', 'session.id')
                     ->where('periode.visibilite', 1)
-                    ->join('session', 'periode.session_id', '=', 'session.id')->get();
+                    ->get();
         return $results;
     }
 
