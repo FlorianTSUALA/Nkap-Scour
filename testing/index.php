@@ -36,6 +36,14 @@ $excel_Obj = $reader->load($path);
 	$i = 0;
 
 	$html = '';
+	$index_nom = 2;
+	$index_prenom = 3;
+	$index_date_naissance = 4;
+	$index_lieu_naissance = 5;
+	// $index_nom = 2;
+	// $index_nom = 2;
+		$td_open .=  "<td>";
+		$td_closed .=  "</td>";
 
 	while ($excel_Obj->setActiveSheetIndex($i))
 	{
@@ -43,7 +51,9 @@ $excel_Obj = $reader->load($path);
 		$Worksheet = $excel_Obj->getActiveSheet();
 		$lastRow = $worksheet->getHighestRow();
         $colomncount = $worksheet->getHighestDataColumn();
-        $colomncount_number=PHPExcel_Cell::columnIndexFromString($colomncount);
+		$colomncount_number=PHPExcel_Cell::columnIndexFromString($colomncount);
+		
+	
 
 		$html .= "<table border='1'>";
 		for($row=1;$row<=$lastRow;$row++){
@@ -56,14 +66,7 @@ $excel_Obj = $reader->load($path);
 					
 			// 	$html .=  "</td>";
 			// }
-			$index_nom = 2;
-			$index_prenom = 3;
-			$index_date_naissance = 4;
-			$index_lieu_naissance = 5;
-			// $index_nom = 2;
-			// $index_nom = 2;
-				$td_open .=  "<td>";
-				$td_closed .=  "</td>";
+		
 			$nom = $td_open . $worksheet->getCell(PHPExcel_Cell::stringFromColumnIndex($index_nom).$row)->getValue() .$td_closed;
 			$prenom = $td_open . $worksheet->getCell(PHPExcel_Cell::stringFromColumnIndex($index_prenom).$row)->getValue() .$td_closed;
 			$date_naissance = $td_open . $worksheet->getCell(PHPExcel_Cell::stringFromColumnIndex($index_date_naissance).$row)->getValue() .$td_closed;
