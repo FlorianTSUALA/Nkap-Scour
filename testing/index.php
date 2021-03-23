@@ -42,8 +42,8 @@ $excel_Obj = $reader->load($path);
 	$index_lieu_naissance = 5;
 	// $index_nom = 2;
 	// $index_nom = 2;
-		$td_open .=  "<td>";
-		$td_closed .=  "</td>";
+	$td_open =  "<td>";
+	$td_closed =  "</td>";
 
 	while ($excel_Obj->setActiveSheetIndex($i))
 	{
@@ -73,6 +73,24 @@ $excel_Obj = $reader->load($path);
 			$lieu_naissance = $td_open . $worksheet->getCell(PHPExcel_Cell::stringFromColumnIndex($index_lieu_naissance).$row)->getValue() .$td_closed;
 			$html .= $nom. $prenom.$date_naissance.$lieu_naissance;
 			$html .=  "</tr>";
+
+
+			$data_eleve = [
+				'code' => $code_eleve,
+				'matricule' => $matricule,
+				'nom' => $nom_eleve,
+				'prenom' => $prenom_eleve,
+				'lieu_naissance' => $lieu_naissance_eleve,
+				'date_naissance' => $date_naissance_eleve,
+				'sexe' => $sexe_eleve,
+				'photo' => $photo_name,
+				// 'pays_id' => DBHelper::find('pays', ),
+				'anciennete' => $anciennete_eleve,
+				'groupe_familial_id' => null,
+				'antecedent_scolaire_id' => $id_antecedent_scolaire,
+			];
+			$data = DBHelper::insert("eleve", $data_eleve);
+
 		}	
 		$html .= "</table>";	
 		
@@ -99,6 +117,8 @@ $excel_Obj = $reader->load($path);
 	$data = DBHelper::execSelectAll("select * from pays");
 
 	var_dump($data);
+
+
 	die();
 
 	/*
@@ -112,23 +132,7 @@ $excel_Obj = $reader->load($path);
   
 
 
-	$data_eleve = [
-		'code' => $code_eleve,
-		'matricule' => $matricule,
-		'nom' => Request::getSecParam('nom_eleve', ''),
-		'prenom' => Request::getSecParam('prenom_eleve', ''),
-		
-		'lieu_naissance' => Request::getSecParam('lieu_naissance_eleve', ''),
-		'date_naissance' => Request::getSecParam('date_naissance_eleve', ''),
-		'sexe' => Request::getSecParam('sexe_eleve', ''),
-		'photo' => $photo_name,
-		Eleve::PAYS_ID => $this->pays->id(Request::getSecParam('pays_eleve', ''), Pays::LIBELLE),
-		'anciennete' => (Request::getSecParam('anciennete_eleve', '') === '')? 0 : Request::getSecParam('anciennete_eleve', ''),
-	   
-		Eleve::GROUPE_FAMILIAL_ID => null,
-   
-		Eleve::ANTECEDENT_SCOLAIRE_ID => $id_antecedent_scolaire,
-	];
+
 
 	$result_eleve = $this->eleve->save($data_eleve);
 	$id_eleve = $this->eleve->id($code_eleve);
