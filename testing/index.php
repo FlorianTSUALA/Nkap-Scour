@@ -10,34 +10,31 @@
 
 <?php
 
-use App\Model\Eleve;
-use App\Model\DBTable;
-use App\Model\Parcours;
-use Core\Session\Request;
 
-use App\Model\SalleClasse;
-use function Core\Helper\dd;
-use App\Repository\EleveRepository;
+require_once "helpers/DBHelper.php";
 
 require_once "Classes/PHPExcel.php";
 $path="2020_CPA_T1Note.xlsx";
+
 $reader= PHPExcel_IOFactory::createReaderForFile($path);
 //$Reader->setReadDataOnly(true);
 $excel_Obj = $reader->load($path);
  
 
-//echo $worksheet->getCell('E33')->getValue();
 
-//echo $colomncount;
-function round_up($value, $places)
-{
-    $mult = pow(10, abs($places));
-     return $places < 0 ?
-    ceil($value / $mult) * $mult :
-        ceil($value * $mult) / $mult;
-}
+	//echo $worksheet->getCell('E33')->getValue();
 
-$i = 0;
+	//echo $colomncount;
+	function round_up($value, $places)
+	{
+		$mult = pow(10, abs($places));
+		return $places < 0 ?
+		ceil($value / $mult) * $mult :
+			ceil($value * $mult) / $mult;
+	}
+
+	$i = 0;
+
 	$html = '';
 
 	while ($excel_Obj->setActiveSheetIndex($i))
@@ -96,6 +93,12 @@ $i = 0;
 
 
 
+	$data = DBHelper::execSelectAll("select * from pays");
+
+	var_dump($data);
+	die();
+
+	/*
 	//INFO ELEVE
 	$code_eleve = $this->eleve->genCode();
 
@@ -145,7 +148,7 @@ $i = 0;
 	];
 
 	$result_parcours = $this->parcours->save($data_parcours);
-	$id_parcours = $this->parcours->id($code_parcours);
+	$id_parcours = $this->parcours->id($code_parcours);*/
 
 ?>
 </body>

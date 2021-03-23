@@ -8,12 +8,17 @@ class ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e
 {
     public static $files = array (
         '68f8ba2b0d9c3efadeac35a6b319cf28' => __DIR__ . '/../..' . '/config/Invariant/constants.php',
+        '6c02a63cdf050e08d5ab4ec7be69002c' => __DIR__ . '/../..' . '/lib/spreadsheet/vendor/autoload.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
             'Spipu\\Html2Pdf\\' => 15,
+        ),
+        'P' => 
+        array (
+            'PHPExcel\\' => 9,
         ),
         'F' => 
         array (
@@ -36,6 +41,10 @@ class ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e
         array (
             0 => __DIR__ . '/..' . '/spipu/html2pdf/src',
         ),
+        'PHPExcel\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/lib/Excell',
+        ),
         'FPDF\\' => 
         array (
             0 => __DIR__ . '/../..' . '/lib/pdf',
@@ -55,16 +64,6 @@ class ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'P' => 
-        array (
-            'PHPExcel' => 
-            array (
-                0 => __DIR__ . '/../..' . '/lib/Excell',
-            ),
         ),
     );
 
@@ -91,7 +90,6 @@ class ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e::$classMap;
 
         }, null, ClassLoader::class);

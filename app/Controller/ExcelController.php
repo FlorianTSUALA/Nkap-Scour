@@ -18,6 +18,7 @@ use function Core\Helper\dd;
 use App\Model\DossierParental;
 use App\Model\StatutApprenant;
 use App\Repository\EleveRepository;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 // use App\Controller\Admin\AppController;
 
 class ExcelController extends AppController
@@ -45,57 +46,29 @@ class ExcelController extends AppController
      **/
     public function excell()
     {
-        // require_once  (dirname (dirname (__DIR__))). "/lib/Excell/PHPExcel.php";
-        $path="2020_CPA_T1Note.xlsx";
-        $reader= PHPExcel_IOFactory::createReaderForFile($path);
-        //$Reader->setReadDataOnly(true);
-        $excel_Obj = $reader->load($path);
-        
 
-        //echo $worksheet->getCell('E33')->getValue();
+        //create directly an object instance of the IOFactory class, and load the xlsx file
+        $fxls ='excell/excel-file_1.xlsx';
+        // $spreadsheet = IOFactory::load($fxls);
+        $reader = IOFactory::createReaderForFile($fxls);
 
-      
+        $spreadsheet = $reader->load($fxls);
 
-        $i = 0;
-            while ($excel_Obj->setActiveSheetIndex($i)){
-                $worksheet=$excel_Obj->getSheet($i);
-                $Worksheet = $excel_Obj->getActiveSheet();
-                $lastRow = $worksheet->getHighestRow();
-                $colomncount = $worksheet->getHighestDataColumn();
-                $colomncount_number=PHPExcel_Cell::columnIndexFromString($colomncount);
+        //read excel data and store it into an array
+        $xls_data = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+        /* $xls_data contains this array:
+        [1=>['A'=>'Domain', 'B'=>'Category', 'C'=>'Nr. Pages'], 2=>['A'=>'CoursesWeb.net', 'B'=>'Web Development', 'C'=>4000], 3=>['A'=>'MarPlo.net', 'B'=>'Courses & Games', 'C'=>15000]]
+        */
 
-                echo "<table border='1'>";
-            for($row=1;$row<=$lastRow;$row++){
-                echo "<tr>";
-                for($col=1;$col<=$colomncount_number;$col++){
-                    echo "<td>";
-                
-                        echo $worksheet->getCell(PHPExcel_Cell::stringFromColumnIndex($col).$row)->getValue();
-                    
-                    echo "</td>";
-                }
-                echo "</tr>";
-            }	
-        echo "</table>";
-                
-                $i++;
-                //echo $excel_Obj->getSheetCount();
-                if ($i == $excel_Obj->getSheetCount()) {
-                break;    
-            }
-            $col1 =4; $row1=3;
-            $inline= $worksheet->getCell(PHPExcel_Cell::stringFromColumnIndex($col1).$row1)->getValue();
-            $timestamp = ($inline - 25569) * 86400;
-            $date=date("d/m/y",$timestamp);
-            echo $date;
-            $col2 =13; $row2=2;
-            
+        //now it is created a html table with the excel file data
+        $html_tb ='<table border="1"><tr><th>'. implode('</th><th>', $xls_data[1]) .'</th></tr>';
+        $nr = count($xls_data); //number of rows
+        for($i=2; $i<=$nr; $i++){
+        $html_tb .='<tr><td>'. implode('</td><td>', $xls_data[$i]) .'</td></tr>';
+        }
+        $html_tb .='</table>';
 
-        $value=$worksheet->getCell(PHPExcel_Cell::stringFromColumnIndex($col2).$row2)->getOldCalculatedValue();
-        echo " ".round_up($value, 2);
-
-            }
-
+        echo $html_tb; 
 
         $classe = "";
 
