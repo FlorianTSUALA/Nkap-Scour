@@ -190,7 +190,7 @@ class PersonnelController extends AppController
             'adresse' => Request::getSecParam('adresse', '') ,
             'login' => Request::getSecParam('login', '') ,
             'password' => $password ,
-            'date_prise_service' => Request::getSecParam('date_prise_service', '') ,
+            'date_prise_service' => Request::getSecParam('date_prise_service', NULL) ,
             // 'date_fin_carriere' => Request::getSecParam('date_fin_carriere', '') ,
             'bibliographie' => Request::getSecParam('bibliographie', '') ,
             'assurance' => Request::getSecParam('assurance', '') ,
@@ -252,7 +252,7 @@ class PersonnelController extends AppController
             'email' => Request::getSecParam('email', '') ,
             'adresse' => Request::getSecParam('adresse', '') ,
             'login' => Request::getSecParam('login', '') ,
-            'date_prise_service' => Request::getSecParam('date_prise_service', '') ,
+            'date_prise_service' => Request::getSecParam('date_prise_service', NULL) ,
             // 'date_fin_carriere' => Request::getSecParam('date_fin_carriere', '') ,
             'bibliographie' => Request::getSecParam('bibliographie', '') ,
             'assurance' => Request::getSecParam('nom_personnel', '') ,
@@ -261,10 +261,12 @@ class PersonnelController extends AppController
         ];
 
         $password = Request::getSecParam('password', '');
+
         if($password != '' && $password != 'aucun'){
-            $data_info_personnels['password'] = Helpers::passwordEncrypt($password);
+            $data_personnel['password'] = Helpers::passwordEncrypt($password);
         }
 
+        // dd($data_info_personnels['password']);
         if($photo_peices_jointes != 'attachement.jpg' &&  $photo_peices_jointes != '' ){
             $data_personnel['pieces_jointes'] =  $photo_peices_jointes;
         }

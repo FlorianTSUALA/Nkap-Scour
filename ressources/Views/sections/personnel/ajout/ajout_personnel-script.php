@@ -176,7 +176,6 @@ use Core\Routing\URL;
                         beforeSend:function(){
                         },
                         success:function(data){
-                            return
                             // message de notification
                             swal({
                                 title: "Enregistrement Réussi",
