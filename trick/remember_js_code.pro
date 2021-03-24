@@ -41,3 +41,24 @@ $(function() {
 
 
 
+//JQUERY
+
+    $('#modal-emprunt').on('select2:open', 'select.code-livre', function(){
+        mustUpdateY = true
+        mustUpdateX = false
+    })
+
+    $('#modal-emprunt').on('change', 'select.titre-livre', function(){
+        let parent = $(this).parent().parent()
+        updateItem(parent, false)
+    })
+
+
+
+    $(document).on('click', '#modal-emprunt-save', function(e) {
+            e.preventDefault();
+            saveEmprunt();
+    })
+        
+
+//---

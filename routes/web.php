@@ -147,9 +147,12 @@ $router->crudRoute('cycle', CycleController::class);
 
 //PERIODE
 $router->crudRoute('periode', PeriodeController::class);
+$router->addRoute('api_liste_periode', 'api/liste/periode', [PeriodeController::class, 'apiPeriodes']);
+$router->addRoute('api_liste_periode_session', 'api/liste/session/periode', [PeriodeController::class, 'apiPeriodesOfSession']);
 
 //SESSION
 $router->crudRoute('session', SessionController::class);
+$router->addRoute('api_liste_session', 'api/liste/session', [SessionController::class, 'apiListeSession']);
 
 //REPAS
 $router->crudRoute('repas', RepasController::class);

@@ -17,6 +17,7 @@ use App\Repository\ParcoursRepository;
 use App\Controller\Admin\AppController;
 use App\Model\AffectationClasseMatiere;
 use App\Repository\EnseignementRepository;
+use App\Repository\SalleClasseRepository;
 
 class EnseignementController extends AppController
 {
@@ -51,14 +52,9 @@ class EnseignementController extends AppController
         $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
         
         $periodeOfSession  = (new PeriodeRepository())->getPeriodeOfSession($annee_scolaire_id);
-        // dd(array_values($periodeOfSession));
-        // dd(array_values(array_map(function ($data){
-        //     return empty($data['periodes'])? null : $data['periodes'];
-        // }, $periodeOfSession)));
-        $data_classes = (new EnseignementRepository())->getEleveOfSalleOfClasseAndMatiereOfClasse($annee_scolaire_id);
+        
+        $data_classes = (new SalleClasseRepository())->getSalles();
 
-        // dd(Helpers::toJSON(array_values($data_classes)));
-        // dd(Helpers::toJSON(array_values($data_classes['SIL']['salle_classes']['SALL_1615974224']['eleves'])));
         $periodes = Periode::table()
         ->select([
             'periode.id'=> 'periode_id', 
@@ -69,9 +65,7 @@ class EnseignementController extends AppController
         ->where('session.annee_scolaire_id', $annee_scolaire_id)
         ->where('periode.visibilite', 1)
         ->get();
-        // dd($periodes);
-        // $classes = Helpers::toJSON(Classe::table()->select(['id'=>'id', 'libelle' => 'value'])->where('visibilite', 1)->get());
-        // Helpers::groupBy($periodeOfSession, 'classe');
+      
         $this->render('sections.note.index', compact('route', 'data_classes', 'periodeOfSession', 'periodes'));
 
     }

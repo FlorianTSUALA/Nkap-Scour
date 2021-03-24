@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Helpers\S;
 use App\Model\Session;
+use App\Helpers\Helpers;
+use Core\Session\Request;
 use App\Helpers\TraitCRUDController;
 use App\Controller\Admin\AppController;
 
@@ -48,5 +50,12 @@ class SessionController extends AppController
 
         return $results;
     }
+
+    public function apiListeSession()
+    {
+        $model = ($this->getall());
+        $this->sendResponseAndExit(Helpers::toJSON($model, TRUE));
+    }
+
 
 }

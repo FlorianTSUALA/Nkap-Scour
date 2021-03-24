@@ -18,11 +18,11 @@ use Core\HTML\Form\FormModel;
 use App\Helpers\TraitCRUDController;
 
 use App\Repository\ClasseRepository;
+use App\Controller\Admin\AppController;
 use App\Repository\PersonnelRepository;
 use ClanCats\Hydrahon\Query\Expression;
 use App\Repository\AnneeScolaireRepository;
 use ClanCats\Hydrahon\Query\Expression as Ex;
-use App\Controller\Admin\AppController;
 
 class PersonnelController extends AppController
 {
@@ -173,6 +173,10 @@ class PersonnelController extends AppController
             $photo_peices_jointes = 'attachement.jpg';
         }
       
+        $password = Request::getSecParam('password', '');
+        if($password != '' && $password != 'aucun'){
+            $data_info_personnels['password'] = Helpers::passwordEncrypt($password);
+        }
 
         $data_personnel = [
             'type_personnel_id' =>  Personnel::getId(DBTable::TYPE_PERSONNEL, Request::getSecParam('type_personnel', ''), TypePersonnel::CODE),
@@ -185,7 +189,7 @@ class PersonnelController extends AppController
             'email' => Request::getSecParam('email', '') ,
             'adresse' => Request::getSecParam('adresse', '') ,
             'login' => Request::getSecParam('login', '') ,
-            'password' => Request::getSecParam('password', '') ,
+            'password' => $password ,
             'date_prise_service' => Request::getSecParam('date_prise_service', '') ,
             // 'date_fin_carriere' => Request::getSecParam('date_fin_carriere', '') ,
             'bibliographie' => Request::getSecParam('bibliographie', '') ,
@@ -342,7 +346,7 @@ class PersonnelController extends AppController
     public function liste_classe()
     {
 
-        $personnels = (new PersonnelRepository())->getDocumentGroupByPersonnel();   
+        // $personnels = (new PersonnelRepository())->getPersonnelGroupByTypePersonnel();   
         $classes = (new ClasseRepository())->getSalleClasseGroupByClasse();
         
         $annee_scolaire_id =  (new AnneeScolaireRepository())->getActive('id');
@@ -350,7 +354,7 @@ class PersonnelController extends AppController
         $data_info_personnels = (new PersonnelRepository())->getInfoPersonnels($annee_scolaire_id);
 
         // dd($data_info_personnels);
-        $this->render('sections.personnel.personnel_salle_classe', compact( 'classes','data_info_personnels', 'personnels'));
+        $this->render('sections.personnel.personnel_salle_classe', compact( 'classes','data_info_personnels'));
     }
 
 

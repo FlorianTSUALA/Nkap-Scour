@@ -20,8 +20,6 @@ $reader= PHPExcel_IOFactory::createReaderForFile($path);
 //$Reader->setReadDataOnly(true);
 $excel_Obj = $reader->load($path);
  
-
-
 	//echo $worksheet->getCell('E33')->getValue();
 
 	//echo $colomncount;

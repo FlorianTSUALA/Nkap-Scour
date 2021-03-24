@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use App\Helpers\S;
+use Core\Model\Model;
+use App\Model\DBTable;
 use App\Model\Periode;
+use App\Helpers\Helpers;
+use Core\Session\Request;
 use App\Helpers\TraitCRUDController;
 use App\Controller\Admin\AppController;
 
@@ -45,5 +49,34 @@ class PeriodeController extends AppController
                     ->get();
         return $results;
     }
+
+    public function apiPeriodes()
+    {
+        $model = ($this->getall());
+        $this->sendResponseAndExit(Helpers::toJSON($model, TRUE));
+
+    }
+
+    public function apiPeriodesOfSession()
+    {
+        $session_code = Request::getSecParam('sesssion_id');
+        $session_id = Model::getId(DBTable::SESSION, $session_code);
+
+        $model = DBTable::getModel(DBTable::PERIODE);
+        $model->select([
+            'etat_document_id' => 'etat_document_id',
+            'etat_document_id' => 'etat_document_id',
+            'etat_document_id' => 'etat_document_id'
+        ])
+        ->join('session', '=', 1)
+        ->where('visibilite', '=', 1)
+        ->where('visibilite', '=', 1)
+        ->get();
+        
+        $model = ($this->getall());
+        $this->sendResponseAndExit(Helpers::toJSON($model, TRUE));
+    }   
+
+
 
 }

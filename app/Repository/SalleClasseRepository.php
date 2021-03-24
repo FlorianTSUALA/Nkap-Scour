@@ -12,7 +12,6 @@ use Core\Repository\BaseRepository;
 
 class SalleClasseRepository extends BaseRepository{
     
-        
     public function getSalleClasseGroupByClasse(){
         
         $salle_classes = [];
@@ -49,25 +48,19 @@ class SalleClasseRepository extends BaseRepository{
         
         return $salle_classes;
     }
-
-
-   
-
-  
-  
-     public function draft()
+ 
+    public function getSalles($annee_scolaire_id = null)
     {
-        $salle_classes =  DBTable::getModel(DBTable::CLASSE)->select(
-            [   
-                'salle_classe.code' => 'salle_classe_id', 
-                'salle_classe.libelle' => 'salle_classe', 
-                'classe.code' => 'classe_id', 
-                'classe.libelle' => 'classe'
-            ])
-            ->join(DBTable::SALLE_CLASSE, 'salle_classe.classe_id', '=', 'classe.id')
-            ->where('classe.visibilite', '=', 1)
-            ->get();
-            
+        $model =  DBTable::getModel(DBTable::SALLE_CLASSE);
+        $model = $model->select(
+                [   
+                    'salle_classe.code' => 'salle_classe_id', 
+                    'salle_classe.code' => 'salle_classe_code', 
+                    'salle_classe.libelle' => 'salle_classe', 
+                ])
+                ->where('salle_classe.visibilite', '=', 1)
+                ->get();
+        return $model;
     }
 
 

@@ -222,9 +222,9 @@ $include_footer_script = ob_get_clean();
 
                             <div class="col-xs-12 col-4">
                                 <div class="form-group row">
-                                    <label for="classe" class="col-3 col-form-label">Periode:</label>
+                                    <label for="periode" class="col-3 col-form-label">Periode:</label>
                                     <div class="col-9">
-                                        <select id="classe" class="select2 form-control" name="classe" required>
+                                        <select id="periode" class="select2 form-control" name="periode" required>
                                             <!-- <option value="-----------">---------------</option> -->
                                             <?php foreach($periodes as $item){?>
                                                     <option data-id="<?= $item['periode_code']; ?>" value="<?= $item['periode_code']; ?>" ><?= $item['periode']; ?></option>
@@ -241,12 +241,12 @@ $include_footer_script = ob_get_clean();
 
                             <div class="col-xs-12 col-4">
                                 <div class="form-group row">
-                                    <label for="classe" class="col-3 col-form-label">Salle de classe:</label>
+                                    <label for="salle_classe" class="col-3 col-form-label">Salle de classe:</label>
                                     <div class="col-9">
-                                        <select id="classe" class="select2 form-control" name="classe" required>
+                                        <select id="salle_classe" class="select2 form-control" name="salle_classe" required>
                                             <!-- <option value="-----------">---------------</option> -->
-                                            <?php foreach($periodes as $item){?>
-                                                    <option data-id="<?= $item['periode_code']; ?>" value="<?= $item['periode_code']; ?>" ><?= $item['periode']; ?></option>
+                                            <?php foreach($data_classes as $item){?>
+                                                    <option data-id="<?= $item['salle_classe_code']; ?>" value="<?= $item['salle_classe_code']; ?>" ><?= $item['salle_classe']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>

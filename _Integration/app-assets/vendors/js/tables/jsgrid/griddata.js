@@ -222,8 +222,8 @@ $("#jsGrid").jsGrid({
  
         fields: [
             { name: "Name", type: "textarea", width: 150 },
-            { name: "Age", type: "number", width: 50 },
-            { name: "Address", type: "text", width: 200 },
+            { name: "Age", type: "number", width: 50, align: "center"},
+            { name: "Address", type: "text", width: 200, align: "center" },
             { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
             { name: "Married", type: "checkbox", title: "Is Married", sorting: false },
             { type: "control" }
