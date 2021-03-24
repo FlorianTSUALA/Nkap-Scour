@@ -106,12 +106,12 @@ trait AffectationControllerTraitSalleEnseignant
     {
         $route = 'affectation_salle_enseignant';
         $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
-        
         $affectationExist = $this->_verifierExistenceAffectationSalleEnseignant($annee_scolaire_id);
+       
         if(!$affectationExist)
             $this->_genererAffectationSalleEnseignant($annee_scolaire_id);
-            
-        $salle_classes = Helpers::toJSON(SalleClasse::table()->select(['id'=>'id', 'libelle' => 'value'])->where('visibilite', '=', 1)->get());
+
+            $salle_classes = Helpers::toJSON(SalleClasse::table()->select(['id'=>'id', 'libelle' => 'value'])->where('visibilite', '=', 1)->get());
         $classes = Helpers::toJSON(Classe::table()->select(['id'=>'id', 'libelle' => 'value'])->where('visibilite', '=', 1)->get());
         $personnels = Helpers::toJSON(Personnel::table()->select([ 'id' => 'id' , new Expression("concat(nom,' ',prenom) as value")])->where('visibilite', 1)->get());
         $affectation_personnel_salle_classes = Helpers::toJSON(AffectationPersonnelSalleClasse::table()
@@ -172,7 +172,7 @@ trait AffectationControllerTraitSalleEnseignant
             ->join('salle_classe', 'salle_classe.id', '=', 'affectation_personnel_salle_classe.salle_classe_id')
             ->where('affectation_personnel_salle_classe.visibilite', '=', 1);
         if(!is_null($classe_id))       
-            $model = $model->where('annee_scolaire_id', $classe_id);
+            $model = $model->where('salle_classe.classe_id', $classe_id);
 
         $data = $model->where('annee_scolaire_id', $annee_scolaire_id)->get();
             
