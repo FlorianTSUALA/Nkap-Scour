@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Spipu\\Html2Pdf\\' => array($vendorDir . '/spipu/html2pdf/src'),
-    'PHPExcel\\' => array($baseDir . '/lib/Excell'),
     'FPDF\\' => array($baseDir . '/lib/pdf'),
     'Core\\' => array($baseDir . '/core'),
     'Config\\' => array($baseDir . '/config'),

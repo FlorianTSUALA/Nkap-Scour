@@ -11,6 +11,8 @@ use Core\Session\Request;
 use App\Helpers\TraitCRUDController;
 use App\Controller\Admin\AppController;
 
+use function Core\Helper\dd;
+
 class PeriodeController extends AppController
 {
     use TraitCRUDController;
@@ -59,21 +61,29 @@ class PeriodeController extends AppController
 
     public function apiPeriodesOfSession()
     {
-        $session_code = Request::getSecParam('sesssion_id');
-        $session_id = Model::getId(DBTable::SESSION, $session_code);
+        $session_code = Request::getSecParam('session_id', null);
+        
+        $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
 
+        if(is_null($session_code)) return;
+
+        $session_id = Model::getId(DBTable::SESSION, $session_code);
+        
         $model = DBTable::getModel(DBTable::PERIODE);
-        $model->select([
-            'etat_document_id' => 'etat_document_id',
-            'etat_document_id' => 'etat_document_id',
-            'etat_document_id' => 'etat_document_id'
+        $model = $model->select([
+            // 'periode.session_id' => 'session_id',
+            'session.libelle' => 'session',
+            'session.code' => 'session_code',
+            // 'periode.id' => 'periode_id',
+            'periode.code' => 'periode_code',
+            'periode.libelle' => 'periode'
         ])
-        ->join('session', '=', 1)
-        ->where('visibilite', '=', 1)
-        ->where('visibilite', '=', 1)
+        ->join('session', 'session.id', '=', 'periode.session_id')
+        ->where('periode.session_id',  $session_id)
+        ->where('periode.visibilite', 1)
+        // ->where('periode.annee_scolaire_id', $annee_scolaire_id)
         ->get();
         
-        $model = ($this->getall());
         $this->sendResponseAndExit(Helpers::toJSON($model, TRUE));
     }   
 

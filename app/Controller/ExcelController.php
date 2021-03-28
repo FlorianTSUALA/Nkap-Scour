@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+require dirname(dirname(__DIR__)). '/lib/phpe/vendor/autoload.php';
 use App\App;
 use DateTime;
 use App\Helpers\S;
@@ -19,6 +20,9 @@ use App\Model\DossierParental;
 use App\Model\StatutApprenant;
 use App\Repository\EleveRepository;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 // use App\Controller\Admin\AppController;
 
 class ExcelController extends AppController
@@ -40,15 +44,58 @@ class ExcelController extends AppController
     }
 
 
-
-    /**
-     * permet la connexion d'utilisateur à la BD
-     **/
     public function excell()
     {
+        $inputFileType = 'Xlsx';
+        $path_excel_files = '../ressources/data/excel_files/';
+        $file ="2020_CPA_T1Note.xlsx";
+        $inputFileName =  $path_excel_files .$file;
+        // Create a new Reader of the type defined in $inputFileType
+        $reader = IOFactory::createReader($inputFileType);
+        // Load $inputFileName to a PhpSpreadsheet Object
+        $spreadsheet = $reader->load($inputFileName);
 
-        //create directly an object instance of the IOFactory class, and load the xlsx file
-        $fxls ='excell/excel-file_1.xlsx';
+
+
+        
+        //read excel data and store it into an array
+        $xls_data = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+        /* $xls_data contains this array:
+        [1=>['A'=>'Domain', 'B'=>'Category', 'C'=>'Nr. Pages'], 2=>['A'=>'CoursesWeb.net', 'B'=>'Web Development', 'C'=>4000], 3=>['A'=>'MarPlo.net', 'B'=>'Courses & Games', 'C'=>15000]]
+        */
+
+        //now it is created a html table with the excel file data
+        $html_tb ='<table border="1"><tr><th>'. implode('</th><th>', $xls_data[1]) .'</th></tr>';
+        $nr = count($xls_data); //number of rows
+        for($i=2; $i<=$nr; $i++){
+        $html_tb .='<tr><td>'. implode('</td><td>', $xls_data[$i]) .'</td></tr>';
+        }
+        $html_tb .='</table>';
+
+        echo $html_tb; 
+    die("Error");
+    // Reader\19_Reading_worksheet_information_without_loading_entire_file.php
+
+
+
+    }
+
+
+    public function draft()
+    {
+        $path_excel_files = '../ressources/data/excel_files/';
+
+        //** */
+            // $spreadsheet = new Spreadsheet();
+            // $sheet = $spreadsheet->getActiveSheet();
+            // $sheet->setCellValue('A1', 'Hello World !');
+            // $writer = new Xlsx($spreadsheet);
+            // $writer->save('../hello world.xlsx');
+            //create directly an object instance of the IOFactory class, and load the xlsx file
+        //** */
+
+
+        $fxls = $path_excel_files.'excel-file_1.xlsx';
         // $spreadsheet = IOFactory::load($fxls);
         $reader = IOFactory::createReaderForFile($fxls);
 

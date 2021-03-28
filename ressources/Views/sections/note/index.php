@@ -203,11 +203,11 @@ $include_footer_script = ob_get_clean();
                         <div class="row">
                             <div class="col-xs-12 col-4">
                                 <div class="form-group row">
-                                    <label for="eleve_nom_complet" class="col-3 col-form-label">Session:</label>
+                                    <label for="session" class="col-3 col-form-label">Session:</label>
                                     <div class="col-9">
-                                        <select id="eleve_nom_complet" class="select2 form-control" name="eleve_nom_complet" required>
+                                        <select id="session" class="select2 form-control" name="session" required>
                                             <?php foreach($periodeOfSession??[] as $key => $item){?>
-                                                    <option data-code="<?= $item['session_code']; ?>" data-id="<?= $item['session_code']; ?>"  value="<?= $item['session_code']; ?>" ><?= $item['session']; ?></option>
+                                            <option data-code="<?= $item['session_code']; ?>" data-id="<?= $item['session_code']; ?>"  value="<?= $item['session_code']; ?>" ><?= $item['session']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -227,7 +227,7 @@ $include_footer_script = ob_get_clean();
                                         <select id="periode" class="select2 form-control" name="periode" required>
                                             <!-- <option value="-----------">---------------</option> -->
                                             <?php foreach($periodes as $item){?>
-                                                    <option data-id="<?= $item['periode_code']; ?>" value="<?= $item['periode_code']; ?>" ><?= $item['periode']; ?></option>
+                                            <option data-id="<?= $item['periode_code']; ?>" value="<?= $item['periode_code']; ?>" ><?= $item['periode']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -270,7 +270,11 @@ $include_footer_script = ob_get_clean();
                 <div class="card-content collapse show">
                     <div class="card-body card-dashboard ">
                         <p>Grid with filtering, editing, inserting, deleting, sorting and paging. Data provided by controller.</p>
-                        <div id="basicScenario"></div>
+                        
+                         <!-- <option value="-----------">---------------</option> -->
+                         <?php foreach($data_classes as $item){?>
+                            <div id="table_bulletin_note<?= $item->code?>" class="table_bulletin_note <?= "active"?>"></div>
+                        <?php } ?>
                     </div>
                 </div>
             </section>

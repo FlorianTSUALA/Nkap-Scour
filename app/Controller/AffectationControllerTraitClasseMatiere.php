@@ -10,11 +10,6 @@ use App\Model\matiere;
 use Config\Invariant\API;
 
 use Core\Session\Request;
-
-use App\Model\AnneeScolaire;
-use function Core\Helper\dd;
-use function Core\Helper\vd;
-use ClanCats\Hydrahon\Query\Expression;
 use App\Model\AffectationClasseMatiere;
 
 trait AffectationControllerTraitClasseMatiere

@@ -16,11 +16,13 @@ use App\Repository\ParcoursRepository;
 
 use App\Controller\Admin\AppController;
 use App\Model\AffectationClasseMatiere;
-use App\Repository\EnseignementRepository;
 use App\Repository\SalleClasseRepository;
+use App\Repository\EnseignementRepository;
+use App\Controller\EnseignementControllerTraitInitBulletinNote;
 
 class EnseignementController extends AppController
 {
+    use EnseignementControllerTraitInitBulletinNote;
     /**
      * Initialise les Models qu'on charge dans ce controller
      **/
@@ -148,6 +150,19 @@ class EnseignementController extends AppController
 
     }
  
+
+    private function verifierExistenceClasseMatiere($annee_scolaire_id, $matiere_id, $classe_id)
+    {
+        $result = AffectationClasseMatiere::table()->select([ 'code' => 'id' ])
+                    ->where('visibilite', '=', 1)
+                    ->where('annee_scolaire_id', $annee_scolaire_id)
+                    ->where('matiere_id', $matiere_id)
+                    ->where('classe_id', $classe_id)
+                    ->get();
+        return ( is_array($result) && count($result)>0);
+    }
+
+
     public function apiInitNoteClasse()
     {
         # DRAFT

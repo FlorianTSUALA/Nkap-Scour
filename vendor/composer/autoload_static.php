@@ -8,17 +8,12 @@ class ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e
 {
     public static $files = array (
         '68f8ba2b0d9c3efadeac35a6b319cf28' => __DIR__ . '/../..' . '/config/Invariant/constants.php',
-        '6c02a63cdf050e08d5ab4ec7be69002c' => __DIR__ . '/../..' . '/lib/spreadsheet/vendor/autoload.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
             'Spipu\\Html2Pdf\\' => 15,
-        ),
-        'P' => 
-        array (
-            'PHPExcel\\' => 9,
         ),
         'F' => 
         array (
@@ -40,10 +35,6 @@ class ComposerStaticInit945ea8cee1437ff573e93b29ce56fd2e
         'Spipu\\Html2Pdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/spipu/html2pdf/src',
-        ),
-        'PHPExcel\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/lib/Excell',
         ),
         'FPDF\\' => 
         array (
