@@ -24,7 +24,7 @@ Raccourci clavier de visual studio code
 20 - Alt + Z            =   Ramener le texte long à la ligne
 20 - Ctrl + B            =   Ouvrir et fermer la sidebar
 21 - Ctrl + Schift + x  =   Open extention panel
-
+22 - alt + [0-9] = ♠♣♦•◘○☺☻♥
 Top extension for Dev Web
 1 - php extension pack
 2 - html extension package

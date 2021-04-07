@@ -48,8 +48,14 @@ class LoginController extends AppController
 
     public function index()
     {
-        $this->app->setTitle('Connexion - Comelines');
-        $this->render('auth.login', [], "layout-auth");
+        $auth = new DBAuth($this->app->getDBInstance());
+        if ($auth->logged()) {
+            $this->home();
+        }else{
+            $this->app->setTitle('Connexion - Comelines');
+            $this->render('auth.login', [], "layout-auth");
+        }
+
     }
 
     /**

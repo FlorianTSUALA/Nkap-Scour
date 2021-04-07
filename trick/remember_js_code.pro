@@ -61,4 +61,10 @@ $(function() {
     })
         
 
+
+
+    onclick="window.location.href='<?= URL::link('versement') ?>'"   data-toggle="modal" data-target="#modal-emprunt"
+
+
+
 //---

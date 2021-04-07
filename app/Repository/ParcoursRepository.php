@@ -12,7 +12,7 @@ use function Core\Helper\vd;
 
 class ParcoursRepository extends BaseRepository{
     
-    public function getAffectationEleveBySalleClasse($salle_classe_id, $annee_scolaire_id){
+    public function getAffectationEleveBySalleClasse($salle_classe_id, $annee_scolaire_id, $seulementEleveDejaAffecte = false){
         
         $salle_classe =  DBTable::getModel(DBTable::SALLE_CLASSE)->select(
             [   
@@ -144,6 +144,10 @@ class ParcoursRepository extends BaseRepository{
                 //TRIGGER VERIFIER CORRESPONDANCE SALLE_CLASSE--CLASSE 
             }
         }
+        
+        if($seulementEleveDejaAffecte)
+            return $affectation_salle_eleve;
+
         $affectation_classe_eleve = [];
         $affectation_classe_eleve['classe_id'] = $classe['id'];
         $affectation_classe_eleve['classe_code'] = $classe['code'];

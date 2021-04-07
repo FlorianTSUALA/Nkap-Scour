@@ -3,22 +3,19 @@
 namespace App\Controller;
 
 use App\Helpers\S;
-use App\Model\Classe;
 use Core\Model\Model;
 use App\Model\DBTable;
-use App\Model\Periode;
-use App\Model\Parcours;
 use App\Helpers\Helpers;
 use Core\Session\Request;
-use function Core\Helper\dd;
 use App\Repository\PeriodeRepository;
 use App\Repository\ParcoursRepository;
-
 use App\Controller\Admin\AppController;
 use App\Model\AffectationClasseMatiere;
 use App\Repository\SalleClasseRepository;
 use App\Repository\EnseignementRepository;
 use App\Controller\EnseignementControllerTraitInitBulletinNote;
+
+use function Core\Helper\dd;
 
 class EnseignementController extends AppController
 {
@@ -30,7 +27,6 @@ class EnseignementController extends AppController
     {
         parent::__construct();
         $this->loadModel('matiere');
-
     }
 
     public function index()
@@ -52,30 +48,20 @@ class EnseignementController extends AppController
     public function note(){
         $route = 'note';
         $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
-        
         $periodeOfSession  = (new PeriodeRepository())->getPeriodeOfSession($annee_scolaire_id);
+        $data_salle_classes = (new SalleClasseRepository())->getSalles();
+        $periodes = (new PeriodeRepository())->getPeriodes($annee_scolaire_id);
         
-        $data_classes = (new SalleClasseRepository())->getSalles();
+        $data_all = (new EnseignementRepository())->getEleveOfSalleOfClasseAndMatiereOfClasse($annee_scolaire_id);
+        
+        // dd($data_all);
 
-        $periodes = Periode::table()
-        ->select([
-            'periode.id'=> 'periode_id', 
-            'periode.code'=> 'periode_code', 
-            'periode.libelle' => 'periode'
-            ])
-        ->join('session', 'periode.session_id', '=', 'session.id')
-        ->where('session.annee_scolaire_id', $annee_scolaire_id)
-        ->where('periode.visibilite', 1)
-        ->get();
-      
-        $this->render('sections.note.index', compact('route', 'data_classes', 'periodeOfSession', 'periodes'));
-
+        $this->render('sections.note.index', compact('route', 'data_salle_classes', 'data_all', 'periodeOfSession', 'periodes'));
     }
         
     public function apiInfoNoteSalle()
     {
         # DRAFT
-
     }
  
     
@@ -130,8 +116,6 @@ class EnseignementController extends AppController
         $this->sendResponseAndExit(Helpers::toJSON($data), true);  
     }
     
-
-    
     public function apiUpdateNoteEleveMatiere()
     {
         # DRAFT
@@ -150,18 +134,6 @@ class EnseignementController extends AppController
 
     }
  
-
-    private function verifierExistenceClasseMatiere($annee_scolaire_id, $matiere_id, $classe_id)
-    {
-        $result = AffectationClasseMatiere::table()->select([ 'code' => 'id' ])
-                    ->where('visibilite', '=', 1)
-                    ->where('annee_scolaire_id', $annee_scolaire_id)
-                    ->where('matiere_id', $matiere_id)
-                    ->where('classe_id', $classe_id)
-                    ->get();
-        return ( is_array($result) && count($result)>0);
-    }
-
 
     public function apiInitNoteClasse()
     {

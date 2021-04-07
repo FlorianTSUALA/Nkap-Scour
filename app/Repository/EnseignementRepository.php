@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Helpers\S;
 use App\Model\DBTable;
 
 use App\Model\Parcours;
@@ -28,6 +27,57 @@ class EnseignementRepository extends BaseRepository{
             'libelle'
         ])
         ->where('visibilite', '=', 1)
+        ->get();
+
+        foreach($classes as $classe){
+            
+            $data_salles_classes = [];
+            $salle_classes =  DBTable::getModel(DBTable::SALLE_CLASSE)->select(
+            [   
+                'id' => 'salle_classe_id',
+                'code' => 'salle_classe_code',
+                'libelle' => 'salle_classe'
+            ])
+            ->where('visibilite', '=', 1)
+            ->where('classe_id', '=', $classe['id'])
+            ->get();
+
+            foreach ($salle_classes as $salle_classe) {
+                $tmp_salle_classe = [
+                    'salle_classe_id' => $salle_classe['salle_classe_id'],
+                    'salle_classe_code' => $salle_classe['salle_classe_code'],
+                    'salle_classe' => $salle_classe['salle_classe'],
+                    'eleves' => $this->getEleveOfSalle($salle_classe['salle_classe_id'], $annee_scolaire_id)
+                ];
+                $data_salles_classes[$salle_classe['salle_classe_code']] = $tmp_salle_classe;
+            }
+
+            $data_classe = [
+                'classe_id' => $classe['id'],
+                'classe_code' => $classe['code'],
+                'classe' => $classe['libelle'],
+                'salle_classes' => $data_salles_classes,
+                'matieres' => $this->getMatiereOfClasse($classe['id'], $annee_scolaire_id)
+            ];
+
+            $data_classes[$classe['code']] = $data_classe;
+            
+        }
+        
+        return $data_classes;
+    }
+        
+    public function getEleveOfSalleClasseAndMatiereOfClasseWithNotes($annee_scolaire_id){
+        
+        $data_classes = [];
+
+        $classes =  DBTable::getModel(DBTable::CLASSE)->select(
+        [   
+            'id',
+            'code',
+            'libelle'
+        ])
+        ->where('visibilite', 1)
         ->get();
 
         foreach($classes as $classe){

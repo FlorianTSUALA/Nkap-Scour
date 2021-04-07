@@ -19,6 +19,7 @@ use App\Repository\ParcoursRepository;
 
 trait AffectationControllerTraitSalleEleve
 {
+
     /**
      * permet de savoir si une matiere est affectée à une classe pour une année scolaire donnée.
      *
@@ -84,27 +85,42 @@ trait AffectationControllerTraitSalleEleve
         $this->render('sections.affectation.salle_eleve.affectation', compact('route', 'classes', 'salle_classes', 'affectation_salle_eleve'));
     }
 
+    //-- NEVER USED
     public function listeAffectationSalleEleve()
     {
-        $classe_id = Request::getSecParam('classe', NULL);
-
         $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
 
-        $model = Parcours::table()
+       $affectation_salle_eleve = 
+            Parcours::table()
             ->select(
                 [
-                    'parcours.classe_id' => 'classe', 
-                    'parcours.salle_classe_id' => 'matiere', 
-                    'parcours.salle_classe_id' => 'salle_classe_id' 
+                    'salle_classe.id' => 'salle_classe_id', 
+                    'salle_classe.code' => 'salle_classe_code', 
+                    'salle_classe.libelle' => 'salle_classe',
+
+                    'classe.id' => 'classe_id',
+                    'classe.code' => 'classe_code',
+                    'classe.libelle' => 'classe',
+                    
+                    'statut_apprenant.id' => 'statut_apprenant_id',
+                    'statut_apprenant.code' => 'statut_apprenant_code',
+                    'statut_apprenant.libelle' => 'statut_apprenant',
+                    
+                    'eleve.id' => 'eleve_id',
+                    'eleve.code' => 'eleve_code',
+                    'eleve.nom' => 'eleve_nom',
+                    'eleve.prenom' => 'eleve_prenom'
                 ])
+            ->join('eleve', 'eleve.id', '=', 'parcours.eleve_id')
+            ->join('classe', 'classe.id', '=', 'parcours.classe_id')
+            ->join('salle_classe', 'salle_classe.id', '=', 'parcours.salle_classe_id')
+            ->join('statut_apprenant', 'statut_apprenant.id', '=', 'parcours.statut_apprenant_id')
             ->where('parcours.visibilite', 1)
-            ->where('parcours.annee_scolaire_id', $annee_scolaire_id);
-        
-        if(!is_null($classe_id))
-            $model->where('affectation_salle_eleve.classe_id', $classe_id);
-        
-        $data = $model->groupBy('salle_classe_id')->get();
-        $this->sendResponseAndExit(Helpers::toJSON($data), true);
+            ->where('parcours.annee_scolaire_id', $annee_scolaire_id)
+            ->whereNotNull('parcours.classe_id')
+            ->where('parcours.salle_classe_id', $salle_classe_id)
+            ->get();
+        $this->sendResponseAndExit(Helpers::toJSON($affectation_salle_eleve), true);
 
     }
 

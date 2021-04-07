@@ -93,7 +93,7 @@ $router->addRoute('versement-create', 'versement/create/{code}', [VersementContr
 $router->addRoute('versement_facture', 'versement/print/{code}', [VersementController::class, 'imprimer_facture']);
 $router->addRoute('versement-preview', 'versement/preview/{code}', [VersementController::class, 'preview']);
 
-$router->addRoute('versement_liste', 'versement/detail', [VersementController::class, 'liste_abonnee']);
+$router->addRoute('versement_liste', 'versement/list', [VersementController::class, 'liste_abonnee']);
 $router->addRoute('versement_info', 'versement/info/', [VersementController::class, 'info']);
 
 //PRINTER REPORT

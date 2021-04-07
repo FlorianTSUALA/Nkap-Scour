@@ -3,22 +3,12 @@
 namespace App\Controller;
 
 use App\Helpers\S;
-use App\Model\Classe;
-use Core\Model\Model;
-use App\Model\DBTable;
-use App\Model\Periode;
 use App\Model\Composer;
-use App\Model\Parcours;
-use App\Helpers\Helpers;
-use Core\Session\Request;
+use App\Model\SalleClasse;
 use function Core\Helper\dd;
-use App\Repository\PeriodeRepository;
-
 use App\Repository\ParcoursRepository;
-use App\Controller\Admin\AppController;
 use App\Model\AffectationClasseMatiere;
-use App\Repository\SalleClasseRepository;
-use App\Repository\EnseignementRepository;
+use App\Model\AffectationPersonnelSalleClasse;
 
 trait EnseignementControllerTraitInitBulletinNote
 {
@@ -42,25 +32,44 @@ trait EnseignementControllerTraitInitBulletinNote
         return ( is_array($result) && count($result)>0);
     }
 
-
-
-
-     //initialisation pour une année scolaire définies
+    //initialisation pour une année scolaire définies
     //To do
-    public function initBulletinSalle($annee_scolaire_id, $classe_id, $periode_id )
+    public function initBulletinSallePeriode($annee_scolaire_id, $salle_classe_id, $periode_id )
     {
-        // $personnels = (Personnel::table()->select([ 'code' => 'id' , new Expression("concat(nom,' ',prenom) as value")])->where('visibilite', 1)->get());
-        eleve_id
-        $cours = Helpers::toJSON(DBTable::table()->select(['id'=>'id', 'libelle' => 'value']))
-        $personnel_id = Helpers::toJSON(DBTable::table()->select)
-        $eleves
-        for ($i = 0; $i <count($annee_scolaires); $i++){
-            $annee_scolaire = $annee_scolaires[$i]['id'];
-            for ($j = 0; $j <count($salle_classes); $j++){
-                $salle_classe = $salle_classes[$j]['id'];
-                $data = ['annee_scolaire_id' => $annee_scolaire, 'salle_classe_id' => $salle_classe, 'code' =>  AffectationPersonnelSalleClasse::generateCode()];
-                // vd($data); 
-                AffectationPersonnelSalleClasse::table()->insert($data)->execute();
+        $classe_id = SalleClasse::table()->select('classe_id')->where('visibilite', 1)->where('salle_classe_id', $salle_classe_id)->one();
+        
+        $personnel_id = AffectationPersonnelSalleClasse::table()
+                                ->select('personnel_id')
+                                ->where('annee_scolaire_id', $annee_scolaire_id)
+                                ->where('salle_classe_id', $salle_classe_id)
+                                ->where('visibilite', 1)
+                                ->one();
+        
+        $matieres = AffectationClasseMatiere::table()
+                                ->select('matiere_id')
+                                ->where('annee_scolaire_id', $annee_scolaire_id)
+                                ->where('classe_id', $classe_id)
+                                ->where('visibilite', 1)
+                                ->get();
+
+        $eleves = ( new ParcoursRepository() )->getAffectationEleveBySalleClasse($salle_classe_id, $annee_scolaire_id);
+ 
+        for ($i = 0; $i < count($matieres); $i++){
+            $matiere_id = $matieres[$i];
+            for ($j = 0; $j <count($eleves); $j++){
+                $eleve_id = $eleves[$j]['eleve_id'];
+                $data = [
+                    'annee_scolaire_id' => $annee_scolaire_id, 
+                    'salle_classe_id' => $salle_classe_id, 
+                    'classe_id' => $classe_id, 
+                    'periode_id' => $periode_id, 
+                    'code' =>  Composer::generateCode(),
+                    'personnel_id' => $personnel_id,
+                    'matiere_id' => $matiere_id,
+                    'eleve_id' => $eleve_id,
+                    'note' => null,
+                ];
+                Composer::table()->insert($data)->execute();
             }
         }
        
@@ -68,11 +77,7 @@ trait EnseignementControllerTraitInitBulletinNote
 
     public function genererBulletinSalle($annee_scolaire_code)
     {
-        $annee_scolaire_id = AnneeScolaire::getId(DBTable::ANNEE_SCOLAIRE, $annee_scolaire_code);
-        $this->_genererAffectationSalleEnseignant($annee_scolaire_id);
-        echo true;
+        $annee_scolaire_id = $this->session->get(S::ANNEE_SCOLAIRE); //annee scolaire courante
     }
-
-  
 
 }

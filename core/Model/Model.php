@@ -97,11 +97,19 @@ class Model
 	}
 
     public function genCode(){
-        return strtoupper(substr( $this->class, 0, 4)."_".Date('U'));
+		//Sleep because we must want that date must be unique
+		usleep ( 1 );// sleep 1 micro second 
+		//Date('u') get current micro second
+		//Date('U') get second since 1970
+        return strtoupper(substr( $this->class, 0, 4)."_".Date('U').Date('u'));
 	}
 
 	public static function generateCode(){
-        return strtoupper(substr( __CLASS__, 0, 4)."_".Date('U'));
+		//Sleep because we must want that date must be unique
+		usleep ( 3 );// sleep 1 micro second 
+		//Date('U') get second since 1970
+		//Date('u') get current micro second
+        return strtoupper(substr( __CLASS__, 0, 4)."_".Date('U').Date('u'));
 	}
 	
 }

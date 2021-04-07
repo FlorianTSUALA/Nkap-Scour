@@ -177,8 +177,8 @@ $include_footer_script = ob_get_clean();
             <div class="content-header-right col-md-6 col-12">
                 <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
                     <div class="btn-group" role="group">
-                        <a class="btn btn-outline-info" href="calendars-clndr.html"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Matiere</a>
-                        <a class="btn btn-outline-info" href="timeline-center.html"><i class="fa fa-bar-chart"></i>&nbsp;&nbsp;SalleClasse</a>
+                        <a class="btn btn-outline-info" href="<? URL::link('matiere')?>"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Matiere</a>
+                        <a class="btn btn-outline-info" href="<? URL::link('salle_classe')?>"><i class="fa fa-bar-chart"></i>&nbsp;&nbsp;Salle Classe</a>
                     </div>
                 </div>
             </div>
@@ -245,7 +245,7 @@ $include_footer_script = ob_get_clean();
                                     <div class="col-9">
                                         <select id="salle_classe" class="select2 form-control" name="salle_classe" required>
                                             <!-- <option value="-----------">---------------</option> -->
-                                            <?php foreach($data_classes as $item){?>
+                                            <?php foreach($data_salle_classes as $item){?>
                                                     <option data-id="<?= $item['salle_classe_code']; ?>" value="<?= $item['salle_classe_code']; ?>" ><?= $item['salle_classe']; ?></option>
                                             <?php } ?>
                                         </select>
@@ -272,7 +272,7 @@ $include_footer_script = ob_get_clean();
                         <p>Grid with filtering, editing, inserting, deleting, sorting and paging. Data provided by controller.</p>
                         
                          <!-- <option value="-----------">---------------</option> -->
-                         <?php foreach($data_classes as $item){?>
+                         <?php foreach($data_salle_classes as $item){?>
                             <div id="table_bulletin_note<?= $item->code?>" class="table_bulletin_note <?= "active"?>"></div>
                         <?php } ?>
                     </div>

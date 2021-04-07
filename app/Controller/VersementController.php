@@ -204,7 +204,7 @@ class VersementController extends \App\Controller\Admin\AppController
         
     
         //PENSION ELEVE
-                $data_pension = $_POST['pension_classe'];
+                $data_pension = $_POST['pension_classe']??[];
 
 
                 // if($debug) vd( $data_pension );
@@ -285,7 +285,7 @@ class VersementController extends \App\Controller\Admin\AppController
 
         //ACTIVITE
 
-            $activites = $_POST['activites'];
+            $activites = $_POST['activites']??[];
             
             $items = $activites['multiplicateur']??[];
             $reduction = $activites['remise'];
@@ -293,7 +293,7 @@ class VersementController extends \App\Controller\Admin\AppController
 
 
             $k = 0;
-            foreach($activites['activites'] as $activite){
+            foreach($activites['activites']??[] as $activite){
                 $nom_activite = $activite['value'];
                 $code_activite = $activite['id'];
                 $montant_activite = $activite['montant'];
@@ -388,7 +388,7 @@ class VersementController extends \App\Controller\Admin\AppController
             
         //CANTINE
                 
-            $cantines = $_POST['cantines'];
+            $cantines = $_POST['cantines']??[];
             
             $items = $cantines['recapitulatif'];
             
@@ -472,7 +472,7 @@ class VersementController extends \App\Controller\Admin\AppController
 
 
         //AUTRES
-            $autres = $_POST['autres'];
+            $autres = $_POST['autres']??[];
             $motif = $autres['type_pension'];
             $montant = $autres['montant'];
             $reduction = $autres['remise'];
@@ -539,9 +539,9 @@ class VersementController extends \App\Controller\Admin\AppController
 
     }
 
-
     public function liste_abonnee()
     {
-        # code...
+        $route = 'versement_liste';
+        $this->render('sections.versement.liste.versement_liste', compact('route'));
     }
 }

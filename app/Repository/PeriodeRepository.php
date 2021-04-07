@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Helpers\S;
 use App\Model\DBTable;
 
+use App\Model\Periode;
 use App\Model\Parcours;
 use App\Helpers\Helpers;
 use Core\Session\Request;
@@ -54,6 +55,21 @@ class PeriodeRepository extends BaseRepository{
         }
 
         return $data_periodes;
+    }
+    
+    public function getPeriodes($annee_scolaire_id)       
+    {
+        $data = Periode::table()
+                ->select([
+                    'periode.id'=> 'periode_id', 
+                    'periode.code'=> 'periode_code', 
+                    'periode.libelle' => 'periode'
+                    ])
+                ->join('session', 'periode.session_id', '=', 'session.id')
+                ->where('session.annee_scolaire_id', $annee_scolaire_id)
+                ->where('periode.visibilite', 1)
+                ->get();
+        return $data;
     }
 
 }

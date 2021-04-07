@@ -1,7 +1,7 @@
 <?php 
     use Core\Routing\URL;
-    include 'index-script_search_menu.php';          
-    include dirname(__DIR__)."/_common_lib/_select2_script.php"; 
+    include_once dirname(__DIR__)."/_common_lib/_select2_script.php"; 
+    include_once "affectation-script.php"; 
 ?>
 
 <script>
@@ -66,8 +66,83 @@
 
         function updateJsGrid(){
             console.log('Hello')
+            //manage error
+            return
+            $.ajax({
+                url: '<?= URL::link('api_info_affectation_eleve') ?>',
+                type: 'post',
+                data: data,
+                dataType: 'json',
+            
+                success:function(data){
+                    // console.log(data)
+                    let html = ''
+                    for(var i = 0; i <data.length; i++) {
+                        html += ' '
+                        html += ' '
+                        html += ' '
+                        html += buildCard(data[i])
+                    }
+
+                    $('.content-body').html(html)
+
+                    initDualList()
+                },
+                error: function (textStatus, errorThrown) {
+                    Success = false;
+                    console.log(textStatus, errorThrown);
+                }, 
+                complete: function(data) {
+
+                }
+            })
         }
 
     })
-</script>
 
+    function apiCall(){
+        //jQuery > 1.4.3
+        let id  = $('#menu .list-group a.list-group-item.active').attr("id")
+        if(id.includes('ID_'))
+            classe_id = id.replace('ID_', '')
+        
+        let data = {}
+        if(classe_id === 'ALL'){
+            data.classe_id = null
+        }else{
+            data.classe_id = classe_id
+        }
+
+        // console.log(data)
+
+       $.ajax({
+            url: '<?= URL::link('api_info_affectation_eleve') ?>',
+            type: 'post',
+            data: data,
+            dataType: 'json',
+        
+            success:function(data){
+                // console.log(data)
+                let html = ''
+                for(var i = 0; i <data.length; i++) {
+                    html += ' '
+                    html += ' '
+                    html += ' '
+                    html += buildCard(data[i])
+                }
+
+                $('.content-body').html(html)
+
+                initDualList()
+            },
+            error: function (textStatus, errorThrown) {
+                Success = false;
+                console.log(textStatus, errorThrown);
+            }, 
+            complete: function(data) {
+
+            }
+        }); 
+    }
+
+</script>
