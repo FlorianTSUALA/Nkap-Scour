@@ -93,6 +93,18 @@ $router->addRoute('versement-create', 'versement/create/{code}', [VersementContr
 $router->addRoute('versement_facture', 'versement/print/{code}', [VersementController::class, 'imprimer_facture']);
 $router->addRoute('versement-preview', 'versement/preview/{code}', [VersementController::class, 'preview']);
 
+//LISTE VERSEMENT
+
+$router->addRoute('versement-list_all', 'versement/list/all', [VersementController::class, 'list_all']);
+// $router->addRoute('versement-list_info', 'versement/list/_info{code}', [VersementController::class, 'preview']);
+$router->addRoute('versement-detail', 'versement/detal/{code}', [VersementController::class, 'detail']);
+
+
+$router->addRoute('versement_liste_test', 'test/versement/list', [VersementController::class, 'liste_abonnee']);
+$router->addRoute('versement_liste', 'versement/list', [VersementController::class, 'liste_abonnee']);
+$router->addRoute('versement_info', 'versement/info/', [VersementController::class, 'info']);
+
+$router->addRoute('versement_liste_test', 'test/versement/list', [VersementController::class, 'liste_abonnee']);
 $router->addRoute('versement_liste', 'versement/list', [VersementController::class, 'liste_abonnee']);
 $router->addRoute('versement_info', 'versement/info/', [VersementController::class, 'info']);
 

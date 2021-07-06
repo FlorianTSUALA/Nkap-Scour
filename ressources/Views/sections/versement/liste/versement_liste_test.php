@@ -14,6 +14,26 @@ use App\Helpers\Helpers;
     $include_res_header .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'assets/vendors/css/forms/selects/select2.min.css">'. "\n";
     $include_res_header .= Helpers::dataTableResponsibleSearchBar() . "\n";
     $include_res_header .=  '<style>
+
+
+
+
+                        .btn-group {  
+                            white-space: nowrap;              
+                        }
+                        
+                        @media (max-width: 767px) {
+                            .table-responsive .dropdown-menu {
+                                position: static !important;
+                            }
+                        }
+                        @media (min-width: 768px) {
+                            .table-responsive {
+                                overflow: inherit;
+                            }
+                        }
+
+                        
                         #menu ul, #menu li {list-style-type: none;}
 
                         #menu div div li a, #menu  div li a, #menu  li{ 
@@ -88,7 +108,35 @@ $include_footer_script = ob_get_clean();
 -->
 
 <div class="app-content content">
-   
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12">
+                <h3 class="content-header-title">Liste des Versements	</h3>
+                <div class="row breadcrumbs-top">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="<?= URL::link('accueil') ?>">Accueil</a> </li>
+                            <li class="breadcrumb-item"><a href="<?= URL::link('accueil') ?>">Scolarité</a> </li>
+                            <li class="breadcrumb-item"><a href="<?= URL::link('biblio_accueil') ?>">Versement</a> </a> </li>
+                            <li class="breadcrumb-item active">Liste </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="content-header-right col-md-6 col-12">
+                <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-outline-info" href='<?= URL::link('eleve') ?>'><i class="fa fa-folder-open"></i>&nbsp; Gerer Eleves</a>
+                        <a class="btn btn-outline-info" href='<?= URL::link('activite') ?>'><i class="fa fa-book"></i>&nbsp; Gerer Activites</a>
+                        <a class="btn btn-outline-info" href='<?= URL::link('cantine') ?>'><i class="fa fa-bookmark"></i>&nbsp; Gerer Cantines</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="content-header-lead col-12 mt-2">
+                <p class="lead"></p>
+            </div>
+        </div>
 
         <div>
         <!-- <div class="content-detached "> -->
