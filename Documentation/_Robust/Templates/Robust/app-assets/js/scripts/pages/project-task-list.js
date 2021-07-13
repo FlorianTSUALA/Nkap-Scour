@@ -53,11 +53,7 @@ $(document).ready(function() {
 
     $('select').select2();
 
-    // Checkbox & Radio 1
-    $('.icheck input').iCheck({
-        checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue',
-    });
+
 
     $('#project-task-list').on( 'draw.dt', function () {
         // Checkbox & Radio 1
