@@ -32,8 +32,7 @@ class PersonnelController extends AppController
         parent::__construct();
 
         $this->vairant = DBTable::PERSONNEL;
-        $this->folder_view_index = 'personnel.index';
-
+        // $this->folder_view_index = 'personnel.index';
 
         $this->loadModel($this->vairant);
         $this->loadModel('pays');
@@ -41,7 +40,7 @@ class PersonnelController extends AppController
         $this->base_route = 'personnel';
         $this->class_name = 'personnel';
 
-        $this->title_page = 'Gestion du personnel - Comelines';
+        $this->title_page = 'Gestion du personnel - Ges-School';
         $this->title_home = 'Gestion du personnel';
         $this->create_title = "Ajout d'un personnel";
         $this->view_title = "Information sur un personnel";
@@ -99,7 +98,7 @@ class PersonnelController extends AppController
     {
         $route = 'ajout_personnel';
 
-        $this->app->setTitle('Ajout d\'un personnel  - Comelines');
+        $this->app->setTitle('Ajout d\'un personnel  - Ges-School');
         // $type_personnels = $this->type_personnel->all(); 
         $type_personnels = TypePersonnel::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         // $pays = $this->pays->all();
@@ -147,7 +146,7 @@ class PersonnelController extends AppController
                     
                 ])->where('code', $code)->one();
         // dd($personnel);
-        $this->app->setTitle('Mise à jour d\'un personnel  - Comelines');
+        $this->app->setTitle('Mise à jour d\'un personnel  - Ges-School');
         $type_personnels = TypePersonnel::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $pays = Pays::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get() ;
 

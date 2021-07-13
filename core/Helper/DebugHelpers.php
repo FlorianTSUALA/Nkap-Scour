@@ -26,7 +26,7 @@ trait DebugHelpers{
             die('---------------- || -------------------');
         }
 
-        function dd($expression , $title = " -NKAP-SCOUR- ", ...$_){
+        function dd($expression , $title = " -ges-school- ", ...$_){
 
             $background="#EEEEEE";
             $color="#000000";            
@@ -73,7 +73,7 @@ trait DebugHelpers{
 
             $background="#EEEEEE";
             $color="#000000";
-            $title = " -NKAP-SCOUR- ";
+            $title = " -ges-school- ";
             echo '<pre><br><br></pre>';
 
             //Print File called function

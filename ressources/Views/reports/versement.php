@@ -35,7 +35,7 @@ data_items  ****************
     
     ?>
 
-<!-- <link rel="stylesheet" type="text/css" href="http://127.0.0.1/nkap-scour/public/assets/app-assets/images/logo/cantineList2.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="http://127.0.0.1/ges-school/public/assets/app-assets/images/logo/cantineList2.css"> -->
 <style type="text/css">
 table, th, td {
   border: 0px solid black;
@@ -51,7 +51,7 @@ th, td {
 <table  style="width:100%">
     <tr>
         <td  rowspan="4"  style="width: 13%"><img src="<?= URL::base() ?>/assets/app-assets/images/logo/logo-80x80.png"> </td>
-        <td style="text-align: left;    width: 22%"><b>Les comelines</b></td>
+        <td style="text-align: left;    width: 22%"><b>Ges-School</b></td>
         <td style="text-align: right;    width: 65%">  <b>REÇU DE PAIEMENT DE LA CANTINE</b> </td>
     </tr>
   

@@ -42,7 +42,7 @@ class FactureVersement extends Report{
         $invoice->setType("RECU DE VERSEMENT");
         $invoice->setReference($ref);
         $invoice->setDate($date);
-        $invoice->setFrom(array("Les comelines","Batterie 4","Libreville , Gabon"));
+        $invoice->setFrom(array("Ges-School","Batterie 4","Libreville , Gabon"));
         $invoice->setTo(array( $nom.' '.$prenom ,$classe,""));
 
         $i = 0;
@@ -230,7 +230,7 @@ class FactureVersement extends Report{
         /* Add Paragraph */
         $invoice->addParagraph("Apres paiement, votre argent est non-remboursable.");
         /* Set footer note */
-        // $invoice->setFooternote("Les comelines");
+        // $invoice->setFooternote("Ges-School");
 
 
         /* Render */

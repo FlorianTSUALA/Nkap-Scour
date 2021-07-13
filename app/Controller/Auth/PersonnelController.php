@@ -30,7 +30,7 @@ class UsersController extends AppController
 
     public function index()
     {
-        $this->app->setTitle('Connexion - Nkap-scour');
+        $this->app->setTitle('Connexion - ges-school');
 
         $this->render('auth.login', [], "layout-auth");
 

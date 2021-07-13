@@ -222,7 +222,7 @@ use App\Controller\PrinterController;
             </div>
 
             <div class="card-footer border-top-2 border-top-warning">
-                <span>Les Comelines</span>
+                <span>Ges-School</span>
             </div>
         </div>
     </div>

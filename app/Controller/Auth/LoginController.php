@@ -38,7 +38,7 @@ class LoginController extends AppController
     {
         $auth = new DBAuth($this->app->getDb());
         $auth->disconnect();
-        $this->app->setTitle('Connexion - Comelines');
+        $this->app->setTitle('Connexion - Ges-School');
         header("HTTP/1.1 200 OK");
         $root = App::base_url();
 		header("Location: {$root}");
@@ -52,7 +52,7 @@ class LoginController extends AppController
         if ($auth->logged()) {
             $this->home();
         }else{
-            $this->app->setTitle('Connexion - Comelines');
+            $this->app->setTitle('Connexion - Ges-School');
             $this->render('auth.login', [], "layout-auth");
         }
 
@@ -63,7 +63,7 @@ class LoginController extends AppController
      **/
     public function home()
     {
-        $this->app->setTitle('accueil - Comelines');
+        $this->app->setTitle('accueil - Ges-School');
         
         $this->session->flash("Hello  ".$this->session->get(S::PERS_NOM)."!!!<br> Nous sommes ravis de vous revoir!!!");
 

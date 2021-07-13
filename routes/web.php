@@ -58,7 +58,7 @@ $router->addRoute('accueil', 'accueil', [HomeController::class, 'home']);
 
 $router->addRoute('biblio_accueil', 'biblio/accueil', [BiblioController::class, 'accueil']);
 $router->addRoute('cantine_accueil', 'cantine/accueil', [CantineController::class, 'accueil']);
-$router->addRoute('club_accueil', 'club/accueil', [ClubController::class, 'accueil']);
+$router->addRoute('club_accueil', 'club/accueil', [ClubController::class, 'index']);
 $router->addRoute('personnel_accueil', 'personnel/accueil', [PersonnelController::class, 'accueil']);
 $router->addRoute('enseignement_accueil', 'enseignant/accueil', [EnseignementController::class, 'accueil']);
 $router->addRoute('bulletin_accueil', 'bulletin/accueil', [BulletinController::class, 'accueil']);
@@ -93,8 +93,22 @@ $router->addRoute('versement-create', 'versement/create/{code}', [VersementContr
 $router->addRoute('versement_facture', 'versement/print/{code}', [VersementController::class, 'imprimer_facture']);
 $router->addRoute('versement-preview', 'versement/preview/{code}', [VersementController::class, 'preview']);
 
+$router->addRoute('versement-suppression', 'versement/suppression/{id_fact}', [VersementController::class, 'suppression']);
+
+//LISTE VERSEMENT
+
+$router->addRoute('versement-list_all', 'versement/list/all', [VersementController::class, 'list_all']);
+// $router->addRoute('versement-list_info', 'versement/list/_info{code}', [VersementController::class, 'preview']);
+$router->addRoute('versement-detail', 'versement/detal/{code}', [VersementController::class, 'detail']);
+
+
+$router->addRoute('versement_liste_test', 'test/versement/list', [VersementController::class, 'liste_abonnee']);
 $router->addRoute('versement_liste', 'versement/list', [VersementController::class, 'liste_abonnee']);
 $router->addRoute('versement_info', 'versement/info/', [VersementController::class, 'info']);
+
+// $router->addRoute('versement_liste_test', 'test/versement/list', [VersementController::class, 'liste_abonnee']);
+// $router->addRoute('versement_liste', 'versement/list', [VersementController::class, 'liste_abonnee']);
+// $router->addRoute('versement_info', 'versement/info/', [VersementController::class, 'info']);
 
 //PRINTER REPORT
 $router->addRoute('print', 'print/{model}', [PrinterController::class, 'index']);
@@ -189,7 +203,7 @@ $router->addRoute('ajout_personnel', 'personnel/nouveau', [PersonnelController::
 $router->addRoute('modifier_personnel', 'personnel/modifier/{code}', [PersonnelController::class, 'modifier']);
 $router->addRoute('personnel_liste', 'personnel/detail', [PersonnelController::class, 'liste']);
 $router->addRoute('personnel_salle_classe', 'personnel/salleclasse', [PersonnelController::class, 'liste_classe']);
-$router->addRoute('personnel_api_get_all', 'personnel/api/all', [PersonnelController::class, 'getApiPersonnels']);
+$router->addRoute(' api_personnel_all', 'personnel/api/all', [PersonnelController::class, 'getApiPersonnels']);
 $router->addRoute('personnel_api_info', 'personnel/api/info/{code}', [PersonnelController::class, 'getApiPersonnel']);
 $router->addRoute('personnel_api_delete_personnel', 'personnel/api/delete/personnel/{code}', [PersonnelController::class, 'apiDeletePersonnel']);
 $router->addRoute('api_personnel_list', 'personnel/api/list', [PersonnelController::class, 'getApiAllEssentiel']);
@@ -296,3 +310,6 @@ $router->addRoute('testa', 'testa', [TestController::class, 'testA']);
 $router->addRoute('testb', 'testb', [TestController::class, 'testB']);
 $router->addRoute('testc', 'testc', [TestController::class, 'testC']);
 
+// CLUB
+$router->addRoute('club-create', 'club/create/', [ClubController::class, 'save']);
+$router->addRoute('club_liste', 'club/detail', [ClubController::class, 'liste_abonnee_activite']);

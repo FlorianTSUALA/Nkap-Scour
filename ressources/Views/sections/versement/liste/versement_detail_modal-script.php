@@ -2,7 +2,7 @@
 
 use App\Helpers\Helpers;
     use Core\Routing\URL;
-    include dirname(__DIR__)."/_common_lib/_select2_script.php";
+    // include dirname(__DIR__)."/_common_lib/_select2_script.php"; 
 ?>
 
 
@@ -10,27 +10,12 @@ use App\Helpers\Helpers;
     //Restreindre l'emprunt d'un meme livre
     var mustUpdateX = true
     var mustUpdateY = false
-    var exemplaires = <?= Helpers::toJSON($exemplaires); ?>;
+    var exemplaires = <?= Helpers::toJSON($exemplaires??[]); ?>;
    
 
     //Initialisation des composant de base
     (function(window, document, $) {
-        //'use strict'
-
-        $('#modal-emprunt').on('select2:open', 'select.code-livre', function(){
-            mustUpdateY = true
-            mustUpdateX = false
-        })
-
-        $('#modal-emprunt').on('select2:open', 'select.titre-livre', function(){
-            mustUpdateX = true
-            mustUpdateY = false
-        })
-
-        $('#modal-emprunt').on('change', 'select.code-livre', function(){
-            let parent = $(this).parent().parent()
-            updateItem(parent, true)
-        })
+      
 
         $('#modal-emprunt').on('change', 'select.titre-livre', function(){
             let parent = $(this).parent().parent()
@@ -59,96 +44,17 @@ use App\Helpers\Helpers;
         })
         
         // Custom Show / Hide Configurations
-        initRepeater()
-        resetRepeater()
+        //-*- initRepeater()
+        //-*- resetRepeater()
     })
 
-    function resetRepeater() {
-        $('[data-repeater-list]').empty()
-        $('[data-repeater-create]').click()
-    }
 
-    function initRepeater() {
-        items = $('.item-repeater').repeater({
-            
-            show: function () {
-                $(this).slideDown();
+ 
 
-                $('.select2-container').remove();
-
-                $('select').select2({
-                    width: '100%',
-                    // placeholder: "Placeholder text",
-                    // allowClear: true
-                });
-
-                initItem(this)
-                
-                $('#modal-emprunt').on('select2:open', 'select.code-livre', function(){
-                    mustUpdateY = true
-                    mustUpdateX = false
-                    
-                })
-
-                $('#modal-emprunt').on('select2:open', 'select.titre-livre', function(){
-                    mustUpdateX = true
-                    mustUpdateY = false
-                })
-               
-
-                $('#modal-emprunt').on('change', 'select.code-livre', function(){
-                    let parent = $(this).parent().parent()
-                    updateItem(parent, true)
-                })
-
-                $('#modal-emprunt').on('change', 'select.titre-livre', function(){
-                    let parent = $(this).parent().parent()
-                    updateItem(parent, false)
-                })
-                
-            },
-                
-            hide: function(remove) {
-                if (confirm('Etes vous sûre de supprimer cette élément?')) {
-                    $(this).slideUp(remove);
-                    // $(this).hide(remove);
-                }
-            }
-        });
-    }
-    function updateItem(parent, isCode=true){
-        let css_class = (isCode)? 'code-livre' : 'titre-livre'
-        let selected = parent.find("." + css_class).val()
-        console.log(selected)
-        if(selected == null) return //aucune valeur selectionnée
-        if(exemplaires.length === 0) return
-        let tmp = exemplaires.filter((item)=>{
-            return String(item.exemplaire_id) === String(selected)
-        })
-        let current = tmp[0]
-       
-        if(isCode){
-            if(mustUpdateY){
-                parent.find(".titre-livre").val( current.exemplaire_id )
-                parent.find(".titre-livre").trigger('change')
-            }
-        }else{
-            if(mustUpdateX){
-                parent.find(".code-livre").val( current.exemplaire_id )
-                parent.find(".code-livre").trigger('change')
-            }
-        }
-
-        mustUpdateX = false
-        mustUpdateY = false
-
-        parent.find(".etat-livre").val( current.etat_document_id )
-        parent.find(".etat-livre").trigger('change')
-    }
     
     function initItem(target, isCode = true){
         let parent = $(target)
-        updateItem(parent, isCode)
+        //-*- updateItem(parent, isCode)
     }
 
 

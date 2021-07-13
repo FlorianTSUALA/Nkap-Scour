@@ -2,11 +2,9 @@
 
 use Core\Routing\URL;
 use App\Model\Emprunt;
+use App\Model\Eleve;
 use App\Helpers\Helpers;
 use Config\Invariant\API;
-use Core\HTML\Form\InputType;
-
-include dirname(__DIR__)."/_common_lib/_select2_script.php";
 
 ?>
 <!--
@@ -17,12 +15,13 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
 -->
 
 
-<script> 
+<script>
 
-  let msg  = 'Bienvenue à la section des paiement cantine'
+  let msg  = 'Bienvenue à la section versement'
+
   block_notification(msg)
 
-        // C:\laragon\www\Nkap-Scour\_robust\_Robust\Robust\Robust\app-assets\js\scripts\pickers\dateTime\pick-a-datetime.js
+        // C:\laragon\www\ges-school\_robust\_Robust\Robust\Robust\app-assets\js\scripts\pickers\dateTime\pick-a-datetime.js
         var filter_by = 'ALL'
         var start_date = moment()
         var end_date = moment()
@@ -37,129 +36,124 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
             console.log(start_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ))
             return start_date.format( 'YYYY-MM-DD  HH:mm:ss.000' )
         }
-        
+
         function getDateEnd(){
             console.log(end_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ))
             return end_date.format( 'YYYY-MM-DD  HH:mm:ss.000' )
         }
-        
+
         function init_data_table() {
           // $('#table-emprunt').append('<caption style="caption-side: top-right">Table caption</caption>');
 
-            table = $('#table-emprunt').DataTable({
+            table = $('#table-versements').DataTable({
+                scrollX: true,
+                paging: true,
+                // responsive: true,
                 //"serverSide": true,
                 //Server-side processing is useful when working with large data sets (typically >50'000 records) as it means a database engine can be used to perform the sorting etc calculations - operations that modern database engines are highly optimised for, allowing use of DataTables with massive data sets (millions of rows).
                 ajax:{
-                    url: '<?= URL::link('biblio_api_emprunt_liste') ?>',
+                    url: '<?= URL::link('versement-list_all') ?>',
                     data: function(data){
+                      console.log(data)
                         data.code =  code,
-                        data.filter_by = filter_by,
-                        data.start_date = start_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ),
-                        data.end_date = end_date.format( 'YYYY-MM-DD  HH:mm:ss.000' )
+                        data.filter_by =  filter_by
                     } ,
                     type: 'POST'
                 },
-                "columns": [<?= Emprunt::getColumns() ?>],
-                "columnDefs": [
-                  {
-                    targets: 0,
-                    visible: false
-                  },         
-                  {
-                    targets: 1,
-                    visible: false
-                  },         
-                  {
-                    targets: -2,
-                    visible: false
-                  },         
-                  {
-                    targets: -3,
-                    visible: false
-                  },
-                  {
+                "columns": [<?= Eleve::getColumns() ?>],
+                fixedColumns: true,
+              "columnDefs": [
+                {
+                  "targets": 0,
+                  width: '5%',
+                  "searchable": false,
+                  // "orderable": false,
+                  "class": "index",
+
+                },
+
+                {
                   "targets": -1,
+                  width: '7%',
                   "data": null,
-                  "render": function(data, type, full, meta){ 
-                      console.log(data);
-                        return '<span class="dropdown">  '+
-                                    '<button id="btnSearchDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-info dropdown-toggle"><i class="fa fa-cog"></i></button> <span aria-labelledby="btnSearchDrop2" class="dropdown-menu mt-1 dropdown-menu-right">  ' +
-                                    '<a href="#" class="dropdown-item action action-voir" data-action="action-voir"  data-id="'+data.id+'"  ><i class="ft-eye"></i> voir</a>' +
-                                    '<a href="#" class="dropdown-item action action-modifier" data-action="action-modifier"  data-id="'+data.id+'"  ><i class="ft-edit-2"></i> modifier</a>' +
-                                    '<a href="#" class="dropdown-item action action-restituer" data-action="action-restituer"  data-id="'+data.id+'"  ><i class="ft-check"></i> restituer</a>' +
-                                    '<a href="#" class="dropdown-item action action-reemprunter" data-action="action-reemprunter"  data-id="'+data.id+'"  ><i class="ft-upload"></i> re-emprunter</a>' +
-                                    '<a href="#" class="dropdown-item action action-supprimer" data-action="action-supprimer"  data-id="'+data.id+'"  ><i class="ft-trash"></i> supprimer</a>  </span> </span>' 
+                  "render": function(data, type, full, meta){
+                      // console.log(data);
+                        return  ' '+
+                                ' <div class="btn-group" role="group" aria-label="Basic example"> '+
+                                '      <button type="button" data-action="action-voir" class="action btn btn-sm btn-icon btn-primary mr-0" title="voir"><i class="ft-eye"></i></button> '+
+                                '      <button type="button" data-action="action-modifier" class="action btn btn-sm btn-icon btn-success mr-0" title="modifier"><i class="ft-edit-2"></i></button> '+
+                                '      <button type="button" data-action="action-supprimer" class="action btn btn-sm btn-icon btn-warning mr-0" title="supprimer"><i class="ft-trash"></i></button> '+
+                                '  </div>'
+
                     }
-                  // "defaultContent": "
-                  // '<span class="dropdown">  '+
-                  // '<button id="btnSearchDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-info dropdown-toggle"><i class="fa fa-cog"></i></button> <span aria-labelledby="btnSearchDrop2" class="dropdown-menu mt-1 dropdown-menu-right">  ' +
-                  // '<a href="#" class="dropdown-item action action-voir" data-action="action-voir"  data-id="action-voir"  ><i class="ft-eye"></i> voir</a>' +
-                  // '<a href="#" class="dropdown-item action action-modifier" data-action="action-modifier"  data-id="action-modifier"  ><i class="ft-edit-2"></i> modifier</a>' +
-                  // '<a href="#" class="dropdown-item action action-restituer" data-action="action-restituer"  data-id="action-restituer"  ><i class="ft-check"></i> restituer</a>' +
-                  // '<a href="#" class="dropdown-item action action-reemprunter" data-action="action-reemprunter"  data-id="action-reemprunter"  ><i class="ft-upload"></i> re-emprunter</a>' +
-                  // '<a href="#" class="dropdown-item action action-supprimer" data-action="action-supprimer"  data-id="action-supprimer"  ><i class="ft-trash"></i> supprimer</a>  </span> </span>"' 
                 }
-              ],
-              "createdRow": function(row, data, index) {
-                    // if (data[2] * 1 < 9000) 
-                    {
-                      // console.log(data.date_expiration)
-                      let date_emprunt = new Date(data.date_emprunt).toLocaleDateString(window.navigator.language, {year: 'numeric',month: 'long',day: 'numeric',});
-                      let date_expiration = new Date(data.date_expiration).toLocaleDateString(window.navigator.language, {year: 'numeric',month: 'long',day: 'numeric',});
-                        //  console.log(date_expiration);
-                        $('td', row).eq(3).text( date_emprunt );
-                        $('td', row).eq(4).text( date_expiration );
-                    }
-                },
-                "fnDrawCallback": function( oSettings ) {
-                    // $('#table-emprunt').append('<caption style="caption-side: top-right">Table caption</caption>');
-                },
+            ],
+            "createdRow": function(row, data, index) {
+                  // let date = new Date(data.date).toLocaleDateString(window.navigator.language, {year: 'numeric',month: 'long',day: 'numeric',});
+              },
+              "fnDrawCallback": function( oSettings ) {
+                  // $('#table-emprunt').append('<caption style="caption-side: top-right">Table caption</caption>');
+              },
                 "destroy" : true,
                 dom: 'Blfrtip',
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
                 stateSave: true,
               <?= Helpers::dataTableCommunOptions() ?>
-               
+
             })
 
+            // $('#table-emprunt').on('show.bs.dropdown', function () {
+            //   $('.dataTables_scrollBody').addClass('dropdown-visible')
+            // }).on('hide.bs.dropdown', function () {
+            //   $('.dataTables_scrollBody').removeClass('dropdown-visible')
+            // })
 
-            $('#table-emprunt tbody').on( 'click', 'a.action', function () {
-                var id = $(this).data('id');
+
+            // $('#table-emprunt tbody .dropdown-toggle').dropdown();
+
+            $('#table-versements tbody').on( 'click', 'a.action', function (event)
+              {
+                var id = $(this).data('id')
                 var action = $(this).data('action');
-                console.log(id)
+                // console.log(id)
+                // console.log(action)
+                // var data = table.row( $(this).parents('tr') ).data()
+                // console.log(data)
+                // // let id = data.id
+                // let num = data.num
+                // let code_enregistrement = data.code_enregistrement
+                // let titre = data.titre
+                // let eleve = data.eleve
+                // let date_emprunt = data.date_emprunt
+                // let date_expiration = data.date_expiration
+                // let classe = data.classe
+                // let etat_document = data.etat_document
+                // $('#modal-restitution').modal('show')
+                // $('.dropdown-toggle').dropdown()
+                // $(".dropdown").dropdown("toggle");
                 console.log(action)
-                var data = table.row( $(this).parents('tr') ).data()
-                console.log(data)
-                // let id = data.id
-                let num = data.num
-                let code_enregistrement = data.code_enregistrement
-                let titre = data.titre
-                let eleve = data.eleve
-                let date_emprunt = data.date_emprunt
-                let date_expiration = data.date_expiration
-                let classe = data.classe
-                let etat_document = data.etat_document
-
-                switch(action){
-                  case 'action-voir':
-                      $('#modal-restitution').modal('show')
-                    break;
-                  case 'action-modifier':
-                    $('#modal-restitution').modal('show')
-                    break;
-                  case 'action-restituer':
-                    $('#modal-restitution').modal('show')
-                    break;
-                  case 'action-reemprunter':
-                    $('#modal-restitution').modal('show')
-                    break;
-                  case 'action-supprimer':
-                    $('#modal-restitution').modal('show')
-                    break;
-                }
+                // switch(action){
+                //   case 'action-voir':
+                //       $('#modal-restitution').modal('show')
+                //     break;
+                //   case 'action-modifier':
+                //     $('#modal-restitution').modal('show')
+                //     break;
+                //   case 'action-restituer':
+                //     $('#modal-restitution').modal('show')
+                //     break;
+                //   case 'action-reemprunter':
+                //     $('#modal-restitution').modal('show')
+                //     break;
+                //   case 'action-supprimer':
+                //     $('#modal-restitution').modal('show')
+                //     break;
+                // }
 
                 // alert( id, num, code_enregistrement, titre, eleve, date_emprunt, date_expiration, classe, etat_document )
-            } )
+                // return false
+              }
+            )
 
 
             //Reload table data every 30 seconds (paging retained):
@@ -173,7 +167,7 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
 
     	// Localization
       $('.localeRange').daterangepicker({
-        singleDatePicker: true,
+        singleDatePicker: false,
         // ranges: {
         //   "Aujourd'hui": [moment(), moment()],
         //   'Hier': [moment().subtract('days', 1), moment().subtract('days', 1)],
@@ -199,8 +193,8 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
 
       // Max and Min date
       min: [2019,8,20],
-      max: [2022,10,30],
-        
+      // max: [2022,10,30],
+
       // Using Javascript
       // min: new Date(2015,3,20,7),
       // max: new Date(2015,7,14,18,30)
@@ -234,13 +228,13 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
   }, cb)
 
   init_data_table()
-  
+
   function cb(start, end) {
     $('#resume_filtre').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
     start_date = start
     end_date = end
-    console.log(start_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ))         
-    console.log(end_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ))         
+    console.log(start_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ))
+    console.log(end_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ))
     table.ajax.reload()
     // table.ajax({
     //               url: '<?= URL::link('cantine_abonnement_info') ?>',
@@ -261,42 +255,14 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
 
 
 <script>
-    // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_active_element
-    // Add active class to the current menu item (highlight it)
-    var menu = document.getElementById("menu");
-    var links = menu.getElementsByClassName("list-group-item");
 
+    window.setInterval(
+      function (){
+        table.ajax.reload()
+      },
+      <?= API::REALTIME_TIME_RECENT_TRANSACTION ?>
+    )
 
-    for (var i = 0; i < links.length; i++) {
-        links[i].addEventListener('click', function() {
-            var current = document.getElementsByClassName('active')
-            if (current.length > 0) { 
-                current[0].className = current[0].className.replace(' active', '')
-            }
-            this.className += ' active'
-            if(this.id.includes('ID_')){
-                let current_id = this.id.replace('ID_', '')
-                if(current_id.includes('DOCU'))
-                filter_by ='DOCUMENT'
-                else
-                filter_by = 'DOMAINE'
-                code  =  current_id
-            }else{
-                filter_by = 'ALL'
-                code = ''
-            }
-
-            start_date = moment()
-            end_date = moment()
-            // alert(code)
-            table.ajax.reload()
-        })
-    }
-    
-    
-    window.setInterval(function (){
-      table.ajax.reload()
-        }, <?= API::REALTIME_TIME_RECENT_TRANSACTION ?>);
 </script>
 
 
@@ -311,7 +277,7 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
         } );
         $('#modal-restitution').modal('show')
     } );
- 
+
     $('#example tbody').on( 'click', 'button', function () {
         var data = table.row( $(this).parents('tr') ).data();
         alert( data[0] +"'s salary is: "+ data[ 5 ] );
@@ -319,90 +285,19 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
 </script>
 
 
-<script>
-      // FOR SEARCH MENU
+<!-- <script>
 
-      function searchMenu(list) {
-      
-        // https://jsfiddle.net/sofoklis_stouraitis/zLzfpb1u/8/
-        // https://stackoverflow.com/questions/2487747/selecting-element-by-data-attribute-with-jquery
-        // https://www.w3schools.com/jquery/traversing_closest.asp
-        // https://stackoverflow.com/questions/10260667/jquery-get-parent-parent-id
-        // bonus https://codepen.io/CodifyAcademy/pen/wzBmXL
-
-
-        var input = $(".menu-search");
-        $(input)
-        .change( function () {
-          var filter = $(this).val().toUpperCase();
-          if(filter) {
-            let li = $(list).find("li a");
-            for (i = 0; i < li.length; i++) {
-              a = li[i]
-              if (a.innerText.toUpperCase().indexOf(filter) > -1) {
-                
-                $(a).parent().children('a').show()
-                if($(a).closest('div').hasClass('collapse')){
-
-                  $(a).closest('div').addClass(' show')
-                  let id = $(a).closest('div').attr('id')
-                  $('[data-target="#'+id+'"]').show()
-
-                }
-
-              } else {
-                $(a).parent().children('a').hide()
-              }
-
-            }
-            
-            // not_contains = $(list).find("li a:not(:Contains(" + filter + "))").hide();
-            // console.log(not_contains)
-            // return
-            
-            // not_contains.hide().parent().hide()
-            // $(list).find("li a:Contains(" + filter + ")").show().parents('li').show().addClass('open').closest('li').children('a').show();
-            var searchFilter = $(list).find("li a:Contains(" + filter + ")");
-            if( searchFilter.parent().hasClass('has-sub') ){
-              searchFilter.show()
-              .parents('li').show()
-              .addClass('open')
-              .closest('li')
-              .children('a').show()
-              .children('li').show();
-              alert('has')
-              // searchFilter.parents('li').find('li').show().children('a').show();
-              if(searchFilter.siblings('ul').length > 0){
-                searchFilter.siblings('ul').children('li').show().children('a').show();
-              }
-      
-            }
-            else{
-              searchFilter.show().parents('li').show().addClass('open').closest('li').children('a').show();
-            }
-
-          } else {
-            // return to default
-            console.log($('#menu').find("li > a"))
-            // $('#menu>li a').hide()
-            $('#menu').find("li > a").hide()
-            // $('[data-parent="#menu"]').show()
-               $('#menu div li a').show()
-               $('#menu div div').removeClass('show')
-
-          //--   $('.navigation-header').show();
-            // $(list).find("li a").show().parent().show().removeClass('open');
-            // alert('empty')
-          }
-          // $.app.menu.manualScroller.update();
-          return false;
-        })
-        .keyup( function () {
-            // fire the above change event after every letter
-            $(this).change();
-        });
-    
-      }
-      searchMenu('#menu')
-
-</script>
+        (function () {
+          if (typeof EventTarget !== "undefined") {
+              let func = EventTarget.prototype.addEventListener;
+              EventTarget.prototype.addEventListener = function (type, fn, capture) {
+                  this.func = func;
+                  if(typeof capture !== "boolean"){
+                      capture = capture || {};
+                      capture.passive = false;
+                  }
+                  this.func(type, fn, capture);
+              };
+          };
+      }());
+    </script> -->

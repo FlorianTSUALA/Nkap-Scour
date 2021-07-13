@@ -89,7 +89,7 @@ ft-list
 
 
 <script>
-  // C:\laragon\www\Nkap-Scour\_robust\_Robust\Robust\Robust\app-assets\js\scripts\pickers\dateTime\pick-a-datetime.js
+  // C:\laragon\www\ges-school\_robust\_Robust\Robust\Robust\app-assets\js\scripts\pickers\dateTime\pick-a-datetime.js
     var current_classe = 'all';
     var start_date = <?= date("Y-m-d") ?> ;
     var end_date = <?= date("Y-m-d") ?> ;

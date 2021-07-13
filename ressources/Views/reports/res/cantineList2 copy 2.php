@@ -237,7 +237,7 @@ end_last_page div
     <tr>
         <th>
             <div>
-                <h3>LES COMELINES</h3>
+                <h3>Ges-School</h3>
                 ECOLE MATERNELLE ET <br />
                 PRIMAIRE <br />
             </div>

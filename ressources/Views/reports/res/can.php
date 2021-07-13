@@ -6,7 +6,7 @@
         <div id="invoice-company-details" class="row">
             <div class="col-md-6 col-sm-12 text-center text-md-left">
                 <div class="media">
-                    <img src="http://127.0.0.1/nkap-scour/public/assets/app-assets/images/logo/logo-80x80.png" alt="company logo" class="">
+                    <img src="http://127.0.0.1/ges-school/public/assets/app-assets/images/logo/logo-80x80.png" alt="company logo" class="">
                     <div class="media-body">
                         <ul class="ml-2 px-0 list-unstyled">
                             <li class="text-bold-800"><h2>Les comilines</h2></li>
@@ -98,7 +98,7 @@
                     </div>
                     <div class="text-center">
                         <p>Personne habilitée</p>
-                        <!-- <img src="http://127.0.0.1/nkap-scour/public/assets/app-assets/images/pages/signature-scan.png" alt="signature" class="height-100"/> -->
+                        <!-- <img src="http://127.0.0.1/ges-school/public/assets/app-assets/images/pages/signature-scan.png" alt="signature" class="height-100"/> -->
                         <h6 id="recap-signataire">Charbonnier LaRose</h6>
                         <p class="text-muted" id="recap-funtion_signataire">Le Sécrétariat</p>
                     </div>

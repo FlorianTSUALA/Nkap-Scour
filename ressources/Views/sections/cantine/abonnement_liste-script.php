@@ -2,6 +2,7 @@
 
 use Core\Routing\URL;
 use Core\HTML\Form\InputType;
+use App\Model\AbonnementCantine;
 
 include dirname(__DIR__)."/_common_lib/_select2_script.php";
 
@@ -19,7 +20,7 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
   let msg  = 'Bienvenue à la section des paiement cantine'
   block_notification(msg)
 
-        // C:\laragon\www\Nkap-Scour\_robust\_Robust\Robust\Robust\app-assets\js\scripts\pickers\dateTime\pick-a-datetime.js
+        // C:\laragon\www\ges-school\_robust\_Robust\Robust\Robust\app-assets\js\scripts\pickers\dateTime\pick-a-datetime.js
         var filter_by = 'ALL'
         var start_date = moment()
         var end_date = moment()
@@ -53,8 +54,14 @@ include dirname(__DIR__)."/_common_lib/_select2_script.php";
                         data.start_date = start_date.format( 'YYYY-MM-DD  HH:mm:ss.000' ),
                         data.end_date = end_date.format( 'YYYY-MM-DD  HH:mm:ss.000' )
                     } ,
-                    type: 'POST'
+                    type: 'POST',
+
+                    success: function(msg){
+                      console.log("voici le message", msg)
+                    }
                 },
+
+                
                
             })
 

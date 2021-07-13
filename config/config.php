@@ -4,7 +4,7 @@
 define('APP_MODE', 'DEVELOPMENT'); //PRODUCTION
 
 
-define('BASE_PATH', "nkap-scour/public/");
+define('BASE_PATH', "ges-school/public/");
 
 define("OFFLINE_DB", true);
 
@@ -21,7 +21,7 @@ define("APP_SESSION_TIME_OUT", 1440);
  //if (!OFFLINE_DB) {
     if (OFFLINE_DB) {
         return array(        
-        "ORGANISATION" => "Les Comelines",
+        "ORGANISATION" => "Ges-School",
         "db_user" => "root",
         "db_pass" => "",
         "db_host" => "localhost",
@@ -31,7 +31,7 @@ define("APP_SESSION_TIME_OUT", 1440);
     } else {
         //PHP ADMIN http://www.phpmyadmin.co/
         return array(
-        "ORGANISATION" => "Les Comelines",
+        "ORGANISATION" => "Ges-School",
         "db_user" => "Fqy2hYVwUB",
         "db_pass" => "hdG3urVvRi",
         "db_host" => "remotemysql.com",

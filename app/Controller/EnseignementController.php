@@ -31,7 +31,7 @@ class EnseignementController extends AppController
 
     public function index()
     {
-        $this->app->setTitle('Gestion des emploie de temps  - Comelines');
+        $this->app->setTitle('Gestion des emploie de temps  - Ges-School');
         
         $this->render('sections.emploie_temps.emploie_temps');
         // $this->render('sections.emploie_temps.emploie_temps', compact('pays', 'classes', 'statut_apprenants'));

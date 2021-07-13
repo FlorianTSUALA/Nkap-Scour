@@ -21,7 +21,7 @@ class CycleController extends AppController
         $this->base_route = 'cycle';
         $this->class_name = 'Cycle';
 
-        $this->title_page = 'Gestion des cycles - Comelines';
+        $this->title_page = 'Gestion des cycles - Ges-School';
         $this->title_home = 'Gestion des cycles';
         $this->create_title = "Creation d'un cycle";
         $this->view_title = "Information d'un cycle";

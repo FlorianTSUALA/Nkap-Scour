@@ -27,7 +27,7 @@ class BulletinController extends AppController
         $this->base_route = 'bulletin';
         $this->class_name = 'bulletin';
 
-        $this->title_page = 'Gestion des bulletins - Comelines';
+        $this->title_page = 'Gestion des bulletins - Ges-School';
         $this->title_home = 'Gestion des bulletins';
         $this->create_title = "Inserer une note";
         $this->view_title = "Information d'un élève";

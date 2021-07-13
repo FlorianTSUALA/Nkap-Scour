@@ -24,7 +24,7 @@ $annee_scolaires = ( new AnneeScolaireRepository() )->getAll();
 				</li>
 				<li class="nav-item">
 					<a class="navbar-brand" href=""><img class="brand-logo" alt="robust admin logo" src="<?= URL::base() ?>assets/app-assets/images/logo/logo-dark-sm.png">
-						<h3 class="brand-text">Les comelines</h3>
+						<h3 class="brand-text">Ges-School</h3>
 					</a>
 				</li>
 				<li class="nav-item d-md-none">

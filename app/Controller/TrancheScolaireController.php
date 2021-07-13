@@ -22,7 +22,7 @@ class TrancheScolaireController extends AppController
         $this->base_route = 'tranche_scolaire';
         $this->class_name = 'tranche_scolaire';
 
-        $this->title_page = 'Gestion des tranches scolaire - Comelines';
+        $this->title_page = 'Gestion des tranches scolaire - Ges-School';
         $this->title_home = 'Gestion des tranches scolaire';
         $this->create_title = "Creation d'une tranche scolaire";
         $this->view_title = "Information d'une tranche scolaire";

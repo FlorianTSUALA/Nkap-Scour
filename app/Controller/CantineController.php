@@ -42,7 +42,7 @@ class CantineController extends AppController
         $this->base_route = 'abonnement_cantine';
         $this->class_name = 'abonnement_cantine';
 
-        $this->title_page = 'Gestion du abonnement_cantine - Comelines';
+        $this->title_page = 'Gestion du abonnement_cantine - Ges-School';
         $this->title_home = 'Gestion du abonnement_cantine';
         $this->create_title = "Ajout d'un abonnement_cantine";
         $this->view_title = "Information sur un abonnement_cantine";
@@ -102,7 +102,7 @@ class CantineController extends AppController
         
     public function abonnement_cantine()
     {
-        $this->app->setTitle('Abonnement Cantine- Comelines');
+        $this->app->setTitle('Abonnement Cantine- Ges-School');
 
         $prix_abonnements = DBTable::getModel('prix_abonnement')
                             ->select(
@@ -230,7 +230,7 @@ class CantineController extends AppController
             [
                 'abonnement_cantine.code'=> 'id', 
                 'abonnement_cantine.date_paiement'=> 'date_paiement', 
-                'abonnement_cantine.date_debut'=> 'date_debut ', 
+                'abonnement_cantine.date_debut'=> 'date_debut', 
                 'abonnement_cantine.date_fin'=> 'date_fin', 
                 'abonnement_cantine.montant_total'=> 'montant_total', 
                 'classe.libelle'=> 'classe', 
@@ -243,8 +243,8 @@ class CantineController extends AppController
         ->join('parcours', 'eleve.id', '=', 'parcours.eleve_id')
         ->join('classe', 'parcours.classe_id', '=', 'classe.id')
         ->join('pension_classe', 'pension_classe.classe_id', '=', 'parcours.classe_id')
-        // ->where('parcours.visibilite', '=', 1)
-        ->where('parcours.annee_scolaire_id', '=', $annee_scolaire)
+        ->where('abonnement_cantine.visibilite', '=', 1)
+        // ->where('parcours.annee_scolaire_id', '=', $annee_scolaire)
         ->get();
 
 

@@ -15,7 +15,7 @@
         <div class="card border-grey border-lighten-3 m-0">
             <div class="card-header border-0">
                 <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
-                    <span><strong>LES COMELINES</strong></span>
+                    <span><strong>Ges-School</strong></span>
                 </h6>
             </div>
 
