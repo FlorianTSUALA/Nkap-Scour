@@ -24,7 +24,7 @@ class EleveController extends AppController
         $this->base_route = 'eleve';
         $this->class_name = 'eleve';
 
-        $this->title_page = 'Gestion des eleves - Ges-School';
+        $this->title_page = 'Gestion des eleves - Comelines';
         $this->title_home = 'Gestion des eleves';
         $this->create_title = "Creation d'un eleve";
         $this->view_title = "Information d'un eleve";
@@ -36,7 +36,7 @@ class EleveController extends AppController
     public function index()
     {
         $route = 'eleve';
-        $this->app->setTitle('Liste des élèves inscrits  - Ges-School');
+        $this->app->setTitle('Liste des élèves inscrits  - Comelines');
         $title = $this->title_page;
         $eleves = $this->eleve_repository->getEleveInscriptionInfo();
         $classes = DBTable::getModel(DBTable::CLASSE)->select(['code' => 'id', 'libelle' => 'value'])->where('visibilite', '=', 1)->get();

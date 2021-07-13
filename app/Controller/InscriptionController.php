@@ -43,7 +43,7 @@ class InscriptionController extends AppController
 
     public function index()
     {
-        $this->app->setTitle('Inscription d\'un(e) élève  - Ges-School');
+        $this->app->setTitle('Inscription d\'un(e) élève  - Comelines');
         $route = "inscrire";
         $pays = $this->pays->all();
         $classes = $this->classe->all();

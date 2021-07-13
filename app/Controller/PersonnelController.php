@@ -40,7 +40,7 @@ class PersonnelController extends AppController
         $this->base_route = 'personnel';
         $this->class_name = 'personnel';
 
-        $this->title_page = 'Gestion du personnel - Ges-School';
+        $this->title_page = 'Gestion du personnel - Comelines';
         $this->title_home = 'Gestion du personnel';
         $this->create_title = "Ajout d'un personnel";
         $this->view_title = "Information sur un personnel";
@@ -98,7 +98,7 @@ class PersonnelController extends AppController
     {
         $route = 'ajout_personnel';
 
-        $this->app->setTitle('Ajout d\'un personnel  - Ges-School');
+        $this->app->setTitle('Ajout d\'un personnel  - Comelines');
         // $type_personnels = $this->type_personnel->all(); 
         $type_personnels = TypePersonnel::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         // $pays = $this->pays->all();
@@ -146,7 +146,7 @@ class PersonnelController extends AppController
                     
                 ])->where('code', $code)->one();
         // dd($personnel);
-        $this->app->setTitle('Mise à jour d\'un personnel  - Ges-School');
+        $this->app->setTitle('Mise à jour d\'un personnel  - Comelines');
         $type_personnels = TypePersonnel::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get();
         $pays = Pays::table()->select([ 'code' => 'id' , 'libelle' => 'value'])->where('visibilite', 1)->get() ;
 

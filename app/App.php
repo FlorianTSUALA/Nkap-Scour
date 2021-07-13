@@ -10,8 +10,8 @@ use Core\BaseApp;
  */
 class App extends BaseApp 
 {
-	protected $title = 'Bienvenue aux Ges-School';
-	public $SCHOOL_NAME = 'Ges-School';
-	const ORGANISATION = 'Ges-School';
+	protected $title = 'Bienvenue aux Comelines';
+	public $SCHOOL_NAME = 'Comelines';
+	const ORGANISATION = 'Comelines';
 
 }

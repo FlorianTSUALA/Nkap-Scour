@@ -59,7 +59,7 @@
                     <tr>
                         <th>
                             <div>
-                                <h3>Ges-School</h3>
+                                <h3>Comelines</h3>
                                 ECOLE MATERNELLE ET <br />
                                 PRIMAIRE <br />
                             </div>

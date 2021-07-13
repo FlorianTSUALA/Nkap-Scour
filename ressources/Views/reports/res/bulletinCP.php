@@ -1,6 +1,6 @@
 
 
-<!-- <link rel="stylesheet" type="text/css" href="http://127.0.0.1/ges-school/public/assets/app-assets/images/logo/cantineList2.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="http://127.0.0.1/Comelines/public/assets/app-assets/images/logo/cantineList2.css"> -->
 <style type="text/css">
 table, th, td {
   border: 1px solid black;
@@ -29,7 +29,7 @@ th, td {
 
 <table  style="width:100%">
     <tr class="noborders">
-        <td  rowspan="4"  style="width: 20%"><img src="http://127.0.0.1/ges-school/public/assets/app-assets/images/logo/logo-80x80.png"> </td>
+        <td  rowspan="4"  style="width: 20%"><img src="http://127.0.0.1/Comelines/public/assets/app-assets/images/logo/logo-80x80.png"> </td>
         <td class="smallCell22" rowspan="4"  style="text-align: left;    width: 2%"></td>
         <td  class="smallCell" style="text-align: left;    width: 78%">  <b>REÇU22 DE VERSEMENT</b> </td>
     

@@ -19,8 +19,8 @@ use Core\Database\HydrahonDatabase;
 class BaseApp
 {
 
-	protected $title = 'Bienvenue aux Ges-School';
-	const TEAM = 'ges-school';
+	protected $title = 'Bienvenue aux Comelines';
+	const TEAM = 'Comelines';
 	public $ORGANISATION = '';
 	
 	private static $_instance = null;

@@ -3,12 +3,12 @@ $root_app_url = ((isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] === 'on')) ? "h
 
 switch ($root_app_url):
 // replace production-url with the server name for your production site
-    case 'https://ges-school.com/':
+    case 'https://Comelines.com/':
         require_once('production.config.php');
     break;
 
 // replace development-url with the server name for your development site
-    case 'http://test.ges-school.com/':
+    case 'http://test.Comelines.com/':
         require_once('development.config.php');
     break;
 

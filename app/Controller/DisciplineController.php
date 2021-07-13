@@ -20,7 +20,7 @@ class DisciplineController extends AppController
         $this->base_route = 'discipline';
         $this->class_name = 'Discipline';
 
-        $this->title_page = 'Gestion des disciplines - Ges-School';
+        $this->title_page = 'Gestion des disciplines - Comelines';
         $this->title_home = 'Gestion des disciplines';
         $this->create_title = "Creation d'une discipline";
         $this->view_title = "Information d'une discipline";

@@ -317,7 +317,7 @@ $include_res_header .=  '<link rel="stylesheet" type="text/css" href="'.URL::bas
                         </div>
 
                         <div class="card-footer border-top-2 border-top-warning">
-                            <span>Ges-School</span>
+                            <span>Comelines</span>
                         </div>
                     </div>
                 </div>

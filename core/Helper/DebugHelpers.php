@@ -26,7 +26,7 @@ trait DebugHelpers{
             die('---------------- || -------------------');
         }
 
-        function dd($expression , $title = " -ges-school- ", ...$_){
+        function dd($expression , $title = " -Comelines- ", ...$_){
 
             $background="#EEEEEE";
             $color="#000000";            
@@ -73,7 +73,7 @@ trait DebugHelpers{
 
             $background="#EEEEEE";
             $color="#000000";
-            $title = " -ges-school- ";
+            $title = " -Comelines- ";
             echo '<pre><br><br></pre>';
 
             //Print File called function

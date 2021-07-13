@@ -5,7 +5,7 @@
             <div id="invoice-company-details" class="row">
                 <div class="col-md-6 col-sm-12 text-center text-md-left">
                     <div class="media">
-                        <img src="http://127.0.0.1/ges-school/public/assets/app-assets/images/logo/logo-80x80.png" alt="company logo" class="">
+                        <img src="http://127.0.0.1/Comelines/public/assets/app-assets/images/logo/logo-80x80.png" alt="company logo" class="">
                         <div class="media-body">
                             <ul class="ml-2 px-0 list-unstyled">
                                 <li class="text-bold-800"><h2>Les comilines</h2></li>
@@ -112,7 +112,7 @@
                         </div>
                         <div class="text-center">
                             <p>Personne habilitée</p>
-                            <!-- <img src="http://127.0.0.1/ges-school/public/assets/app-assets/images/pages/signature-scan.png" alt="signature" class="height-100"/> -->
+                            <!-- <img src="http://127.0.0.1/Comelines/public/assets/app-assets/images/pages/signature-scan.png" alt="signature" class="height-100"/> -->
                             <h6 id="recap-signataire">Charbonnier LaRose</h6>
                             <p class="text-muted" id="recap-funtion_signataire">Le Sécrétariat</p>
                         </div>
@@ -141,10 +141,10 @@
                         
 
                         <a href="#" id="btn_save" class="btn btn-green my-1"><i class="fa fa-floppy-o"></i> Enregistrer</a>
-                        <a href="http://127.0.0.1/ges-school/public/accueil" id="btn_home" class="btn btn-blue my-1" style="display: none;"><i class="fa fa-home"></i> Liste des élèves</a>
+                        <a href="http://127.0.0.1/Comelines/public/accueil" id="btn_home" class="btn btn-blue my-1" style="display: none;"><i class="fa fa-home"></i> Liste des élèves</a>
                         
                         <a href="#" id="btn_back" class="btn btn-warning my-1"><i class="fa fa-arrow-left"></i> Retour</a>
-                        <a href="http://127.0.0.1/ges-school/public/print/scolarite" target="_blank" id="btn_print" class="btn btn-danger my-1" style="display: none;"><i class="fa fa-print"></i> Imprimer</a>
+                        <a href="http://127.0.0.1/Comelines/public/print/scolarite" target="_blank" id="btn_print" class="btn btn-danger my-1" style="display: none;"><i class="fa fa-print"></i> Imprimer</a>
                     </div>
                 </div>
             </div>
